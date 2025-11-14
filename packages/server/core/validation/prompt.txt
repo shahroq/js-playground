@@ -1,0 +1,5 @@
+create a express middleware with these criteria:
+- it should be typescript
+- use Joi for start
+- create a interface, and the middleware should conform to the interface, for future abstraction
+- put everything in `validations` folder, and joi related files inside `validations/joi`

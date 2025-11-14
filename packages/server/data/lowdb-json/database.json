@@ -1,0 +1,205 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "orm": "lowdb",
+    "database": "json",
+    "created_at": "2025-11-14T10:34:49.093Z",
+    "updated_at": "2025-11-14T10:34:49.093Z"
+  },
+  "users": [
+    {
+      "name": "Alice Johnson",
+      "email": "alice.johnson@example.com.0.8962394806043947",
+      "role": "ADMIN",
+      "id": 1,
+      "created_at": "2025-11-14T10:34:49.170Z",
+      "updated_at": "2025-11-14T10:34:49.170Z",
+      "created_by": 1,
+      "updated_by": 1
+    },
+    {
+      "name": "Brian Lee",
+      "email": "brian.lee@example.com.0.03545077887079229",
+      "role": "EDITOR",
+      "id": 2,
+      "created_at": "2025-11-14T10:34:49.172Z",
+      "updated_at": "2025-11-14T10:34:49.172Z",
+      "created_by": 1,
+      "updated_by": 1
+    },
+    {
+      "name": "Catherine Park",
+      "email": "catherine.park@example.com.0.6011459074775503",
+      "role": "USER",
+      "id": 3,
+      "created_at": "2025-11-14T10:34:49.173Z",
+      "updated_at": "2025-11-14T10:34:49.173Z",
+      "created_by": 1,
+      "updated_by": 1
+    }
+  ],
+  "products": [
+    {
+      "name": "Bamboo Silk Pillowcase",
+      "description": "Luxurious and breathable silk pillowcase made from sustainable bamboo fibers.",
+      "price": 59.99,
+      "category": "Home & Bedding",
+      "in_stock": true,
+      "created_by": 1,
+      "updated_by": 1,
+      "id": 1,
+      "created_at": "2025-11-14T10:34:49.188Z",
+      "updated_at": "2025-11-14T10:34:49.188Z"
+    },
+    {
+      "name": "Organic Cotton Duvet Cover",
+      "description": "Soft and durable duvet cover made from 100% organic cotton.",
+      "price": 89.99,
+      "category": "Home & Bedding",
+      "in_stock": true,
+      "created_by": 1,
+      "updated_by": 1,
+      "id": 2,
+      "created_at": "2025-11-14T10:34:49.192Z",
+      "updated_at": "2025-11-14T10:34:49.192Z"
+    },
+    {
+      "name": "Linen Sheet Set",
+      "description": "Breathable linen sheets perfect for warm sleepers.",
+      "price": 129.99,
+      "category": "Home & Bedding",
+      "in_stock": false,
+      "created_by": 1,
+      "updated_by": 1,
+      "id": 3,
+      "created_at": "2025-11-14T10:34:49.205Z",
+      "updated_at": "2025-11-14T10:34:49.205Z"
+    },
+    {
+      "name": "Memory Foam Pillow",
+      "description": "Ergonomic pillow providing neck and shoulder support for a better night’s sleep.",
+      "price": 49.99,
+      "category": "Home & Bedding",
+      "in_stock": true,
+      "created_by": 1,
+      "updated_by": 1,
+      "id": 4,
+      "created_at": "2025-11-14T10:34:49.207Z",
+      "updated_at": "2025-11-14T10:34:49.207Z"
+    },
+    {
+      "name": "Weighted Blanket",
+      "description": "12 lb cotton weighted blanket designed to reduce stress and improve sleep quality.",
+      "price": 139.99,
+      "category": "Home & Bedding",
+      "in_stock": true,
+      "created_by": 1,
+      "updated_by": 1,
+      "id": 5,
+      "created_at": "2025-11-14T10:34:49.210Z",
+      "updated_at": "2025-11-14T10:34:49.210Z"
+    }
+  ],
+  "reviews": [
+    {
+      "product_id": 1,
+      "content": "Super soft and cooling! My hair feels smoother after sleeping on it.",
+      "rating": 5,
+      "created_by": 1,
+      "updated_by": 1,
+      "id": 1,
+      "created_at": "2025-11-14T10:34:49.220Z",
+      "updated_at": "2025-11-14T10:34:49.220Z"
+    },
+    {
+      "product_id": 1,
+      "content": "Nice quality but a bit pricey.",
+      "rating": 4,
+      "created_by": 1,
+      "updated_by": 1,
+      "id": 2,
+      "created_at": "2025-11-14T10:34:49.221Z",
+      "updated_at": "2025-11-14T10:34:49.221Z"
+    },
+    {
+      "product_id": 2,
+      "content": "Very comfortable and easy to wash.",
+      "rating": 5,
+      "created_by": 1,
+      "updated_by": 1,
+      "id": 3,
+      "created_at": "2025-11-14T10:34:49.222Z",
+      "updated_at": "2025-11-14T10:34:49.222Z"
+    },
+    {
+      "product_id": 2,
+      "content": "Color faded a little after several washes.",
+      "rating": 3,
+      "created_by": 1,
+      "updated_by": 1,
+      "id": 4,
+      "created_at": "2025-11-14T10:34:49.224Z",
+      "updated_at": "2025-11-14T10:34:49.224Z"
+    },
+    {
+      "product_id": 3,
+      "content": "Love the texture and quality. Worth the wait!",
+      "rating": 5,
+      "created_by": 1,
+      "updated_by": 1,
+      "id": 5,
+      "created_at": "2025-11-14T10:34:49.231Z",
+      "updated_at": "2025-11-14T10:34:49.231Z"
+    },
+    {
+      "product_id": 4,
+      "content": "Neck pain gone! Firm but comfy.",
+      "rating": 5,
+      "created_by": 1,
+      "updated_by": 1,
+      "id": 6,
+      "created_at": "2025-11-14T10:34:49.235Z",
+      "updated_at": "2025-11-14T10:34:49.235Z"
+    },
+    {
+      "product_id": 4,
+      "content": "Not suitable for side sleepers.",
+      "rating": 2,
+      "created_by": 1,
+      "updated_by": 1,
+      "id": 7,
+      "created_at": "2025-11-14T10:34:49.238Z",
+      "updated_at": "2025-11-14T10:34:49.238Z"
+    },
+    {
+      "product_id": 5,
+      "content": "Really helps with my anxiety at night. Highly recommend!",
+      "rating": 5,
+      "created_by": 1,
+      "updated_by": 1,
+      "id": 8,
+      "created_at": "2025-11-14T10:34:49.240Z",
+      "updated_at": "2025-11-14T10:34:49.240Z"
+    },
+    {
+      "product_id": 5,
+      "content": "Too heavy for me personally, but great build quality.",
+      "rating": 4,
+      "created_by": 1,
+      "updated_by": 1,
+      "id": 9,
+      "created_at": "2025-11-14T10:34:49.241Z",
+      "updated_at": "2025-11-14T10:34:49.241Z"
+    },
+    {
+      "product_id": 3,
+      "content": "Arrived late but excellent craftsmanship.",
+      "rating": 4,
+      "created_by": 1,
+      "updated_by": 1,
+      "id": 10,
+      "created_at": "2025-11-14T10:34:49.243Z",
+      "updated_at": "2025-11-14T10:34:49.243Z"
+    }
+  ]
+}

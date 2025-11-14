@@ -1,0 +1,12 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "orm": "lowdb",
+    "database": "json",
+    "created_at": "2025-11-14T10:34:49.093Z",
+    "updated_at": "2025-11-14T10:34:49.093Z"
+  },
+  "users": [],
+  "products": [],
+  "reviews": []
+}

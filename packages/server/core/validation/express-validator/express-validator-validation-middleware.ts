@@ -1,0 +1,44 @@
+import type { Request, Response, NextFunction } from "express";
+import { get } from "lodash";
+import AppError, { type ErrorDetail } from "@/core/app-error.ts";
+import type { Action, ValidateMiddleware } from "../types.ts";
+import { chains } from "./chain.ts";
+import { validationResult, type ValidationChain } from "express-validator";
+
+export const expressValidatorValidateMiddleware: ValidateMiddleware = (
+  action: Action
+) => {
+  const chain = get(chains, action);
+  if (!chain) throw new AppError(`Chain not found for action: ${action}`);
+
+  return async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    // Run all validations
+    await Promise.all(
+      chain.map((validation: ValidationChain) => validation.run(req))
+    );
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      const details = getErrorDetails(errors);
+
+      return next(AppError.badRequest("Validation failed.", true, { details }));
+    }
+
+    next();
+  };
+};
+
+const getErrorDetails = (errors): ErrorDetail[] => {
+  const details = errors.array().map((error) => ({
+    path: "path" in error ? [error.path] : [],
+    message: error.msg,
+    type: error.type,
+  }));
+
+  return details;
+};
