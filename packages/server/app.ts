@@ -13,16 +13,16 @@ export const bootstrap = (): Application => {
   const app: Application = express();
   app.use(express.json()).use(cors());
 
-  app.get("/favicon.ico", (req, res) => res.status(204).end());
+  app.get("/favicon.ico", (_req, res) => res.status(204).end());
 
   // home
-  app.get("/", (req: Request, res: Response) => {
+  app.get("/", (_req: Request, res: Response) => {
     console.log(`I am at home`);
     res.send(`API Sandbox Home: Hello World [${isoString()}]`);
   });
 
   // health
-  app.get("/health", (req: Request, res: Response) => {
+  app.get("/health", (_req: Request, res: Response) => {
     res.json(formatter.success({ ok: true, environment: config.env }));
   });
 
