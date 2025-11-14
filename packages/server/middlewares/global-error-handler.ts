@@ -3,7 +3,7 @@ import config from "../core/config";
 import type AppError from "../core/app-error";
 import { formatter } from "@/core/response";
 
-export function errorHandler(
+export function globalErrorHandler(
   e: Error | AppError,
   req: Request,
   res: Response,

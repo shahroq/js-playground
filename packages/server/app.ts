@@ -1,13 +1,13 @@
 import express from "express";
 import cors from "cors";
 import type { Application, Request, Response, NextFunction } from "express";
-import AppError from "@/core/app-error";
-import { errorHandler } from "@/middlewares/error-handler";
+
 import sandboxRoutes from "./routes/sandbox";
 import v1Router from "@/routes/v1";
 import config from "@/core/config";
 import { isoString } from "@/core/utils";
 import { formatter } from "@/core/response";
+import { undefinedErrorHandler, globalErrorHandler } from "@/middlewares";
 
 export const bootstrap = (): Application => {
   const app: Application = express();
@@ -29,13 +29,8 @@ export const bootstrap = (): Application => {
   app.use("/api/sandbox", sandboxRoutes); // my sandbox
   app.use("/api/v1", v1Router);
 
-  // undefined routes
-  app.use((req: Request, res: Response, next: NextFunction) => {
-    next(AppError.notFound(`Can't find ${req.originalUrl} on this server.`));
-  });
-
-  // global error handler
-  app.use(errorHandler);
+  app.use(undefinedErrorHandler);
+  app.use(globalErrorHandler);
 
   return app;
 };
