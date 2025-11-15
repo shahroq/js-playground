@@ -26,16 +26,14 @@ export interface ValidationSchema/Payload {
 }
 */
 
-export type ValidateMiddleware = (
+export type ValidatorMiddleware = (
   action: Action
 ) => (req: Request, res: Response, next: NextFunction) => void | Promise<void>;
 
 /*
-export interface IValidationMiddleware {
+export interface IValidatorMiddleware {
   validate(
     action: Action
   ): (req: Request, res: Response, next: NextFunction) => void | Promise<void>;
 }
-
-
-  */
+*/

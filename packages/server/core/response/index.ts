@@ -5,9 +5,10 @@ import { JsonApiFormatter } from "./json-api-formatter.ts";
 
 let formatterInstance: ResponseFormatter | null = null;
 
-export function getFormatter(): ResponseFormatter {
+function getFormatter(): ResponseFormatter {
   if (!formatterInstance) {
     const format = config.response_format_strategy || "jsend";
+    console.log(`⚙️  Getting formatter for response strategy (${format})`);
 
     switch (format) {
       case "jsend":
