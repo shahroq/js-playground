@@ -1,11 +1,11 @@
 import type { Request, Response, NextFunction } from "express";
-import config from "../core/config";
-import type AppError from "../core/app-error";
+import config from "@/core/config";
+import type AppError from "@/core/app-error";
 import { formatter } from "@/core/response";
 
 export function globalErrorHandler(
   e: Error | AppError,
-  req: Request,
+  _req: Request,
   res: Response,
   next: NextFunction
 ): void {

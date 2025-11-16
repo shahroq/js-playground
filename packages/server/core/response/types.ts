@@ -1,3 +1,4 @@
+export type responseStatus = "success" | "fail" | "error";
 export type ResponseFormatStrategy = "jsend" | "json-api";
 
 /**

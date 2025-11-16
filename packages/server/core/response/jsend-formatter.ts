@@ -14,7 +14,7 @@ export class JSendFormatter implements ResponseFormatter {
       data,
     };
   }
-
+  // TODO: for now, use statusCode here/define internal(app wide) codes is better
   error(message: string, code = 500, data: any = null) {
     const response: any = {
       status: "error",

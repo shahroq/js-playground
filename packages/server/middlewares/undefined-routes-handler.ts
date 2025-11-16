@@ -3,7 +3,7 @@ import AppError from "../core/app-error";
 
 export function undefinedErrorHandler(
   req: Request,
-  res: Response,
+  _res: Response,
   next: NextFunction
 ) {
   next(

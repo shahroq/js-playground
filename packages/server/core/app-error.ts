@@ -1,3 +1,5 @@
+import type { responseStatus } from "./response/types";
+
 export type ErrorDetail = {
   path: string;
   message: string;
@@ -6,9 +8,10 @@ export type ErrorDetail = {
 
 export default class AppError extends Error {
   public readonly statusCode: number;
-  public readonly status: string;
   public readonly isOperational: boolean; // The isOperational flag helps distinguish between expected errors (like validation failures) and unexpected programming errors (like null pointer exceptions).
-  public readonly details: ErrorDetail[]; // keep details of validation errors
+  public readonly details: ErrorDetail[] | null; // keep details of validation errors
+
+  public readonly status: responseStatus;
 
   constructor(
     message: string,
@@ -34,8 +37,8 @@ export default class AppError extends Error {
   // Static factory methods for common errors
   static badRequest(
     message: string = "Bad Request",
-    isOperational = true,
-    details = null
+    isOperational: boolean = true,
+    details: ErrorDetail[] | null = null
   ): AppError {
     return new AppError(message, 400, isOperational, details);
   }
