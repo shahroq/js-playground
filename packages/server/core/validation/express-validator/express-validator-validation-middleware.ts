@@ -17,7 +17,7 @@ export const expressValidatorValidateMiddleware: ValidatorMiddleware = (
 
   return async (
     req: Request,
-    res: Response,
+    _res: Response,
     next: NextFunction
   ): Promise<void> => {
     // Run all validations

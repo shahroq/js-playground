@@ -15,18 +15,9 @@ export const zodValidateMiddleware: ValidatorMiddleware = (action: Action) => {
     next: NextFunction
   ): Promise<void> => {
     try {
-      if (schema.body) {
-        schema.body.parse(req.body);
-      }
-
-      if (schema.query) {
-        schema.query.parse(req.query);
-      }
-
-      if (schema.params) {
-        schema.params.parse(req.params);
-      }
-
+      if ("body" in schema && schema.body) schema.body.parse(req.body);
+      if ("query" in schema && schema.query) schema.query.parse(req.query);
+      if ("params" in schema && schema.params) schema.params.parse(req.params);
       next();
     } catch (error) {
       if (error instanceof ZodError) {

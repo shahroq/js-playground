@@ -17,23 +17,20 @@ export const joiValidateMiddleware: ValidatorMiddleware = (action: Action) => {
     try {
       const validationPromises: Promise<any>[] = [];
 
-      if (schema.body) {
+      if ("body" in schema && schema.body)
         validationPromises.push(
           schema.body.validateAsync(req.body, { abortEarly: false })
         );
-      }
 
-      if (schema.query) {
+      if ("query" in schema && schema.query)
         validationPromises.push(
           schema.query.validateAsync(req.query, { abortEarly: false })
         );
-      }
 
-      if (schema.params) {
+      if ("params" in schema && schema.params)
         validationPromises.push(
           schema.params.validateAsync(req.params, { abortEarly: false })
         );
-      }
 
       await Promise.all(validationPromises);
       next();
