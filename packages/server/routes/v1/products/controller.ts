@@ -6,19 +6,20 @@ import { productService as service } from "./service";
 const collection = "product";
 
 export const productController = {
-  async getItems(req: Request, res: Response, next: NextFunction) {
+  async getItems(_req: Request, res: Response, next: NextFunction) {
     const items = await service.getItems();
 
-    res.status(200).json(formatter.success({ [`${collection}s`]: items }));
+    res.status(200).json(formatter.format(null, { [`${collection}s`]: items }));
   },
 
   async getItem(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
     if (!id) return next(AppError.badRequest());
 
-    const item = await service.getItem(Number(id));
+    const item = await service.getItem(+id);
+    if (!item) return next(AppError.notFound());
 
-    res.status(200).json(formatter.success({ [collection]: item }));
+    res.status(200).json(formatter.format(null, { [collection]: item }));
   },
 
   async createItem(req: Request, res: Response, next: NextFunction) {
@@ -26,7 +27,7 @@ export const productController = {
 
     const newItem = await service.createItem(body);
 
-    res.status(201).json(formatter.success({ [collection]: newItem }));
+    res.status(201).json(formatter.format(null, { [collection]: newItem }));
   },
 
   async updateItem(req: Request, res: Response, next: NextFunction) {
@@ -38,18 +39,18 @@ export const productController = {
     const updatedItem = await service.updateItem(Number(id), body);
     if (!updatedItem) return next(AppError.notFound());
 
-    res.status(200).json(formatter.success({ [collection]: updatedItem }));
+    res.status(200).json(formatter.format(null, { [collection]: updatedItem }));
   },
 
   async deleteItem(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
     if (!id) return next(AppError.badRequest());
 
-    const deleted = await service.deleteItem(Number(id));
+    const deleted = await service.deleteItem(+id);
     if (!deleted) return next(AppError.notFound());
 
     res
       .status(200)
-      .json(formatter.success({ message: `${collection} deleted.` }));
+      .json(formatter.format(null, { message: `${collection} deleted.` }));
   },
 };

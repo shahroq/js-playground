@@ -2,7 +2,7 @@ import { PrismaClient } from "@/generated/prisma/client";
 import { BaseAdapter, type QueryFilter } from "@/data/base-adapter";
 import { isoString } from "@/core/utils";
 
-const collectionMap = {
+const collectionMap: { [key: string]: string } = {
   products: "Product",
   reviews: "Review",
   users: "User",
@@ -47,14 +47,12 @@ export class PrismaSQLiteAdapter extends BaseAdapter {
   }
 
   async create<T>(collection: string, data: T): Promise<T> {
-    // @ts-ignore
     const newItem = {
       ...data,
       created_at: isoString(),
       created_by: 1,
       updated_by: 1,
     };
-    // console.log("newItem: " + newItem);
 
     return await this.prisma[collectionMap[collection]].create({
       data: newItem,
@@ -83,10 +81,11 @@ export class PrismaSQLiteAdapter extends BaseAdapter {
   }
 
   async delete(collection: string, id: string | number): Promise<boolean> {
-    const deleted = await this.prisma[collectionMap[collection]].delete({
+    const result = await this.prisma[collectionMap[collection]].deleteMany({
       where: { id },
     });
-    return !!deleted;
+
+    return !!result.count;
   }
 
   async deleteMany<T>(
@@ -97,28 +96,6 @@ export class PrismaSQLiteAdapter extends BaseAdapter {
 
     const result = await this.prisma[collectionMap[collection]].deleteMany();
     return result.count;
-  }
-
-  async deleteMany0<T>(
-    collection: string,
-    filter: QueryFilter<T> = {}
-  ): Promise<T[]> {
-    /*
-    const dbUrl = process.env.DATABASE_URL;
-    if (dbUrl && dbUrl.startsWith("file:")) {
-      const dbPath = dbUrl.replace("file:", "");
-      try {
-        await fs.remove(dbPath);
-        console.log("Database file removed for reset:", dbPath);
-        return true;
-      } catch (error) {
-        console.error("Error removing database file:", error);
-        return false;
-      }
-    }
-    console.warn("Reset is only supported for file-based databases.");
-    return false;
-    */
   }
 
   async find<T>(collection: string, filter: QueryFilter<T> = {}): Promise<T[]> {

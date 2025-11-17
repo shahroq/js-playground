@@ -23,7 +23,7 @@ export const bootstrap = (): Application => {
 
   // health
   app.get("/health", (_req: Request, res: Response) => {
-    res.json(formatter.success({ ok: true, environment: config.env }));
+    res.json(formatter.format(null, { ok: true, environment: config.env }));
   });
 
   app.use("/api/sandbox", sandboxRoutes); // my sandbox

@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 import config from "@/core/config";
-import type AppError from "@/core/app-error";
+import AppError from "@/core/app-error";
 import { formatter } from "@/core/response";
 
 export function globalErrorHandler(
@@ -12,18 +12,23 @@ export function globalErrorHandler(
   // the error is best to pass to default error handler
   if (res.headersSent || config.debug) return next(e);
 
-  // log errors (winston, etc)
+  // TODO: log errors (winston, etc)
   // ..
 
-  const statusCode = (e as AppError).statusCode || 500;
-  const status = (e as AppError).status || "error";
-  const details = (e as AppError).details || null;
+  const statusCode = (e as AppError).meta.statusCode || 500;
 
+  // TODO: convert to AppError?
+  // ..
+  /*
+  console.log(e);
   res
     .status(statusCode)
     .json(
       formatter.error(`Glbl Err: ${getErrorMessage(e)}`, statusCode, details)
     );
+  */
+  const message = `Glbl Err: ${getErrorMessage(e)}`;
+  res.status(statusCode).json(formatter.format(e as AppError, { message }));
 }
 
 function getErrorMessage(e: unknown): string {

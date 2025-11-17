@@ -1,31 +1,32 @@
-import type { responseStatus } from "./response/types";
-
 export type ErrorDetail = {
   path: string;
   message: string;
   type?: string;
 };
 
+export type ErrorMeta = {
+  statusCode?: number;
+  isOperational?: boolean; // The isOperational flag helps distinguish between expected errors (like validation failures) and unexpected programming errors (like null pointer exceptions).
+  details?: ErrorDetail[]; // keep details of validation errors
+
+  __code?: string; // app-defined codes
+  __status?: responseStatus; // no need, move it to jsend respond class
+};
+
 export default class AppError extends Error {
-  public readonly statusCode: number;
-  public readonly isOperational: boolean; // The isOperational flag helps distinguish between expected errors (like validation failures) and unexpected programming errors (like null pointer exceptions).
-  public readonly details: ErrorDetail[] | null; // keep details of validation errors
+  public meta: ErrorMeta & {
+    isOperational: boolean;
+  };
 
-  public readonly status: responseStatus;
-
-  constructor(
-    message: string,
-    statusCode: number = 500,
-    isOperational: boolean = true,
-    details: ErrorDetail[] | null = null
-  ) {
+  constructor(message: string, meta: ErrorMeta = {}) {
     super(message);
 
-    this.statusCode = statusCode;
-    this.isOperational = isOperational;
-    this.details = details;
-
-    this.status = `${statusCode}`.startsWith("4") ? "fail" : "error";
+    this.meta = {
+      ...meta,
+      // set required fields, if not provided
+      statusCode: meta.statusCode ?? 500,
+      isOperational: meta.isOperational ?? true,
+    };
 
     // Maintains proper stack trace for where error was thrown
     Error.captureStackTrace(this, this.constructor);
@@ -37,40 +38,98 @@ export default class AppError extends Error {
   // Static factory methods for common errors
   static badRequest(
     message: string = "Bad Request",
-    isOperational: boolean = true,
-    details: ErrorDetail[] | null = null
+    meta?: Omit<ErrorMeta, "statusCode">
   ): AppError {
-    return new AppError(message, 400, isOperational, details);
+    const statusCode = 400;
+    return new AppError(message, {
+      statusCode,
+      isOperational: meta?.isOperational ?? true,
+      details: meta?.details,
+    });
   }
 
-  static unauthorized(message: string = "Unauthorized"): AppError {
-    return new AppError(message, 401);
+  static unauthorized(
+    message: string = "Unauthorized",
+    meta?: Omit<ErrorMeta, "statusCode">
+  ): AppError {
+    const statusCode = 401;
+    return new AppError(message, {
+      statusCode,
+      isOperational: meta?.isOperational ?? true,
+      details: meta?.details,
+    });
   }
 
-  static forbidden(message: string = "Forbidden"): AppError {
-    return new AppError(message, 403);
+  static forbidden(
+    message: string = "Forbidden",
+    meta?: Omit<ErrorMeta, "statusCode">
+  ): AppError {
+    const statusCode = 403;
+    return new AppError(message, {
+      statusCode,
+      isOperational: meta?.isOperational ?? true,
+      details: meta?.details,
+    });
   }
 
-  static notFound(message: string = "Resource not found"): AppError {
-    return new AppError(message, 404);
+  static notFound(
+    message: string = "Resource not found",
+    meta?: Omit<ErrorMeta, "statusCode">
+  ): AppError {
+    const statusCode = 404;
+    return new AppError(message, {
+      statusCode,
+      isOperational: meta?.isOperational ?? true,
+      details: meta?.details,
+    });
   }
 
-  static conflict(message: string = "Conflict"): AppError {
-    return new AppError(message, 409);
+  static conflict(
+    message: string = "Conflict",
+    meta?: Omit<ErrorMeta, "statusCode">
+  ): AppError {
+    const statusCode = 409;
+    return new AppError(message, {
+      statusCode,
+      isOperational: meta?.isOperational ?? true,
+      details: meta?.details,
+    });
   }
 
   static unprocessableEntity(
-    message: string = "Unprocessable Entity"
+    message: string = "Unprocessable Entity",
+    meta?: Omit<ErrorMeta, "statusCode">
   ): AppError {
-    return new AppError(message, 422);
+    const statusCode = 422;
+    return new AppError(message, {
+      statusCode,
+      isOperational: meta?.isOperational ?? true,
+      details: meta?.details,
+    });
   }
 
-  static tooManyRequests(message: string = "Too Many Requests"): AppError {
-    return new AppError(message, 429);
+  static tooManyRequests(
+    message: string = "Too Many Requests",
+    meta?: Omit<ErrorMeta, "statusCode">
+  ): AppError {
+    const statusCode = 429;
+    return new AppError(message, {
+      statusCode,
+      isOperational: meta?.isOperational ?? true,
+      details: meta?.details,
+    });
   }
 
-  static internal(message: string = "Internal Server Error"): AppError {
-    return new AppError(message, 500, false);
+  static internal(
+    message: string = "Internal Server Error",
+    meta?: Omit<ErrorMeta, "statusCode">
+  ): AppError {
+    const statusCode = 500;
+    return new AppError(message, {
+      statusCode,
+      isOperational: meta?.isOperational ?? false,
+      details: meta?.details,
+    });
   }
 }
 

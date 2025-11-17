@@ -1,11 +1,11 @@
 import type { Request, Response, NextFunction } from "express";
 import { get } from "lodash";
 import AppError, { type ErrorDetail } from "@/core/app-error.ts";
-import type { Action, ValidateMiddleware } from "../types.ts";
+import type { Action, ValidatorMiddleware } from "../types.ts";
 import { chains } from "./chain.ts";
 import { validationResult, type ValidationChain } from "express-validator";
 
-export const expressValidatorValidateMiddleware: ValidateMiddleware = (
+export const expressValidatorValidateMiddleware: ValidatorMiddleware = (
   action: Action
 ) => {
   const chain = get(chains, action);
@@ -26,7 +26,7 @@ export const expressValidatorValidateMiddleware: ValidateMiddleware = (
     if (!errors.isEmpty()) {
       const details = getErrorDetails(errors);
 
-      return next(AppError.badRequest("Validation failed.", true, { details }));
+      return next(AppError.badRequest("Validation failed.", { details }));
     }
 
     next();

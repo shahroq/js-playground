@@ -1,17 +1,17 @@
 import type { Request, Response, NextFunction } from "express";
 import { get } from "lodash";
 import AppError, { type ErrorDetail } from "@/core/app-error.ts";
-import type { Action, ValidateMiddleware } from "../types.ts";
+import type { Action, ValidatorMiddleware } from "../types.ts";
 import { schemas } from "./schema.ts";
 import { ZodError } from "zod";
 
-export const zodValidateMiddleware: ValidateMiddleware = (action: Action) => {
+export const zodValidateMiddleware: ValidatorMiddleware = (action: Action) => {
   const schema = get(schemas, action);
   if (!schema) throw new AppError(`Schema not found for action: ${action}`);
 
   return async (
     req: Request,
-    res: Response,
+    _res: Response,
     next: NextFunction
   ): Promise<void> => {
     try {
@@ -31,10 +31,7 @@ export const zodValidateMiddleware: ValidateMiddleware = (action: Action) => {
     } catch (error) {
       if (error instanceof ZodError) {
         const details = getErrorDetails(error);
-
-        return next(
-          AppError.badRequest("Validation failed.", true, { details })
-        );
+        return next(AppError.badRequest("Validation failed.", { details }));
       }
       next(error);
     }

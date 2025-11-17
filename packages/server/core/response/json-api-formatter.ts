@@ -1,6 +1,26 @@
 import type { ResponseFormatter } from "./types";
+import type AppError from "@/core/app-error";
 
 export class JsonApiFormatter implements ResponseFormatter {
+  format(error: AppError | null, data: any = null) {
+    if (!error) return { data };
+
+    // handle error responses
+    const statusCode = error.meta.statusCode;
+    const details = error.meta.details;
+
+    return {
+      errors: [
+        {
+          status: statusCode.toString(),
+          title: error.message,
+          ...(details ? { detail: details } : {}),
+        },
+      ],
+    };
+  }
+
+  /*
   success(data: any) {
     return { data };
   }
@@ -22,4 +42,5 @@ export class JsonApiFormatter implements ResponseFormatter {
       ],
     };
   }
+    */
 }
