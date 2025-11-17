@@ -3,7 +3,11 @@ import { get } from "lodash";
 import AppError, { type ErrorDetail } from "@/core/app-error.ts";
 import type { Action, ValidatorMiddleware } from "../types.ts";
 import { chains } from "./chain.ts";
-import { validationResult, type ValidationChain } from "express-validator";
+import {
+  validationResult,
+  type ValidationChain,
+  type Result,
+} from "express-validator";
 
 export const expressValidatorValidateMiddleware: ValidatorMiddleware = (
   action: Action
@@ -33,9 +37,9 @@ export const expressValidatorValidateMiddleware: ValidatorMiddleware = (
   };
 };
 
-const getErrorDetails = (errors): ErrorDetail[] => {
+const getErrorDetails = (errors: Result): ErrorDetail[] => {
   const details = errors.array().map((error) => ({
-    path: "path" in error ? [error.path] : [],
+    path: "path" in error ? error.path : "",
     message: error.msg,
     type: error.type,
   }));

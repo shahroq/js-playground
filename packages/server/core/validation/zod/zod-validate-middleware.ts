@@ -39,10 +39,10 @@ export const zodValidateMiddleware: ValidatorMiddleware = (action: Action) => {
 };
 
 const getErrorDetails = (error: ZodError): ErrorDetail[] => {
-  const details = error.issues.map((err) => ({
-    path: err.path.map((p) => String(p)),
-    message: err.message,
-    type: err.code,
+  const details = error.issues.map((issue) => ({
+    path: issue.path.map((p) => String(p)).join("."),
+    message: issue.message,
+    type: issue.code,
   }));
 
   return details;

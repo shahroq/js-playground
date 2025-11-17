@@ -49,7 +49,7 @@ export const joiValidateMiddleware: ValidatorMiddleware = (action: Action) => {
 
 const getErrorDetails = (error: Joi.ValidationError): ErrorDetail[] => {
   const details = error.details.map((detail) => ({
-    path: detail.path.map((p) => String(p)),
+    path: detail.path.map((p) => String(p)).join("."),
     message: detail.message,
     type: detail.type,
   }));
