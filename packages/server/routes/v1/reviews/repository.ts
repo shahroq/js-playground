@@ -1,5 +1,5 @@
-import type { Review } from "../../../core/types";
-import { BaseRepository } from "../../../core/base-repository";
+import type { Review } from "../../../common/types";
+import { BaseRepository } from "../../../common/base-repository";
 
 export class ReviewRepository extends BaseRepository<Review> {
   constructor() {

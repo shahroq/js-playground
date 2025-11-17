@@ -4,9 +4,9 @@ import type { Application, Request, Response, NextFunction } from "express";
 
 import sandboxRoutes from "./routes/sandbox";
 import v1Router from "@/routes/v1";
-import config from "@/core/config";
-import { isoString } from "@/core/utils";
-import { formatter } from "@/core/response";
+import config from "@/common/config";
+import { isoString } from "@/common/utils";
+import { formatter } from "@/common/response";
 import { undefinedErrorHandler, globalErrorHandler } from "@/middlewares";
 
 export const bootstrap = (): Application => {

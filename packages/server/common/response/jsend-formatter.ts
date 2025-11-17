@@ -1,5 +1,5 @@
 import type { ResponseFormatter } from "./types";
-import type AppError from "@/core/app-error";
+import type AppError from "@/common/app-error";
 
 type JSendStatus = "success" | "fail" | "error";
 

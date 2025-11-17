@@ -2,8 +2,8 @@ import { Low } from "lowdb";
 import { JSONFile } from "lowdb/node";
 import fs from "fs-extra";
 import { BaseAdapter, type QueryFilter } from "../base-adapter";
-import config from "@/core/config";
-import { isoString, truncateString } from "@/core/utils";
+import config from "@/common/config";
+import { isoString, truncateString } from "@/common/utils";
 import { defaultData, type DatabaseSchema } from "./schema";
 
 export class LowDBJSONAdapter extends BaseAdapter {

@@ -1,5 +1,5 @@
-import type { User } from "../../../core/types";
-import { BaseRepository } from "../../../core/base-repository";
+import type { User } from "../../../common/types";
+import { BaseRepository } from "../../../common/base-repository";
 
 export class UserRepository extends BaseRepository<User> {
   constructor() {

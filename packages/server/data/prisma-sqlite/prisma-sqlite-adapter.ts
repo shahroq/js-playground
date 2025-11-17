@@ -1,6 +1,6 @@
 import { PrismaClient } from "@/generated/prisma/client";
 import { BaseAdapter, type QueryFilter } from "@/data/base-adapter";
-import { isoString } from "@/core/utils";
+import { isoString } from "@/common/utils";
 
 const collectionMap: { [key: string]: string } = {
   products: "Product",

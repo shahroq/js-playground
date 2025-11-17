@@ -1,5 +1,5 @@
-import type { Product } from "@/core/types";
-import { BaseRepository } from "../../../core/base-repository";
+import type { Product } from "@/common/types";
+import { BaseRepository } from "../../../common/base-repository";
 
 export class ProductRepository extends BaseRepository<Product> {
   constructor() {

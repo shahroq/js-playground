@@ -1,4 +1,4 @@
-import config from "@/core/config";
+import config from "@/common/config";
 import type { BaseAdapter, DatabaseStrategy } from "./base-adapter";
 import { FileJSONAdapter } from "./file-json/file-json-adapter";
 import { LowDBJSONAdapter } from "./lowdb-json/lowdb-json-adapter";

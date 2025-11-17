@@ -1,6 +1,6 @@
 import express from "express";
 import type { Request, Response } from "express";
-import AppError from "../../core/app-error";
+import AppError from "../../common/app-error";
 
 const router = express.Router();
 

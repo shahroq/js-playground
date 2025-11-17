@@ -1,4 +1,4 @@
-import type { EntityId, Product } from "@/core/types";
+import type { EntityId, Product } from "@/common/types";
 import { ProductRepository } from "./repository";
 
 // get repository

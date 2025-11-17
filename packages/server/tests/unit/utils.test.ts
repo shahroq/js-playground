@@ -1,5 +1,5 @@
 import { describe, it, expect } from "bun:test";
-import { add, isAdmin } from "@/core/utils";
+import { add, isAdmin } from "@/common/utils";
 
 describe("add :", () => {
   it("should return the addition of two number correctly", () => {
