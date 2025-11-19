@@ -4,10 +4,10 @@ import { validate } from "@/common/validation";
 
 const router = express.Router();
 
-router.get("/", validate("products.getItems"), controller.getItems);
-router.get("/:id", validate("products.getItem"), controller.getItem);
-router.post("/", validate("products.createItem"), controller.createItem);
-router.put("/:id", validate("products.updateItem"), controller.updateItem);
-router.delete("/:id", validate("products.deleteItem"), controller.deleteItem);
+router.get("/", validate("products.getItems"), controller.index);
+router.get("/:id", validate("products.getItem"), controller.show);
+router.post("/", validate("products.createItem"), controller.store);
+router.put("/:id", validate("products.updateItem"), controller.update);
+router.delete("/:id", validate("products.deleteItem"), controller.destroy);
 
 export default router;
