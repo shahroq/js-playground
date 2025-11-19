@@ -1,5 +1,6 @@
-import type { EntityId, User } from "@/common/types";
+import type { EntityId } from "@/common/type";
 import { UserRepository } from "./repository";
+import type { User } from "./type";
 
 // get repository
 const repository = new UserRepository();

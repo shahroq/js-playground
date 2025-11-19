@@ -1,5 +1,6 @@
-import type { EntityId, Review } from "@/common/types";
+import type { EntityId } from "@/common/type";
 import { ReviewRepository } from "./repository";
+import type { Review } from "./type";
 
 // get repository
 const repository = new ReviewRepository();

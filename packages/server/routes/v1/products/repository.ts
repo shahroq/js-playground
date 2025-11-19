@@ -1,10 +1,11 @@
-import type { Product } from "@/common/types";
-import { BaseRepository } from "../../../common/base-repository";
+import type { Product } from "./type";
+import { BaseRepository } from "@/common/base-repository";
 
 export class ProductRepository extends BaseRepository<Product> {
   constructor() {
     super("products");
   }
+
   /*
   async findByCategory(category: string): Promise<Product[]> {
     return this.find({ where: { category } });

@@ -19,9 +19,15 @@ const config = {
   database_strategy: process.env.DATABASE_STRATEGY || "file-json",
 
   database_url: process.env.DATABASE_URL,
-  database_name: null,
-  database_path: null,
+  database_name: null as string | null,
+  database_path: null as string | null,
+
+  http_client_strategy: process.env.HTTP_CLIENT_STRATEGY,
+
+  // api urls
+  api_url_jsonplaceholder: process.env.API_URL_JSONPLACEHOLDER,
 };
+
 config.database_name = getDatabaseName(config.database_url);
 config.database_path = getDatabasePath(config.database_url);
 // console.log(config);

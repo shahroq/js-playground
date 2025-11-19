@@ -1,5 +1,5 @@
-import type { User } from "../../../common/types";
-import { BaseRepository } from "../../../common/base-repository";
+import { BaseRepository } from "@/common/base-repository";
+import type { User } from "./type";
 
 export class UserRepository extends BaseRepository<User> {
   constructor() {

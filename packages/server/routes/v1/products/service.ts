@@ -1,5 +1,6 @@
-import type { EntityId, Product } from "@/common/types";
+import type { EntityId } from "@/common/type";
 import { ProductRepository } from "./repository";
+import type { Product } from "./type";
 
 // get repository
 const repository = new ProductRepository();
@@ -9,7 +10,6 @@ export const productService = {
     const allItems = await repository.findAll();
     return allItems;
   },
-
   async getItem(id: EntityId): Promise<Product | null> {
     const item = await repository.findById(id);
     return item;
