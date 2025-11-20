@@ -8,9 +8,9 @@ const collectionModelMap: { [key: string]: Uncapitalize<Prisma.ModelName> } = {
   users: "user",
 } as const;
 
-export type CollectionName = keyof typeof collectionModelMap;
-export type ModelName = (typeof collectionModelMap)[CollectionName];
-// export type ModelName = Uncapitalize<Prisma.ModelName>;
+type CollectionName = keyof typeof collectionModelMap;
+type ModelName = (typeof collectionModelMap)[CollectionName];
+// type ModelName = Uncapitalize<Prisma.ModelName>;
 
 export class PrismaSQLiteAdapter extends BaseAdapter {
   private dbClient: PrismaClient;
