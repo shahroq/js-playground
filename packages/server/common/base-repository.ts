@@ -1,11 +1,11 @@
-import { getDBAdapter } from "@/data";
+import { getDBClientAdapter } from "@/data/factory";
 import { BaseAdapter } from "@/data/base-adapter";
 
 export abstract class BaseRepository<T> {
   protected db: BaseAdapter;
 
   constructor(protected collection: string) {
-    this.db = getDBAdapter();
+    this.db = getDBClientAdapter();
   }
 
   async findAll(): Promise<T[]> {
