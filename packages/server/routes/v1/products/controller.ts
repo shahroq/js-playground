@@ -36,7 +36,7 @@ export const productController = {
 
     const { body } = req;
 
-    const updatedItem = await service.updateItem(Number(id), body);
+    const updatedItem = await service.updateItem(+id, body);
     if (!updatedItem) return next(AppError.notFound());
 
     res.status(200).json(formatter.format(null, { [collection]: updatedItem }));

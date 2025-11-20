@@ -16,7 +16,7 @@ export const reviewController = {
     const { id } = req.params;
     if (!id) return next(AppError.badRequest());
 
-    const item = await service.getItem(Number(id));
+    const item = await service.getItem(+id);
     if (!item) return next(AppError.notFound());
 
     res.status(200).json(formatter.format(null, { [collection]: item }));
@@ -36,7 +36,7 @@ export const reviewController = {
 
     const { body } = req;
 
-    const updatedItem = await service.updateItem(Number(id), body);
+    const updatedItem = await service.updateItem(+id, body);
     if (!updatedItem) return next(AppError.notFound());
 
     res.status(200).json(formatter.format(null, { [collection]: updatedItem }));
@@ -46,7 +46,7 @@ export const reviewController = {
     const { id } = req.params;
     if (!id) return next(AppError.badRequest());
 
-    const deleted = await service.deleteItem(Number(id));
+    const deleted = await service.deleteItem(+id);
     if (!deleted) return next(AppError.notFound());
 
     res
