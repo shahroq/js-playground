@@ -1,5 +1,7 @@
 # sandbox-api-design-2025
 
+## Catalog API
+
 To install dependencies:
 
 ```bash
