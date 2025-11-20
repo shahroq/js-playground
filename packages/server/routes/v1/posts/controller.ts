@@ -2,7 +2,7 @@ import type { NextFunction, Request, Response } from "express";
 import { formatter } from "@/common/response/factory";
 import type { Post } from "./type";
 import { PostService } from "./service";
-import AppError from "@/common/app-error";
+import AppError from "@/common/error/app-error";
 
 const collection = "post";
 

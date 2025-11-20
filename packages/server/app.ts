@@ -4,8 +4,8 @@ import type { Application, Request, Response, NextFunction } from "express";
 
 import sandboxRoutes from "./routes/sandbox";
 import v1Router from "@/routes/v1";
-import config from "@/common/config";
-import { isoString } from "@/common/utils";
+import config from "@/common/config/config";
+import { isoString } from "@/common/utils/utils";
 import { formatter } from "@/common/response/factory";
 import { undefinedErrorHandler, globalErrorHandler } from "@/middlewares";
 

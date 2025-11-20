@@ -1,5 +1,5 @@
-import type { IDBAdapter } from "./db-adapter/db-adapter.interface";
-import { getDBAdapter } from "./db-adapter/factory";
+import type { IDBAdapter } from "../db-adapter/db-adapter.interface";
+import { getDBAdapter } from "../db-adapter/factory";
 
 export abstract class BaseRepository<T> {
   protected db: IDBAdapter;

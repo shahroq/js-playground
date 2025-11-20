@@ -1,8 +1,8 @@
 import { Low } from "lowdb";
 import { JSONFile } from "lowdb/node";
 import fs from "fs-extra";
-import config from "@/common/config";
-import { isoString, truncateString } from "@/common/utils";
+import config from "@/common/config/config";
+import { isoString, truncateString } from "@/common/utils/utils";
 import { defaultData, type DatabaseSchema } from "@/data/lowdb-json/schema";
 import type { IDBAdapter } from "./db-adapter.interface";
 

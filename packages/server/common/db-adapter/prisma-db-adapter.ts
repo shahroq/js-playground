@@ -1,5 +1,5 @@
 import { PrismaClient, Prisma } from "@/generated/prisma/client";
-import { isoString } from "@/common/utils";
+import { isoString } from "@/common/utils/utils";
 import type { IDBAdapter, QueryFilter } from "./db-adapter.interface";
 
 const collectionModelMap: { [key: string]: Uncapitalize<Prisma.ModelName> } = {

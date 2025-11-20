@@ -1,4 +1,4 @@
-import type { EntityId } from "@/common/type";
+import type { EntityId } from "@/common/type/type";
 import type { Review } from "../reviews/type";
 
 export interface Product {

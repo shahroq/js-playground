@@ -1,5 +1,5 @@
 import { join } from "path";
-import { isFileURL, getDBIdentifier } from "./utils";
+import { isFileURL, getDBIdentifier } from "../utils/utils";
 
 const root = process.cwd();
 

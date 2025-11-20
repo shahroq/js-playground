@@ -1,5 +1,5 @@
 import type { ResponseFormatter } from "./types";
-import type AppError from "@/common/app-error";
+import type AppError from "@/common/error/app-error";
 
 export class JsonApiFormatter implements ResponseFormatter {
   format(error: AppError | null, data: any = null) {

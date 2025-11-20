@@ -1,4 +1,4 @@
-import config from "@/common/config";
+import config from "@/common/config/config";
 import type { IHttpClient, HttpClientStrategy } from "./http-client.interface";
 import { AxiosHttpClient } from "./axios-http-client";
 

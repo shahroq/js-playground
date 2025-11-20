@@ -1,5 +1,5 @@
-import config from "@/common/config";
-import { isoString } from "@/common/utils";
+import config from "@/common/config/config";
+import { isoString } from "@/common/utils/utils";
 
 export interface DatabaseSchema {
   [collection: string]: any[] | string | Record<string, any>;

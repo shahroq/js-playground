@@ -1,4 +1,4 @@
-import config from "@/common/config.ts";
+import config from "@/common/config/config.ts";
 import type { ResponseFormatter } from "./types.ts";
 import { JSendFormatter } from "./jsend-formatter.ts";
 import { JsonApiFormatter } from "./json-api-formatter.ts";

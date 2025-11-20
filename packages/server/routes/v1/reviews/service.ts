@@ -1,4 +1,4 @@
-import type { EntityId } from "@/common/type";
+import type { EntityId } from "@/common/type/type";
 import { ReviewRepository } from "./repository";
 import type { Review } from "./type";
 

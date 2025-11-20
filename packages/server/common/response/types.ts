@@ -1,4 +1,4 @@
-import type AppError from "@/common/app-error";
+import type AppError from "@/common/error/app-error";
 
 export type ResponseFormatStrategy = "jsend" | "json-api";
 
