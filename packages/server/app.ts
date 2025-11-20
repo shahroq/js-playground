@@ -6,7 +6,7 @@ import sandboxRoutes from "./routes/sandbox";
 import v1Router from "@/routes/v1";
 import config from "@/common/config";
 import { isoString } from "@/common/utils";
-import { formatter } from "@/common/response";
+import { formatter } from "@/common/response/factory";
 import { undefinedErrorHandler, globalErrorHandler } from "@/middlewares";
 
 export const bootstrap = (): Application => {

@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
 import config from "@/common/config";
 import AppError from "@/common/app-error";
-import { formatter } from "@/common/response";
+import { formatter } from "@/common/response/factory";
 
 export function globalErrorHandler(
   e: Error | AppError,

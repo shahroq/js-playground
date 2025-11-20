@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import AppError from "@/common/app-error";
-import { formatter } from "@/common/response";
+import { formatter } from "@/common/response/factory";
 import { userService as service } from "./service";
 
 const collection = "user";

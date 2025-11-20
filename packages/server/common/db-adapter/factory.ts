@@ -12,6 +12,7 @@ export function getDBAdapter(): IDBAdapter {
 
   const strategy = config.database_adapter_strategy as DBAdapterStrategy;
   let dbAdapter;
+  console.log(`⚙️  Getting db adapter (${strategy})`);
 
   switch (strategy) {
     case "file":
