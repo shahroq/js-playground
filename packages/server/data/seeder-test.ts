@@ -1,4 +1,4 @@
-import { getDBAdapter } from ".";
+import { getDBAdapter } from "../common/db-adapter/factory";
 import { ProductRepository } from "@/routes/v1/products/repository";
 
 // let dbAdapter = getDBAdapter(); // used for migration directly

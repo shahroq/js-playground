@@ -1,11 +1,11 @@
-import { getDBClientAdapter } from "@/data/factory";
-import { BaseAdapter } from "@/data/base-adapter";
+import type { IDBAdapter } from "./db-adapter/db-adapter.interface";
+import { getDBAdapter } from "./db-adapter/factory";
 
 export abstract class BaseRepository<T> {
-  protected db: BaseAdapter;
+  protected db: IDBAdapter;
 
   constructor(protected collection: string) {
-    this.db = getDBClientAdapter();
+    this.db = getDBAdapter();
   }
 
   async findAll(): Promise<T[]> {

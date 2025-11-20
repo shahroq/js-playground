@@ -1,5 +1,5 @@
 import { join } from "path";
-import { isFileURL, getDbIdentifier } from "./utils";
+import { isFileURL, getDBIdentifier } from "./utils";
 
 const root = process.cwd();
 
@@ -16,34 +16,80 @@ const config = {
   response_format_strategy: process.env.RESPONSE_FORMAT_STRATEGY,
 
   validation_strategy: process.env.VALIDATION_STRATEGY,
-  database_strategy: process.env.DATABASE_STRATEGY || "file-json",
 
-  database_url: process.env.DATABASE_URL,
+  database_url: process.env.DATABASE_URL as string | null,
+  database_adapter_strategy: process.env.DATABASE_ADAPTER_STRATEGY,
+
+  database_type: null as string | null,
   database_name: null as string | null,
   database_path: null as string | null,
 
   http_client_strategy: process.env.HTTP_CLIENT_STRATEGY,
-
-  // api urls
   api_url_jsonplaceholder: process.env.API_URL_JSONPLACEHOLDER,
 };
 
-config.database_name = getDatabaseName(config.database_url);
-config.database_path = getDatabasePath(config.database_url);
+config.database_type = getDBType(config.database_url);
+config.database_name = getDBName(config.database_url);
+config.database_path = getDBPath(config.database_url);
 // console.log(config);
+
+export function getDBType(database_url: string | null) {
+  if (!database_url) return null;
+
+  // 1. Handle file-based URLs
+  if (isFileURL(database_url)) {
+    const lower = database_url.toLowerCase();
+
+    if (lower.endsWith(".json")) return "json";
+    if (lower.endsWith(".db")) return "sqlite";
+
+    return "unknown"; // fallback for unknown file types
+  }
+
+  // 2. Extract protocol (e.g., mysql://, postgres://)
+  const protocolMatch = database_url.match(/^([a-zA-Z0-9+]+):\/\//);
+  // ensure the capture exists before accessing it
+  if (protocolMatch && protocolMatch[1]) {
+    return protocolMatch[1].toLowerCase(); // "mysql", "postgres", etc.
+  }
+
+  return "unknown";
+}
+
+function getDBName(database_url: string | null) {
+  if (!database_url) return null;
+  return getDBIdentifier(database_url, {});
+}
+
+function getDBPath(database_url: string | null) {
+  if (!database_url) return null;
+  return isFileURL(database_url)
+    ? join(
+        config.data_path,
+        `${config.database_adapter_strategy}-${config.database_type}`,
+        getDBIdentifier(database_url, { withExtension: true })
+      )
+    : null;
+}
+
 /*
 {
-  root_path: "/Users/shahroq/code/sandbox/ts-projects/sandbox-4-bun/packages/server",
-  data_path: "/Users/shahroq/code/sandbox/ts-projects/sandbox-4-bun/packages/server/data",
+  root_path: "/Users/shahroq/code/sandbox/ts-projects/sandbox-api-design-2025/packages/server",
+  data_path: "/Users/shahroq/code/sandbox/ts-projects/sandbox-api-design-2025/packages/server/data",
   version: "1.0.0",
   env: "development",
+  base_url: "http://localhost",
   port: 3000,
-  debug: false,
-  validation_strategy: "joi",
-  database_strategy: "lowdb-json",
-  database_url: "file:/database.json",
+  debug: true,
+  response_format_strategy: "jsend",
+  validation_strategy: "zod",
+  database_type: "sqlite",
+  database_url: "file:./database.db",
   database_name: "database",
-  database_path: "/Users/shahroq/code/sandbox/ts-projects/sandbox-4-bun/packages/server/data/lowdb-json/database.json",
+  database_path: "/Users/shahroq/code/sandbox/ts-projects/sandbox-api-design-2025/packages/server/data/prisma-sqlite/database.db",
+  database_adapter_strategy: "prisma",
+  http_client_strategy: "axios",
+  api_url_jsonplaceholder: "https://jsonplaceholder.typicode.com",
 }
 */
 // set test env
@@ -51,23 +97,9 @@ config.database_path = getDatabasePath(config.database_url);
 dotenv.config({ path: ".env.test.local" });
 console.log(process.env);
 config.test = {
-  database_filname: process.env.DATABASE_FILENAME || undefined, // only for file-based strategies
-  database_url: process.env.DATABASE_URL, // only for db engines
+  database_filname: process.env.Db_FILENAME || undefined, // only for file-based strategies
+  database_url: process.env.Db_URL, // only for db engines
 };
-console.log(config);
 */
-function getDatabaseName(database_url) {
-  return isFileURL(database_url) ? getDbIdentifier(database_url, {}) : null;
-}
-
-function getDatabasePath(database_url) {
-  return isFileURL(database_url)
-    ? join(
-        config.data_path,
-        config.database_strategy,
-        getDbIdentifier(database_url, { withExtension: true })
-      )
-    : null;
-}
 
 export default config;

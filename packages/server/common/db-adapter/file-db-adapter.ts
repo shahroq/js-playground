@@ -1,17 +1,15 @@
 import fs from "fs-extra";
-import { BaseAdapter, type QueryFilter } from "../base-adapter";
 import config from "@/common/config";
 import { isoString, truncateString } from "@/common/utils";
-import { defaultData, type DatabaseSchema } from "./schema";
+import { defaultData, type DatabaseSchema } from "@/data/file-json/schema";
+import type { IDBAdapter } from "./db-adapter.interface";
 
-export class FileJSONAdapter extends BaseAdapter {
+export class FileDBAdapter implements IDBAdapter {
   private db: DatabaseSchema = {};
   private filePath = config.database_path;
   private defaultData: DatabaseSchema = defaultData;
 
-  constructor() {
-    super();
-  }
+  constructor() {}
 
   async connect(): Promise<void> {
     await fs.ensureFile(this.filePath);

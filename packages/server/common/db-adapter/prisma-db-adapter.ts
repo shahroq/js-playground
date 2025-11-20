@@ -1,6 +1,6 @@
 import { PrismaClient, Prisma } from "@/generated/prisma/client";
-import { BaseAdapter, type QueryFilter } from "@/data/base-adapter";
 import { isoString } from "@/common/utils";
+import type { IDBAdapter, QueryFilter } from "./db-adapter.interface";
 
 const collectionModelMap: { [key: string]: Uncapitalize<Prisma.ModelName> } = {
   products: "product",
@@ -12,12 +12,10 @@ type CollectionName = keyof typeof collectionModelMap;
 type ModelName = (typeof collectionModelMap)[CollectionName];
 // type ModelName = Uncapitalize<Prisma.ModelName>;
 
-export class PrismaSQLiteAdapter extends BaseAdapter {
+export class PrismaDBAdapter implements IDBAdapter {
   private dbClient: PrismaClient;
 
   constructor() {
-    super();
-
     // Prisma will use the DATABASE_URL from .env
     // Example: DATABASE_URL=“mysql://user:password@localhost:3306/mydb”
     // Or: DATABASE_URL=“file:./database.db”
@@ -159,8 +157,6 @@ export class PrismaSQLiteAdapter extends BaseAdapter {
   }
 
   override async migrate() {
-    await super.migrate();
-
     // migration is done via prisma cli
     console.log(`Migration is not necessary for Prisma. It's done via cli.`);
     // this.createDB(config.database_name);

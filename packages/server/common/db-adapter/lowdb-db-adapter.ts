@@ -1,18 +1,17 @@
 import { Low } from "lowdb";
 import { JSONFile } from "lowdb/node";
 import fs from "fs-extra";
-import { BaseAdapter, type QueryFilter } from "../base-adapter";
 import config from "@/common/config";
 import { isoString, truncateString } from "@/common/utils";
-import { defaultData, type DatabaseSchema } from "./schema";
+import { defaultData, type DatabaseSchema } from "@/data/lowdb-json/schema";
+import type { IDBAdapter } from "./db-adapter.interface";
 
-export class LowDBJSONAdapter extends BaseAdapter {
+export class LowDBDBAdapter implements IDBAdapter {
   private dbClient: Low<DatabaseSchema>;
   private filePath = config.database_path;
   private defaultData: DatabaseSchema = defaultData;
 
   constructor() {
-    super();
     const adapter = new JSONFile<DatabaseSchema>(this.filePath);
     this.dbClient = new Low(adapter, this.defaultData);
   }

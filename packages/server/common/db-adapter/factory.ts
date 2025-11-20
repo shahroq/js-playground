@@ -1,30 +1,30 @@
 import config from "@/common/config";
-import type { BaseAdapter, DatabaseStrategy } from "./base-adapter";
-import { FileJSONAdapter } from "./file-json/file-json-adapter";
-import { LowDBJSONAdapter } from "./lowdb-json/lowdb-json-adapter";
-import { PrismaSQLiteAdapter } from "./prisma-sqlite/prisma-sqlite-adapter";
+import { FileDBAdapter } from "./file-db-adapter";
+import { LowDBDBAdapter } from "./lowdb-db-adapter";
+import { PrismaDBAdapter } from "./prisma-db-adapter";
+import type { DBAdapterStrategy, IDBAdapter } from "./db-adapter.interface";
 
-let dbAdapterInstance: BaseAdapter | null = null;
+let dbAdapterInstance: IDBAdapter | null = null;
 
 // add identifier here (filepath, or db engine name)?
-export function getDBAdapter(): BaseAdapter {
+export function getDBAdapter(): IDBAdapter {
   if (dbAdapterInstance) return dbAdapterInstance;
 
-  const strategy = config.database_strategy as DatabaseStrategy;
+  const strategy = config.database_adapter_strategy as DBAdapterStrategy;
   let dbAdapter;
 
   switch (strategy) {
-    case "file-json":
-      dbAdapter = new FileJSONAdapter();
+    case "file":
+      dbAdapter = new FileDBAdapter();
       break;
-    case "lowdb-json":
-      dbAdapter = new LowDBJSONAdapter();
+    case "lowdb":
+      dbAdapter = new LowDBDBAdapter();
       break;
-    case "prisma-sqlite":
-      dbAdapter = new PrismaSQLiteAdapter();
+    case "prisma":
+      dbAdapter = new PrismaDBAdapter();
       break;
     default:
-      throw new Error(`Unsupported database strategy: ${strategy}`);
+      throw new Error(`Unsupported database adapter strategy: ${strategy}`);
   }
 
   dbAdapter.connect();

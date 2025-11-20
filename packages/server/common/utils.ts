@@ -36,7 +36,7 @@ export function isoString(
 // const tmp2 = new Date().toISOString();
 // console.log(tmp2);
 
-// for database_url
+/** check if the value is url of type file(starts with file://..) */
 export function isFileURL(value: string): boolean {
   try {
     const url = new URL(value);
@@ -55,7 +55,8 @@ interface GetDbIdentifierOptions {
   withExtension?: boolean;
 }
 
-export function getDbIdentifier(
+/** returns database name, which can be file name(json, sqllite) or database name (mysql, postgres, etc) */
+export function getDBIdentifier(
   dbUrl: string,
   { withExtension = false }: GetDbIdentifierOptions = {}
 ): string {
@@ -76,10 +77,10 @@ export function getDbIdentifier(
   }
 }
 /*
-console.log(getDbIdentifier("file:./data/dev.db")); // → "dev"
-console.log(getDbIdentifier("file:./data/dev.db", { withExtension: true })); // → "dev.db"
-console.log(getDbIdentifier("mysql://root@localhost/testdb")); // → "testdb"
-console.log(getDbIdentifier("./local.sqlite", { withExtension: true })); // → "local.sqlite"
+console.log(getDBIdentifier("file:./data/dev.db")); // → "dev"
+console.log(getDBIdentifier("file:./data/dev.db", { withExtension: true })); // → "dev.db"
+console.log(getDBIdentifier("mysql://root@localhost/testdb")); // → "testdb"
+console.log(getDBIdentifier("./local.sqlite", { withExtension: true })); // → "local.sqlite"
 */
 
 type TruncatePosition = "start" | "middle" | "end";
