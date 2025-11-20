@@ -1,15 +1,19 @@
-import { PrismaClient } from "@/generated/prisma/client";
+import { PrismaClient, Prisma } from "@/generated/prisma/client";
 import { BaseAdapter, type QueryFilter } from "@/data/base-adapter";
 import { isoString } from "@/common/utils";
 
-const collectionMap: { [key: string]: string } = {
-  products: "Product",
-  reviews: "Review",
-  users: "User",
-};
+const collectionModelMap: { [key: string]: Uncapitalize<Prisma.ModelName> } = {
+  products: "product",
+  reviews: "review",
+  users: "user",
+} as const;
+
+export type CollectionName = keyof typeof collectionModelMap;
+export type ModelName = (typeof collectionModelMap)[CollectionName];
+// export type ModelName = Uncapitalize<Prisma.ModelName>;
 
 export class PrismaSQLiteAdapter extends BaseAdapter {
-  private prisma: PrismaClient;
+  private dbClient: PrismaClient;
 
   constructor() {
     super();
@@ -17,31 +21,31 @@ export class PrismaSQLiteAdapter extends BaseAdapter {
     // Prisma will use the DATABASE_URL from .env
     // Example: DATABASE_URL=“mysql://user:password@localhost:3306/mydb”
     // Or: DATABASE_URL=“file:./database.db”
-    this.prisma = new PrismaClient();
+    this.dbClient = new PrismaClient();
   }
 
   async connect(): Promise<void> {
-    await this.prisma.$connect();
-    await this.prisma.$executeRawUnsafe(`PRAGMA foreign_keys = OFF;`);
+    await this.dbClient.$connect();
+    await this.dbClient.$executeRawUnsafe(`PRAGMA foreign_keys = OFF;`);
 
     console.log("🌕 Prisma connected");
   }
 
   async disconnect(): Promise<void> {
-    await this.prisma.$disconnect();
+    await this.dbClient.$disconnect();
     console.log("🌒 Prisma disconnected");
   }
 
   async findAll<T>(collection: string): Promise<T[]> {
     // @ts-ignore - Dynamic collection access
-    return await this.prisma[collectionMap[collection]].findMany();
+    return await this.dbClient[collectionModelMap[collection]].findMany();
   }
 
   async findById<T>(
     collection: string,
     id: string | number
   ): Promise<T | null> {
-    return await this.prisma[collectionMap[collection]].findUnique({
+    return await this.dbClient[collectionModelMap[collection]].findUnique({
       where: { id },
     });
   }
@@ -54,7 +58,7 @@ export class PrismaSQLiteAdapter extends BaseAdapter {
       updated_by: 1,
     };
 
-    return await this.prisma[collectionMap[collection]].create({
+    return await this.dbClient[collectionModelMap[collection]].create({
       data: newItem,
     });
   }
@@ -74,14 +78,16 @@ export class PrismaSQLiteAdapter extends BaseAdapter {
       updated_by: 1,
     };
 
-    return await this.prisma[collectionMap[collection]].update({
+    return await this.dbClient[collectionModelMap[collection]].update({
       where: { id },
       data: updatedItem,
     });
   }
 
   async delete(collection: string, id: string | number): Promise<boolean> {
-    const result = await this.prisma[collectionMap[collection]].deleteMany({
+    const result = await this.dbClient[
+      collectionModelMap[collection]
+    ].deleteMany({
       where: { id },
     });
 
@@ -92,9 +98,11 @@ export class PrismaSQLiteAdapter extends BaseAdapter {
     collection: string,
     filter: QueryFilter<T> = {}
   ): Promise<number> {
-    await this.prisma.$executeRawUnsafe(`PRAGMA foreign_keys = OFF;`);
+    await this.dbClient.$executeRawUnsafe(`PRAGMA foreign_keys = OFF;`);
 
-    const result = await this.prisma[collectionMap[collection]].deleteMany();
+    const result = await this.dbClient[
+      collectionModelMap[collection]
+    ].deleteMany();
     return result.count;
   }
 
@@ -118,7 +126,7 @@ export class PrismaSQLiteAdapter extends BaseAdapter {
     if (filter.offset) query.skip = filter.offset;
 
     // @ts-ignore
-    return await this.prisma[collectionMap[collection]].findMany(query);
+    return await this.dbClient[collectionModelMap[collection]].findMany(query);
   }
 
   async findOne<T>(
@@ -132,7 +140,7 @@ export class PrismaSQLiteAdapter extends BaseAdapter {
     }
 
     // @ts-ignore
-    return await this.prisma[collectionMap[collection]].findFirst(query);
+    return await this.dbClient[collectionModelMap[collection]].findFirst(query);
   }
 
   async count<T>(collection: string, filter?: QueryFilter<T>): Promise<number> {
@@ -143,7 +151,7 @@ export class PrismaSQLiteAdapter extends BaseAdapter {
     }
 
     // @ts-ignore
-    return await this.prisma[collectionMap[collection]].count(query);
+    return await this.dbClient[collectionModelMap[collection]].count(query);
   }
 
   async createDB(identifier: string) {

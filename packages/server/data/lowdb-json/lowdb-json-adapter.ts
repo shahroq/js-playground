@@ -7,21 +7,21 @@ import { isoString, truncateString } from "@/common/utils";
 import { defaultData, type DatabaseSchema } from "./schema";
 
 export class LowDBJSONAdapter extends BaseAdapter {
-  private db: Low<DatabaseSchema>;
+  private dbClient: Low<DatabaseSchema>;
   private filePath = config.database_path;
   private defaultData: DatabaseSchema = defaultData;
 
   constructor() {
     super();
     const adapter = new JSONFile<DatabaseSchema>(this.filePath);
-    this.db = new Low(adapter, this.defaultData);
+    this.dbClient = new Low(adapter, this.defaultData);
   }
 
   async connect(): Promise<void> {
     // Ensure file exists before LowDB tries to read it
     await fs.ensureFile(this.filePath);
     const adapter = new JSONFile<DatabaseSchema>(this.filePath);
-    this.db = new Low(adapter, this.defaultData);
+    this.dbClient = new Low(adapter, this.defaultData);
     console.log(
       `🌕 Connected to LowDB: ${truncateString(this.filePath, {
         position: "start",
@@ -30,21 +30,21 @@ export class LowDBJSONAdapter extends BaseAdapter {
   }
 
   async disconnect(): Promise<void> {
-    await this.db.write();
+    await this.dbClient.write();
     console.log("🌒 LowDB disconnected");
   }
 
   async findAll<T>(collection: string): Promise<T[]> {
-    await this.db.read();
-    return (this.db.data[collection] || []) as T[];
+    await this.dbClient.read();
+    return (this.dbClient.data[collection] || []) as T[];
   }
 
   async findById<T>(
     collection: string,
     id: string | number
   ): Promise<T | null> {
-    await this.db.read();
-    const items = this.db.data[collection] || [];
+    await this.dbClient.read();
+    const items = this.dbClient.data[collection] || [];
     return items.find((item: any) => item.id === id) || null;
   }
 
@@ -52,20 +52,20 @@ export class LowDBJSONAdapter extends BaseAdapter {
     collection: string,
     data: T
   ): Promise<T> {
-    await this.db.read();
+    await this.dbClient.read();
 
-    if (!this.db.data[collection]) this.db.data[collection] = [];
+    if (!this.dbClient.data[collection]) this.dbClient.data[collection] = [];
 
     const newItem = {
       ...data,
-      id: data.id || this.db.data[collection].length + 1,
+      id: data.id || this.dbClient.data[collection].length + 1,
       created_at: isoString(),
       updated_at: isoString(),
       created_by: 1,
       updated_by: 1,
     };
-    this.db.data[collection].push(newItem);
-    await this.db.write();
+    this.dbClient.data[collection].push(newItem);
+    await this.dbClient.write();
 
     return { ...newItem } as T;
   }
@@ -75,9 +75,9 @@ export class LowDBJSONAdapter extends BaseAdapter {
     id: string | number,
     data: Partial<T>
   ): Promise<T | null> {
-    await this.db.read();
+    await this.dbClient.read();
 
-    const items = this.db.data[collection] || [];
+    const items = this.dbClient.data[collection] || [];
     const index = items.findIndex((item: any) => item.id === id);
 
     if (index === -1) return null;
@@ -88,20 +88,20 @@ export class LowDBJSONAdapter extends BaseAdapter {
       updated_at: isoString(),
       updated_by: 1,
     };
-    await this.db.write();
+    await this.dbClient.write();
 
     return { ...items[index] };
   }
 
   async delete(collection: string, id: string | number): Promise<boolean> {
-    await this.db.read();
-    const items = this.db.data[collection] || [];
+    await this.dbClient.read();
+    const items = this.dbClient.data[collection] || [];
     const index = items.findIndex((item: any) => item.id === id);
 
     if (index === -1) return false;
 
     items.splice(index, 1);
-    await this.db.write();
+    await this.dbClient.write();
 
     return true;
   }
@@ -111,8 +111,8 @@ export class LowDBJSONAdapter extends BaseAdapter {
     filter: QueryFilter<T> = {}
   ): Promise<number> {
     console.log(collection);
-    await this.db.read(); // ensure fresh data
-    console.log(this.db.data);
+    await this.dbClient.read(); // ensure fresh data
+    console.log(this.dbClient.data);
     /*
     // Get the collection (e.g., users, products, etc.)
     const items: T[] = this.db.data?.[collection] || [];
@@ -139,8 +139,8 @@ export class LowDBJSONAdapter extends BaseAdapter {
   }
 
   async find<T>(collection: string, filter: QueryFilter<T> = {}): Promise<T[]> {
-    await this.db.read();
-    let items = (this.db.data[collection] || []) as T[];
+    await this.dbClient.read();
+    let items = (this.dbClient.data[collection] || []) as T[];
 
     if (filter.where) {
       if (typeof filter.where === "function") {
@@ -188,8 +188,8 @@ export class LowDBJSONAdapter extends BaseAdapter {
 
   async count<T>(collection: string, filter?: QueryFilter<T>): Promise<number> {
     if (!filter || !filter.where) {
-      await this.db.read();
-      return (this.db.data[collection] || []).length;
+      await this.dbClient.read();
+      return (this.dbClient.data[collection] || []).length;
     }
     const results = await this.find(collection, filter);
     return results.length;
@@ -202,15 +202,15 @@ export class LowDBJSONAdapter extends BaseAdapter {
     // main file
     try {
       // file exists
-      await this.db.read(); // even if file
+      await this.dbClient.read(); // even if file
     } catch (err) {
       // file not exist, create it with defaultData
       console.warn(
         `⚠️ Lowdb read failed, initializing DB file (${identifier}) with default data...`
       );
-      this.db.data = this.defaultData;
-      await this.db.write();
-      await this.db.read();
+      this.dbClient.data = this.defaultData;
+      await this.dbClient.write();
+      await this.dbClient.read();
     }
 
     // copy main file, for test
