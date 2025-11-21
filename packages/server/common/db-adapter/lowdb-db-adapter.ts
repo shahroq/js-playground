@@ -8,7 +8,7 @@ import type { IDBAdapter } from "./db-adapter.interface";
 
 export class LowDBDBAdapter implements IDBAdapter {
   private dbClient: Low<DatabaseSchema>;
-  private filePath = config.database_path;
+  private filePath = config.database_path ?? "";
   private defaultData: DatabaseSchema = defaultData;
 
   constructor() {
