@@ -1,1 +1,3 @@
-console.log("Hello via Bun!");
+if (1) {
+  console.log("Hello via Bun!");
+}
