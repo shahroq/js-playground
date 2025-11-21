@@ -98,9 +98,8 @@ export class PrismaDBAdapter implements IDBAdapter {
   ): Promise<number> {
     await this.dbClient.$executeRawUnsafe(`PRAGMA foreign_keys = OFF;`);
 
-    const result = await this.dbClient[
-      collectionModelMap[collection]
-    ].deleteMany();
+    const result =
+      await this.dbClient[collectionModelMap[collection]].deleteMany();
     return result.count;
   }
 
