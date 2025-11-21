@@ -4,10 +4,10 @@ import type { IRawQuery, INormalizedQuery } from "@/common/type/type";
 export class QueryHelper {
   static normalize<T extends IRawQuery>(query: T): INormalizedQuery {
     const page = Math.max(Number(query.page) || 1, 1);
-    const limit = Number(query.limit ?? config.pagination_limit);
-    const offset = (page - 1) * limit;
+    const per_page = Number(query.per_page ?? config.pagination_per_page);
+    const offset = (page - 1) * per_page;
 
-    return { ...query, page, limit, offset };
+    return { ...query, page, per_page, offset };
   }
   /*
   static meta(params: INormalizedQuery, total: number) {

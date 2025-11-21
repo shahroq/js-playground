@@ -66,8 +66,8 @@ export class LowDBDBAdapter implements IDBAdapter {
       items = items.slice(filter.offset);
     }
 
-    if (filter.limit !== undefined) {
-      items = items.slice(0, filter.limit);
+    if (filter.per_page !== undefined) {
+      items = items.slice(0, filter.per_page);
     }
 
     return items;
@@ -77,7 +77,7 @@ export class LowDBDBAdapter implements IDBAdapter {
     collection: string,
     filter: QueryFilter<T>
   ): Promise<T | null> {
-    const results = await this.find(collection, { ...filter, limit: 1 });
+    const results = await this.find(collection, { ...filter, per_page: 1 });
     return results[0] || null;
   }
 

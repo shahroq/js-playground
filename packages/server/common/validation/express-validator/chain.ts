@@ -9,7 +9,7 @@ const sharedChains = {
       .optional()
       .isInt({ min: 1 })
       .withMessage("Page must be at least 1"),
-    query("limit")
+    query("per_page")
       .optional()
       .isInt({ min: 1, max: 100 })
       .withMessage("Limit must be between 1 and 100"),

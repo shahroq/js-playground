@@ -39,7 +39,7 @@ export class PrismaDBAdapter implements IDBAdapter {
     const q: any = {};
 
     // Pagination
-    if (args.limit) q.take = args.limit;
+    if (args.per_page) q.take = args.per_page;
     if (args.offset) q.skip = args.offset;
 
     // Convert where filter to Prisma format

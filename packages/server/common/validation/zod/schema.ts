@@ -7,7 +7,7 @@ const sharedSchemas = {
   getItems: {
     query: z.object({
       page: z.coerce.number().int().min(1).default(1),
-      limit: z.coerce.number().int().min(1).max(100).default(10),
+      per_page: z.coerce.number().int().min(1).max(100).default(10),
       category: z.string().optional(),
       in_stock: z.boolean().optional(),
     }),

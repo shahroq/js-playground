@@ -2,17 +2,17 @@ export type EntityId = number | string;
 
 export interface IRawQuery {
   page?: number | string;
-  limit?: number | string;
+  per_page?: number | string;
   /*
-  orderBy?: string; // field name
-  orderDir?: "asc" | "desc";
+  order?: string; // field name
+  direction?: "asc" | "desc";
   */
 }
 
 // Normalized query params after processing
 export interface INormalizedQuery {
   page: number;
-  limit: number;
+  per_page: number;
   offset: number;
 
   /*
@@ -26,7 +26,7 @@ export interface INormalizedQuery {
 
 export interface IMeta {
   page?: number;
-  limit?: number;
+  per_page?: number;
   total_page?: number;
   total_count?: number;
 }
