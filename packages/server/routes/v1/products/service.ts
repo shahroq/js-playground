@@ -7,7 +7,7 @@ const repository = new ProductRepository();
 
 export const productService = {
   async getItems(): Promise<Product[]> {
-    const allItems = await repository.findAll();
+    const allItems = await repository.find();
     return allItems;
   },
   async getItem(id: EntityId): Promise<Product | null> {

@@ -7,7 +7,7 @@ const repository = new ReviewRepository();
 
 export const reviewService = {
   async getItems(): Promise<Review[]> {
-    const allItems = await repository.findAll();
+    const allItems = await repository.find();
     return allItems;
   },
 

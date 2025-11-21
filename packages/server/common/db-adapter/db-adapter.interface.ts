@@ -16,7 +16,9 @@ export interface IDBAdapter {
 
   disconnect(): Promise<void>;
 
-  findAll<T>(collection: string): Promise<T[]>;
+  find<T>(collection: string, filter: QueryFilter<T>): Promise<T[]>;
+
+  findOne<T>(collection: string, filter: QueryFilter<T>): Promise<T | null>;
 
   findById<T>(collection: string, id: string | number): Promise<T | null>;
 
@@ -31,10 +33,6 @@ export interface IDBAdapter {
   delete(collection: string, id: string | number): Promise<boolean>;
 
   deleteMany(collection: string, filter: QueryFilter<T>): Promise<boolean>;
-
-  find<T>(collection: string, filter: QueryFilter<T>): Promise<T[]>;
-
-  findOne<T>(collection: string, filter: QueryFilter<T>): Promise<T | null>;
 
   count<T>(collection: string, filter?: QueryFilter<T>): Promise<number>;
 

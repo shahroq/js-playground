@@ -4,7 +4,7 @@ import fs from "fs-extra";
 import config from "@/common/config/config";
 import { isoString, truncateString } from "@/common/utils/utils";
 import { defaultData, type DatabaseSchema } from "@/data/lowdb-json/schema";
-import type { IDBAdapter } from "./db-adapter.interface";
+import type { IDBAdapter, QueryFilter } from "./db-adapter.interface";
 
 export class LowDBDBAdapter implements IDBAdapter {
   private dbClient: Low<DatabaseSchema>;
@@ -33,10 +33,60 @@ export class LowDBDBAdapter implements IDBAdapter {
     console.log("🌒 LowDB disconnected");
   }
 
+  async find<T>(collection: string, filter: QueryFilter<T> = {}): Promise<T[]> {
+    await this.dbClient.read();
+    let items = (this.dbClient.data[collection] || []) as T[];
+
+    if (filter.where) {
+      if (typeof filter.where === "function") {
+        items = items.filter(filter.where);
+      } else {
+        items = items.filter((item) => {
+          return Object.entries(filter.where as object).every(
+            ([key, value]) => {
+              return (item as any)[key] === value;
+            }
+          );
+        });
+      }
+    }
+
+    if (filter.orderBy) {
+      const { field, direction } = filter.orderBy;
+      items.sort((a, b) => {
+        const aVal = a[field];
+        const bVal = b[field];
+        if (aVal < bVal) return direction === "asc" ? -1 : 1;
+        if (aVal > bVal) return direction === "asc" ? 1 : -1;
+        return 0;
+      });
+    }
+
+    if (filter.offset !== undefined) {
+      items = items.slice(filter.offset);
+    }
+
+    if (filter.limit !== undefined) {
+      items = items.slice(0, filter.limit);
+    }
+
+    return items;
+  }
+
+  async findOne<T>(
+    collection: string,
+    filter: QueryFilter<T>
+  ): Promise<T | null> {
+    const results = await this.find(collection, { ...filter, limit: 1 });
+    return results[0] || null;
+  }
+
+  /*
   async findAll<T>(collection: string): Promise<T[]> {
     await this.dbClient.read();
     return (this.dbClient.data[collection] || []) as T[];
   }
+  */
 
   async findById<T>(
     collection: string,
@@ -135,54 +185,6 @@ export class LowDBDBAdapter implements IDBAdapter {
 
     return deletedCount;
     */
-  }
-
-  async find<T>(collection: string, filter: QueryFilter<T> = {}): Promise<T[]> {
-    await this.dbClient.read();
-    let items = (this.dbClient.data[collection] || []) as T[];
-
-    if (filter.where) {
-      if (typeof filter.where === "function") {
-        items = items.filter(filter.where);
-      } else {
-        items = items.filter((item) => {
-          return Object.entries(filter.where as object).every(
-            ([key, value]) => {
-              return (item as any)[key] === value;
-            }
-          );
-        });
-      }
-    }
-
-    if (filter.orderBy) {
-      const { field, direction } = filter.orderBy;
-      items.sort((a, b) => {
-        const aVal = a[field];
-        const bVal = b[field];
-        if (aVal < bVal) return direction === "asc" ? -1 : 1;
-        if (aVal > bVal) return direction === "asc" ? 1 : -1;
-        return 0;
-      });
-    }
-
-    if (filter.offset !== undefined) {
-      items = items.slice(filter.offset);
-    }
-
-    if (filter.limit !== undefined) {
-      items = items.slice(0, filter.limit);
-    }
-
-    return items;
-  }
-
-  async findOne<T>(
-    collection: string,
-    filter: QueryFilter<T>
-  ): Promise<T | null> {
-    const results = await this.find(collection, { ...filter, limit: 1 });
-    return results[0] || null;
   }
 
   async count<T>(collection: string, filter?: QueryFilter<T>): Promise<number> {

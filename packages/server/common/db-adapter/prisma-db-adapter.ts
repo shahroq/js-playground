@@ -34,10 +34,48 @@ export class PrismaDBAdapter implements IDBAdapter {
     console.log("🌒 Prisma disconnected");
   }
 
+  async find<T>(collection: string, filter: QueryFilter<T> = {}): Promise<T[]> {
+    const query: any = {};
+
+    // Convert where filter to Prisma format
+    if (filter.where && typeof filter.where !== "function") {
+      query.where = filter.where;
+    }
+
+    // Ordering
+    if (filter.orderBy) {
+      query.orderBy = {
+        [filter.orderBy.field as string]: filter.orderBy.direction,
+      };
+    }
+
+    // Pagination
+    if (filter.limit) query.take = filter.limit;
+    if (filter.offset) query.skip = filter.offset;
+
+    // @ts-ignore
+    return await this.dbClient[collectionModelMap[collection]].findMany(query);
+  }
+
+  async findOne<T>(
+    collection: string,
+    filter: QueryFilter<T>
+  ): Promise<T | null> {
+    const query: any = {};
+
+    if (filter.where && typeof filter.where !== "function") {
+      query.where = filter.where;
+    }
+
+    // @ts-ignore
+    return await this.dbClient[collectionModelMap[collection]].findFirst(query);
+  }
+  /*
   async findAll<T>(collection: string): Promise<T[]> {
     // @ts-ignore - Dynamic collection access
     return await this.dbClient[collectionModelMap[collection]].findMany();
   }
+  */
 
   async findById<T>(
     collection: string,
@@ -101,43 +139,6 @@ export class PrismaDBAdapter implements IDBAdapter {
     const result =
       await this.dbClient[collectionModelMap[collection]].deleteMany();
     return result.count;
-  }
-
-  async find<T>(collection: string, filter: QueryFilter<T> = {}): Promise<T[]> {
-    const query: any = {};
-
-    // Convert where filter to Prisma format
-    if (filter.where && typeof filter.where !== "function") {
-      query.where = filter.where;
-    }
-
-    // Ordering
-    if (filter.orderBy) {
-      query.orderBy = {
-        [filter.orderBy.field as string]: filter.orderBy.direction,
-      };
-    }
-
-    // Pagination
-    if (filter.limit) query.take = filter.limit;
-    if (filter.offset) query.skip = filter.offset;
-
-    // @ts-ignore
-    return await this.dbClient[collectionModelMap[collection]].findMany(query);
-  }
-
-  async findOne<T>(
-    collection: string,
-    filter: QueryFilter<T>
-  ): Promise<T | null> {
-    const query: any = {};
-
-    if (filter.where && typeof filter.where !== "function") {
-      query.where = filter.where;
-    }
-
-    // @ts-ignore
-    return await this.dbClient[collectionModelMap[collection]].findFirst(query);
   }
 
   async count<T>(collection: string, filter?: QueryFilter<T>): Promise<number> {

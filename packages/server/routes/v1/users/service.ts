@@ -7,7 +7,7 @@ const repository = new UserRepository();
 
 export const userService = {
   async getItems(): Promise<User[]> {
-    const allItems = await repository.findAll();
+    const allItems = await repository.find();
     return allItems;
   },
 
