@@ -1,4 +1,9 @@
-import type { EntityId } from "@/common/type/type";
+import type {
+  EntityId,
+  IMeta,
+  INormalizedQuery,
+  IRawQuery,
+} from "@/common/type/type";
 import type { Review } from "../reviews/type";
 
 export interface Product {
@@ -14,7 +19,20 @@ export interface Product {
   updated_by?: number;
 }
 
-export interface ProductWithReviews extends Product {
+export interface IProductQuery extends INormalizedQuery {
+  // id?: EntityId;
+  /*
+  search?: string;
+  categoryId?: number;
+  */
+}
+
+export interface IProductResult {
+  products: Product[];
+  meta?: IMeta;
+}
+
+export interface IProductWithReviewsResult extends IProductResult {
   reviews: Review[];
   averageRating: number;
   reviewCount: number;

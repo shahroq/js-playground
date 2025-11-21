@@ -1,4 +1,8 @@
-import type { EntityId } from "@/common/type/type";
+import type {
+  EntityId,
+  IBaseQuery,
+  IBaseQueryResult,
+} from "@/common/type/type";
 
 export interface User {
   id?: EntityId;
@@ -9,4 +13,13 @@ export interface User {
   updated_at?: Date;
   created_by?: number;
   updated_by?: number;
+}
+
+export interface IUserQuery extends IBaseQuery {
+  id?: EntityId;
+}
+
+export interface IUserQueryResult extends IBaseQueryResult {
+  users: User[];
+  meta: IBaseQueryResult;
 }

@@ -1,5 +1,6 @@
 import type { IDBAdapter } from "../db-adapter/db-adapter.interface";
 import { getDBAdapter } from "../db-adapter/factory";
+import type { INormalizedQuery } from "../type/type";
 
 export abstract class BaseRepository<T> {
   protected db: IDBAdapter;
@@ -8,12 +9,12 @@ export abstract class BaseRepository<T> {
     this.db = getDBAdapter();
   }
 
-  async find(filter: any = {}): Promise<T[]> {
-    return this.db.find<T>(this.collection, filter);
+  async find(args: INormalizedQuery): Promise<T[]> {
+    return this.db.find<T>(this.collection, args);
   }
 
-  async findOne(filter: any): Promise<T | null> {
-    return this.db.findOne<T>(this.collection, filter);
+  async findOne(args: INormalizedQuery): Promise<T | null> {
+    return this.db.findOne<T>(this.collection, args);
   }
 
   /*

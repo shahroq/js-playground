@@ -13,6 +13,8 @@ const config = {
   port: parseInt(process.env.PORT || "3000"),
   debug: process.env.DEBUG === "true",
 
+  pagination_limit: process.env.PAGINATION_LIMIT || 10,
+
   response_format_strategy: process.env.RESPONSE_FORMAT_STRATEGY,
 
   validation_strategy: process.env.VALIDATION_STRATEGY,

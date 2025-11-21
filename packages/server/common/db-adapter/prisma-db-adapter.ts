@@ -1,6 +1,7 @@
 import { PrismaClient, Prisma } from "@/generated/prisma/client";
 import { isoString } from "@/common/utils/utils";
-import type { IDBAdapter, QueryFilter } from "./db-adapter.interface";
+import type { IDBAdapter } from "./db-adapter.interface";
+import type { INormalizedQuery } from "../type/type";
 
 const collectionModelMap: { [key: string]: Uncapitalize<Prisma.ModelName> } = {
   products: "product",
@@ -34,38 +35,43 @@ export class PrismaDBAdapter implements IDBAdapter {
     console.log("🌒 Prisma disconnected");
   }
 
-  async find<T>(collection: string, filter: QueryFilter<T> = {}): Promise<T[]> {
-    const query: any = {};
+  async find<T>(collection: string, args: INormalizedQuery): Promise<T[]> {
+    const q: any = {};
+
+    // Pagination
+    if (args.limit) q.take = args.limit;
+    if (args.offset) q.skip = args.offset;
 
     // Convert where filter to Prisma format
-    if (filter.where && typeof filter.where !== "function") {
-      query.where = filter.where;
-    }
-
-    // Ordering
-    if (filter.orderBy) {
-      query.orderBy = {
-        [filter.orderBy.field as string]: filter.orderBy.direction,
+    /*
+    // sort
+    if (query.orderBy) {
+      q.orderBy = {
+        [query.orderBy.field as string]: query.orderBy.direction,
       };
     }
 
-    // Pagination
-    if (filter.limit) query.take = filter.limit;
-    if (filter.offset) query.skip = filter.offset;
+    // filters
+    if (query.where && typeof query.where !== "function") {
+      q.where = query.where;
+    }
+    */
 
     // @ts-ignore
-    return await this.dbClient[collectionModelMap[collection]].findMany(query);
+    return await this.dbClient[collectionModelMap[collection]].findMany(q);
   }
 
   async findOne<T>(
     collection: string,
-    filter: QueryFilter<T>
+    args: INormalizedQuery
   ): Promise<T | null> {
-    const query: any = {};
+    const q: any = {};
 
-    if (filter.where && typeof filter.where !== "function") {
-      query.where = filter.where;
+    /*
+    if (query.where && typeof query.where !== "function") {
+      q.where = query.where;
     }
+      */
 
     // @ts-ignore
     return await this.dbClient[collectionModelMap[collection]].findFirst(query);
@@ -81,6 +87,7 @@ export class PrismaDBAdapter implements IDBAdapter {
     collection: string,
     id: string | number
   ): Promise<T | null> {
+    // use findOne
     return await this.dbClient[collectionModelMap[collection]].findUnique({
       where: { id },
     });
@@ -144,8 +151,8 @@ export class PrismaDBAdapter implements IDBAdapter {
   async count<T>(collection: string, filter?: QueryFilter<T>): Promise<number> {
     const query: any = {};
 
-    if (filter?.where && typeof filter.where !== "function") {
-      query.where = filter.where;
+    if (filter?.where && typeof query.where !== "function") {
+      q.where = query.where;
     }
 
     // @ts-ignore

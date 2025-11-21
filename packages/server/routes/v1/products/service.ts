@@ -1,13 +1,16 @@
-import type { EntityId } from "@/common/type/type";
+import type { EntityId, IRawQuery } from "@/common/type/type";
 import { ProductRepository } from "./repository";
-import type { Product } from "./type";
+import type { IProductQuery, Product } from "./type";
+import { QueryHelper } from "@/common/utils/query-helper";
 
 // get repository
 const repository = new ProductRepository();
 
 export const productService = {
-  async getItems(): Promise<Product[]> {
-    const allItems = await repository.find();
+  async getItems(rawQuery: IRawQuery): Promise<Product[]> {
+    const normalizedQuery: IProductQuery = QueryHelper.normalize(rawQuery);
+
+    const allItems = await repository.find(normalizedQuery);
     return allItems;
   },
   async getItem(id: EntityId): Promise<Product | null> {
