@@ -3,25 +3,32 @@ export type EntityId = number | string;
 export interface IRawQuery {
   page?: number | string;
   per_page?: number | string;
-  /*
-  order?: string; // field name
+
+  sort?: string; // field name
   direction?: "asc" | "desc";
-  */
+
+  // other dynamic fields allowed
+  [key: string]: unknown;
 }
 
-// Normalized query params after processing
-export interface INormalizedQuery {
+export type Pagination = {
   page: number;
   per_page: number;
   offset: number;
+};
 
-  /*
-  orderBy?: {
-    field: string;
-    direction: "asc" | "desc";
-  };
-  filter?: {}
-  */
+export type OrderBy = {
+  sort: string;
+  direction: "asc" | "desc";
+};
+
+export type Filter = Record<string, any>;
+
+// Normalized query params after processing
+export interface INormQuery {
+  pagination?: Pagination;
+  orderBy?: OrderBy;
+  filter?: Filter;
 }
 
 export interface IMeta {
@@ -32,16 +39,6 @@ export interface IMeta {
 }
 
 /*
-export interface QueryFilter<T> {
-  where?: Partial<T> | ((item: T) => boolean);
-  limit?: number;
-  offset?: number;
-  orderBy?: {
-    field: keyof T;
-    direction: "asc" | "desc";
-  };
-}
-
 export interface Category {
   id?: EntityId;
   title: string;

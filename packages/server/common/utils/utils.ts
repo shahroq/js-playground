@@ -7,6 +7,38 @@ export function add(a: number, b: number) {
 }
 
 /**
+ * Determines whether the given value is a *real* string — meaning
+ * a non-empty string that does **not** represent a numeric value.
+ *
+ * This function excludes:
+ * - numeric strings (e.g. "2", "3.14", "-5", "001")
+ * - empty strings ("")
+ * - whitespace-only strings ("   ")
+ *
+ * It returns `true` only for semantic strings such as:
+ * - "hello"
+ * - "abc123"
+ * - "John Doe"
+ *
+ * @param value - Any value to be tested.
+ * @returns `true` if the value is a non-numeric, non-empty string; otherwise `false`.
+ *
+ * @example
+ * isRealString("hello");  // true
+ * isRealString("abc123"); // true
+ *
+ * isRealString("2");      // false
+ * isRealString("3.14");   // false
+ * isRealString("");       // false
+ * isRealString(2);        // false
+ */
+export function isRealString(value: unknown): value is string {
+  return (
+    typeof value === "string" && value.trim() !== "" && isNaN(Number(value))
+  );
+}
+
+/**
  * Returns an ISO 8601 formatted string for a given date.
  *
  * By default, it returns the local time in ISO-like format (without the trailing 'Z').
@@ -31,10 +63,6 @@ export function isoString(
   const localTime = new Date(date.getTime() - offsetMs);
   return localTime.toISOString();
 }
-// const tmp1 = isoString();
-// console.log(tmp1);
-// const tmp2 = new Date().toISOString();
-// console.log(tmp2);
 
 /** check if the value is url of type file(starts with file://..) */
 export function isFileURL(value: string): boolean {

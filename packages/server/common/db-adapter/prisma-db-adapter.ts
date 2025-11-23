@@ -1,7 +1,12 @@
 import { PrismaClient, Prisma } from "@/generated/prisma/client";
 import { isoString } from "@/common/utils/utils";
 import type { IDBAdapter } from "./db-adapter.interface";
-import type { INormalizedQuery } from "../type/type";
+import type {
+  Pagination,
+  OrderBy,
+  Filter,
+  INormQuery,
+} from "@/common/type/type";
 
 const collectionModelMap: { [key: string]: Uncapitalize<Prisma.ModelName> } = {
   products: "product",
@@ -35,27 +40,8 @@ export class PrismaDBAdapter implements IDBAdapter {
     console.log("🌒 Prisma disconnected");
   }
 
-  async find<T>(collection: string, args: INormalizedQuery): Promise<T[]> {
-    const q: any = {};
-
-    // Pagination
-    if (args.per_page) q.take = args.per_page;
-    if (args.offset) q.skip = args.offset;
-
-    // Convert where filter to Prisma format
-    /*
-    // sort
-    if (query.orderBy) {
-      q.orderBy = {
-        [query.orderBy.field as string]: query.orderBy.direction,
-      };
-    }
-
-    // filters
-    if (query.where && typeof query.where !== "function") {
-      q.where = query.where;
-    }
-    */
+  async find<T>(collection: string, normQuery: INormQuery): Promise<T[]> {
+    const q = this.query<T>(collection, normQuery);
 
     // @ts-ignore
     return await this.dbClient[collectionModelMap[collection]].findMany(q);
@@ -63,34 +49,19 @@ export class PrismaDBAdapter implements IDBAdapter {
 
   async findOne<T>(
     collection: string,
-    args: INormalizedQuery
+    normQuery: INormQuery
   ): Promise<T | null> {
-    const q: any = {};
-
-    /*
-    if (query.where && typeof query.where !== "function") {
-      q.where = query.where;
-    }
-      */
+    const q = this.query<T>(collection, normQuery);
 
     // @ts-ignore
-    return await this.dbClient[collectionModelMap[collection]].findFirst(query);
+    return await this.dbClient[collectionModelMap[collection]].findFirst(q);
   }
-  /*
-  async findAll<T>(collection: string): Promise<T[]> {
-    // @ts-ignore - Dynamic collection access
-    return await this.dbClient[collectionModelMap[collection]].findMany();
-  }
-  */
 
   async findById<T>(
     collection: string,
     id: string | number
   ): Promise<T | null> {
-    // use findOne
-    return await this.dbClient[collectionModelMap[collection]].findUnique({
-      where: { id },
-    });
+    return this.findOne<T>(collection, { filter: { id } });
   }
 
   async create<T>(collection: string, data: T): Promise<T> {
@@ -137,10 +108,7 @@ export class PrismaDBAdapter implements IDBAdapter {
     return !!result.count;
   }
 
-  async deleteMany<T>(
-    collection: string,
-    filter: QueryFilter<T> = {}
-  ): Promise<number> {
+  async deleteMany<T>(normQuery: INormQuery): Promise<number> {
     await this.dbClient.$executeRawUnsafe(`PRAGMA foreign_keys = OFF;`);
 
     const result =
@@ -148,15 +116,11 @@ export class PrismaDBAdapter implements IDBAdapter {
     return result.count;
   }
 
-  async count<T>(collection: string, filter?: QueryFilter<T>): Promise<number> {
-    const query: any = {};
-
-    if (filter?.where && typeof query.where !== "function") {
-      q.where = query.where;
-    }
+  async count<T>(collection: string, normQuery: INormQuery): Promise<number> {
+    const q = this.query<T>(collection, normQuery);
 
     // @ts-ignore
-    return await this.dbClient[collectionModelMap[collection]].count(query);
+    return await this.dbClient[collectionModelMap[collection]].count(q);
   }
 
   async createDB(identifier: string) {
@@ -167,5 +131,43 @@ export class PrismaDBAdapter implements IDBAdapter {
     // migration is done via prisma cli
     console.log(`Migration is not necessary for Prisma. It's done via cli.`);
     // this.createDB(config.database_name);
+  }
+
+  private async query<T>(collection: string, normQuery: INormQuery) {
+    const { pagination, orderBy, filter } = normQuery;
+    return {
+      ...this.buildPagination(pagination),
+      ...this.buildSorting(orderBy),
+      ...this.buildFilter(filter),
+    };
+  }
+
+  private buildPagination(pagination?: Pagination): {
+    take?: number;
+    skip?: number;
+  } {
+    if (!pagination) return {};
+    return {
+      take: pagination.per_page,
+      skip: pagination.offset,
+    };
+  }
+
+  private buildSorting(orderBy?: OrderBy): {
+    orderBy?: Record<string, "asc" | "desc">;
+  } {
+    if (!orderBy) return {};
+    return {
+      orderBy: { [orderBy.sort]: orderBy.direction },
+    };
+  }
+
+  private buildFilter(filter?: Filter): { where?: Record<string, any> } {
+    if (!filter) return {};
+    const where: Record<string, any> = {};
+    for (const [key, value] of Object.entries(filter)) {
+      where[key] = Array.isArray(value) ? { in: value } : value;
+    }
+    return { where };
   }
 }

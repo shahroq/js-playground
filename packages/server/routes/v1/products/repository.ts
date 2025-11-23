@@ -1,9 +1,16 @@
+import config from "@/common/config/config";
 import type { Product } from "./type";
 import { BaseRepository } from "@/common/repository/base-repository";
 
 export class ProductRepository extends BaseRepository<Product> {
   constructor() {
-    super("products");
+    super("products", {
+      // defaultPerPage: 1,
+      defaultOrder: { sort: "id", direction: "asc" },
+      allowedSortFields: ["id", "name", "price", "created_at"],
+      searchableFields: ["name", "description"],
+      filterableFields: ["id", "name", "category", "price", "in_stock"],
+    });
   }
 
   /*

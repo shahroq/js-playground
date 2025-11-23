@@ -1,4 +1,4 @@
-import type { EntityId, IMeta, INormalizedQuery } from "@/common/type/type";
+import type { EntityId, IMeta, INormQuery } from "@/common/type/type";
 import type { Review } from "../reviews/type";
 
 export interface Product {
@@ -14,7 +14,7 @@ export interface Product {
   updated_by?: number;
 }
 
-export interface IProductQuery extends INormalizedQuery {
+export interface IProductQuery extends INormQuery {
   // id?: EntityId;
   /*
   search?: string;

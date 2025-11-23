@@ -1,48 +1,57 @@
-import type { IDBAdapter } from "../db-adapter/db-adapter.interface";
-import { getDBAdapter } from "../db-adapter/factory";
-import type { INormalizedQuery } from "../type/type";
+import type { IDBAdapter } from "@/common/db-adapter/db-adapter.interface";
+import { getDBAdapter } from "@/common/db-adapter/factory";
+import type { OrderBy, IRawQuery } from "@/common/type/type";
+import { Query } from "@/common/utils/query";
+
+export interface RepoOptions {
+  defaultPerPage?: number;
+  defaultOrder?: OrderBy;
+  allowedSortFields?: string[]; // whitelist for sort validation
+  searchableFields?: string[]; // for q/search handling
+  filterableFields?: string[]; // whitelist
+}
 
 export abstract class BaseRepository<T> {
-  protected db: IDBAdapter;
+  protected dbAdapter: IDBAdapter;
 
-  constructor(protected collection: string) {
-    this.db = getDBAdapter();
+  constructor(
+    protected collection: string,
+    protected repoOptions: RepoOptions = {}
+  ) {
+    this.dbAdapter = getDBAdapter();
   }
 
-  async find(args: INormalizedQuery): Promise<T[]> {
-    return this.db.find<T>(this.collection, args);
+  async find(rawQuery: IRawQuery): Promise<T[]> {
+    const normQuery = new Query(rawQuery, this.repoOptions).getNormalized();
+    return this.dbAdapter.find<T>(this.collection, normQuery);
   }
 
-  async findOne(args: INormalizedQuery): Promise<T | null> {
-    return this.db.findOne<T>(this.collection, args);
+  async findOne(rawQuery: IRawQuery): Promise<T | null> {
+    const normQuery = new Query(rawQuery, this.repoOptions).getNormalized();
+    return this.dbAdapter.findOne<T>(this.collection, normQuery);
   }
 
-  /*
-  async findAll(): Promise<T[]> {
-    return this.db.findAll<T>(this.collection);
-  }
-  */
   async findById(id: string | number): Promise<T | null> {
-    return this.db.findById<T>(this.collection, id);
+    return this.dbAdapter.findById<T>(this.collection, id);
   }
 
   async create(data: T): Promise<T> {
-    return await this.db.create<T>(this.collection, data);
+    return await this.dbAdapter.create<T>(this.collection, data);
   }
 
   async update(id: string | number, data: Partial<T>): Promise<T | null> {
-    return await this.db.update<T>(this.collection, id, data);
+    return await this.dbAdapter.update<T>(this.collection, id, data);
   }
 
   async delete(id: string | number): Promise<boolean> {
-    return this.db.delete(this.collection, id);
+    return this.dbAdapter.delete(this.collection, id);
   }
 
   async deleteMany(filter: any = {}): Promise<boolean> {
-    return this.db.deleteMany(this.collection, filter);
+    return this.dbAdapter.deleteMany(this.collection, filter);
   }
 
   async count(filter?: any): Promise<number> {
-    return this.db.count<T>(this.collection, filter);
+    return this.dbAdapter.count<T>(this.collection, filter);
   }
 }

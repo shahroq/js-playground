@@ -1,4 +1,4 @@
-import type { IBaseQuery } from "@/common/type/type";
+import type { INormQuery } from "@/common/type/type";
 
 // export type DatabaseStrategy = "file-json" | "lowdb-json" | "prisma-sqlite";
 export type DBAdapterStrategy = "file" | "lowdb" | "prisma";
@@ -8,9 +8,9 @@ export interface IDBAdapter {
 
   disconnect(): Promise<void>;
 
-  find<T>(collection: string, query: IBaseQuery): Promise<T[]>;
+  find<T>(collection: string, args: INormQuery): Promise<T[]>;
 
-  findOne<T>(collection: string, query: IBaseQuery): Promise<T | null>;
+  findOne<T>(collection: string, args: INormQuery): Promise<T | null>;
 
   findById<T>(collection: string, id: string | number): Promise<T | null>;
 
