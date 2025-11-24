@@ -161,7 +161,7 @@ export class PrismaDBAdapter implements IDBAdapter {
     return this.dbClient[collectionModelMap[collection]];
   }
 
-  private async query<T>(normQuery: INormQuery) {
+  private query<T>(normQuery: INormQuery) {
     const { pagination, orderBy, filter } = normQuery;
     return {
       ...this.buildPagination(pagination),
