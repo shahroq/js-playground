@@ -1,6 +1,4 @@
-# sandbox-api-design-2025
-
-## Catalog API
+# Catalog API with Express
 
 To install dependencies:
 
