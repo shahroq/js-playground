@@ -1,6 +1,6 @@
 import type { IDBAdapter } from "@/common/db-adapter/db-adapter.interface";
 import { getDBAdapter } from "@/common/db-adapter/factory";
-import type { OrderBy, IRawQuery } from "@/common/type/type";
+import type { OrderBy, IRawQuery, EntityId } from "@/common/type/type";
 import { Query } from "@/common/utils/query";
 
 export interface RepoOptions {
@@ -31,7 +31,7 @@ export abstract class BaseRepository<T> {
     return this.dbAdapter.findOne<T>(this.collection, normQuery);
   }
 
-  async findById(id: string | number): Promise<T | null> {
+  async findById(id: EntityId): Promise<T | null> {
     return this.dbAdapter.findById<T>(this.collection, id);
   }
 
@@ -39,11 +39,11 @@ export abstract class BaseRepository<T> {
     return await this.dbAdapter.create<T>(this.collection, data);
   }
 
-  async update(id: string | number, data: Partial<T>): Promise<T | null> {
+  async update(id: EntityId, data: Partial<T>): Promise<T | null> {
     return await this.dbAdapter.update<T>(this.collection, id, data);
   }
 
-  async delete(id: string | number): Promise<boolean> {
+  async delete(id: EntityId): Promise<boolean> {
     return this.dbAdapter.delete(this.collection, id);
   }
 

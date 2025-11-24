@@ -2,6 +2,7 @@ import { PrismaClient, Prisma } from "@/generated/prisma/client";
 import { isoString } from "@/common/utils/utils";
 import type { IDBAdapter } from "./db-adapter.interface";
 import type {
+  EntityId,
   Pagination,
   OrderBy,
   Filter,
@@ -17,6 +18,9 @@ const collectionModelMap: { [key: string]: Uncapitalize<Prisma.ModelName> } = {
 type CollectionName = keyof typeof collectionModelMap;
 type ModelName = (typeof collectionModelMap)[CollectionName];
 // type ModelName = Uncapitalize<Prisma.ModelName>;
+
+// test
+type User = Prisma.Product$reviewsArgs;
 
 export class PrismaDBAdapter implements IDBAdapter {
   private dbClient: PrismaClient;
@@ -40,31 +44,33 @@ export class PrismaDBAdapter implements IDBAdapter {
     console.log("🌒 Prisma disconnected");
   }
 
-  async find<T>(collection: string, normQuery: INormQuery): Promise<T[]> {
-    const q = this.query<T>(collection, normQuery);
+  async find<T>(
+    collection: CollectionName,
+    normQuery: INormQuery
+  ): Promise<T[]> {
+    const q = this.query<T>(normQuery);
 
-    // @ts-ignore
     return await this.dbClient[collectionModelMap[collection]].findMany(q);
   }
 
   async findOne<T>(
-    collection: string,
+    collection: CollectionName,
     normQuery: INormQuery
   ): Promise<T | null> {
-    const q = this.query<T>(collection, normQuery);
+    const q = this.query<T>(normQuery);
 
     // @ts-ignore
     return await this.dbClient[collectionModelMap[collection]].findFirst(q);
   }
 
   async findById<T>(
-    collection: string,
-    id: string | number
+    collection: CollectionName,
+    id: EntityId
   ): Promise<T | null> {
     return this.findOne<T>(collection, { filter: { id } });
   }
 
-  async create<T>(collection: string, data: T): Promise<T> {
+  async create<T>(collection: CollectionName, data: T): Promise<T> {
     const newItem = {
       ...data,
       created_at: isoString(),
@@ -78,8 +84,8 @@ export class PrismaDBAdapter implements IDBAdapter {
   }
 
   async update<T>(
-    collection: string,
-    id: string | number,
+    collection: CollectionName,
+    id: EntityId,
     data: Partial<T>
   ): Promise<T | null> {
     // first check if exists
@@ -98,7 +104,7 @@ export class PrismaDBAdapter implements IDBAdapter {
     });
   }
 
-  async delete(collection: string, id: string | number): Promise<boolean> {
+  async delete(collection: CollectionName, id: EntityId): Promise<boolean> {
     const result = await this.dbClient[
       collectionModelMap[collection]
     ].deleteMany({
@@ -108,7 +114,10 @@ export class PrismaDBAdapter implements IDBAdapter {
     return !!result.count;
   }
 
-  async deleteMany<T>(normQuery: INormQuery): Promise<number> {
+  async deleteMany(
+    collection: CollectionName,
+    normQuery: INormQuery
+  ): Promise<number> {
     await this.dbClient.$executeRawUnsafe(`PRAGMA foreign_keys = OFF;`);
 
     const result =
@@ -116,8 +125,11 @@ export class PrismaDBAdapter implements IDBAdapter {
     return result.count;
   }
 
-  async count<T>(collection: string, normQuery: INormQuery): Promise<number> {
-    const q = this.query<T>(collection, normQuery);
+  async count<T>(
+    collection: CollectionName,
+    normQuery: INormQuery
+  ): Promise<number> {
+    const q = this.query<T>(normQuery);
 
     // @ts-ignore
     return await this.dbClient[collectionModelMap[collection]].count(q);
@@ -133,7 +145,7 @@ export class PrismaDBAdapter implements IDBAdapter {
     // this.createDB(config.database_name);
   }
 
-  private async query<T>(collection: string, normQuery: INormQuery) {
+  private async query<T>(normQuery: INormQuery) {
     const { pagination, orderBy, filter } = normQuery;
     return {
       ...this.buildPagination(pagination),
