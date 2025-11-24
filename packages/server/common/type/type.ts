@@ -27,16 +27,18 @@ export type Filter = Record<string, any>;
 
 // Normalized query params after processing
 export interface INormQuery {
-  pagination?: Pagination;
-  orderBy?: OrderBy;
-  filter?: Filter;
+  pagination: Pagination;
+  orderBy: OrderBy;
+  filter: Filter;
 }
 
 export interface IMeta {
   page?: number;
   per_page?: number;
-  total_page?: number;
+  total_pages?: number;
   total_count?: number;
+  has_next_page?: boolean;
+  has_prev_page?: boolean;
 }
 
 /*
