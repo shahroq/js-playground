@@ -1,4 +1,4 @@
-import type { EntityId } from "@/common/type/type";
+import type { EntityId, IRawQuery } from "@/common/type/type";
 import { ReviewRepository } from "./repository";
 import type { Review } from "./type";
 
@@ -6,8 +6,8 @@ import type { Review } from "./type";
 const repository = new ReviewRepository();
 
 export const reviewService = {
-  async getItems(): Promise<Review[]> {
-    const allItems = await repository.find();
+  async getItems(rawQuery: IRawQuery): Promise<Review[]> {
+    const allItems = await repository.find(rawQuery);
     return allItems;
   },
 

@@ -1,6 +1,11 @@
 import { PrismaClient, Prisma } from "@/generated/prisma/client";
+import type {
+  ProductDelegate,
+  ReviewDelegate,
+  UserDelegate,
+} from "@/generated/prisma/models";
 import { isoString } from "@/common/utils/utils";
-import type { IDBAdapter } from "./db-adapter.interface";
+import type { CollectionName, IDBAdapter } from "./db-adapter.interface";
 import type {
   EntityId,
   Pagination,
@@ -8,19 +13,16 @@ import type {
   Filter,
   INormQuery,
 } from "@/common/type/type";
-import type {
-  ProductDelegate,
-  ReviewDelegate,
-  UserDelegate,
-} from "@/generated/prisma/models";
 
-const collectionModelMap = {
+const collectionModelMap: Record<
+  CollectionName,
+  Uncapitalize<Prisma.ModelName>
+> = {
   products: "product",
   reviews: "review",
   users: "user",
 } as const;
 
-type CollectionName = keyof typeof collectionModelMap;
 type ModelName = (typeof collectionModelMap)[CollectionName];
 // type ModelName = Uncapitalize<Prisma.ModelName>;
 type ModelDelegate = ProductDelegate | ReviewDelegate | UserDelegate;
@@ -115,7 +117,7 @@ export class PrismaDBAdapter implements IDBAdapter {
     });
   }
 
-  async delete(collection: CollectionName, id: EntityId): Promise<boolean> {
+  async delete<T>(collection: CollectionName, id: EntityId): Promise<boolean> {
     const m = this.getModel(collection);
 
     // @ts-ignore
@@ -124,7 +126,7 @@ export class PrismaDBAdapter implements IDBAdapter {
     return !!result.count;
   }
 
-  async deleteMany(
+  async deleteMany<T>(
     collection: CollectionName,
     normQuery: INormQuery
   ): Promise<number> {

@@ -1,6 +1,11 @@
 import type { IDBAdapter } from "@/common/db-adapter/db-adapter.interface";
 import { getDBAdapter } from "@/common/db-adapter/factory";
-import type { OrderBy, IRawQuery, EntityId } from "@/common/type/type";
+import type {
+  OrderBy,
+  IRawQuery,
+  EntityId,
+  CollectionName,
+} from "@/common/type/type";
 import { Query } from "@/common/utils/query";
 
 export interface RepoOptions {
@@ -15,7 +20,7 @@ export abstract class BaseRepository<T> {
   protected dbAdapter: IDBAdapter;
 
   constructor(
-    protected collection: string,
+    protected collection: CollectionName,
     protected repoOptions: RepoOptions = {}
   ) {
     this.dbAdapter = getDBAdapter();

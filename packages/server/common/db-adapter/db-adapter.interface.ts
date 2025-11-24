@@ -1,4 +1,4 @@
-import type { INormQuery } from "@/common/type/type";
+import type { CollectionName, EntityId, INormQuery } from "@/common/type/type";
 
 // export type DatabaseStrategy = "file-json" | "lowdb-json" | "prisma-sqlite";
 export type DBAdapterStrategy = "file" | "lowdb" | "prisma";
@@ -8,25 +8,31 @@ export interface IDBAdapter {
 
   disconnect(): Promise<void>;
 
-  find<T>(collection: string, args: INormQuery): Promise<T[]>;
+  find<T>(collection: CollectionName, normQuery: INormQuery): Promise<T[]>;
 
-  findOne<T>(collection: string, args: INormQuery): Promise<T | null>;
+  findOne<T>(
+    collection: CollectionName,
+    normQuery: INormQuery
+  ): Promise<T | null>;
 
-  findById<T>(collection: string, id: string | number): Promise<T | null>;
+  findById<T>(collection: CollectionName, id: EntityId): Promise<T | null>;
 
-  create<T>(collection: string, data: T): Promise<T>;
+  create<T>(collection: CollectionName, data: T): Promise<T>;
 
   update<T>(
-    collection: string,
-    id: string | number,
+    collection: CollectionName,
+    id: EntityId,
     data: Partial<T>
   ): Promise<T | null>;
 
-  delete(collection: string, id: string | number): Promise<boolean>;
+  delete<T>(collection: CollectionName, id: EntityId): Promise<boolean>;
 
-  deleteMany(collection: string, query: IQuery): Promise<boolean>;
+  deleteMany<T>(
+    collection: CollectionName,
+    normQuery: INormQuery
+  ): Promise<number>;
 
-  count<T>(collection: string, query: IQuery): Promise<number>;
+  count<T>(collection: CollectionName, normQuery: INormQuery): Promise<number>;
 
   /** identifier is:
    * filePath for filebase dbs (json, sqlite)

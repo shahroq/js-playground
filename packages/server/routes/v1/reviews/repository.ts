@@ -1,9 +1,15 @@
-import { BaseRepository } from "@/common/repository/base-repository";
 import type { Review } from "./type";
+import { BaseRepository } from "@/common/repository/base-repository";
 
 export class ReviewRepository extends BaseRepository<Review> {
   constructor() {
-    super("reviews");
+    super("reviews", {
+      // defaultPerPage: 1,
+      defaultOrder: { sort: "id", direction: "asc" },
+      allowedSortFields: ["id", "title", "created_at"],
+      searchableFields: [],
+      filterableFields: ["id", "product_id"],
+    });
   }
   /*
     async findByProductId(productId: string): Promise<Review[]> {

@@ -1,4 +1,4 @@
-import type { EntityId } from "@/common/type/type";
+import type { EntityId, IMeta, INormQuery } from "@/common/type/type";
 
 export interface Review {
   id?: EntityId;
@@ -9,4 +9,11 @@ export interface Review {
   updated_at: Date;
   created_by: number;
   updated_by: number;
+}
+
+export interface IReviewQuery extends INormQuery {}
+
+export interface IReviewResult {
+  reviews: Review[];
+  meta?: IMeta;
 }

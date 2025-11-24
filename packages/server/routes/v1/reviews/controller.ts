@@ -6,8 +6,8 @@ import { reviewService as service } from "./service";
 const collection = "review";
 
 export const reviewController = {
-  async index(_req: Request, res: Response, next: NextFunction) {
-    const items = await service.getItems();
+  async index(req: Request, res: Response, next: NextFunction) {
+    const items = await service.getItems(req.query);
 
     res.status(200).json(formatter.format(null, { [`${collection}s`]: items }));
   },

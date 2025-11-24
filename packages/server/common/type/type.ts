@@ -1,4 +1,5 @@
 export type EntityId = number | string;
+export type CollectionName = "users" | "products" | "reviews";
 
 export interface IRawQuery {
   page?: number | string;
