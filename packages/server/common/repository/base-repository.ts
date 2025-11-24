@@ -52,11 +52,13 @@ export abstract class BaseRepository<T> {
     return this.dbAdapter.delete(this.collection, id);
   }
 
-  async deleteMany(filter: any = {}): Promise<boolean> {
-    return this.dbAdapter.deleteMany(this.collection, filter);
+  async deleteMany(rawQuery: IRawQuery): Promise<number> {
+    const normQuery = new Query(rawQuery, this.repoOptions).getNormalized();
+    return this.dbAdapter.deleteMany(this.collection, normQuery);
   }
 
-  async count(filter?: any): Promise<number> {
-    return this.dbAdapter.count<T>(this.collection, filter);
+  async count(rawQuery: IRawQuery): Promise<number> {
+    const normQuery = new Query(rawQuery, this.repoOptions).getNormalized();
+    return this.dbAdapter.count<T>(this.collection, normQuery);
   }
 }

@@ -5,9 +5,10 @@ import type {
   UserDelegate,
 } from "@/generated/prisma/models";
 import { isoString } from "@/common/utils/utils";
-import type { CollectionName, IDBAdapter } from "./db-adapter.interface";
+import type { IDBAdapter } from "./db-adapter.interface";
 import type {
   EntityId,
+  CollectionName,
   Pagination,
   OrderBy,
   Filter,
