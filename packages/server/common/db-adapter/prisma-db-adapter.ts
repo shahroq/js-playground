@@ -8,8 +8,13 @@ import type {
   Filter,
   INormQuery,
 } from "@/common/type/type";
+import type {
+  ProductDelegate,
+  ReviewDelegate,
+  UserDelegate,
+} from "@/generated/prisma/models";
 
-const collectionModelMap: { [key: string]: Uncapitalize<Prisma.ModelName> } = {
+const collectionModelMap = {
   products: "product",
   reviews: "review",
   users: "user",
@@ -18,9 +23,7 @@ const collectionModelMap: { [key: string]: Uncapitalize<Prisma.ModelName> } = {
 type CollectionName = keyof typeof collectionModelMap;
 type ModelName = (typeof collectionModelMap)[CollectionName];
 // type ModelName = Uncapitalize<Prisma.ModelName>;
-
-// test
-type User = Prisma.Product$reviewsArgs;
+type ModelDelegate = ProductDelegate | ReviewDelegate | UserDelegate;
 
 export class PrismaDBAdapter implements IDBAdapter {
   private dbClient: PrismaClient;
@@ -49,8 +52,10 @@ export class PrismaDBAdapter implements IDBAdapter {
     normQuery: INormQuery
   ): Promise<T[]> {
     const q = this.query<T>(normQuery);
+    const m = this.getModel(collection);
 
-    return await this.dbClient[collectionModelMap[collection]].findMany(q);
+    // @ts-ignore
+    return await m.findMany(q);
   }
 
   async findOne<T>(
@@ -58,9 +63,10 @@ export class PrismaDBAdapter implements IDBAdapter {
     normQuery: INormQuery
   ): Promise<T | null> {
     const q = this.query<T>(normQuery);
+    const m = this.getModel(collection);
 
     // @ts-ignore
-    return await this.dbClient[collectionModelMap[collection]].findFirst(q);
+    return await m.findFirst(q);
   }
 
   async findById<T>(
@@ -77,8 +83,10 @@ export class PrismaDBAdapter implements IDBAdapter {
       created_by: 1,
       updated_by: 1,
     };
+    const m = this.getModel(collection);
 
-    return await this.dbClient[collectionModelMap[collection]].create({
+    // @ts-ignore
+    return await m.create({
       data: newItem,
     });
   }
@@ -98,18 +106,20 @@ export class PrismaDBAdapter implements IDBAdapter {
       updated_by: 1,
     };
 
-    return await this.dbClient[collectionModelMap[collection]].update({
+    const m = this.getModel(collection);
+
+    // @ts-ignore
+    return await m.update({
       where: { id },
       data: updatedItem,
     });
   }
 
   async delete(collection: CollectionName, id: EntityId): Promise<boolean> {
-    const result = await this.dbClient[
-      collectionModelMap[collection]
-    ].deleteMany({
-      where: { id },
-    });
+    const m = this.getModel(collection);
+
+    // @ts-ignore
+    const result = m.deleteMany({ where: { id } });
 
     return !!result.count;
   }
@@ -119,9 +129,10 @@ export class PrismaDBAdapter implements IDBAdapter {
     normQuery: INormQuery
   ): Promise<number> {
     await this.dbClient.$executeRawUnsafe(`PRAGMA foreign_keys = OFF;`);
+    const m = this.getModel(collection);
 
-    const result =
-      await this.dbClient[collectionModelMap[collection]].deleteMany();
+    // @ts-ignore
+    const result = await m.deleteMany();
     return result.count;
   }
 
@@ -130,19 +141,24 @@ export class PrismaDBAdapter implements IDBAdapter {
     normQuery: INormQuery
   ): Promise<number> {
     const q = this.query<T>(normQuery);
+    const m = this.getModel(collection);
 
     // @ts-ignore
-    return await this.dbClient[collectionModelMap[collection]].count(q);
+    return await m.count(q);
   }
 
   async createDB(identifier: string) {
     // done via cli
   }
 
-  override async migrate() {
+  async migrate() {
     // migration is done via prisma cli
     console.log(`Migration is not necessary for Prisma. It's done via cli.`);
     // this.createDB(config.database_name);
+  }
+
+  private getModel(collection: CollectionName): ModelDelegate {
+    return this.dbClient[collectionModelMap[collection]];
   }
 
   private async query<T>(normQuery: INormQuery) {
@@ -176,7 +192,9 @@ export class PrismaDBAdapter implements IDBAdapter {
 
   private buildFilter(filter?: Filter): { where?: Record<string, any> } {
     if (!filter) return {};
+
     const where: Record<string, any> = {};
+
     for (const [key, value] of Object.entries(filter)) {
       where[key] = Array.isArray(value) ? { in: value } : value;
     }
