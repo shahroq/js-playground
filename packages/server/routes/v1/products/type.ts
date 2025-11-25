@@ -23,7 +23,8 @@ export interface IProductQuery extends INormQuery {
 }
 
 export interface IProductResult {
-  products: Product[];
+  item?: Product;
+  items?: Product[];
   meta?: IMeta;
 }
 

@@ -7,16 +7,18 @@ const collection = "review";
 
 export const reviewController = {
   async index(req: Request, res: Response, next: NextFunction) {
-    const items = await service.getItems(req.query);
+    const { items, meta } = await service.getItems(req.query);
 
-    res.status(200).json(formatter.format(null, { [`${collection}s`]: items }));
+    res
+      .status(200)
+      .json(formatter.format(null, { [`${collection}s`]: items, meta }));
   },
 
   async show(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
     if (!id) return next(AppError.badRequest());
 
-    const item = await service.getItem(+id);
+    const { item } = await service.getItem(+id);
     if (!item) return next(AppError.notFound());
 
     res.status(200).json(formatter.format(null, { [collection]: item }));
@@ -25,7 +27,7 @@ export const reviewController = {
   async store(req: Request, res: Response, next: NextFunction) {
     const { body } = req;
 
-    const newItem = await service.createItem(body);
+    const { item: newItem } = await service.createItem(body);
 
     res.status(201).json(formatter.format(null, { [collection]: newItem }));
   },
@@ -36,7 +38,7 @@ export const reviewController = {
 
     const { body } = req;
 
-    const updatedItem = await service.updateItem(+id, body);
+    const { item: updatedItem } = await service.updateItem(+id, body);
     if (!updatedItem) return next(AppError.notFound());
 
     res.status(200).json(formatter.format(null, { [collection]: updatedItem }));

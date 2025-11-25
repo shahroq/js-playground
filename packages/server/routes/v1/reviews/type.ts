@@ -14,6 +14,7 @@ export interface Review {
 export interface IReviewQuery extends INormQuery {}
 
 export interface IReviewResult {
-  reviews: Review[];
+  item?: Review;
+  items?: Review[];
   meta?: IMeta;
 }
