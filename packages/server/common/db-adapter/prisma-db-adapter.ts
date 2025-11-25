@@ -143,7 +143,7 @@ export class PrismaDBAdapter implements IDBAdapter {
     collection: CollectionName,
     normQuery: INormQuery
   ): Promise<number> {
-    const q = this.query<T>(normQuery);
+    const q = this.query<T>(normQuery, false, false);
     const m = this.getModel(collection);
 
     // @ts-ignore
@@ -164,11 +164,15 @@ export class PrismaDBAdapter implements IDBAdapter {
     return this.dbClient[collectionModelMap[collection]];
   }
 
-  private query<T>(normQuery: INormQuery) {
+  private query<T>(
+    normQuery: INormQuery,
+    includePagination: boolean = true,
+    includeSorting: boolean = true
+  ) {
     const { pagination, orderBy, filter } = normQuery;
     return {
-      ...this.buildPagination(pagination),
-      ...this.buildSorting(orderBy),
+      ...(includePagination ? this.buildPagination(pagination) : {}),
+      ...(includeSorting ? this.buildSorting(orderBy) : {}),
       ...this.buildFilter(filter),
     };
   }
