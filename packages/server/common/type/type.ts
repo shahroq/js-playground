@@ -27,9 +27,9 @@ export type Filter = Record<string, any>;
 
 // Normalized query params after processing
 export interface INormQuery {
-  pagination: Pagination;
-  orderBy: OrderBy;
-  filter: Filter;
+  pagination?: Pagination;
+  orderBy?: OrderBy;
+  filter?: Filter;
 }
 
 export interface IMeta {
