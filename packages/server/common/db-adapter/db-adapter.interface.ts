@@ -34,6 +34,12 @@ export interface IDBAdapter {
 
   count<T>(collection: CollectionName, normQuery: INormQuery): Promise<number>;
 
+  avg<T>(
+    collection: CollectionName,
+    normQuery: INormQuery,
+    field: keyof T & string
+  ): Promise<number | null>;
+
   /** identifier is:
    * filePath for filebase dbs (json, sqlite)
    * database name for db  engines (postgres, mysql)

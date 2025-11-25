@@ -28,8 +28,8 @@ export interface IProductResult {
   meta?: IMeta;
 }
 
-export interface IProductWithReviewsResult extends IProductResult {
-  reviews: Review[];
-  averageRating: number;
-  reviewCount: number;
+export interface IProductResultWithReviews extends IProductResult {
+  reviews?: Review[];
+  review_count?: number;
+  average_rating?: number | null;
 }

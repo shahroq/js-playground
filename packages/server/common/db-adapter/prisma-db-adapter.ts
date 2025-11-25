@@ -150,6 +150,23 @@ export class PrismaDBAdapter implements IDBAdapter {
     return await m.count(q);
   }
 
+  async avg<T>(
+    collection: CollectionName,
+    normQuery: INormQuery,
+    field: keyof T & string
+  ): Promise<number | null> {
+    const q = this.query<T>(normQuery, false, false);
+    const m = this.getModel(collection);
+
+    // @ts-ignore
+    const result = await m.aggregate({
+      ...q,
+      _avg: { [field]: true },
+    });
+
+    return result._avg[field] ?? null;
+  }
+
   async createDB(identifier: string) {
     // done via cli
   }

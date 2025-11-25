@@ -1,10 +1,16 @@
 import type { EntityId, IRawQuery } from "@/common/type/type";
 import { ProductRepository } from "./repository";
-import type { IProductResult, Product } from "./type";
+import type {
+  Product,
+  IProductResult,
+  IProductResultWithReviews,
+} from "./type";
 import { MetaData } from "@/common/utils/meta-data";
+import { ReviewRepository } from "../reviews/repository";
 
 // get repository
 const repository = new ProductRepository();
+const reviewRepository = new ReviewRepository();
 
 export const productService = {
   async getItems(rawQuery: IRawQuery): Promise<IProductResult> {
@@ -38,5 +44,13 @@ export const productService = {
   async deleteItem(id: EntityId): Promise<boolean> {
     const deleted = await repository.delete(id);
     return deleted;
+  },
+
+  async getItemWithReviews(id: EntityId): Promise<IProductResultWithReviews> {
+    const item = await repository.findById(id);
+    const reviews = await reviewRepository.findByProductId(id);
+    const review_count = await reviewRepository.count({ product_id: id });
+    const average_rating = await reviewRepository.average({ product_id: id });
+    return item ? { item, reviews, review_count, average_rating } : {};
   },
 };
