@@ -12,6 +12,7 @@ export interface Product {
   updated_at?: Date;
   created_by?: number;
   updated_by?: number;
+  reviews?: Review[];
 }
 
 export interface IProductQuery extends INormQuery {

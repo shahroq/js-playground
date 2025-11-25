@@ -10,6 +10,8 @@ export interface IRawQuery {
 
   // other dynamic fields allowed
   [key: string]: unknown;
+
+  include?: CollectionName[];
 }
 
 export type Pagination = {
@@ -25,11 +27,16 @@ export type OrderBy = {
 
 export type Filter = Record<string, any>;
 
+export type Expansion = {
+  include?: CollectionName[];
+};
+
 // Normalized query params after processing
 export interface INormQuery {
   pagination?: Pagination;
   orderBy?: OrderBy;
   filter?: Filter;
+  expansion?: Expansion;
 }
 
 export interface IMeta {

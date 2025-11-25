@@ -9,6 +9,7 @@ export class ProductRepository extends BaseRepository<Product> {
       allowedSortFields: ["id", "name", "price", "created_at"],
       searchableFields: ["name", "description"],
       filterableFields: ["id", "name", "category", "price", "in_stock"],
+      expandableCollections: ["reviews"],
     });
   }
 

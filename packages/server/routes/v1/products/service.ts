@@ -14,11 +14,23 @@ const reviewRepository = new ReviewRepository();
 
 export const productService = {
   async getItems(rawQuery: IRawQuery): Promise<IProductResult> {
-    const items = await repository.find(rawQuery);
+    let items = await repository.find(rawQuery);
     const total = await repository.count(rawQuery);
 
     const normQuery = repository.normalizeQuery(rawQuery);
     const meta = new MetaData(normQuery, total).build();
+
+    // get expansions: reviews
+    if (normQuery.expansion?.include?.includes("reviews")) {
+      items = await Promise.all(
+        items.map(async (p) => {
+          const reviews = await reviewRepository.findByProductId(
+            p.id as EntityId
+          );
+          return { ...p, reviews };
+        })
+      );
+    }
 
     return { items, meta };
   },

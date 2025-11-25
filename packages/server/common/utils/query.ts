@@ -1,12 +1,16 @@
 import config from "@/common/config/config";
 import type {
+  CollectionName,
   IRawQuery,
   INormQuery,
   Pagination,
   OrderBy,
   Filter,
+  Expansion,
 } from "@/common/type/type";
 import type { RepoOptions } from "@/common/repository/base-repository";
+
+const reserved = new Set(["page", "per_page", "sort", "direction", "include"]);
 
 export class Query {
   constructor(
@@ -19,6 +23,7 @@ export class Query {
       pagination: this.pagination(),
       orderBy: this.orderBy(),
       filter: this.filter(),
+      expansion: this.expansion(),
     };
   }
 
@@ -55,7 +60,6 @@ export class Query {
     const { filterableFields } = this.repoOptions;
 
     const filter: Filter = {};
-    const reserved = new Set(["page", "per_page", "sort", "direction"]);
 
     if (!filterableFields || filterableFields.length === 0) return undefined;
 
@@ -75,6 +79,24 @@ export class Query {
     return Object.keys(filter).length > 0 ? filter : undefined;
   }
 
+  private expansion(): Expansion | undefined {
+    const { include } = this.rawQuery;
+    const { expandableCollections } = this.repoOptions;
+
+    if (!include) return undefined;
+
+    // Convert include to array of strings
+    const includeArray = this.parseAsArray(`${include}`);
+
+    // Filter only allowed collections and assert type
+    const collections: CollectionName[] = includeArray.filter(
+      (c): c is CollectionName =>
+        expandableCollections?.includes(c as CollectionName) ?? false
+    );
+
+    return collections.length > 0 ? { include: collections } : undefined;
+  }
+
   /**
    * Correct types
    */
@@ -89,5 +111,19 @@ export class Query {
     if (!isNaN(Number(v))) return Number(v);
 
     return v; // leave as string
+  }
+
+  /**
+   * Parse comma-separated strings/qs to array of string
+   * "[reviews,users]" -> ["reviews", "users"]
+   * reviews,users -> ["reviews", "users"]
+   */
+  private parseAsArray(s: string): string[] {
+    return s
+      .trim()
+      .replace(/^\[|\]$/g, "") // remove outer [ and ]
+      .split(",")
+      .map((item) => item.trim())
+      .filter(Boolean);
   }
 }
