@@ -6,6 +6,7 @@ export class ReviewRepository extends BaseRepository<Review> {
   constructor() {
     super("reviews", {
       // defaultPerPage: 10,
+      selectableFields: ["id", "content", "rating", "product_id"],
       defaultOrder: { sort: "id", direction: "asc" },
       allowedSortFields: ["id", "title", "created_at"],
       searchableFields: [],

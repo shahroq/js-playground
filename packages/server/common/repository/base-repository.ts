@@ -10,6 +10,7 @@ import { Query } from "@/common/utils/query";
 
 export interface RepoOptions {
   defaultPerPage?: number;
+  selectableFields: string[]; // whitelist
   defaultOrder?: OrderBy;
   allowedSortFields?: string[]; // whitelist for sort validation
   searchableFields?: string[]; // for q/search handling

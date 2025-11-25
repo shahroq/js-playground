@@ -5,6 +5,7 @@ export class ProductRepository extends BaseRepository<Product> {
   constructor() {
     super("products", {
       // defaultPerPage: 1,
+      selectableFields: ["id", "name", "category", "price", "in_stock"],
       defaultOrder: { sort: "id", direction: "asc" },
       allowedSortFields: ["id", "name", "price", "created_at"],
       searchableFields: ["name", "description"],

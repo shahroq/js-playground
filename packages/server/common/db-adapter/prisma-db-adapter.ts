@@ -9,10 +9,11 @@ import type { IDBAdapter } from "./db-adapter.interface";
 import type {
   EntityId,
   CollectionName,
+  INormQuery,
   Pagination,
   OrderBy,
   Filter,
-  INormQuery,
+  Selection,
 } from "@/common/type/type";
 
 const collectionModelMap: Record<
@@ -143,7 +144,7 @@ export class PrismaDBAdapter implements IDBAdapter {
     collection: CollectionName,
     normQuery: INormQuery
   ): Promise<number> {
-    const q = this.query<T>(normQuery, false, false);
+    const q = this.query<T>(normQuery, false, false, false);
     const m = this.getModel(collection);
 
     // @ts-ignore
@@ -184,13 +185,15 @@ export class PrismaDBAdapter implements IDBAdapter {
   private query<T>(
     normQuery: INormQuery,
     includePagination: boolean = true,
-    includeSorting: boolean = true
+    includeSorting: boolean = true,
+    includeSelection: boolean = true
   ) {
-    const { pagination, orderBy, filter } = normQuery;
+    const { pagination, orderBy, filter, selection } = normQuery;
     return {
       ...(includePagination ? this.buildPagination(pagination) : {}),
       ...(includeSorting ? this.buildSorting(orderBy) : {}),
       ...this.buildFilter(filter),
+      ...(includeSelection ? this.buildSelection(selection) : {}),
     };
   }
 
@@ -223,5 +226,21 @@ export class PrismaDBAdapter implements IDBAdapter {
       where[key] = Array.isArray(value) ? { in: value } : value;
     }
     return { where };
+  }
+
+  private buildSelection(selection?: Selection): {
+    select?: Record<string, boolean>;
+  } {
+    if (!selection || !selection.fields || selection.fields.length === 0) {
+      return {};
+    }
+
+    // Convert array of fields to Prisma select object
+    const select: Record<string, boolean> = {};
+    for (const field of selection.fields) {
+      select[field] = true;
+    }
+
+    return { select };
   }
 }

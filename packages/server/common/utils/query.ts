@@ -7,10 +7,18 @@ import type {
   OrderBy,
   Filter,
   Expansion,
+  Selection,
 } from "@/common/type/type";
 import type { RepoOptions } from "@/common/repository/base-repository";
 
-const reserved = new Set(["page", "per_page", "sort", "direction", "include"]);
+const reserved = new Set([
+  "page",
+  "per_page",
+  "sort",
+  "direction",
+  "fields",
+  "include",
+]);
 
 export class Query {
   constructor(
@@ -19,12 +27,14 @@ export class Query {
   ) {}
 
   getNormalized(): INormQuery {
-    return {
+    const nq = {
       pagination: this.pagination(),
       orderBy: this.orderBy(),
       filter: this.filter(),
+      selection: this.selection(),
       expansion: this.expansion(),
     };
+    return nq;
   }
 
   private pagination(): Pagination {
@@ -79,6 +89,23 @@ export class Query {
     return Object.keys(filter).length > 0 ? filter : undefined;
   }
 
+  private selection(): Selection | undefined {
+    const { fields } = this.rawQuery;
+    const { selectableFields } = this.repoOptions;
+
+    if (!fields) return { fields: selectableFields };
+
+    // Convert include to array of strings
+    const fieldsAr = this.parseAsArray(`${fields}`);
+
+    // Filter only allowed collections and assert type
+    const fieldsRefined = fieldsAr.filter(
+      (f) => selectableFields?.includes(f) ?? false
+    );
+
+    return fieldsRefined.length > 0 ? { fields: fieldsRefined } : undefined;
+  }
+
   private expansion(): Expansion | undefined {
     const { include } = this.rawQuery;
     const { expandableCollections } = this.repoOptions;
@@ -86,15 +113,15 @@ export class Query {
     if (!include) return undefined;
 
     // Convert include to array of strings
-    const includeArray = this.parseAsArray(`${include}`);
+    const includeAr = this.parseAsArray(`${include}`);
 
     // Filter only allowed collections and assert type
-    const collections: CollectionName[] = includeArray.filter(
+    const includeRefined: CollectionName[] = includeAr.filter(
       (c): c is CollectionName =>
         expandableCollections?.includes(c as CollectionName) ?? false
     );
 
-    return collections.length > 0 ? { include: collections } : undefined;
+    return includeRefined.length > 0 ? { include: includeRefined } : undefined;
   }
 
   /**

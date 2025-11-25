@@ -11,6 +11,8 @@ export interface IRawQuery {
   // other dynamic fields allowed
   [key: string]: unknown;
 
+  fields?: string[];
+
   include?: CollectionName[];
 }
 
@@ -27,6 +29,10 @@ export type OrderBy = {
 
 export type Filter = Record<string, any>;
 
+export type Selection = {
+  fields?: string[];
+};
+
 export type Expansion = {
   include?: CollectionName[];
 };
@@ -36,6 +42,7 @@ export interface INormQuery {
   pagination?: Pagination;
   orderBy?: OrderBy;
   filter?: Filter;
+  selection?: Selection;
   expansion?: Expansion;
 }
 
