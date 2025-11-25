@@ -11,6 +11,7 @@ export class ReviewRepository extends BaseRepository<Review> {
       allowedSortFields: ["id", "title", "created_at"],
       searchableFields: [],
       filterableFields: ["id", "product_id"],
+      expandableCollections: ["products"],
     });
   }
 

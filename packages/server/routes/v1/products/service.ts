@@ -23,11 +23,11 @@ export const productService = {
     // get expansions: reviews
     if (normQuery.expansion?.include?.includes("reviews")) {
       items = await Promise.all(
-        items.map(async (p) => {
+        items.map(async (i) => {
           const reviews = await reviewRepository.findByProductId(
-            p.id as EntityId
+            i.id as EntityId
           );
-          return { ...p, reviews };
+          return { ...i, reviews };
         })
       );
     }

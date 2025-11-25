@@ -2,17 +2,29 @@ import type { EntityId, IRawQuery } from "@/common/type/type";
 import { ReviewRepository } from "./repository";
 import type { IReviewResult, Review } from "./type";
 import { MetaData } from "@/common/utils/meta-data";
+import { ProductRepository } from "../products/repository";
 
 // get repository
 const repository = new ReviewRepository();
+const productRepository = new ProductRepository();
 
 export const reviewService = {
   async getItems(rawQuery: IRawQuery): Promise<IReviewResult> {
-    const items = await repository.find(rawQuery);
+    let items = await repository.find(rawQuery);
     const total = await repository.count(rawQuery);
 
     const normQuery = repository.normalizeQuery(rawQuery);
     const meta = new MetaData(normQuery, total).build();
+
+    // get expansions: products
+    if (normQuery.expansion?.include?.includes("products")) {
+      items = await Promise.all(
+        items.map(async (i) => {
+          const product = await productRepository.findById(i.product_id);
+          return { ...i, product };
+        })
+      );
+    }
 
     return { items, meta };
   },

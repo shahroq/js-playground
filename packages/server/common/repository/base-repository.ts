@@ -23,7 +23,7 @@ export abstract class BaseRepository<T> {
 
   constructor(
     protected collection: CollectionName,
-    protected repoOptions: RepoOptions = {}
+    protected repoOptions: RepoOptions
   ) {
     this.dbAdapter = getDBAdapter();
   }
