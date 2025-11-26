@@ -1,4 +1,5 @@
 import type { EntityId, IMeta, INormQuery } from "@/common/type/type";
+import type { Product } from "../products/type";
 
 export interface Review {
   id?: EntityId;
@@ -9,6 +10,8 @@ export interface Review {
   updated_at: Date;
   created_by: number;
   updated_by: number;
+
+  product?: Product;
 }
 
 export interface IReviewQuery extends INormQuery {}

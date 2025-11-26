@@ -35,8 +35,16 @@ export const productService = {
     return { items, meta };
   },
 
-  async getItem(id: EntityId): Promise<IProductResult> {
+  async getItem(id: EntityId, rawQuery: IRawQuery): Promise<IProductResult> {
     const item = await repository.findById(id);
+
+    const normQuery = repository.normalizeQuery(rawQuery);
+    if (normQuery.expansion?.include?.includes("reviews")) {
+      const reviews = await reviewRepository.findByProductId(
+        item?.id as EntityId
+      );
+      if (item && reviews) item.reviews = reviews;
+    }
     return item ? { item } : {};
   },
 

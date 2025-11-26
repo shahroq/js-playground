@@ -18,7 +18,7 @@ export const productController = {
     const { id } = req.params;
     if (!id) return next(AppError.badRequest());
 
-    const { item } = await service.getItem(+id);
+    const { item } = await service.getItem(+id, req.query);
     if (!item) return next(AppError.notFound());
 
     res.status(200).json(formatter.format(null, { [collection]: item }));
