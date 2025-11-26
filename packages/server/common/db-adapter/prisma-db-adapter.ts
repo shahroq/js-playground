@@ -156,7 +156,7 @@ export class PrismaDBAdapter implements IDBAdapter {
     normQuery: INormQuery,
     field: keyof T & string
   ): Promise<number | null> {
-    const q = this.query<T>(normQuery, false, false);
+    const q = this.query<T>(normQuery, false, false, false);
     const m = this.getModel(collection);
 
     // @ts-ignore
