@@ -1,3 +1,4 @@
+import { Review } from "./../../../__bak/express_app_structure-v10-2";
 import type { EntityId, IRawQuery } from "@/common/type/type";
 import { ProductRepository } from "./repository";
 import type {
@@ -14,8 +15,10 @@ const reviewRepository = new ReviewRepository();
 
 export const productService = {
   async getItems(rawQuery: IRawQuery): Promise<IProductResult> {
-    let items = await repository.find(rawQuery);
-    const total = await repository.count(rawQuery);
+    let [items, total] = await Promise.all([
+      repository.find(rawQuery),
+      repository.count(rawQuery),
+    ]);
 
     const normQuery = repository.normalizeQuery(rawQuery);
     const meta = new MetaData(normQuery, total).build();
@@ -68,9 +71,13 @@ export const productService = {
 
   async getItemWithReviews(id: EntityId): Promise<IProductResultWithReviews> {
     const item = await repository.findById(id);
-    const reviews = await reviewRepository.findByProductId(id);
-    const review_count = await reviewRepository.count({ product_id: id });
-    const average_rating = await reviewRepository.average({ product_id: id });
+
+    const [reviews, review_count, average_rating] = await Promise.all([
+      reviewRepository.findByProductId(id),
+      reviewRepository.count({ product_id: id }),
+      reviewRepository.average({ product_id: id }),
+    ]);
+
     return item ? { item, reviews, review_count, average_rating } : {};
   },
 };

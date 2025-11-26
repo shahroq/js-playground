@@ -10,8 +10,10 @@ const productRepository = new ProductRepository();
 
 export const reviewService = {
   async getItems(rawQuery: IRawQuery): Promise<IReviewResult> {
-    let items = await repository.find(rawQuery);
-    const total = await repository.count(rawQuery);
+    let [items, total] = await Promise.all([
+      repository.find(rawQuery),
+      repository.count(rawQuery),
+    ]);
 
     const normQuery = repository.normalizeQuery(rawQuery);
     const meta = new MetaData(normQuery, total).build();
