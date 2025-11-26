@@ -12,6 +12,10 @@ export class AxiosHttpClient implements IHttpClient {
     this.httpClient = axios.create(baseConfig);
   }
 
+  getHttpClient<T = AxiosInstance>(): T {
+    return this.httpClient as T;
+  }
+
   async get<T = any>(url: string, config?: RequestConfig): Promise<T> {
     const response = await this.httpClient.get<T>(url, config);
     return response.data;
