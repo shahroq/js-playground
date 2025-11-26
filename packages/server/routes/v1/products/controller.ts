@@ -55,22 +55,4 @@ export const productController = {
       .status(200)
       .json(formatter.format(null, { message: `${collection} deleted.` }));
   },
-
-  async showWithReviews(req: Request, res: Response, next: NextFunction) {
-    const { id } = req.params;
-    if (!id) return next(AppError.badRequest());
-
-    const { item, reviews, review_count, average_rating } =
-      await service.getItemWithReviews(+id);
-    if (!item) return next(AppError.notFound());
-
-    res.status(200).json(
-      formatter.format(null, {
-        [collection]: item,
-        reviews,
-        review_count,
-        average_rating,
-      })
-    );
-  },
 };

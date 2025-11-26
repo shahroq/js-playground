@@ -1,5 +1,5 @@
 import type { EntityId, IRawQuery } from "@/common/type/type";
-import type { Review } from "./type";
+import type { IReviewResult, Review } from "./type";
 import { BaseRepository } from "@/common/repository/base-repository";
 
 export class ReviewRepository extends BaseRepository<Review> {
@@ -15,12 +15,16 @@ export class ReviewRepository extends BaseRepository<Review> {
     });
   }
 
-  async findByProductId(productId: EntityId): Promise<Review[]> {
-    return this.find({
+  async findByProductId(productId: EntityId): Promise<IReviewResult> {
+    const reviews = await this.find({
       product_id: productId,
       sort: "created_at",
       direction: "desc",
     });
+    const review_count = await this.count({ product_id: productId });
+    const average_rating = await this.average({ product_id: productId });
+
+    return { reviews, review_count, average_rating };
   }
 
   async findByUserId(userId: EntityId): Promise<Review[]> {

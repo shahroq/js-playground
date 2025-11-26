@@ -48,6 +48,7 @@ export const productService = {
       );
       if (item && reviews) item.reviews = reviews;
     }
+
     return item ? { item } : {};
   },
 
@@ -67,17 +68,5 @@ export const productService = {
   async deleteItem(id: EntityId): Promise<boolean> {
     const deleted = await repository.delete(id);
     return deleted;
-  },
-
-  async getItemWithReviews(id: EntityId): Promise<IProductResultWithReviews> {
-    const item = await repository.findById(id);
-
-    const [reviews, review_count, average_rating] = await Promise.all([
-      reviewRepository.findByProductId(id),
-      reviewRepository.count({ product_id: id }),
-      reviewRepository.average({ product_id: id }),
-    ]);
-
-    return item ? { item, reviews, review_count, average_rating } : {};
   },
 };
