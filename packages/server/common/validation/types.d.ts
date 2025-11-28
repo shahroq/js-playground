@@ -2,7 +2,8 @@ import type { Request, Response, NextFunction } from "express";
 
 export type ValidationStrategy = "express-validator" | "joi" | "zod";
 
-export type Action =
+// it's not splitable! why? when make a union of two type with, each with multiple items, it's not working. works just when each type has one value!
+export type ValidationAction =
   | "users.getItems"
   | "users.getItem"
   | "users.createItem"
@@ -27,7 +28,7 @@ export interface ValidationSchema/Payload {
 */
 
 export type ValidatorMiddleware = (
-  action: Action
+  action: ValidationAction
 ) => (req: Request, res: Response, next: NextFunction) => void | Promise<void>;
 
 /*

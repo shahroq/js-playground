@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
 import { get } from "lodash";
 import AppError, { type ErrorDetail } from "@/common/app-error/app-error.ts";
-import type { Action, ValidatorMiddleware } from "../types";
+import type { ValidationAction, ValidatorMiddleware } from "../types";
 import { chains } from "./chain.ts";
 import {
   validationResult,
@@ -10,7 +10,7 @@ import {
 } from "express-validator";
 
 export const expressValidatorValidateMiddleware: ValidatorMiddleware = (
-  action: Action
+  action: ValidationAction
 ) => {
   const chain = get(chains, action);
   if (!chain) throw new AppError(`Chain not found for action: ${action}`);

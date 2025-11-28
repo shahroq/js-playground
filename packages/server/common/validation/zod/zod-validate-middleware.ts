@@ -1,11 +1,13 @@
 import type { Request, Response, NextFunction } from "express";
 import { get } from "lodash";
 import AppError, { type ErrorDetail } from "@/common/app-error/app-error.ts";
-import type { Action, ValidatorMiddleware } from "../types";
+import type { ValidationAction, ValidatorMiddleware } from "../types";
 import { schemas } from "./schema.ts";
 import { ZodError } from "zod";
 
-export const zodValidateMiddleware: ValidatorMiddleware = (action: Action) => {
+export const zodValidateMiddleware: ValidatorMiddleware = (
+  action: ValidationAction
+) => {
   const schema = get(schemas, action);
   if (!schema) throw new AppError(`Schema not found for action: ${action}`);
 
