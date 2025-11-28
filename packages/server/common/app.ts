@@ -1,10 +1,8 @@
 import express from "express";
 import cors from "cors";
 import type { Application, Request, Response, NextFunction } from "express";
-
-import sandboxRoutes from "./routes/sandbox";
-import v1Router from "@/routes/v1";
 import config from "@/common/config";
+import v1Router from "@/routes/v1";
 import { isoString } from "@/common/utils/utils";
 import { formatter } from "@/common/response/factory";
 import { undefinedErrorHandler, globalErrorHandler } from "@/middlewares";
@@ -26,7 +24,6 @@ export const bootstrap = (): Application => {
     res.json(formatter.format(null, { ok: true, environment: config.env }));
   });
 
-  app.use("/api/sandbox", sandboxRoutes); // my sandbox
   app.use("/api/v1", v1Router);
 
   app.use(undefinedErrorHandler);

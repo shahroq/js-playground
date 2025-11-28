@@ -1,4 +1,4 @@
-import { bootstrap } from "./app";
+import { bootstrap } from "./common/app";
 import config from "./common/config";
 
 const app = bootstrap();
