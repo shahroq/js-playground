@@ -6,7 +6,7 @@ import type {
   EntityId,
   CollectionName,
 } from "@/common/type/type";
-import { Query } from "@/common/utils/query";
+import { Query } from "@/common/query-object/query";
 
 export interface RepoOptions {
   defaultPerPage?: number;
@@ -26,6 +26,10 @@ export abstract class BaseRepository<T> {
     protected repoOptions: RepoOptions
   ) {
     this.dbAdapter = getDBAdapter();
+  }
+
+  getDbAdapter() {
+    return this.dbAdapter;
   }
 
   async find(rawQuery: IRawQuery): Promise<T[]> {
