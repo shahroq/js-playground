@@ -1,12 +1,8 @@
 import type { IDBAdapter } from "@/common/db-adapter/db-adapter.interface";
 import { getDBAdapter } from "@/common/db-adapter/factory";
-import type {
-  OrderBy,
-  IRawQuery,
-  EntityId,
-  CollectionName,
-} from "@/common/type";
+import type { EntityId, CollectionName } from "@/common/type";
 import { Query } from "@/common/query-object/query";
+import type { OrderBy, IRawQuery } from "@/common/query-object/type";
 
 export interface RepoOptions {
   defaultPerPage?: number;
@@ -70,6 +66,6 @@ export abstract class BaseRepository<T> {
   }
 
   normalizeQuery(rawQuery: IRawQuery) {
-    return new Query(rawQuery, this.repoOptions).getNormalized();
+    return new Query(rawQuery, this.repoOptions).normalize();
   }
 }

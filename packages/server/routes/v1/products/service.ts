@@ -1,8 +1,9 @@
-import type { EntityId, IRawQuery } from "@/common/type";
+import type { EntityId } from "@/common/type";
 import { ProductRepository } from "./repository";
 import type { Product, IProductResult } from "./type";
 import { MetaData } from "@/common/utils/meta-data";
 import { ReviewRepository } from "@reviews/repository";
+import type { IRawQuery } from "@/common/query-object/type";
 
 // get repository
 const repository = new ProductRepository();

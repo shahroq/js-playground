@@ -1,6 +1,7 @@
-import type { EntityId, IRawQuery } from "@/common/type";
+import type { EntityId } from "@/common/type";
 import type { IReviewResult, Review } from "./type";
 import { BaseRepository } from "@/common/repository/base.repository";
+import type { IRawQuery } from "@/common/query-object/type";
 
 export class ReviewRepository extends BaseRepository<Review> {
   constructor() {

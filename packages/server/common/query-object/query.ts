@@ -1,15 +1,15 @@
 import config from "@/common/config";
+import type { CollectionName } from "@/common/type";
+import type { RepoOptions } from "@/common/repository/base.repository";
 import type {
-  CollectionName,
   IRawQuery,
   INormQuery,
   Pagination,
   OrderBy,
   Filter,
-  Expansion,
   Selection,
-} from "@/common/type";
-import type { RepoOptions } from "@/common/repository/base.repository";
+  Expansion,
+} from "./type";
 
 const reserved = new Set([
   "page",
@@ -20,13 +20,19 @@ const reserved = new Set([
   "include",
 ]);
 
+/**
+ * Query
+ *
+ * Normalize and validate raw query parameters coming from an HTTP request
+ * into a consistent `INormQuery` shape used by repositories.
+ */
 export class Query {
   constructor(
     private readonly rawQuery: IRawQuery,
     private readonly repoOptions: RepoOptions
   ) {}
 
-  getNormalized(): INormQuery {
+  normalize(): INormQuery {
     const nq = {
       pagination: this.pagination(),
       orderBy: this.orderBy(),

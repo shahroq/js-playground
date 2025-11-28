@@ -6,7 +6,7 @@ import { productService as service } from "./service";
 const collection = "product";
 
 export const productController = {
-  async index(req: Request, res: Response, next: NextFunction) {
+  async index(req: Request, res: Response) {
     const { items, meta } = await service.getItems(req.query);
 
     res
