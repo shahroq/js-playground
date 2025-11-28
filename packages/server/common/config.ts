@@ -15,7 +15,7 @@ const config = {
 
   pagination_per_page: process.env.PAGINATION_PER_PAGE || 10,
 
-  response_format_strategy: process.env.RESPONSE_FORMAT_STRATEGY,
+  app_response_strategy: process.env.APP_RESPONSE_STRATEGY,
 
   validation_strategy: process.env.VALIDATION_STRATEGY,
 
@@ -83,7 +83,7 @@ function getDBPath(database_url: string | null) {
   base_url: "http://localhost",
   port: 3000,
   debug: true,
-  response_format_strategy: "jsend",
+  app_response_strategy: "jsend",
   validation_strategy: "zod",
   database_type: "sqlite",
   database_url: "file:./database.db",

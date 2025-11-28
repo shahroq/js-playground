@@ -1,8 +1,8 @@
 import type { NextFunction, Request, Response } from "express";
-import { formatter } from "@/common/response/factory";
+import { appResponse } from "@/common/app-response/factory";
 import type { Post } from "./type";
 import { PostService } from "./service";
-import AppError from "@/common/error/app-error";
+import AppError from "@/common/app-error/app-error";
 
 const collection = "post";
 
@@ -16,7 +16,9 @@ export const postController = {
     _next: NextFunction
   ): Promise<void> {
     const items: Post[] = await service.getItems();
-    res.status(200).json(formatter.format(null, { [`${collection}s`]: items }));
+    res
+      .status(200)
+      .json(appResponse.format(null, { [`${collection}s`]: items }));
   },
 
   async show(req: Request, res: Response, next: NextFunction) {
@@ -26,6 +28,6 @@ export const postController = {
     const item = await service.getItem(+id);
     if (!item) return next(AppError.notFound());
 
-    res.status(200).json(formatter.format(null, { [collection]: item }));
+    res.status(200).json(appResponse.format(null, { [collection]: item }));
   },
 };

@@ -4,7 +4,7 @@ import type { Application, Request, Response, NextFunction } from "express";
 import config from "@/common/config";
 import v1Router from "@/routes/v1";
 import { isoString } from "@/common/utils/utils";
-import { formatter } from "@/common/response/factory";
+import { appResponse } from "@/common/app-response/factory";
 import { undefinedErrorHandler, globalErrorHandler } from "@/middlewares";
 
 export const bootstrap = (): Application => {
@@ -21,7 +21,7 @@ export const bootstrap = (): Application => {
 
   // health
   app.get("/health", (_req: Request, res: Response) => {
-    res.json(formatter.format(null, { ok: true, environment: config.env }));
+    res.json(appResponse.format(null, { ok: true, environment: config.env }));
   });
 
   app.use("/api/v1", v1Router);

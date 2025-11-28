@@ -1,16 +1,16 @@
-import type { ResponseFormatter } from "./type";
-import type AppError from "@/common/error/app-error";
+import type { AppResponse } from "./app-response.interface";
+import type AppError from "@/common/app-error/app-error";
 
 type JSendStatus = "success" | "fail" | "error";
 
-type JSendResponse = {
+type JSendFormat = {
   status: JSendStatus;
   data?: any;
   message?: string;
   code?: number;
 };
 
-export class JSendFormatter implements ResponseFormatter {
+export class JSend implements AppResponse {
   format(error: AppError | null, data: any = null) {
     const status = this.getStatus(error);
 
@@ -30,14 +30,14 @@ export class JSendFormatter implements ResponseFormatter {
     return "error";
   }
 
-  private formatSuccess(data: any): JSendResponse {
+  private formatSuccess(data: any): JSendFormat {
     return {
       status: "success",
       data,
     };
   }
 
-  private formatFail(error: AppError, data: any): JSendResponse {
+  private formatFail(error: AppError, data: any): JSendFormat {
     return {
       status: "fail",
       message: data?.message,
@@ -47,7 +47,7 @@ export class JSendFormatter implements ResponseFormatter {
     };
   }
 
-  private formatError(error: AppError, data: any): JSendResponse {
+  private formatError(error: AppError, data: any): JSendFormat {
     return {
       status: "error",
       message: error?.message,

@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 import { get } from "lodash";
-import AppError, { type ErrorDetail } from "@/common/error/app-error.ts";
+import AppError, { type ErrorDetail } from "@/common/app-error/app-error.ts";
 import type { Action, ValidatorMiddleware } from "../type";
 import { schemas } from "./schema.ts";
 import { ZodError } from "zod";

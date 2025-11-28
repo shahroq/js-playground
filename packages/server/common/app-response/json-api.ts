@@ -1,7 +1,9 @@
-import type { ResponseFormatter } from "./type";
-import type AppError from "@/common/error/app-error";
+import type { AppResponse } from "./app-response.interface";
+import type AppError from "@/common/app-error/app-error";
 
-export class JsonApiFormatter implements ResponseFormatter {
+type JSonsApiFormat = {};
+
+export class JsonApi implements AppResponse {
   format(error: AppError | null, data: any = null) {
     if (!error) return { data };
 
@@ -12,7 +14,7 @@ export class JsonApiFormatter implements ResponseFormatter {
     return {
       errors: [
         {
-          status: statusCode.toString(),
+          status: statusCode?.toString(),
           title: error.message,
           ...(details ? { detail: details } : {}),
         },

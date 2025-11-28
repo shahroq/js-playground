@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
-import AppError from "@/common/error/app-error";
-import { formatter } from "@/common/response/factory";
+import AppError from "@/common/app-error/app-error";
+import { appResponse } from "@/common/app-response/factory";
 import { userService as service } from "./service";
 
 const collection = "user";
@@ -9,7 +9,9 @@ export const userController = {
   async index(req: Request, res: Response, next: NextFunction) {
     const items = await service.getItems();
 
-    res.status(200).json(formatter.format(null, { [`${collection}s`]: items }));
+    res
+      .status(200)
+      .json(appResponse.format(null, { [`${collection}s`]: items }));
   },
 
   async show(req: Request, res: Response, next: NextFunction) {
@@ -18,7 +20,7 @@ export const userController = {
 
     const item = await service.getItem(+id);
 
-    res.status(200).json(formatter.format(null, { [collection]: item }));
+    res.status(200).json(appResponse.format(null, { [collection]: item }));
   },
 
   async store(req: Request, res: Response, next: NextFunction) {
@@ -26,7 +28,7 @@ export const userController = {
 
     const newItem = await service.createItem(body);
 
-    res.status(201).json(formatter.format(null, { [collection]: newItem }));
+    res.status(201).json(appResponse.format(null, { [collection]: newItem }));
   },
 
   async update(req: Request, res: Response, next: NextFunction) {
@@ -38,7 +40,9 @@ export const userController = {
     const updatedItem = await service.updateItem(+id, body);
     if (!updatedItem) return next(AppError.notFound());
 
-    res.status(200).json(formatter.format(null, { [collection]: updatedItem }));
+    res
+      .status(200)
+      .json(appResponse.format(null, { [collection]: updatedItem }));
   },
 
   async destroy(req: Request, res: Response, next: NextFunction) {
@@ -50,6 +54,6 @@ export const userController = {
 
     res
       .status(200)
-      .json(formatter.format(null, { message: `${collection} deleted.` }));
+      .json(appResponse.format(null, { message: `${collection} deleted.` }));
   },
 };
