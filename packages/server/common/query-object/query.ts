@@ -9,7 +9,7 @@ import type {
   Expansion,
   Selection,
 } from "@/common/type/type";
-import type { RepoOptions } from "@/common/repository/base-repository";
+import type { RepoOptions } from "@/common/repository/base.repository";
 
 const reserved = new Set([
   "page",
