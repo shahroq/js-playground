@@ -5,7 +5,7 @@ import type { ValidationAction, ValidatorMiddleware } from "../types";
 import { schemas } from "./schema.ts";
 import { ZodError } from "zod";
 
-export const zodValidateMiddleware: ValidatorMiddleware = (
+export const zodValidatorMiddleware: ValidatorMiddleware = (
   action: ValidationAction
 ) => {
   const schema = get(schemas, action);

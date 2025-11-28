@@ -5,7 +5,7 @@ import type { ValidationAction, ValidatorMiddleware } from "../types";
 import { schemas } from "./schema.ts";
 import Joi from "joi";
 
-export const joiValidateMiddleware: ValidatorMiddleware = (
+export const joiValidatorMiddleware: ValidatorMiddleware = (
   action: ValidationAction
 ) => {
   const schema = get(schemas, action);

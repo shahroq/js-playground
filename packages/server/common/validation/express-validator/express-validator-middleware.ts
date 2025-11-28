@@ -9,7 +9,7 @@ import {
   type Result,
 } from "express-validator";
 
-export const expressValidatorValidateMiddleware: ValidatorMiddleware = (
+export const expressValidatorMiddleware: ValidatorMiddleware = (
   action: ValidationAction
 ) => {
   const chain = get(chains, action);
