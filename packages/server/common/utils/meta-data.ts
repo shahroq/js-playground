@@ -1,5 +1,5 @@
-import type { IMeta } from "@/common/type";
-import type { INormQuery } from "../query-object/type";
+import type { IMeta } from "@/common/types";
+import type { INormQuery } from "../query-object/types";
 
 export class MetaData {
   constructor(

@@ -1,8 +1,8 @@
 import type { IDBAdapter } from "@/common/db-adapter/db-adapter.interface";
 import { getDBAdapter } from "@/common/db-adapter/factory";
-import type { EntityId, CollectionName } from "@/common/type";
+import type { EntityId, CollectionName } from "@/common/types";
 import { Query } from "@/common/query-object/query";
-import type { OrderBy, IRawQuery } from "@/common/query-object/type";
+import type { OrderBy, IRawQuery } from "@/common/query-object/types";
 
 export interface RepoOptions {
   defaultPerPage?: number;

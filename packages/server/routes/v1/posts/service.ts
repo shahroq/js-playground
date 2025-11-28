@@ -1,8 +1,8 @@
 import config from "@/common/config";
-import type { Post } from "./type";
+import type { Post } from "./types";
 import { getHttpClient } from "@/common/http-client/factory";
 import type { IHttpClient } from "@/common/http-client/http-client.interface";
-import type { EntityId } from "@/common/type";
+import type { EntityId } from "@/common/types";
 
 const base_url_source = config.api_url_jsonplaceholder as string;
 

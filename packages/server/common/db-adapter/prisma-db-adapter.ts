@@ -14,7 +14,7 @@ import type {
   OrderBy,
   Filter,
   Selection,
-} from "@/common/type";
+} from "@/common/types";
 
 const collectionModelMap: Record<
   CollectionName,

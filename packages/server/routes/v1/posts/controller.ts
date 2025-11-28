@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import { appResponse } from "@/common/app-response/factory";
-import type { Post } from "./type";
+import type { Post } from "./types";
 import { PostService } from "./service";
 import AppError from "@/common/app-error/app-error";
 

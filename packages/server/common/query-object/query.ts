@@ -1,5 +1,5 @@
 import config from "@/common/config";
-import type { CollectionName } from "@/common/type";
+import type { CollectionName } from "@/common/types";
 import type { RepoOptions } from "@/common/repository/base.repository";
 import type {
   IRawQuery,
@@ -9,7 +9,7 @@ import type {
   Filter,
   Selection,
   Expansion,
-} from "./type";
+} from "./types";
 
 const reserved = new Set([
   "page",

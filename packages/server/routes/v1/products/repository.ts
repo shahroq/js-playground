@@ -1,4 +1,4 @@
-import type { Product } from "./type";
+import type { Product } from "./types";
 import { BaseRepository } from "@/common/repository/base.repository";
 
 export class ProductRepository extends BaseRepository<Product> {

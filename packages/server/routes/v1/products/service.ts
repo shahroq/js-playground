@@ -1,9 +1,9 @@
-import type { EntityId } from "@/common/type";
+import type { EntityId } from "@/common/types";
 import { ProductRepository } from "./repository";
-import type { Product, IProductResult } from "./type";
+import type { Product, IProductResult } from "./types";
 import { MetaData } from "@/common/utils/meta-data";
 import { ReviewRepository } from "@reviews/repository";
-import type { IRawQuery } from "@/common/query-object/type";
+import type { IRawQuery } from "@/common/query-object/types";
 
 // get repository
 const repository = new ProductRepository();
