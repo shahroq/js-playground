@@ -1,4 +1,4 @@
-import config from "@/common/config/config";
+import config from "@/common/config";
 import { FileDBAdapter } from "./file-db-adapter";
 import { LowDBDBAdapter } from "./lowdb-db-adapter";
 import { PrismaDBAdapter } from "./prisma-db-adapter";

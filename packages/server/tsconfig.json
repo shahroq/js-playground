@@ -27,7 +27,11 @@
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false,
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@users/*": ["./routes/v1/users/*"],
+      "@products/*": ["./routes/v1/products/*"],
+      "@reviews/*": ["./routes/v1/reviews/*"],
+      "@posts/*": ["./routes/v1/posts/*"]
     }
   },
 

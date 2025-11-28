@@ -1,7 +1,7 @@
 import dbSource from "./database-source.json";
-import { UserRepository } from "@/routes/v1/users/repository";
-import { ProductRepository } from "@/routes/v1/products/repository";
-import { ReviewRepository } from "@/routes/v1/reviews/repository";
+import { UserRepository } from "@users/repository";
+import { ProductRepository } from "@products/repository";
+import { ReviewRepository } from "@reviews/repository";
 import { getDBAdapter } from "@/common/db-adapter/factory";
 
 let dbAdapter = getDBAdapter(); // used for migration directly

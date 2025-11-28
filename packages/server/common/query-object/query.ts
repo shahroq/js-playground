@@ -1,4 +1,4 @@
-import config from "@/common/config/config";
+import config from "@/common/config";
 import type {
   CollectionName,
   IRawQuery,
@@ -8,7 +8,7 @@ import type {
   Filter,
   Expansion,
   Selection,
-} from "@/common/type/type";
+} from "@/common/type";
 import type { RepoOptions } from "@/common/repository/base.repository";
 
 const reserved = new Set([

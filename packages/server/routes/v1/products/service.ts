@@ -1,13 +1,8 @@
-import { Review } from "./../../../__bak/express_app_structure-v10-2";
-import type { EntityId, IRawQuery } from "@/common/type/type";
+import type { EntityId, IRawQuery } from "@/common/type";
 import { ProductRepository } from "./repository";
-import type {
-  Product,
-  IProductResult,
-  IProductResultWithReviews,
-} from "./type";
+import type { Product, IProductResult } from "./type";
 import { MetaData } from "@/common/utils/meta-data";
-import { ReviewRepository } from "../reviews/repository";
+import { ReviewRepository } from "@reviews/repository";
 
 // get repository
 const repository = new ProductRepository();

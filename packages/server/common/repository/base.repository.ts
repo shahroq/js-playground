@@ -5,7 +5,7 @@ import type {
   IRawQuery,
   EntityId,
   CollectionName,
-} from "@/common/type/type";
+} from "@/common/type";
 import { Query } from "@/common/query-object/query";
 
 export interface RepoOptions {

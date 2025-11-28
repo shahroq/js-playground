@@ -1,4 +1,4 @@
-import type { EntityId, IRawQuery } from "@/common/type/type";
+import type { EntityId, IRawQuery } from "@/common/type";
 import type { IReviewResult, Review } from "./type";
 import { BaseRepository } from "@/common/repository/base.repository";
 

@@ -1,4 +1,4 @@
-import config from "@/common/config/config";
+import config from "@/common/config";
 import { isoString } from "@/common/utils/utils";
 
 export interface DatabaseSchema {

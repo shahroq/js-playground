@@ -1,4 +1,4 @@
-import type { CollectionName, EntityId, INormQuery } from "@/common/type/type";
+import type { CollectionName, EntityId, INormQuery } from "@/common/type";
 
 // export type DatabaseStrategy = "file-json" | "lowdb-json" | "prisma-sqlite";
 export type DBAdapterStrategy = "file" | "lowdb" | "prisma";

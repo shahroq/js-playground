@@ -1,8 +1,4 @@
-import type {
-  EntityId,
-  IBaseQuery,
-  IBaseQueryResult,
-} from "@/common/type/type";
+import type { EntityId, IBaseQuery, IBaseQueryResult } from "@/common/type";
 
 export interface User {
   id?: EntityId;

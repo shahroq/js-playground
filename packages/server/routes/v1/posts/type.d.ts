@@ -1,4 +1,4 @@
-import type { EntityId } from "@/common/type/type";
+import type { EntityId } from "@/common/type";
 
 export interface Post {
   id?: EntityId;

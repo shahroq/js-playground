@@ -1,5 +1,5 @@
-import type { EntityId, IMeta, INormQuery } from "@/common/type/type";
-import type { Product } from "../products/type";
+import type { EntityId, IMeta, INormQuery } from "@/common/type";
+import type { Product } from "@products/type";
 
 export interface Review {
   id?: EntityId;

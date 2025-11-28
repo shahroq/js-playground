@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
-import config from "@/common/config/config";
+import config from "@/common/config";
 import AppError from "@/common/error/app-error";
 import { formatter } from "@/common/response/factory";
 

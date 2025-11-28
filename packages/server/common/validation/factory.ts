@@ -1,4 +1,4 @@
-import config from "@/common/config/config.ts";
+import config from "@/common/config.ts";
 import type { ValidatorMiddleware, ValidationStrategy } from "./type";
 import { joiValidateMiddleware } from "./joi/joi-validate-middleware.ts";
 import { zodValidateMiddleware } from "./zod/zod-validate-middleware.ts";
