@@ -21,10 +21,11 @@ const reserved = new Set([
 ]);
 
 /**
- * Query
+ * Query: Utility class for working with queries
  *
  * Normalize and validate raw query parameters coming from an HTTP request
  * into a consistent `INormQuery` shape used by repositories.
+ * Not a stateless class.
  */
 export class Query {
   constructor(
