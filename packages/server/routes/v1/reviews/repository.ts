@@ -2,18 +2,23 @@ import type { EntityId } from "@/common/types";
 import type { IReviewResult, Review } from "./types";
 import { BaseRepository } from "@/common/repository/base.repository";
 import type { IRawQuery } from "@/common/query-object/types";
+import type { IDBAdapter } from "@/common/db-adapter/db-adapter.interface";
 
 export class ReviewRepository extends BaseRepository<Review> {
-  constructor() {
-    super("reviews", {
-      // defaultPerPage: 10,
-      selectableFields: ["id", "content", "rating", "product_id"],
-      defaultOrder: { sort: "id", direction: "asc" },
-      allowedSortFields: ["id", "title", "created_at"],
-      searchableFields: [],
-      filterableFields: ["id", "product_id"],
-      expandableCollections: ["products"],
-    });
+  constructor(dbAdapter: IDBAdapter) {
+    super(
+      "reviews",
+      {
+        // defaultPerPage: 10,
+        selectableFields: ["id", "content", "rating", "product_id"],
+        defaultOrder: { sort: "id", direction: "asc" },
+        allowedSortFields: ["id", "title", "created_at"],
+        searchableFields: [],
+        filterableFields: ["id", "product_id"],
+        expandableCollections: ["products"],
+      },
+      dbAdapter
+    );
   }
 
   async findByProductId(productId: EntityId): Promise<IReviewResult> {

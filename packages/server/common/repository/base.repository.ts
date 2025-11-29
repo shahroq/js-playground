@@ -1,8 +1,7 @@
-import type { IDBAdapter } from "@/common/db-adapter/db-adapter.interface";
-import { getDBAdapter } from "@/common/db-adapter/factory";
 import type { EntityId, CollectionName } from "@/common/types";
 import { Query } from "@/common/query-object/query";
 import type { OrderBy, IRawQuery } from "@/common/query-object/types";
+import type { IDBAdapter } from "../db-adapter/db-adapter.interface";
 
 export interface RepoOptions {
   defaultPerPage?: number;
@@ -15,18 +14,11 @@ export interface RepoOptions {
 }
 
 export abstract class BaseRepository<T> {
-  protected dbAdapter: IDBAdapter;
-
   constructor(
     protected collection: CollectionName,
-    protected repoOptions: RepoOptions
-  ) {
-    this.dbAdapter = getDBAdapter();
-  }
-
-  getDbAdapter() {
-    return this.dbAdapter;
-  }
+    protected repoOptions: RepoOptions,
+    protected dbAdapter: IDBAdapter
+  ) {}
 
   async find(rawQuery: IRawQuery): Promise<T[]> {
     const normQuery = Query.normalize(rawQuery, this.repoOptions);

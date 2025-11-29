@@ -1,17 +1,9 @@
-import config from "@/common/config";
 import type { Post } from "./types";
-import { getHttpClient } from "@/common/http-client/factory";
 import type { IHttpClient } from "@/common/http-client/http-client.interface";
 import type { EntityId } from "@/common/types";
 
-const base_url_source = config.api_url_jsonplaceholder as string;
-
 export class PostService {
-  private httpClient: IHttpClient;
-
-  constructor() {
-    this.httpClient = getHttpClient(base_url_source);
-  }
+  constructor(private httpClient: IHttpClient) {}
 
   async getItems(): Promise<Post[]> {
     return this.httpClient.get<Post[]>(`/posts`);
@@ -30,6 +22,7 @@ export class PostService {
     }
     */
   }
+
   async getItem(id: EntityId): Promise<Post | null> {
     const item = await this.httpClient.get<Post>(`/posts/${id}`);
     return item;

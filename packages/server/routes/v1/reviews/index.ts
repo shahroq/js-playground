@@ -1,13 +1,13 @@
 import express from "express";
-import { reviewController as controller } from "./controller";
+import { reviewController as ctrl } from "@/common/container";
 import { validate } from "@/common/validation/factory";
 
 const router = express.Router();
 
-router.get("/", validate("reviews.getItems"), controller.index);
-router.get("/:id", validate("reviews.getItem"), controller.show);
-router.post("/", validate("reviews.createItem"), controller.store);
-router.put("/:id", validate("reviews.updateItem"), controller.update);
-router.delete("/:id", validate("reviews.deleteItem"), controller.destroy);
+router.get("/", validate("reviews.getItems"), ctrl.index.bind(ctrl));
+router.get("/:id", validate("reviews.getItem"), ctrl.show.bind(ctrl));
+router.post("/", validate("reviews.createItem"), ctrl.store.bind(ctrl));
+router.put("/:id", validate("reviews.updateItem"), ctrl.update.bind(ctrl));
+router.delete("/:id", validate("reviews.deleteItem"), ctrl.destroy.bind(ctrl));
 
 export default router;

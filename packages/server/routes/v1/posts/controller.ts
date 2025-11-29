@@ -4,30 +4,29 @@ import type { Post } from "./types";
 import { PostService } from "./service";
 import AppError from "@/common/app-error/app-error";
 
-const collection = "post";
+export class PostController {
+  private collection = "post";
 
-// get repository
-const service = new PostService();
+  constructor(private service: PostService) {}
 
-export const postController = {
   async index(
     _req: Request,
     res: Response,
     _next: NextFunction
   ): Promise<void> {
-    const items: Post[] = await service.getItems();
+    const items: Post[] = await this.service.getItems();
     res
       .status(200)
-      .json(appResponse.format(null, { [`${collection}s`]: items }));
-  },
+      .json(appResponse.format(null, { [`${this.collection}s`]: items }));
+  }
 
   async show(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
     if (!id) return next(AppError.badRequest());
 
-    const item = await service.getItem(+id);
+    const item = await this.service.getItem(+id);
     if (!item) return next(AppError.notFound());
 
-    res.status(200).json(appResponse.format(null, { [collection]: item }));
-  },
-};
+    res.status(200).json(appResponse.format(null, { [this.collection]: item }));
+  }
+}
