@@ -29,12 +29,12 @@ export abstract class BaseRepository<T> {
   }
 
   async find(rawQuery: IRawQuery): Promise<T[]> {
-    const normQuery = this.normalizeQuery(rawQuery);
+    const normQuery = Query.normalize(rawQuery, this.repoOptions);
     return this.dbAdapter.find<T>(this.collection, normQuery);
   }
 
   async findOne(rawQuery: IRawQuery): Promise<T | null> {
-    const normQuery = this.normalizeQuery(rawQuery);
+    const normQuery = Query.normalize(rawQuery, this.repoOptions);
     return this.dbAdapter.findOne<T>(this.collection, normQuery);
   }
 
@@ -56,16 +56,16 @@ export abstract class BaseRepository<T> {
   }
 
   async deleteMany(rawQuery: IRawQuery): Promise<number> {
-    const normQuery = this.normalizeQuery(rawQuery);
+    const normQuery = Query.normalize(rawQuery, this.repoOptions);
     return this.dbAdapter.deleteMany(this.collection, normQuery);
   }
 
   async count(rawQuery: IRawQuery): Promise<number> {
-    const normQuery = this.normalizeQuery(rawQuery);
+    const normQuery = Query.normalize(rawQuery, this.repoOptions);
     return this.dbAdapter.count<T>(this.collection, normQuery);
   }
 
   normalizeQuery(rawQuery: IRawQuery) {
-    return new Query(rawQuery, this.repoOptions).normalize();
+    return Query.normalize(rawQuery, this.repoOptions);
   }
 }

@@ -28,25 +28,24 @@ const reserved = new Set([
  * Not a stateless class.
  */
 export class Query {
-  constructor(
-    private readonly rawQuery: IRawQuery,
-    private readonly repoOptions: RepoOptions
-  ) {}
+  private constructor() {}
 
-  normalize(): INormQuery {
-    const nq = {
-      pagination: this.pagination(),
-      orderBy: this.orderBy(),
-      filter: this.filter(),
-      selection: this.selection(),
-      expansion: this.expansion(),
+  static normalize(rawQuery: IRawQuery, repoOptions: RepoOptions): INormQuery {
+    const raw = rawQuery;
+    const opts = repoOptions;
+
+    return {
+      pagination: this.pagination(raw, opts),
+      orderBy: this.orderBy(raw, opts),
+      filter: this.filter(raw, opts),
+      selection: this.selection(raw, opts),
+      expansion: this.expansion(raw, opts),
     };
-    return nq;
   }
 
-  private pagination(): Pagination {
-    let { page, per_page } = this.rawQuery;
-    const { defaultPerPage } = this.repoOptions;
+  private static pagination(raw: IRawQuery, opts: RepoOptions): Pagination {
+    let { page, per_page } = raw;
+    const { defaultPerPage } = opts;
     const { pagination_per_page } = config;
 
     page = Math.max(Number(page) || 1, 1);
@@ -56,9 +55,12 @@ export class Query {
     return { page, per_page, offset };
   }
 
-  private orderBy(): OrderBy | undefined {
-    let { sort, direction } = this.rawQuery;
-    const { defaultOrder, allowedSortFields } = this.repoOptions;
+  private static orderBy(
+    raw: IRawQuery,
+    opts: RepoOptions
+  ): OrderBy | undefined {
+    let { sort, direction } = raw;
+    const { defaultOrder, allowedSortFields } = opts;
 
     if (!sort) return defaultOrder;
 
@@ -72,9 +74,10 @@ export class Query {
     return sort !== undefined ? { sort, direction } : undefined;
   }
 
-  private filter(): Filter | undefined {
-    const rawQuery = this.rawQuery;
-    const { filterableFields } = this.repoOptions;
+  private static filter(raw: IRawQuery, opts: RepoOptions): Filter | undefined {
+    ``;
+    const rawQuery = raw;
+    const { filterableFields } = opts;
 
     const filter: Filter = {};
 
@@ -96,9 +99,12 @@ export class Query {
     return Object.keys(filter).length > 0 ? filter : undefined;
   }
 
-  private selection(): Selection | undefined {
-    const { fields } = this.rawQuery;
-    const { selectableFields } = this.repoOptions;
+  private static selection(
+    raw: IRawQuery,
+    opts: RepoOptions
+  ): Selection | undefined {
+    const { fields } = raw;
+    const { selectableFields } = opts;
 
     if (!fields) return { fields: selectableFields };
 
@@ -113,9 +119,12 @@ export class Query {
     return fieldsRefined.length > 0 ? { fields: fieldsRefined } : undefined;
   }
 
-  private expansion(): Expansion | undefined {
-    const { include } = this.rawQuery;
-    const { expandableCollections } = this.repoOptions;
+  private static expansion(
+    raw: IRawQuery,
+    opts: RepoOptions
+  ): Expansion | undefined {
+    const { include } = raw;
+    const { expandableCollections } = opts;
 
     if (!include) return undefined;
 
@@ -134,7 +143,7 @@ export class Query {
   /**
    * Correct types
    */
-  private coerce(v: any) {
+  private static coerce(v: any) {
     if (typeof v !== "string") return v;
 
     // boolean
@@ -152,7 +161,7 @@ export class Query {
    * "[reviews,users]" -> ["reviews", "users"]
    * reviews,users -> ["reviews", "users"]
    */
-  private parseAsArray(s: string): string[] {
+  private static parseAsArray(s: string): string[] {
     return s
       .trim()
       .replace(/^\[|\]$/g, "") // remove outer [ and ]

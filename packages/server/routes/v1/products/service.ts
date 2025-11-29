@@ -16,8 +16,9 @@ export const productService = {
       repository.count(rawQuery),
     ]);
 
+    // TODO: remove this dependency, build meta somewhere else maybe?
     const normQuery = repository.normalizeQuery(rawQuery);
-    const meta = new MetaData(normQuery, total).build();
+    const meta = MetaData.build(normQuery, total);
 
     // get expansions: reviews
     if (normQuery.expansion?.include?.includes("reviews")) {

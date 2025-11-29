@@ -1,15 +1,15 @@
 export interface IRawQuery {
+  // pagination
   page?: number | string;
   per_page?: number | string;
-
+  // sort
   sort?: string; // field name
   direction?: "asc" | "desc";
-
+  // selection
   fields?: string[];
-
+  // expansion
   include?: CollectionName[];
-
-  // other dynamic fields allowed
+  // filter: other dynamic fields allowed
   [key: string]: unknown;
 }
 

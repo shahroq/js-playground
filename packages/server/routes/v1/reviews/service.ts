@@ -17,7 +17,7 @@ export const reviewService = {
     ]);
 
     const normQuery = repository.normalizeQuery(rawQuery);
-    const meta = new MetaData(normQuery, total).build();
+    const meta = MetaData.build(normQuery, total);
 
     // get expansions: products
     if (normQuery.expansion?.include?.includes("products")) {
