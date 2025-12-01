@@ -6,15 +6,14 @@ import type {
 } from "@/generated/prisma/models";
 import { utils } from "@/common/container";
 import type { IDBAdapter } from "./db-adapter.interface";
+import type { EntityId, CollectionName } from "@/common/types";
 import type {
-  EntityId,
-  CollectionName,
   INormQuery,
   Pagination,
   OrderBy,
   Filter,
   Selection,
-} from "@/common/types";
+} from "@/common/query-object/types";
 
 const collectionModelMap: Record<
   CollectionName,

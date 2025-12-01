@@ -3,8 +3,8 @@ import cors from "cors";
 import type { Application, Request, Response } from "express";
 import v1Router from "@/routes/v1";
 import {
-  utils,
   config,
+  utils,
   appEnvelope,
   globalErrorHandler,
   undefinedRoutesHandler,

@@ -1,7 +1,7 @@
 import express, { Router } from "express";
 import products from "./products";
 import reviews from "./reviews";
-import users from "./users";
+// import users from "./users";
 import posts from "./posts";
 
 const v1Router: Router = express.Router();

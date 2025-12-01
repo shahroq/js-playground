@@ -3,7 +3,7 @@ import { JSONFile } from "lowdb/node";
 import fs from "fs-extra";
 import { config, utils } from "@/common/container";
 import { defaultData, type DatabaseSchema } from "@/data/lowdb-json/schema";
-import type { IDBAdapter, QueryFilter } from "./db-adapter.interface";
+import type { IDBAdapter } from "./db-adapter.interface";
 
 export class LowDBDBAdapter implements IDBAdapter {
   private dbClient: Low<DatabaseSchema>;

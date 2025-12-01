@@ -1,4 +1,4 @@
-import type { AppError } from "../container";
+import type { AppError } from "@/common/container";
 import type { AppEnvelope } from "./app-envelope.interface";
 
 type JSendStatus = "success" | "fail" | "error";
