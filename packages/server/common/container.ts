@@ -1,5 +1,4 @@
 import config from "./config";
-
 import { globalErrorHandler } from "./app-error/global-handler.middleware";
 import AppError from "./app-error/app-error";
 import { getAppEnvelope } from "./app-envelope/factory";
@@ -44,6 +43,7 @@ const postController = new PostController(postService);
 
 // Export all dependencies as a single container object
 export {
+  config,
   globalErrorHandler,
   AppError,
   appEnvelope,

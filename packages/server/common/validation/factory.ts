@@ -1,8 +1,8 @@
-import config from "@/common/config.ts";
 import type { ValidatorMiddleware, ValidationStrategy } from "./types";
 import { joiValidatorMiddleware } from "./joi/joi-validator-middleware.ts";
 import { zodValidatorMiddleware } from "./zod/zod-validator-middleware.ts";
 import { expressValidatorMiddleware } from "./express-validator/express-validator-middleware.ts";
+import { config } from "@/common/container.ts";
 
 // Factory function to get validation middleware
 export function getValidatorMiddleware(): ValidatorMiddleware {

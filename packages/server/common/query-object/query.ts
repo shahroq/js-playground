@@ -1,4 +1,4 @@
-import config from "@/common/config";
+import { config } from "@/common/container.ts";
 import type { CollectionName } from "@/common/types";
 import type { RepoOptions } from "@/common/repository/base.repository";
 import type {

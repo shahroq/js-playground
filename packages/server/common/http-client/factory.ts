@@ -1,6 +1,6 @@
-import config from "@/common/config";
 import type { IHttpClient, HttpClientStrategy } from "./http-client.interface";
 import { AxiosHttpClient } from "./axios-http-client";
+import { config } from "@/common/container";
 
 let httpClientInstance: IHttpClient | null = null;
 

@@ -1,5 +1,5 @@
 import fs from "fs-extra";
-import config from "@/common/config";
+import { config } from "@/common/container";
 import { isoString, truncateString } from "@/common/utils/utils";
 import { defaultData, type DatabaseSchema } from "@/data/file-json/schema";
 import type { IDBAdapter } from "./db-adapter.interface";

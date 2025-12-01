@@ -1,5 +1,5 @@
 import { bootstrap } from "./common/app";
-import config from "./common/config";
+import { config } from "./common/container";
 
 const app = bootstrap();
 

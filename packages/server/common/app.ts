@@ -1,10 +1,9 @@
 import express from "express";
 import cors from "cors";
 import type { Application, Request, Response, NextFunction } from "express";
-import config from "@/common/config";
 import v1Router from "@/routes/v1";
 import { isoString } from "@/common/utils/utils";
-import { appEnvelope, globalErrorHandler } from "@/common/container";
+import { config, appEnvelope, globalErrorHandler } from "@/common/container";
 import { undefinedErrorHandler } from "@/middlewares";
 
 export const bootstrap = (): Application => {

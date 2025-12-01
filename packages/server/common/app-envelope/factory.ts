@@ -1,4 +1,4 @@
-import config from "@/common/config.ts";
+import { config } from "@/common/container.ts";
 import type { AppEnvelope } from "./app-envelope.interface.ts";
 import { JSend } from "./jsend.ts";
 import { JsonApi } from "./json-api.ts";
