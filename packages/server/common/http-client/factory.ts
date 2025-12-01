@@ -2,15 +2,12 @@ import type { IHttpClient, HttpClientStrategy } from "./http-client.interface";
 import { AxiosHttpClient } from "./axios-http-client";
 import { config } from "@/common/container";
 
-let httpClientInstance: IHttpClient | null = null;
+const httpClientInstances = new Map<string, IHttpClient>();
 
+// multipleton!
 export function getHttpClient(baseURL: string): IHttpClient {
-  // TODO: check this? is it multipleton?!
-  if (
-    httpClientInstance &&
-    httpClientInstance.getHttpClient().defaults.baseUrl === baseURL
-  )
-    return httpClientInstance;
+  const existing = httpClientInstances.get(baseURL);
+  if (existing) return existing;
 
   const strategy = config.http_client_strategy as HttpClientStrategy;
   console.log(`⚙️  Getting http client (${strategy})`);
@@ -26,12 +23,12 @@ export function getHttpClient(baseURL: string): IHttpClient {
   }
 
   // Store the instance for future calls
-  httpClientInstance = httpClient;
+  httpClientInstances.set(baseURL, httpClient);
 
-  return httpClientInstance;
+  return httpClient;
 }
 
 // useful for testing
-export function resetHttpClient(): void {
-  httpClientInstance = null;
+export function resetHttpClients(): void {
+  httpClientInstances.clear();
 }
