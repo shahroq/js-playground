@@ -28,6 +28,7 @@ const config = {
 
   http_client_strategy: process.env.HTTP_CLIENT_STRATEGY,
   api_url_jsonplaceholder: process.env.API_URL_JSONPLACEHOLDER,
+  api_url_restfulapi: process.env.API_URL_RESTFULAPI,
 };
 
 config.database_type = getDBType(config.database_url);

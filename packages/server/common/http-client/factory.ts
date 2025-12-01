@@ -5,7 +5,12 @@ import { config } from "@/common/container";
 let httpClientInstance: IHttpClient | null = null;
 
 export function getHttpClient(baseURL: string): IHttpClient {
-  if (httpClientInstance) return httpClientInstance;
+  // TODO: check this? is it multipleton?!
+  if (
+    httpClientInstance &&
+    httpClientInstance.getHttpClient().defaults.baseUrl === baseURL
+  )
+    return httpClientInstance;
 
   const strategy = config.http_client_strategy as HttpClientStrategy;
   console.log(`⚙️  Getting http client (${strategy})`);

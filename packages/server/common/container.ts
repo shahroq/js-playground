@@ -17,8 +17,11 @@ import { ReviewRepository } from "@reviews/repository";
 import { ReviewService } from "@reviews/service";
 import { ReviewController } from "@reviews/controller";
 
-import { PostController } from "@posts/controller";
 import { PostService } from "@posts/service";
+import { PostController } from "@posts/controller";
+
+import { ObjectService } from "@/routes/v1/objects/service";
+import { ObjectController } from "@/routes/v1/objects/controller";
 
 /**
  *  Composition Root & Barrel Export
@@ -28,7 +31,10 @@ import { PostService } from "@posts/service";
 const appEnvelope = getAppEnvelope();
 const validate = getValidatorMiddleware();
 const dbAdapter = getDBAdapter();
-const httpClient = getHttpClient(config.api_url_jsonplaceholder as string);
+const httpClientJsonPlaceHolder = getHttpClient(
+  config.api_url_jsonplaceholder as string
+);
+const httpClientRestfulapi = getHttpClient(config.api_url_restfulapi as string);
 
 // 1. Repositories
 const productRepository = new ProductRepository(dbAdapter);
@@ -37,12 +43,14 @@ const reviewRepository = new ReviewRepository(dbAdapter);
 // 2. Services:
 const productService = new ProductService(productRepository, reviewRepository);
 const reviewService = new ReviewService(reviewRepository, productRepository);
-const postService = new PostService(httpClient);
+const postService = new PostService(httpClientJsonPlaceHolder);
+const objectService = new ObjectService(httpClientRestfulapi);
 
 // 3. Controllers:
 const productController = new ProductController(productService);
 const reviewController = new ReviewController(reviewService);
 const postController = new PostController(postService);
+const objectController = new ObjectController(objectService);
 
 // Export all dependencies as a single container object
 export {
@@ -55,6 +63,8 @@ export {
   validate,
   MetaData,
   dbAdapter,
+  httpClientJsonPlaceHolder,
+  httpClientRestfulapi,
   productRepository,
   productService,
   productController,
@@ -63,4 +73,6 @@ export {
   reviewController,
   postService,
   postController,
+  objectService,
+  objectController,
 };

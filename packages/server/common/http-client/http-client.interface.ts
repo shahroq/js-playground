@@ -8,7 +8,7 @@ export interface RequestConfig {
 }
 
 export interface HttpClientConfig {
-  baseURL?: string;
+  baseURL: string;
   timeout?: number;
   headers?: Record<string, string>;
 }

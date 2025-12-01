@@ -7,6 +7,7 @@ export function globalErrorHandler(
   res: Response,
   next: NextFunction
 ): void {
+  // console.log(e);
   // the error is best to pass to default error handler
   if (res.headersSent || config.debug) return next(e);
 

@@ -8,7 +8,7 @@ import type {
 export class AxiosHttpClient implements IHttpClient {
   private httpClient: AxiosInstance;
 
-  constructor(baseConfig: HttpClientConfig = {}) {
+  constructor(baseConfig: HttpClientConfig) {
     this.httpClient = axios.create(baseConfig);
   }
 
