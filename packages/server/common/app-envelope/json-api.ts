@@ -1,5 +1,5 @@
+import type { AppError } from "../container";
 import type { AppEnvelope } from "./app-envelope.interface";
-import type AppError from "@/common/app-error/app-error";
 
 type JSonsApiFormat = {};
 

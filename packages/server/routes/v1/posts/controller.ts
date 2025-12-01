@@ -1,8 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
-import { appEnvelope } from "@/common/container";
+import { appEnvelope, AppError } from "@/common/container";
 import type { Post } from "./types";
 import { PostService } from "./service";
-import AppError from "@/common/app-error/app-error";
 
 export class PostController {
   private collection = "post";

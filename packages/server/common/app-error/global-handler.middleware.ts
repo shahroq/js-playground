@@ -1,7 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 import config from "@/common/config";
-import AppError from "@/common/app-error/app-error";
-import { appEnvelope as appEnvelope } from "@/common/container";
+import { appEnvelope, AppError } from "@/common/container";
 
 export function globalErrorHandler(
   e: Error | AppError,

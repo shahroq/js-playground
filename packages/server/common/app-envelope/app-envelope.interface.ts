@@ -1,4 +1,4 @@
-import type AppError from "@/common/app-error/app-error";
+import type { AppError } from "../container";
 
 export type AppEnvelopeStrategy = "jsend" | "json-api";
 

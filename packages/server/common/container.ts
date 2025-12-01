@@ -1,5 +1,7 @@
 import config from "./config";
 
+import { globalErrorHandler } from "./app-error/global-handler.middleware";
+import AppError from "./app-error/app-error";
 import { getAppEnvelope } from "./app-envelope/factory";
 import { getValidatorMiddleware } from "./validation/factory";
 import { getDBAdapter } from "./db-adapter/factory";
@@ -17,7 +19,7 @@ import { PostController } from "@posts/controller";
 import { PostService } from "@posts/service";
 
 /**
- *  Composition Root
+ *  Composition Root & Barrel Export
  */
 
 // 0. Common Services
@@ -42,6 +44,8 @@ const postController = new PostController(postService);
 
 // Export all dependencies as a single container object
 export {
+  globalErrorHandler,
+  AppError,
   appEnvelope,
   validate,
   dbAdapter,

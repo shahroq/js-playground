@@ -1,6 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import AppError from "@/common/app-error/app-error";
-import { appEnvelope } from "@/common/container";
+import { appEnvelope, AppError } from "@/common/container";
 import type { ProductService } from "./service";
 
 export class ProductController {

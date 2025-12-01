@@ -1,4 +1,3 @@
-import { undefinedErrorHandler } from "./undefined-routes-handler";
-import { globalErrorHandler } from "./global-error-handler";
+import { undefinedErrorHandler } from "./undefined-routes-handler.middleware";
 
-export { undefinedErrorHandler, globalErrorHandler };
+export { undefinedErrorHandler };
