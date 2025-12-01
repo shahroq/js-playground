@@ -1,4 +1,4 @@
-import type { AppResponse } from "./app-response.interface";
+import type { AppEnvelope } from "./app-envelope.interface";
 import type AppError from "@/common/app-error/app-error";
 
 type JSendStatus = "success" | "fail" | "error";
@@ -10,8 +10,8 @@ type JSendFormat = {
   code?: number;
 };
 
-export class JSend implements AppResponse {
-  format(error: AppError | null, data: any = null) {
+export class JSend implements AppEnvelope {
+  create(error: AppError | null, data: any = null) {
     const status = this.getStatus(error);
 
     switch (status) {

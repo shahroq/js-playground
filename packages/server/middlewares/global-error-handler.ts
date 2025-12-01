@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
 import config from "@/common/config";
 import AppError from "@/common/app-error/app-error";
-import { appResponse as appResponse } from "@/common/container";
+import { appEnvelope as appEnvelope } from "@/common/container";
 
 export function globalErrorHandler(
   e: Error | AppError,
@@ -28,7 +28,7 @@ export function globalErrorHandler(
     );
   */
   const message = `Glbl Err: ${getErrorMessage(e)}`;
-  res.status(statusCode).json(appResponse.format(e as AppError, { message }));
+  res.status(statusCode).json(appEnvelope.create(e as AppError, { message }));
 }
 
 function getErrorMessage(e: unknown): string {

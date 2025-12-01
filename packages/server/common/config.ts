@@ -15,7 +15,7 @@ const config = {
 
   pagination_per_page: process.env.PAGINATION_PER_PAGE || 10,
 
-  app_response_strategy: process.env.APP_RESPONSE_STRATEGY,
+  app_envelope_strategy: process.env.APP_ENVELOPE_STRATEGY,
 
   validation_strategy: process.env.VALIDATION_STRATEGY,
 

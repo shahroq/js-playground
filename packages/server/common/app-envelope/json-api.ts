@@ -1,10 +1,10 @@
-import type { AppResponse } from "./app-response.interface";
+import type { AppEnvelope } from "./app-envelope.interface";
 import type AppError from "@/common/app-error/app-error";
 
 type JSonsApiFormat = {};
 
-export class JsonApi implements AppResponse {
-  format(error: AppError | null, data: any = null) {
+export class JsonApi implements AppEnvelope {
+  create(error: AppError | null, data: any = null) {
     if (!error) return { data };
 
     // handle error responses
