@@ -1,5 +1,6 @@
 import config from "./config";
-import { globalErrorHandler } from "./app-error/global-handler.middleware";
+import { globalErrorHandler } from "./app-error/global-error-handler.middleware";
+import { undefinedRoutesHandler } from "./undefined-routes/undefined-routes-handler.middleware";
 import AppError from "./app-error/app-error";
 import { getAppEnvelope } from "./app-envelope/factory";
 import { getValidatorMiddleware } from "./validation/factory";
@@ -44,6 +45,7 @@ const postController = new PostController(postService);
 // Export all dependencies as a single container object
 export {
   config,
+  undefinedRoutesHandler,
   globalErrorHandler,
   AppError,
   appEnvelope,

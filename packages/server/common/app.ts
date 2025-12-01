@@ -3,8 +3,12 @@ import cors from "cors";
 import type { Application, Request, Response, NextFunction } from "express";
 import v1Router from "@/routes/v1";
 import { isoString } from "@/common/utils/utils";
-import { config, appEnvelope, globalErrorHandler } from "@/common/container";
-import { undefinedErrorHandler } from "@/middlewares";
+import {
+  config,
+  appEnvelope,
+  globalErrorHandler,
+  undefinedRoutesHandler,
+} from "@/common/container";
 
 export const bootstrap = (): Application => {
   const app: Application = express();
@@ -25,7 +29,7 @@ export const bootstrap = (): Application => {
 
   app.use("/api/v1", v1Router);
 
-  app.use(undefinedErrorHandler);
+  app.use(undefinedRoutesHandler);
   app.use(globalErrorHandler);
 
   return app;

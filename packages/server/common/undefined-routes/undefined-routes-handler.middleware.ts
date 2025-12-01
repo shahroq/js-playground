@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
 import { AppError } from "@/common/container";
 
-export function undefinedErrorHandler(
+export function undefinedRoutesHandler(
   req: Request,
   _res: Response,
   next: NextFunction
