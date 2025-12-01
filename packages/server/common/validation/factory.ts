@@ -5,7 +5,7 @@ import { zodValidatorMiddleware } from "./zod/zod-validator-middleware.ts";
 import { expressValidatorMiddleware } from "./express-validator/express-validator-middleware.ts";
 
 // Factory function to get validation middleware
-function getValidatorMiddleware(): ValidatorMiddleware {
+export function getValidatorMiddleware(): ValidatorMiddleware {
   const strategy = config.validation_strategy as ValidationStrategy;
   console.log(`⚙️  Getting middleware for validation strategy (${strategy})`);
 

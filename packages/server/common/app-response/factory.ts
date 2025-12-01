@@ -5,7 +5,7 @@ import { JsonApi } from "./json-api.ts";
 
 let appResponseInstance: AppResponse | null = null;
 
-function getAppResponse(): AppResponse {
+export function getAppResponse(): AppResponse {
   if (!appResponseInstance) {
     const format = config.app_response_strategy || "jsend";
     console.log(`⚙️  Getting app response formatter for strategy (${format})`);
