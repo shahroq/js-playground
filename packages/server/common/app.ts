@@ -1,9 +1,9 @@
 import express from "express";
 import cors from "cors";
-import type { Application, Request, Response, NextFunction } from "express";
+import type { Application, Request, Response } from "express";
 import v1Router from "@/routes/v1";
-import { isoString } from "@/common/utils/utils";
 import {
+  utils,
   config,
   appEnvelope,
   globalErrorHandler,
@@ -19,7 +19,7 @@ export const bootstrap = (): Application => {
   // home
   app.get("/", (_req: Request, res: Response) => {
     console.log(`I am at home`);
-    res.send(`API Sandbox Home: Hello World [${isoString()}]`);
+    res.send(`API Sandbox Home: Hello World [${utils.isoString()}]`);
   });
 
   // health

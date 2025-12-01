@@ -1,5 +1,5 @@
 import { join } from "path";
-import { isFileURL, getDBIdentifier } from "./utils/utils";
+import { utils } from "./container";
 
 const root = process.cwd();
 
@@ -39,7 +39,7 @@ export function getDBType(database_url: string | null) {
   if (!database_url) return null;
 
   // 1. Handle file-based URLs
-  if (isFileURL(database_url)) {
+  if (utils.isFileURL(database_url)) {
     const lower = database_url.toLowerCase();
 
     if (lower.endsWith(".json")) return "json";
@@ -60,16 +60,16 @@ export function getDBType(database_url: string | null) {
 
 function getDBName(database_url: string | null) {
   if (!database_url) return null;
-  return getDBIdentifier(database_url, {});
+  return utils.getDBIdentifier(database_url, {});
 }
 
 function getDBPath(database_url: string | null) {
   if (!database_url) return null;
-  return isFileURL(database_url)
+  return utils.isFileURL(database_url)
     ? join(
         config.data_path,
         `${config.database_adapter_strategy}-${config.database_type}`,
-        getDBIdentifier(database_url, { withExtension: true })
+        utils.getDBIdentifier(database_url, { withExtension: true })
       )
     : null;
 }

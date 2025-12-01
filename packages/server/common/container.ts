@@ -1,9 +1,11 @@
 import config from "./config";
+import * as utils from "./utils/utils";
 import { globalErrorHandler } from "./app-error/global-error-handler.middleware";
 import { undefinedRoutesHandler } from "./undefined-routes/undefined-routes-handler.middleware";
 import AppError from "./app-error/app-error";
 import { getAppEnvelope } from "./app-envelope/factory";
 import { getValidatorMiddleware } from "./validation/factory";
+import { MetaData } from "@/common/meta-data/meta-data";
 import { getDBAdapter } from "./db-adapter/factory";
 import { getHttpClient } from "./http-client/factory";
 
@@ -45,11 +47,13 @@ const postController = new PostController(postService);
 // Export all dependencies as a single container object
 export {
   config,
+  utils,
   undefinedRoutesHandler,
   globalErrorHandler,
   AppError,
   appEnvelope,
   validate,
+  MetaData,
   dbAdapter,
   productRepository,
   productService,

@@ -1,8 +1,8 @@
+import { MetaData } from "@/common/container";
 import type { EntityId } from "@/common/types";
 import { ProductRepository } from "./repository";
 import { ReviewRepository } from "@reviews/repository";
 import type { Product, IProductResult } from "./types";
-import { MetaData } from "@/common/utils/meta-data";
 import type { IRawQuery } from "@/common/query-object/types";
 
 export class ProductService {

@@ -1,7 +1,7 @@
+import { MetaData } from "@/common/container";
 import type { EntityId } from "@/common/types";
 import { ReviewRepository } from "./repository";
 import type { IReviewResult, Review } from "./types";
-import { MetaData } from "@/common/utils/meta-data";
 import { ProductRepository } from "@products/repository";
 import type { IRawQuery } from "@/common/query-object/types";
 

@@ -1,6 +1,5 @@
 import fs from "fs-extra";
-import { config } from "@/common/container";
-import { isoString, truncateString } from "@/common/utils/utils";
+import { config, utils } from "@/common/container";
 import { defaultData, type DatabaseSchema } from "@/data/file-json/schema";
 import type { IDBAdapter } from "./db-adapter.interface";
 
@@ -15,7 +14,7 @@ export class FileDBAdapter implements IDBAdapter {
     await fs.ensureFile(this.filePath);
     await this.readFile();
     console.log(
-      `🌕 Connected to FS JSON: ${truncateString(this.filePath, {
+      `🌕 Connected to FS JSON: ${utils.truncateString(this.filePath, {
         position: "start",
       })}`
     );
@@ -93,8 +92,8 @@ export class FileDBAdapter implements IDBAdapter {
     const newItem = {
       ...data,
       id: data.id ?? this.getNextId(collection),
-      created_at: isoString(),
-      updated_at: isoString(),
+      created_at: utils.isoString(),
+      updated_at: utils.isoString(),
       created_by: 1,
       updated_by: 1,
     };
@@ -118,7 +117,7 @@ export class FileDBAdapter implements IDBAdapter {
     items[index] = {
       ...items[index],
       ...data,
-      updated_at: isoString(),
+      updated_at: utils.isoString(),
       updated_by: 1,
     };
     await this.writeFile();
@@ -205,7 +204,7 @@ export class FileDBAdapter implements IDBAdapter {
       ...this.data,
       meta: {
         ...this.data.meta,
-        updated_at: isoString(),
+        updated_at: utils.isoString(),
       },
     };
   }

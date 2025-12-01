@@ -1,5 +1,4 @@
-import { config } from "@/common/container.ts";
-import { isoString } from "@/common/utils/utils";
+import { config, utils } from "@/common/container.ts";
 
 export interface DatabaseSchema {
   [collection: string]: any[] | string | Record<string, any>;
@@ -10,8 +9,8 @@ export const defaultData = {
     version: config.version,
     orm: "lowdb",
     database: "json",
-    created_at: isoString(),
-    updated_at: isoString(),
+    created_at: utils.isoString(),
+    updated_at: utils.isoString(),
   },
   users: [],
   products: [],

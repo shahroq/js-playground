@@ -1,8 +1,7 @@
 import { Low } from "lowdb";
 import { JSONFile } from "lowdb/node";
 import fs from "fs-extra";
-import { config } from "@/common/container";
-import { isoString, truncateString } from "@/common/utils/utils";
+import { config, utils } from "@/common/container";
 import { defaultData, type DatabaseSchema } from "@/data/lowdb-json/schema";
 import type { IDBAdapter, QueryFilter } from "./db-adapter.interface";
 
@@ -22,7 +21,7 @@ export class LowDBDBAdapter implements IDBAdapter {
     const adapter = new JSONFile<DatabaseSchema>(this.filePath);
     this.dbClient = new Low(adapter, this.defaultData);
     console.log(
-      `🌕 Connected to LowDB: ${truncateString(this.filePath, {
+      `🌕 Connected to LowDB: ${utils.truncateString(this.filePath, {
         position: "start",
       })}`
     );
@@ -108,8 +107,8 @@ export class LowDBDBAdapter implements IDBAdapter {
     const newItem = {
       ...data,
       id: data.id || this.dbClient.data[collection].length + 1,
-      created_at: isoString(),
-      updated_at: isoString(),
+      created_at: utils.isoString(),
+      updated_at: utils.isoString(),
       created_by: 1,
       updated_by: 1,
     };
@@ -134,7 +133,7 @@ export class LowDBDBAdapter implements IDBAdapter {
     items[index] = {
       ...items[index],
       ...data,
-      updated_at: isoString(),
+      updated_at: utils.isoString(),
       updated_by: 1,
     };
     await this.dbClient.write();
