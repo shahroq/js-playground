@@ -20,5 +20,3 @@ export function getValidatorMiddleware(): ValidatorMiddleware {
       throw new Error(`Unsupported validation strategy: ${strategy}`);
   }
 }
-
-export const validate = getValidatorMiddleware();

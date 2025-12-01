@@ -1,6 +1,5 @@
 import express from "express";
-import { productController as ctrl } from "@/common/container";
-import { validate } from "@/common/validation/factory";
+import { productController as ctrl, validate } from "@/common/container";
 
 const router = express.Router();
 

@@ -4,7 +4,7 @@ import type { Application, Request, Response, NextFunction } from "express";
 import config from "@/common/config";
 import v1Router from "@/routes/v1";
 import { isoString } from "@/common/utils/utils";
-import { appResponse } from "@/common/app-response/factory";
+import { appResponse as appResponse } from "@/common/container";
 import { undefinedErrorHandler, globalErrorHandler } from "@/middlewares";
 
 export const bootstrap = (): Application => {

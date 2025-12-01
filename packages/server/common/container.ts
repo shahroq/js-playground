@@ -1,5 +1,7 @@
 import config from "./config";
 
+import { getAppResponse } from "./app-response/factory";
+import { getValidatorMiddleware } from "./validation/factory";
 import { getDBAdapter } from "./db-adapter/factory";
 import { getHttpClient } from "./http-client/factory";
 
@@ -19,6 +21,8 @@ import { PostService } from "@posts/service";
  */
 
 // 0. Common Services
+const appResponse = getAppResponse();
+const validate = getValidatorMiddleware();
 const dbAdapter = getDBAdapter();
 const httpClient = getHttpClient(config.api_url_jsonplaceholder as string);
 
@@ -38,6 +42,8 @@ const postController = new PostController(postService);
 
 // Export all dependencies as a single container object
 export {
+  appResponse,
+  validate,
   dbAdapter,
   productRepository,
   productService,

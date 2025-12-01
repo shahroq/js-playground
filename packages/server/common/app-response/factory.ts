@@ -28,6 +28,3 @@ export function getAppResponse(): AppResponse {
 export function resetAppResponse(): void {
   appResponseInstance = null;
 }
-
-// Export for convenience
-export const appResponse = getAppResponse();

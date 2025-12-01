@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 import AppError from "@/common/app-error/app-error";
-import { appResponse } from "@/common/app-response/factory";
+import { appResponse } from "@/common/container";
 import type { ReviewService } from "./service";
 
 export class ReviewController {

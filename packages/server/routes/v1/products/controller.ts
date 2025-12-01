@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import AppError from "@/common/app-error/app-error";
-import { appResponse } from "@/common/app-response/factory";
+import { appResponse } from "@/common/container";
 import type { ProductService } from "./service";
 
 export class ProductController {
