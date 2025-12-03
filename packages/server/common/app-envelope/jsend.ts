@@ -1,5 +1,5 @@
-import type { AppError } from "@/common/container";
 import type { AppEnvelope } from "./app-envelope.interface";
+import type { E } from "../app-error/app-error";
 
 type JSendStatus = "success" | "fail" | "error";
 
@@ -11,7 +11,7 @@ type JSendFormat = {
 };
 
 export class JSend implements AppEnvelope {
-  create(error: AppError | null, data: any = null) {
+  create(error: E, data: any = null) {
     const status = this.getStatus(error);
 
     switch (status) {
@@ -24,7 +24,7 @@ export class JSend implements AppEnvelope {
     }
   }
 
-  private getStatus(error: AppError | null): JSendStatus {
+  private getStatus(error: E): JSendStatus {
     if (!error) return "success";
     if (`${error.meta.statusCode}`.startsWith("4")) return "fail";
     return "error";
@@ -37,7 +37,7 @@ export class JSend implements AppEnvelope {
     };
   }
 
-  private formatFail(error: AppError, data: any): JSendFormat {
+  private formatFail(error: E, data: any): JSendFormat {
     return {
       status: "fail",
       message: data?.message,
@@ -47,7 +47,7 @@ export class JSend implements AppEnvelope {
     };
   }
 
-  private formatError(error: AppError, data: any): JSendFormat {
+  private formatError(error: E, data: any): JSendFormat {
     return {
       status: "error",
       message: error?.message,

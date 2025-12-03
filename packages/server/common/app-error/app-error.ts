@@ -1,3 +1,12 @@
+export type E = AppError | Error | null;
+
+export type ErrorCode =
+  | "ERR_NF"
+  | "ERR_VALID"
+  | "ERR_AUTH"
+  | "ERR_INT"
+  | "ERR_G";
+
 export type ErrorDetail = {
   path: string;
   message: string;
@@ -10,7 +19,6 @@ export type ErrorMeta = {
   details?: ErrorDetail[]; // keep details of validation errors
 
   __code?: string; // app-defined codes
-  __status?: responseStatus; // no need, move it to jsend respond class
 };
 
 export default class AppError extends Error {

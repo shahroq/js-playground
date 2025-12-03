@@ -10,7 +10,7 @@ export function getHttpClient(baseURL: string): IHttpClient {
   if (existing) return existing;
 
   const strategy = config.http_client_strategy as HttpClientStrategy;
-  console.log(`⚙️  Getting http client (${strategy})`);
+  console.log(`⚙️  Getting http client (${strategy}) for ${baseURL}`);
 
   let httpClient;
 
