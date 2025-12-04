@@ -1,37 +1,16 @@
-export type E = AppError | Error | null;
-
-export type ErrorCode =
-  | "ERR_NF"
-  | "ERR_VALID"
-  | "ERR_AUTH"
-  | "ERR_INT"
-  | "ERR_G";
-
-export type ErrorDetail = {
-  path: string;
-  message: string;
-  type?: string;
-};
-
-export type ErrorMeta = {
-  statusCode?: number;
-  isOperational?: boolean; // The isOperational flag helps distinguish between expected errors (like validation failures) and unexpected programming errors (like null pointer exceptions).
-  details?: ErrorDetail[]; // keep details of validation errors
-
-  __code?: string; // app-defined codes
-};
+import type { ErrorMetaData, ErrorDetail, ErrorCode } from "./types";
 
 export default class AppError extends Error {
-  public meta: ErrorMeta & {
+  public meta: ErrorMetaData & {
     isOperational: boolean;
   };
 
-  constructor(message: string, meta: ErrorMeta = {}) {
+  constructor(message: string, meta: ErrorMetaData = {}) {
     super(message);
 
     this.meta = {
       ...meta,
-      // set required fields, if not provided
+      // set required/default data, if not provided
       statusCode: meta.statusCode ?? 500,
       isOperational: meta.isOperational ?? true,
     };
@@ -43,99 +22,129 @@ export default class AppError extends Error {
     Object.setPrototypeOf(this, AppError.prototype);
   }
 
+  static getMessage(e: unknown): string {
+    if (e instanceof Error) return e.message;
+    if (e && typeof e === "object" && "message" in e) return String(e.message);
+    if (typeof e === "string") return e;
+    return "An error occured";
+  }
+
+  static getStatusCode(e: unknown): number {
+    if (e instanceof AppError && e.meta.statusCode) return e.meta.statusCode;
+    return 500;
+  }
+
+  static getDetails(e: unknown): ErrorDetail[] {
+    if (e instanceof AppError && e.meta.details) return e.meta.details;
+    return [];
+  }
+
+  static getCode(e: unknown): ErrorCode {
+    if (e instanceof AppError && e.meta.code) return e.meta.code;
+    return "ERR_UNKNOWN";
+  }
+
   // Static factory methods for common errors
   static badRequest(
     message: string = "Bad Request",
-    meta?: Omit<ErrorMeta, "statusCode">
+    meta?: Omit<ErrorMetaData, "statusCode">
   ): AppError {
     const statusCode = 400;
     return new AppError(message, {
       statusCode,
       isOperational: meta?.isOperational ?? true,
+      code: "ERR_VALID",
       details: meta?.details,
     });
   }
 
   static unauthorized(
     message: string = "Unauthorized",
-    meta?: Omit<ErrorMeta, "statusCode">
+    meta?: Omit<ErrorMetaData, "statusCode">
   ): AppError {
     const statusCode = 401;
     return new AppError(message, {
       statusCode,
       isOperational: meta?.isOperational ?? true,
+      code: "ERR_AUTH",
       details: meta?.details,
     });
   }
 
   static forbidden(
     message: string = "Forbidden",
-    meta?: Omit<ErrorMeta, "statusCode">
+    meta?: Omit<ErrorMetaData, "statusCode">
   ): AppError {
     const statusCode = 403;
     return new AppError(message, {
       statusCode,
       isOperational: meta?.isOperational ?? true,
+      code: "ERR_AUTH",
       details: meta?.details,
     });
   }
 
   static notFound(
     message: string = "Resource not found",
-    meta?: Omit<ErrorMeta, "statusCode">
+    meta?: Omit<ErrorMetaData, "statusCode">
   ): AppError {
     const statusCode = 404;
     return new AppError(message, {
       statusCode,
       isOperational: meta?.isOperational ?? true,
+      code: "ERR_NF",
       details: meta?.details,
     });
   }
 
   static conflict(
     message: string = "Conflict",
-    meta?: Omit<ErrorMeta, "statusCode">
+    meta?: Omit<ErrorMetaData, "statusCode">
   ): AppError {
     const statusCode = 409;
     return new AppError(message, {
       statusCode,
       isOperational: meta?.isOperational ?? true,
+      code: "ERR_G",
       details: meta?.details,
     });
   }
 
   static unprocessableEntity(
     message: string = "Unprocessable Entity",
-    meta?: Omit<ErrorMeta, "statusCode">
+    meta?: Omit<ErrorMetaData, "statusCode">
   ): AppError {
     const statusCode = 422;
     return new AppError(message, {
       statusCode,
       isOperational: meta?.isOperational ?? true,
+      code: "ERR_G",
       details: meta?.details,
     });
   }
 
   static tooManyRequests(
     message: string = "Too Many Requests",
-    meta?: Omit<ErrorMeta, "statusCode">
+    meta?: Omit<ErrorMetaData, "statusCode">
   ): AppError {
     const statusCode = 429;
     return new AppError(message, {
       statusCode,
       isOperational: meta?.isOperational ?? true,
+      code: "ERR_G",
       details: meta?.details,
     });
   }
 
   static internal(
     message: string = "Internal Server Error",
-    meta?: Omit<ErrorMeta, "statusCode">
+    meta?: Omit<ErrorMetaData, "statusCode">
   ): AppError {
     const statusCode = 500;
     return new AppError(message, {
       statusCode,
       isOperational: meta?.isOperational ?? false,
+      code: "ERR_INT",
       details: meta?.details,
     });
   }
@@ -143,6 +152,7 @@ export default class AppError extends Error {
 
 // sample usage
 /*
+throw AppError.badRequest();
 throw AppError.badRequest('Invalid input');
 throw AppError.notFound('User not found');
 throw AppError.unauthorized('Invalid token');

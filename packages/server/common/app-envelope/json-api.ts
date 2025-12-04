@@ -1,4 +1,4 @@
-import type { E } from "../app-error/app-error";
+import type { E } from "../app-error/types";
 import type { AppEnvelope } from "./app-envelope.interface";
 
 type JSonsApiFormat = {};

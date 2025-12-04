@@ -8,6 +8,7 @@ import {
   appEnvelope,
   globalErrorHandler,
   undefinedRoutesHandler,
+  AppError,
 } from "@/common/container";
 
 export const bootstrap = (): Application => {
@@ -28,11 +29,17 @@ export const bootstrap = (): Application => {
   });
 
   // sandbox
-  app.get("/sandbox", (_req: Request, res: Response, _next: NextFunction) => {
+  app.get("/sandbox", (_req: Request, res: Response, next: NextFunction) => {
     let e = null;
     let data = {};
 
-    res.json(appEnvelope.create(e, { data }));
+    e = new Error("error sent from sandbox");
+    // e = new AppError("custom error sent from sandbox", 433, "ERR_G");
+    // e = new AppError("custom error sent from sandbox", { statusCode: 455 });
+    // throw e;
+    next(e);
+    // res.json(appEnvelope.create(e, { data }));
+    // res.json({ data });
   });
 
   app.use("/api/v1", v1Router);

@@ -1,5 +1,6 @@
+import { AppError } from "@/common/container";
 import type { AppEnvelope } from "./app-envelope.interface";
-import type { E } from "../app-error/app-error";
+import type { E } from "../app-error/types";
 
 type JSendStatus = "success" | "fail" | "error";
 
@@ -18,15 +19,15 @@ export class JSend implements AppEnvelope {
       case "success":
         return this.formatSuccess(data);
       case "fail":
-        return this.formatFail(error!, data);
+        return this.formatFail(error, data);
       case "error":
-        return this.formatError(error!, data);
+        return this.formatError(error, data);
     }
   }
 
   private getStatus(error: E): JSendStatus {
     if (!error) return "success";
-    if (`${error.meta.statusCode}`.startsWith("4")) return "fail";
+    if (`${AppError.getStatusCode(error)}`.startsWith("4")) return "fail";
     return "error";
   }
 
@@ -41,8 +42,8 @@ export class JSend implements AppEnvelope {
     return {
       status: "fail",
       message: data?.message,
-      ...(error.meta?.details && {
-        data: { errors: error.meta.details },
+      ...(AppError.getDetails(error) && {
+        data: { errors: AppError.getDetails(error) },
       }),
     };
   }
@@ -51,9 +52,8 @@ export class JSend implements AppEnvelope {
     return {
       status: "error",
       message: error?.message,
-      code: error.meta.statusCode,
-      ...(data || error.meta.details
-        ? { data: data ?? error.meta.details }
+      ...(data || AppError.getDetails(error)
+        ? { data: data ?? AppError.getDetails(error) }
         : {}),
     };
   }

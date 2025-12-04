@@ -1,4 +1,4 @@
-import type { E } from "../app-error/app-error";
+import type { E } from "../app-error/types";
 
 export type AppEnvelopeStrategy = "jsend" | "json-api";
 
