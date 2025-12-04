@@ -2,6 +2,7 @@ import config from "./config";
 import * as utils from "./utils/utils";
 import { globalErrorHandler } from "./app-error/global-error-handler.middleware";
 import { undefinedRoutesHandler } from "./undefined-routes/undefined-routes-handler.middleware";
+import { normalizeQueryHandler } from "@/common/query-object/normalize-query.middleware";
 import AppError from "./app-error/app-error";
 import { getAppEnvelope } from "./app-envelope/factory";
 import { getValidatorMiddleware } from "./validation/factory";
@@ -58,6 +59,7 @@ export {
   utils,
   undefinedRoutesHandler,
   globalErrorHandler,
+  normalizeQueryHandler,
   AppError,
   appEnvelope,
   validate,

@@ -42,3 +42,17 @@ export interface INormQuery {
   selection?: Selection;
   expansion?: Expansion;
 }
+
+declare global {
+  namespace Express {
+    interface Request {
+      normQuery?: {
+        pagination: Pagination;
+        orderBy?: OrderBy;
+        filters: Filter;
+        selection: Selection;
+        expansion: Expansion;
+      };
+    }
+  }
+}
