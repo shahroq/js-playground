@@ -1,15 +1,11 @@
+// common
 import config from "./config";
-import * as utils from "./utils/utils";
-import { globalErrorHandler } from "./app-error/global-error-handler.middleware";
-import { undefinedRoutesHandler } from "./undefined-routes/undefined-routes-handler.middleware";
-import { normalizeQueryHandler } from "@/common/query-object/normalize-query.middleware";
-import AppError from "./app-error/app-error";
 import { getAppEnvelope } from "./app-envelope/factory";
 import { getValidatorMiddleware } from "./validation/factory";
-import { MetaData } from "@/common/meta-data/meta-data";
 import { getDBAdapter } from "./db-adapter/factory";
 import { getHttpClient } from "./http-client/factory";
 
+// routes
 import { ProductRepository } from "@products/repository";
 import { ProductService } from "@products/service";
 import { ProductController } from "@products/controller";
@@ -24,57 +20,50 @@ import { PostController } from "@posts/controller";
 import { ObjectService } from "@/routes/v1/objects/service";
 import { ObjectController } from "@/routes/v1/objects/controller";
 
+// re-exports
+export * as utils from "./utils/utils";
+export { default as AppError } from "./app-error/app-error";
+export * from "@/common/meta-data/meta-data";
+export * from "./app-error/global-error-handler.middleware";
+export * from "./undefined-routes/undefined-routes-handler.middleware";
+export * from "@/common/query-object/normalize-query.middleware";
+
 /**
  *  Composition Root & Barrel Export
  */
 
 // 0. Common Services
-const appEnvelope = getAppEnvelope();
-const validate = getValidatorMiddleware();
-const dbAdapter = getDBAdapter();
-const httpClientJsonPlaceHolder = getHttpClient(
+export const appEnvelope = getAppEnvelope();
+export const validate = getValidatorMiddleware();
+export const dbAdapter = getDBAdapter();
+export const httpClientJsonPlaceHolder = getHttpClient(
   config.api_url_jsonplaceholder as string
 );
-const httpClientRestfulapi = getHttpClient(config.api_url_restfulapi as string);
+export const httpClientRestfulapi = getHttpClient(
+  config.api_url_restfulapi as string
+);
 
 // 1. Repositories
-const productRepository = new ProductRepository(dbAdapter);
-const reviewRepository = new ReviewRepository(dbAdapter);
+export const productRepository = new ProductRepository(dbAdapter);
+export const reviewRepository = new ReviewRepository(dbAdapter);
 
 // 2. Services:
-const productService = new ProductService(productRepository, reviewRepository);
-const reviewService = new ReviewService(reviewRepository, productRepository);
-const postService = new PostService(httpClientJsonPlaceHolder);
-const objectService = new ObjectService(httpClientRestfulapi);
+export const productService = new ProductService(
+  productRepository,
+  reviewRepository
+);
+export const reviewService = new ReviewService(
+  reviewRepository,
+  productRepository
+);
+export const postService = new PostService(httpClientJsonPlaceHolder);
+export const objectService = new ObjectService(httpClientRestfulapi);
 
 // 3. Controllers:
-const productController = new ProductController(productService);
-const reviewController = new ReviewController(reviewService);
-const postController = new PostController(postService);
-const objectController = new ObjectController(objectService);
+export const productController = new ProductController(productService);
+export const reviewController = new ReviewController(reviewService);
+export const postController = new PostController(postService);
+export const objectController = new ObjectController(objectService);
 
 // Export all dependencies as a single container object
-export {
-  config,
-  utils,
-  undefinedRoutesHandler,
-  globalErrorHandler,
-  normalizeQueryHandler,
-  AppError,
-  appEnvelope,
-  validate,
-  MetaData,
-  dbAdapter,
-  httpClientJsonPlaceHolder,
-  httpClientRestfulapi,
-  productRepository,
-  productService,
-  productController,
-  reviewRepository,
-  reviewService,
-  reviewController,
-  postService,
-  postController,
-  objectService,
-  objectController,
-};
+export { config };
