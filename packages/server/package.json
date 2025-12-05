@@ -6,7 +6,7 @@
   "scripts": {
     "//[RUN]": "",
     "start": "bun run index.ts",
-    "dev": "bun --watch run index.ts",
+    "start:dev": "bun --watch run index.ts",
     "dev-testfile": "bun --watch run ./routes/v1/reviews/entity.ts",
     "//[Test]": "Test:",
     "test": "bun test",
