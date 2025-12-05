@@ -7,8 +7,8 @@ import type { IRawQuery } from "@/common/query-object/types";
 
 export class ProductService {
   constructor(
-    private repository: ProductRepository,
-    private reviewRepository: ReviewRepository
+    private readonly repository: ProductRepository,
+    private readonly reviewRepository: ReviewRepository
   ) {}
 
   async getItems(rawQuery: IRawQuery): Promise<IProductResult> {

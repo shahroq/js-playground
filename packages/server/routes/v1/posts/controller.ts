@@ -6,7 +6,7 @@ import { PostService } from "./service";
 export class PostController {
   private collection = "post";
 
-  constructor(private service: PostService) {}
+  constructor(private readonly service: PostService) {}
 
   async index(
     _req: Request,

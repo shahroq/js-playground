@@ -3,6 +3,9 @@
 @productID = 1
 @reviewID = 1
 
+### Home
+GET {{baseUrl}} HTTP/1.1
+
 ### Health check
 GET {{baseUrl}}/health HTTP/1.1
 

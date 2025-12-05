@@ -5,7 +5,7 @@ import type { ProductService } from "./service";
 export class ProductController {
   private collection = "product";
 
-  constructor(private service: ProductService) {}
+  constructor(private readonly service: ProductService) {}
 
   async index(req: Request, res: Response) {
     const { items, meta } = await this.service.getItems(req.query);

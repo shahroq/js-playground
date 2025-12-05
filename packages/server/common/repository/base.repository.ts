@@ -15,9 +15,9 @@ export interface RepoOptions {
 
 export abstract class BaseRepository<T> {
   constructor(
-    protected collection: CollectionName,
-    protected repoOptions: RepoOptions,
-    protected dbAdapter: IDBAdapter
+    protected readonly collection: CollectionName,
+    protected readonly repoOptions: RepoOptions,
+    protected readonly dbAdapter: IDBAdapter
   ) {}
 
   async find(rawQuery: IRawQuery): Promise<T[]> {

@@ -3,7 +3,7 @@ import type { IHttpClient } from "@/common/http-client/http-client.interface";
 import type { EntityId } from "@/common/types";
 
 export class PostService {
-  constructor(private httpClient: IHttpClient) {}
+  constructor(private readonly httpClient: IHttpClient) {}
 
   async getItems(): Promise<Post[]> {
     return this.httpClient.get<Post[]>(`/posts`);

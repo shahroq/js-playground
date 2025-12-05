@@ -5,7 +5,7 @@ import type { ReviewService } from "./service";
 export class ReviewController {
   private collection = "review";
 
-  constructor(private service: ReviewService) {}
+  constructor(private readonly service: ReviewService) {}
 
   async index(req: Request, res: Response, next: NextFunction) {
     const { items, meta } = await this.service.getItems(req.query);
