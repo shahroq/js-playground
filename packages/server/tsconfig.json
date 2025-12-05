@@ -17,6 +17,7 @@
 
     // Best practices
     "strict": true,
+    "strictPropertyInitialization": false, // me: disable only this one/ for dto use
     "skipLibCheck": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
