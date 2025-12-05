@@ -8,7 +8,7 @@ export class ProductController {
   constructor(private readonly service: ProductService) {}
 
   async index(req: Request, res: Response) {
-    const { items, meta } = await this.service.getItems(req.query);
+    const { items, meta } = await this.service.findAll(req.query);
 
     res
       .status(200)
@@ -19,7 +19,7 @@ export class ProductController {
     const { id } = req.params;
     if (!id) return next(AppError.badRequest());
 
-    const { item } = await this.service.getItem(+id, req.query);
+    const { item } = await this.service.findOne(+id, req.query);
     if (!item) return next(AppError.notFound());
 
     res.status(200).json(appEnvelope.create(null, { [this.collection]: item }));
@@ -28,7 +28,7 @@ export class ProductController {
   async store(req: Request, res: Response, next: NextFunction) {
     const { body } = req;
 
-    const { item: newItem } = await this.service.createItem(body);
+    const { item: newItem } = await this.service.create(body);
 
     res
       .status(201)
@@ -53,7 +53,7 @@ export class ProductController {
     const { id } = req.params;
     if (!id) return next(AppError.badRequest());
 
-    const deleted = await this.service.deleteItem(+id);
+    const deleted = await this.service.delete(+id);
     if (!deleted) return next(AppError.notFound());
 
     res

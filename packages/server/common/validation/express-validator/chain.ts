@@ -4,7 +4,7 @@ import { body, param, query } from "express-validator";
  * Shared Validation Chains
  */
 const sharedChains = {
-  getItems: [
+  findAll: [
     query("page")
       .optional()
       .isInt({ min: 1 })
@@ -17,7 +17,7 @@ const sharedChains = {
     query("in_stock").optional().isBoolean(),
   ],
 
-  getItem: [param("id").isInt().withMessage("ID must be an integer")],
+  findOne: [param("id").isInt().withMessage("ID must be an integer")],
 };
 
 /**
@@ -35,7 +35,7 @@ const createProduct = [
 ];
 
 const updateProduct = [
-  ...sharedChains.getItem,
+  ...sharedChains.findOne,
   body("name").optional().isString(),
   body("description").optional().isString(),
   body("price")
@@ -58,7 +58,7 @@ const createReview = [
 ];
 
 const updateReview = [
-  ...sharedChains.getItem,
+  ...sharedChains.findOne,
   body("rating")
     .optional()
     .isInt({ min: 1, max: 5 })
@@ -74,12 +74,12 @@ export const chains = {
     ...sharedChains,
     createItem: createProduct,
     updateItem: updateProduct,
-    deleteItem: sharedChains.getItem,
+    deleteItem: sharedChains.findOne,
   },
   reviews: {
     ...sharedChains,
     createItem: createReview,
     updateItem: updateReview,
-    deleteItem: sharedChains.getItem,
+    deleteItem: sharedChains.findOne,
   },
 };

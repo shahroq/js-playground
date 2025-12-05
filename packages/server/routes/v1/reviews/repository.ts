@@ -22,7 +22,7 @@ export class ReviewRepository extends BaseRepository<Review> {
   }
 
   async findByProductId(productId: EntityId): Promise<IReviewResult> {
-    const reviews = await this.find({
+    const reviews = await this.findAll({
       product_id: productId,
       sort: "created_at",
       direction: "desc",
@@ -34,7 +34,7 @@ export class ReviewRepository extends BaseRepository<Review> {
   }
 
   async findByUserId(userId: EntityId): Promise<Review[]> {
-    return this.find({
+    return this.findAll({
       user_id: userId,
       sort: "created_at",
       direction: "desc",

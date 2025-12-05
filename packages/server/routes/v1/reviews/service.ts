@@ -11,9 +11,9 @@ export class ReviewService {
     private readonly productRepository: ProductRepository
   ) {}
 
-  async getItems(rawQuery: IRawQuery): Promise<IReviewResult> {
+  async findAll(rawQuery: IRawQuery): Promise<IReviewResult> {
     let [items, total] = await Promise.all([
-      this.repository.find(rawQuery),
+      this.repository.findAll(rawQuery),
       this.repository.count(rawQuery),
     ]);
 
@@ -33,7 +33,7 @@ export class ReviewService {
     return { items, meta };
   }
 
-  async getItem(id: EntityId, rawQuery: IRawQuery): Promise<IReviewResult> {
+  async findOne(id: EntityId, rawQuery: IRawQuery): Promise<IReviewResult> {
     const item = await this.repository.findById(id);
 
     const normQuery = this.repository.normalizeQuery(rawQuery);
@@ -47,20 +47,17 @@ export class ReviewService {
     return item ? { item } : {};
   }
 
-  async createItem(data: Review): Promise<IReviewResult> {
+  async create(data: Review): Promise<IReviewResult> {
     const newItem = await this.repository.create(data);
     return { item: newItem };
   }
 
-  async updateItem(
-    id: EntityId,
-    data: Partial<Review>
-  ): Promise<IReviewResult> {
+  async update(id: EntityId, data: Partial<Review>): Promise<IReviewResult> {
     const updatedItem = await this.repository.update(id, data);
     return updatedItem ? { item: updatedItem } : {};
   }
 
-  async deleteItem(id: EntityId): Promise<boolean> {
+  async delete(id: EntityId): Promise<boolean> {
     const deleted = await this.repository.delete(id);
     return deleted;
   }

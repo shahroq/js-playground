@@ -11,9 +11,9 @@ export class ProductService {
     private readonly reviewRepository: ReviewRepository
   ) {}
 
-  async getItems(rawQuery: IRawQuery): Promise<IProductResult> {
+  async findAll(rawQuery: IRawQuery): Promise<IProductResult> {
     let [items, total] = await Promise.all([
-      this.repository.find(rawQuery),
+      this.repository.findAll(rawQuery),
       this.repository.count(rawQuery),
     ]);
 
@@ -36,7 +36,7 @@ export class ProductService {
     return { items, meta };
   }
 
-  async getItem(id: EntityId, rawQuery: IRawQuery): Promise<IProductResult> {
+  async findOne(id: EntityId, rawQuery: IRawQuery): Promise<IProductResult> {
     const item = await this.repository.findById(id);
 
     const normQuery = this.repository.normalizeQuery(rawQuery);
@@ -50,7 +50,7 @@ export class ProductService {
     return item ? { item } : {};
   }
 
-  async createItem(data: Product): Promise<IProductResult> {
+  async create(data: Product): Promise<IProductResult> {
     const newItem = await this.repository.create(data);
     return { item: newItem };
   }
@@ -63,7 +63,7 @@ export class ProductService {
     return updatedItem ? { item: updatedItem } : {};
   }
 
-  async deleteItem(id: EntityId): Promise<boolean> {
+  async delete(id: EntityId): Promise<boolean> {
     const deleted = await this.repository.delete(id);
     return deleted;
   }

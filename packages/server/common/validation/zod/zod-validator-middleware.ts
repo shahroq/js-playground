@@ -1,3 +1,4 @@
+import { CheckIsLogLevel } from "./../../../generated/prisma/internal/prismaNamespace";
 import type { Request, Response, NextFunction } from "express";
 import { get } from "lodash";
 import { ZodError } from "zod";

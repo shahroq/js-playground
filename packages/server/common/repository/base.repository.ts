@@ -20,7 +20,7 @@ export abstract class BaseRepository<T> {
     protected readonly dbAdapter: IDBAdapter
   ) {}
 
-  async find(rawQuery: IRawQuery): Promise<T[]> {
+  async findAll(rawQuery: IRawQuery): Promise<T[]> {
     const normQuery = Query.normalize(rawQuery, this.repoOptions);
     return this.dbAdapter.find<T>(this.collection, normQuery);
   }

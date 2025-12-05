@@ -13,7 +13,7 @@ export class PostController {
     res: Response,
     _next: NextFunction
   ): Promise<void> {
-    const items: Post[] = await this.service.getItems();
+    const items: Post[] = await this.service.findAll();
     res
       .status(200)
       .json(appEnvelope.create(null, { [`${this.collection}s`]: items }));
@@ -23,7 +23,7 @@ export class PostController {
     const { id } = req.params;
     if (!id) return next(AppError.badRequest());
 
-    const item = await this.service.getItem(+id);
+    const item = await this.service.find(+id);
     if (!item) return next(AppError.notFound());
 
     res.status(200).json(appEnvelope.create(null, { [this.collection]: item }));

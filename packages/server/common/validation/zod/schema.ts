@@ -4,7 +4,7 @@ import { z } from "zod";
  * Shared Schemas
  */
 const sharedSchemas = {
-  getItems: {
+  findAll: {
     query: z.object({
       page: z.coerce.number().int().min(1).default(1),
       per_page: z.coerce.number().int().min(1).max(100).default(10),
@@ -13,7 +13,7 @@ const sharedSchemas = {
     }),
   },
 
-  getItem: {
+  findOne: {
     params: z.object({
       id: z.coerce.number().int(),
     }),
@@ -34,7 +34,7 @@ const createUser = {
 };
 
 const updateUser = {
-  params: sharedSchemas.getItem.params,
+  params: sharedSchemas.findOne.params,
   body: z.object({
     name: z.string().optional(),
     description: z.string().nullable().optional(),
@@ -58,7 +58,7 @@ const createProduct = {
 };
 
 const updateProduct = {
-  params: sharedSchemas.getItem.params,
+  params: sharedSchemas.findOne.params,
   body: z.object({
     name: z.string().optional(),
     description: z.string().nullable().optional(),
@@ -80,7 +80,7 @@ const createReview = {
 };
 
 const updateReview = {
-  params: sharedSchemas.getItem.params,
+  params: sharedSchemas.findOne.params,
   body: z.object({
     rating: z.number().min(1).max(5).optional(),
     content: z.string().nullable().optional(),
@@ -93,14 +93,14 @@ const updateReview = {
 export const schemas = {
   products: {
     ...sharedSchemas,
-    createItem: createProduct,
-    updateItem: updateProduct,
-    deleteItem: sharedSchemas.getItem,
+    create: createProduct,
+    update: updateProduct,
+    delete: sharedSchemas.findOne,
   },
   reviews: {
     ...sharedSchemas,
-    createItem: createReview,
-    updateItem: updateReview,
-    deleteItem: sharedSchemas.getItem,
+    create: createReview,
+    update: updateReview,
+    delete: sharedSchemas.findOne,
   },
 };

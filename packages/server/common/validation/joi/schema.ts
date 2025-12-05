@@ -4,7 +4,7 @@ import Joi from "joi";
  * Shared Schemas
  */
 const sharedSchemas = {
-  getItems: {
+  findAll: {
     query: Joi.object({
       page: Joi.number().integer().min(1).default(1),
       per_page: Joi.number().integer().min(1).max(100).default(10),
@@ -13,7 +13,7 @@ const sharedSchemas = {
     }),
   },
 
-  getItem: {
+  findOne: {
     params: Joi.object({
       id: Joi.number().integer().required(),
     }),
@@ -34,7 +34,7 @@ const createProduct = {
 };
 
 const updateProduct = {
-  params: sharedSchemas.getItem.params,
+  params: sharedSchemas.findOne.params,
   body: Joi.object({
     name: Joi.string().optional(),
     description: Joi.string().optional().allow(null),
@@ -56,7 +56,7 @@ const createReview = {
 };
 
 const updateReview = {
-  params: sharedSchemas.getItem.params,
+  params: sharedSchemas.findOne.params,
   body: Joi.object({
     rating: Joi.number().min(1).max(5).optional(),
     content: Joi.string().optional().allow(null),
@@ -71,12 +71,12 @@ export const schemas = {
     ...sharedSchemas,
     createItem: createProduct,
     updateItem: updateProduct,
-    deleteItem: sharedSchemas.getItem,
+    deleteItem: sharedSchemas.findOne,
   },
   reviews: {
     ...sharedSchemas,
     createItem: createReview,
     updateItem: updateReview,
-    deleteItem: sharedSchemas.getItem,
+    deleteItem: sharedSchemas.findOne,
   },
 };
