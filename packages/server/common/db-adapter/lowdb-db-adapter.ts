@@ -107,8 +107,8 @@ export class LowDBDBAdapter implements IDBAdapter {
     const newItem = {
       ...data,
       id: data.id || this.dbClient.data[collection].length + 1,
-      created_at: utils.isoString(),
-      updated_at: utils.isoString(),
+      created_at: utils.formatISO(),
+      updated_at: utils.formatISO(),
       created_by: 1,
       updated_by: 1,
     };
@@ -133,7 +133,7 @@ export class LowDBDBAdapter implements IDBAdapter {
     items[index] = {
       ...items[index],
       ...data,
-      updated_at: utils.isoString(),
+      updated_at: utils.formatISO(),
       updated_by: 1,
     };
     await this.dbClient.write();

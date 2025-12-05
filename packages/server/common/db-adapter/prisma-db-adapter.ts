@@ -82,7 +82,7 @@ export class PrismaDBAdapter implements IDBAdapter {
   async create<T>(collection: CollectionName, data: T): Promise<T> {
     const newItem = {
       ...data,
-      created_at: utils.isoString(),
+      created_at: utils.formatISO(),
       created_by: 1,
       updated_by: 1,
     };
@@ -105,7 +105,7 @@ export class PrismaDBAdapter implements IDBAdapter {
 
     const updatedItem = {
       ...data,
-      updated_at: utils.isoString(),
+      updated_at: utils.formatISO(),
       updated_by: 1,
     };
 

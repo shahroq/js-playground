@@ -20,7 +20,7 @@ export const bootstrap = (): Application => {
   // home
   app.get("/", (_req: Request, res: Response) => {
     console.log(`I am at home`);
-    res.send(`API Sandbox Home: Hello World [${utils.isoString()}]`);
+    res.send(`API Sandbox Home: Hello World [${utils.formatISO()}]`);
   });
 
   // health

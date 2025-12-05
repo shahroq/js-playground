@@ -49,10 +49,10 @@ export function isRealString(value: unknown): value is string {
  * @returns A string in ISO 8601 format, either local-adjusted or standard UTC.
  *
  * @example
- * isoString();                        // "2025-11-08T17:22:30.123" (local time)
- * isoString(new Date(), false);       // "2025-11-08T16:22:30.123Z" (UTC)
+ * formatISO();                        // "2025-11-08T17:22:30.123" (local time)
+ * formatISO(new Date(), false);       // "2025-11-08T16:22:30.123Z" (UTC)
  */
-export function isoString(
+export function formatISO(
   date: Date = new Date(),
   local: boolean = false
 ): string {

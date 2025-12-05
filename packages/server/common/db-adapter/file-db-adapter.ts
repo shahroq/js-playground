@@ -92,8 +92,8 @@ export class FileDBAdapter implements IDBAdapter {
     const newItem = {
       ...data,
       id: data.id ?? this.getNextId(collection),
-      created_at: utils.isoString(),
-      updated_at: utils.isoString(),
+      created_at: utils.formatISO(),
+      updated_at: utils.formatISO(),
       created_by: 1,
       updated_by: 1,
     };
@@ -117,7 +117,7 @@ export class FileDBAdapter implements IDBAdapter {
     items[index] = {
       ...items[index],
       ...data,
-      updated_at: utils.isoString(),
+      updated_at: utils.formatISO(),
       updated_by: 1,
     };
     await this.writeFile();
@@ -204,7 +204,7 @@ export class FileDBAdapter implements IDBAdapter {
       ...this.data,
       meta: {
         ...this.data.meta,
-        updated_at: utils.isoString(),
+        updated_at: utils.formatISO(),
       },
     };
   }
