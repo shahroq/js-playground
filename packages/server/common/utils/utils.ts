@@ -58,7 +58,7 @@ export function formatISO(
 ): string {
   if (!local) return date.toISOString();
 
-  let offsetMs = date.getTimezoneOffset() * 60000; // convert offset
+  const offsetMs = date.getTimezoneOffset() * 60000; // convert offset
   // to ms
   const localTime = new Date(date.getTime() - offsetMs);
   return localTime.toISOString();
