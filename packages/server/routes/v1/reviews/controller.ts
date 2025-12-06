@@ -7,7 +7,7 @@ export class ReviewController {
 
   constructor(private readonly service: ReviewService) {}
 
-  async index(req: Request, res: Response, next: NextFunction) {
+  async index(req: Request, res: Response) {
     const { items, meta } = await this.service.findAll(req.query);
 
     res
