@@ -1,4 +1,4 @@
-import dbSource from "./database-source.json";
+import dbSource from "./data-source.json";
 import { UserRepository } from "@users/repository";
 import { ProductRepository } from "@products/repository";
 import { ReviewRepository } from "@reviews/repository";
