@@ -1,4 +1,5 @@
 import { config } from "@/common/container";
+import { MemoryDBAdapter } from "./memory-db-adapter";
 import { FileDBAdapter } from "./file-db-adapter";
 import { LowDBDBAdapter } from "./lowdb-db-adapter";
 import { PrismaDBAdapter } from "./prisma-db-adapter";
@@ -15,6 +16,9 @@ export function getDBAdapter(): IDBAdapter {
   console.log(`⚙️  Getting db adapter (${strategy})`);
 
   switch (strategy) {
+    case "memory":
+      dbAdapter = new MemoryDBAdapter();
+      break;
     case "file":
       dbAdapter = new FileDBAdapter();
       break;

@@ -2,7 +2,7 @@ import type { CollectionName, EntityId } from "@/common/types";
 import type { INormQuery } from "@/common/query-object/types";
 
 // export type DatabaseStrategy = "file-json" | "lowdb-json" | "prisma-sqlite";
-export type DBAdapterStrategy = "file" | "lowdb" | "prisma";
+export type DBAdapterStrategy = "memory" | "file" | "lowdb" | "prisma";
 
 export interface IDBAdapter {
   connect(): Promise<void>;
