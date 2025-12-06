@@ -6,13 +6,13 @@ import {
 } from "@/common/container";
 
 // insted of map them manually
-const users = dataSource.users.map((u) => ({
+const userData = dataSource.users.map((u) => ({
   name: u.name,
   email: `${u.email}.${Math.random()}`,
   role: u.role as Role,
 }));
 
-const products = dataSource.products.map((i) => ({
+const productData = dataSource.products.map((i) => ({
   name: i.name,
   description: i.description,
   price: parseFloat(i.price),
@@ -22,7 +22,7 @@ const products = dataSource.products.map((i) => ({
   updated_by: i.updated_by,
 }));
 
-const reviews = dataSource.reviews.map((i) => ({
+const reviewData = dataSource.reviews.map((i) => ({
   product_id: Number(i.product_id),
   content: i.content,
   rating: i.rating,
@@ -42,8 +42,8 @@ export const main = async () => {
   // 2: seed data
   if (1) {
     // await seedUsers(users);
-    await seedProducts(products);
-    await seedReviews(reviews);
+    await seedProducts(productData);
+    await seedReviews(reviewData);
     console.log("Data seeder completed.");
   }
 };
