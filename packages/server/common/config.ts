@@ -44,7 +44,7 @@ export function getDBType(database_url: string | null) {
     const lower = database_url.toLowerCase();
 
     if (lower.endsWith(".json")) return "json";
-    if (lower.endsWith(".db")) return "sqlite";
+    if (lower.endsWith(".db") || lower.endsWith(".sqlite")) return "sqlite";
 
     return "unknown"; // fallback for unknown file types
   }

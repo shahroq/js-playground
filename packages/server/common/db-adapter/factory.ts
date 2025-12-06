@@ -13,7 +13,7 @@ export function getDBAdapter(): IDBAdapter {
 
   const strategy = config.database_adapter_strategy as DBAdapterStrategy;
   let dbAdapter;
-  console.log(`⚙️  Getting db adapter (${strategy})`);
+  console.log(`⚙️  Getting db adapter (${strategy}/${config.database_type})`);
 
   switch (strategy) {
     case "memory":
