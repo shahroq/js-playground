@@ -1,22 +1,18 @@
-import dbSource from "./data-source.json";
-import { UserRepository } from "@users/repository";
-import { ProductRepository } from "@products/repository";
-import { ReviewRepository } from "@reviews/repository";
-import { getDBAdapter } from "@/common/db-adapter/factory";
-
-let dbAdapter = getDBAdapter(); // used for migration directly
-const userRepository = new UserRepository();
-const productRepository = new ProductRepository();
-const reviewRepository = new ReviewRepository();
+import dataSource from "@/data/data-source.json";
+import {
+  dbAdapter,
+  productRepository,
+  reviewRepository,
+} from "@/common/container";
 
 // insted of map them manually
-const users = dbSource.users.map((u) => ({
+const users = dataSource.users.map((u) => ({
   name: u.name,
   email: `${u.email}.${Math.random()}`,
   role: u.role as Role,
 }));
 
-const products = dbSource.products.map((i) => ({
+const products = dataSource.products.map((i) => ({
   name: i.name,
   description: i.description,
   price: parseFloat(i.price),
@@ -26,7 +22,7 @@ const products = dbSource.products.map((i) => ({
   updated_by: i.updated_by,
 }));
 
-const reviews = dbSource.reviews.map((i) => ({
+const reviews = dataSource.reviews.map((i) => ({
   product_id: Number(i.product_id),
   content: i.content,
   rating: i.rating,
@@ -45,18 +41,19 @@ export const main = async () => {
   console.log("Stage 2: Running seeder...");
   // 2: seed data
   if (1) {
-    await seedUsers(users);
+    // await seedUsers(users);
     await seedProducts(products);
     await seedReviews(reviews);
     console.log("Data seeder completed.");
   }
 };
-
+/*
 async function seedUsers(data, reset: boolean = true) {
   if (reset) await userRepository.deleteMany();
   for (const u of data) await userRepository.create(u);
   console.log(`Seeded ${data.length} users.`);
 }
+*/
 
 async function seedProducts(data, reset: boolean = true) {
   if (reset) await productRepository.deleteMany();
