@@ -1,10 +1,11 @@
-import { AppError } from "@/common/container";
+import { AppError, config } from "@/common/container";
 import type { AppEnvelope } from "./app-envelope.interface";
 import type { E } from "../app-error/types";
 
 type JSendStatus = "success" | "fail" | "error";
 
 type JSendFormat = {
+  system?: string;
   status: JSendStatus;
   data?: any;
   message?: string;
@@ -14,21 +15,24 @@ type JSendFormat = {
 export class JSend implements AppEnvelope {
   create(error: E, data: any = null) {
     const status = this.getStatus(error);
+    let envelope;
 
     switch (status) {
       case "success":
-        return this.formatSuccess(data);
+        envelope = this.formatSuccess(data);
+        break;
       case "fail":
-        return this.formatFail(error, data);
+        envelope = this.formatFail(error, data);
+        break;
       case "error":
-        return this.formatError(error, data);
+        envelope = this.formatError(error, data);
+        break;
     }
-  }
 
-  private getStatus(error: E): JSendStatus {
-    if (!error) return "success";
-    if (`${AppError.getStatusCode(error)}`.startsWith("4")) return "fail";
-    return "error";
+    return {
+      ...(config.system ? { system: config.system } : {}),
+      ...envelope,
+    };
   }
 
   private formatSuccess(data: any): JSendFormat {
@@ -56,6 +60,12 @@ export class JSend implements AppEnvelope {
         ? { data: data ?? AppError.getDetails(error) }
         : {}),
     };
+  }
+
+  private getStatus(error: E): JSendStatus {
+    if (!error) return "success";
+    if (`${AppError.getStatusCode(error)}`.startsWith("4")) return "fail";
+    return "error";
   }
 }
 
