@@ -11,28 +11,22 @@ export class MemoryDBAdapter implements IDBAdapter {
     this.dbClient = data;
   }
 
-  async connect(): Promise<void> {
+  connect(): void {
     console.log(`🌕 Fetching initial data from json file`);
   }
 
-  async disconnect(): Promise<void> {
+  disconnect(): void {
     //
   }
 
-  async find<T>(
-    collection: CollectionName,
-    normQuery: INormQuery
-  ): Promise<T[]> {
+  find<T>(collection: CollectionName, normQuery: INormQuery): T[] {
     const m = this.getModel(collection);
 
-    const items = await m;
+    const items = m;
     return items;
   }
 
-  async findOne<T>(
-    collection: CollectionName,
-    normQuery: INormQuery
-  ): Promise<T | null> {
+  findOne<T>(collection: CollectionName, normQuery: INormQuery): T | null {
     const m = this.getModel(collection);
     const id = normQuery.filter?.id;
 
@@ -42,14 +36,11 @@ export class MemoryDBAdapter implements IDBAdapter {
     return item;
   }
 
-  async findById<T>(
-    collection: CollectionName,
-    id: EntityId
-  ): Promise<T | null> {
+  findById<T>(collection: CollectionName, id: EntityId): T | null {
     return this.findOne<T>(collection, { filter: { id } });
   }
 
-  async create<T>(collection: CollectionName, data: T): Promise<T> {
+  create<T>(collection: CollectionName, data: T): T {
     const m = this.getModel(collection);
     const newItem = {
       ...data,
@@ -63,11 +54,11 @@ export class MemoryDBAdapter implements IDBAdapter {
     return newItem;
   }
 
-  async update<T>(
+  update<T>(
     collection: CollectionName,
     id: EntityId,
     data: Partial<T>
-  ): Promise<T | null> {
+  ): T | null {
     const m = this.getModel(collection);
 
     const itemIndex = m.findIndex((item) => item.id === id);
@@ -85,7 +76,7 @@ export class MemoryDBAdapter implements IDBAdapter {
     return updatedItem;
   }
 
-  async delete<T>(collection: CollectionName, id: EntityId): Promise<boolean> {
+  delete<T>(collection: CollectionName, id: EntityId): boolean {
     const m = this.getModel(collection);
 
     const itemIndex = m.findIndex((item) => item.id === id);
@@ -96,10 +87,7 @@ export class MemoryDBAdapter implements IDBAdapter {
     return true;
   }
 
-  async deleteMany<T>(
-    collection: CollectionName,
-    normQuery: INormQuery
-  ): Promise<number> {
+  deleteMany<T>(collection: CollectionName, normQuery: INormQuery): number {
     const m = this.getModel(collection);
 
     const deletedCount = m.length;
@@ -107,19 +95,16 @@ export class MemoryDBAdapter implements IDBAdapter {
     return deletedCount;
   }
 
-  async count<T>(
-    collection: CollectionName,
-    normQuery: INormQuery
-  ): Promise<number> {
+  count<T>(collection: CollectionName, normQuery: INormQuery): number {
     const m = this.getModel(collection);
     return m.length;
   }
 
-  async avg<T>(
+  avg<T>(
     collection: CollectionName,
     normQuery: INormQuery,
     field: keyof T & string
-  ): Promise<number | null> {
+  ): number | null {
     const m = this.getModel(collection);
 
     let sum = 0;
@@ -135,11 +120,11 @@ export class MemoryDBAdapter implements IDBAdapter {
     }
   }
 
-  async createDB(identifier: string) {
+  createDB(identifier: string) {
     // done via cli
   }
 
-  async migrate() {
+  migrate() {
     //
   }
 

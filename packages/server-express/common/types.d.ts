@@ -1,6 +1,8 @@
 export type EntityId = number | string;
 export type CollectionName = "users" | "products" | "reviews";
 
+export type Awaitable<T> = T | Promise<T>;
+
 export interface IMeta {
   page?: number;
   per_page?: number;

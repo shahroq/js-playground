@@ -1,56 +1,59 @@
-import type { CollectionName, EntityId } from "@/common/types";
+import type { Awaitable, CollectionName, EntityId } from "@/common/types";
 import type { INormQuery } from "@/common/query-object/types";
 
 // export type DatabaseStrategy = "file-json" | "lowdb-json" | "prisma-sqlite";
 export type DBAdapterStrategy = "memory" | "file" | "lowdb" | "prisma";
 
 export interface IDBAdapter {
-  connect(): Promise<void>;
+  connect(): Awaitable<void>;
 
-  disconnect(): Promise<void>;
+  disconnect(): Awaitable<void>;
 
-  find<T>(collection: CollectionName, normQuery: INormQuery): Promise<T[]>;
+  find<T>(collection: CollectionName, normQuery: INormQuery): Awaitable<T[]>;
 
   findOne<T>(
     collection: CollectionName,
     normQuery: INormQuery
-  ): Promise<T | null>;
+  ): Awaitable<T | null>;
 
-  findById<T>(collection: CollectionName, id: EntityId): Promise<T | null>;
+  findById<T>(collection: CollectionName, id: EntityId): Awaitable<T | null>;
 
-  create<T>(collection: CollectionName, data: T): Promise<T>;
+  create<T>(collection: CollectionName, data: T): Awaitable<T>;
 
   update<T>(
     collection: CollectionName,
     id: EntityId,
     data: Partial<T>
-  ): Promise<T | null>;
+  ): Awaitable<T | null>;
 
-  delete<T>(collection: CollectionName, id: EntityId): Promise<boolean>;
+  delete<T>(collection: CollectionName, id: EntityId): Awaitable<boolean>;
 
   deleteMany<T>(
     collection: CollectionName,
     normQuery: INormQuery
-  ): Promise<number>;
+  ): Awaitable<number>;
 
-  count<T>(collection: CollectionName, normQuery: INormQuery): Promise<number>;
+  count<T>(
+    collection: CollectionName,
+    normQuery: INormQuery
+  ): Awaitable<number>;
 
   avg<T>(
     collection: CollectionName,
     normQuery: INormQuery,
     field: keyof T & string
-  ): Promise<number | null>;
+  ): Awaitable<number | null>;
 
   /** identifier is:
    * filePath for filebase dbs (json, sqlite)
    * database name for db  engines (postgres, mysql)
    */
-  createDB(identifier: string): Promise<void>;
+  createDB(identifier: string): Awaitable<void>;
 
   /**
    * Migration
    * check if db exists
    * if no: create it, and create the structure
    */
-  migrate(): Promise<void>;
+  migrate(): Awaitable<void>;
 }
