@@ -5,6 +5,7 @@ import { ReviewsModule } from "./modules/reviews/reviews.module";
 import { AppService } from "./app.service";
 import { TypeOrmModule } from "@nestjs/typeorm";
 // import { SeedService } from './common/seed/seed.service';
+import { CommonModule } from "./common/common.module";
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
     }),
     // CatalogModule,
     ReviewsModule,
+    CommonModule,
   ],
   controllers: [AppController],
   providers: [AppService],
