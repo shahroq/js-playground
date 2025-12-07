@@ -116,8 +116,8 @@ export class MemoryDBAdapter implements IDBAdapter {
         sum += value;
         count++;
       }
-      return count === 0 ? null : sum / count;
     }
+    return count === 0 ? null : sum / count;
   }
 
   createDB(identifier: string) {
