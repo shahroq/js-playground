@@ -1,4 +1,8 @@
-# Catalog API with Express
+# Catalog App Playground
+
+## Server: Express, Nest, Laravel
+
+## Client: Angular, React
 
 To install dependencies:
 
