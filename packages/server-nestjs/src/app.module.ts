@@ -1,13 +1,13 @@
 import { Module } from "@nestjs/common";
 import { AppController } from "./app.controller";
-import { CatalogModule } from "./catalog/catalog.module";
+// import { CatalogModule } from "./catalog/catalog.module";
+import { ReviewsModule } from "./modules/reviews/reviews.module";
 import { AppService } from "./app.service";
 import { TypeOrmModule } from "@nestjs/typeorm";
 // import { SeedService } from './common/seed/seed.service';
 
 @Module({
   imports: [
-    CatalogModule,
     TypeOrmModule.forRoot({
       type: "sqlite",
       database: "./data/data.sqlite",
@@ -16,6 +16,8 @@ import { TypeOrmModule } from "@nestjs/typeorm";
       // entities: [],
       autoLoadEntities: true,
     }),
+    // CatalogModule,
+    ReviewsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
