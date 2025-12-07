@@ -26,7 +26,7 @@ export { default as AppError } from "./app-error/app-error";
 export * from "@/common/meta-data/meta-data";
 export * from "./app-error/global-error.middleware";
 export * from "./undefined-routes/undefined-routes.middleware";
-export * from "./app-envelope/append-system-info.middleware";
+export * from "./app-envelope/append-system-data.middleware";
 export * from "@/common/query-object/normalize-query.middleware";
 
 /**
