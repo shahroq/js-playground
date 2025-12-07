@@ -5,7 +5,6 @@ import type { E } from "../app-error/types";
 type JSendStatus = "success" | "fail" | "error";
 
 type JSendFormat = {
-  system?: string;
   status: JSendStatus;
   data?: any;
   message?: string;
@@ -29,10 +28,7 @@ export class JSend implements AppEnvelope {
         break;
     }
 
-    return {
-      ...(config.system ? { system: config.system } : {}),
-      ...envelope,
-    };
+    return envelope;
   }
 
   private formatSuccess(data: any): JSendFormat {

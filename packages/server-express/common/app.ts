@@ -9,11 +9,12 @@ import {
   globalErrorHandler,
   undefinedRoutesHandler,
   AppError,
+  appendSystemInfoHandler,
 } from "@/common/container";
 
 export const bootstrap = (): Application => {
   const app: Application = express();
-  app.use(express.json()).use(cors());
+  app.use(express.json()).use(cors()).use(appendSystemInfoHandler);
 
   app.get("/favicon.ico", (_req, res) => res.status(204).end());
 

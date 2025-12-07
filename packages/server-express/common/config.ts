@@ -31,13 +31,13 @@ const config = {
   api_url_restfulapi: process.env.API_URL_RESTFULAPI,
 
   // overall system info, to display on envelop if needed (dev env)
-  system: null as string | null,
+  system_info: null as string | null,
 };
 
 config.database_type = getDBType(config.database_url);
 config.database_name = getDBName(config.database_url);
 config.database_path = getDBPath(config.database_url);
-config.system = getSystemInfo();
+config.system_info = getSystemInfo();
 // console.log(config);
 
 export function getDBType(database_url: string | null) {
@@ -83,8 +83,6 @@ function getDBPath(database_url: string | null) {
 export function getSystemInfo() {
   const system = [];
 
-  if (config.env !== "development") return false;
-
   system.push(
     "express",
     config.app_envelope_strategy,
@@ -93,7 +91,7 @@ export function getSystemInfo() {
     config.http_client_strategy
   );
 
-  return system.join(",");
+  return system.join(":");
 }
 
 /*

@@ -24,8 +24,9 @@ import { ObjectController } from "@/routes/v1/objects/controller";
 export * as utils from "./utils/utils";
 export { default as AppError } from "./app-error/app-error";
 export * from "@/common/meta-data/meta-data";
-export * from "./app-error/global-error-handler.middleware";
-export * from "./undefined-routes/undefined-routes-handler.middleware";
+export * from "./app-error/global-error.middleware";
+export * from "./undefined-routes/undefined-routes.middleware";
+export * from "./app-envelope/append-system-info.middleware";
 export * from "@/common/query-object/normalize-query.middleware";
 
 /**
