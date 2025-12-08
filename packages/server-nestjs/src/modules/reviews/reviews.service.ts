@@ -16,7 +16,7 @@ export class ReviewsService {
     private readonly repository: Repository<Review>,
     private readonly config: ConfigService,
   ) {
-    this.userId = this.config.get<number>('default_user_id') ?? 1;
+    this.userId = this.config.get<number>('user_id') ?? 1;
   }
 
   async findAll() {
