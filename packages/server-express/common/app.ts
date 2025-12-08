@@ -14,7 +14,12 @@ import {
 
 export const bootstrap = (): Application => {
   const app: Application = express();
-  app.use(express.json()).use(cors()).use(appendSystemDataHandler);
+
+  const beforeMWs = [express.json(), cors(), appendSystemDataHandler];
+  const afterMWs = [undefinedRoutesHandler, globalErrorHandler];
+  config.env === "development" && beforeMWs.push(appendSystemDataHandler);
+
+  app.use(beforeMWs);
 
   app.get("/favicon.ico", (_req, res) => res.status(204).end());
 
@@ -45,8 +50,7 @@ export const bootstrap = (): Application => {
 
   app.use("/api/v1", v1Router);
 
-  app.use(undefinedRoutesHandler);
-  app.use(globalErrorHandler);
+  app.use(afterMWs);
 
   return app;
 };

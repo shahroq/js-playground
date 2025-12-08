@@ -15,9 +15,6 @@ export function appendSystemDataHandler(
 ) {
   if (config.env !== "development") next();
 
-  // Only override res.json once
-  if (res.json === res.__originalJson) return next();
-
   const originalJson = res.json;
 
   res.json = function (body) {
