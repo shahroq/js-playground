@@ -5,15 +5,19 @@ import { CreateReviewDto } from './dto/create-review.dto';
 import { UpdateReviewDto } from './dto/update-review.dto';
 import { Review } from './entities/review.entity';
 import { formatISO } from './../../common/utils/utils';
-import dataSource from '../../../data/data-source.json';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class ReviewsService {
+  private userId: number;
+
   constructor(
     @InjectRepository(Review)
     private readonly repository: Repository<Review>,
-  ) {}
-  private reviews: Review[] = dataSource.reviews as Review[];
+    private readonly config: ConfigService,
+  ) {
+    this.userId = this.config.get<number>('default_user_id') ?? 1;
+  }
 
   async findAll() {
     const items = await this.repository.find();
@@ -32,8 +36,8 @@ export class ReviewsService {
       ...createReviewDto,
       created_at: formatISO(),
       updated_at: formatISO(),
-      created_by: 3,
-      updated_by: 3,
+      created_by: this.userId,
+      updated_by: this.userId,
     };
     const item = this.repository.create(creatingItem);
     const createdItem = await this.repository.save(item);
@@ -49,23 +53,22 @@ export class ReviewsService {
       ...exisitingItem,
       ...updateReviewDto,
       updated_at: formatISO(),
-      updated_by: 3,
+      updated_by: this.userId,
     };
-
-    const updatedItem = await this.repository.save(updatingItem);
     */
 
-    // use preload:
-    const updatedItem = await this.repository.preload({
+    // use .preload():
+    const updatingItem = await this.repository.preload({
       id,
       ...updateReviewDto,
       updated_at: formatISO(),
-      updated_by: 3,
+      updated_by: this.userId,
     });
 
-    if (!updatedItem)
+    if (!updatingItem)
       throw new HttpException(`Item ${id} not found.`, HttpStatus.NOT_FOUND);
 
+    const updatedItem = await this.repository.save(updatingItem);
     return updatedItem;
   }
 
