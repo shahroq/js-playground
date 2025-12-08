@@ -1,11 +1,11 @@
-import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
-import { CreateReviewDto } from "./dto/create-review.dto";
-import { UpdateReviewDto } from "./dto/update-review.dto";
-import { Review } from "./entities/review.entity";
-import { formatISO } from "./../../common/utils/utils";
-import dataSource from "../../../data/data-source.json";
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { CreateReviewDto } from './dto/create-review.dto';
+import { UpdateReviewDto } from './dto/update-review.dto';
+import { Review } from './entities/review.entity';
+import { formatISO } from './../../common/utils/utils';
+import dataSource from '../../../data/data-source.json';
 
 @Injectable()
 export class ReviewsService {
@@ -15,53 +15,64 @@ export class ReviewsService {
   ) {}
   private reviews: Review[] = dataSource.reviews as Review[];
 
-  findAll() {
-    const items = this.reviews;
+  async findAll() {
+    const items = await this.repository.find();
     return items;
   }
 
-  findOne(id: number) {
-    const review = dataSource.reviews.find((item) => item.id == id);
-    if (!review)
+  async findOne(id: number) {
+    const item = await this.repository.findOneBy({ id });
+    if (!item)
       throw new HttpException(`Item ${id} not found.`, HttpStatus.NOT_FOUND);
-    return review;
+    return item;
   }
 
-  create(createReviewDto: CreateReviewDto) {
-    const newItem = {
+  async create(createReviewDto: CreateReviewDto) {
+    const creatingItem = {
       ...createReviewDto,
-      id: 100,
       created_at: formatISO(),
       updated_at: formatISO(),
       created_by: 3,
       updated_by: 3,
     };
-    dataSource.reviews.push(newItem);
-    return newItem;
+    const item = this.repository.create(creatingItem);
+    const createdItem = await this.repository.save(item);
+    return createdItem;
   }
 
-  update(id: number, updateReviewDto: UpdateReviewDto) {
-    const exisitingReview = this.findOne(id);
-    if (!exisitingReview) throw Error("Couldn't find the item.");
+  async update(id: number, updateReviewDto: UpdateReviewDto) {
+    /*
+    const exisitingItem = await this.findOne(id);
+    // no error handling, as findOne does it
 
-    const updatedItem = {
+    const updatingItem = {
+      ...exisitingItem,
       ...updateReviewDto,
-      id,
       updated_at: formatISO(),
       updated_by: 3,
     };
 
-    dataSource.reviews["" + id] = updatedItem;
+    const updatedItem = await this.repository.save(updatingItem);
+    */
+
+    // use preload:
+    const updatedItem = await this.repository.preload({
+      id,
+      ...updateReviewDto,
+      updated_at: formatISO(),
+      updated_by: 3,
+    });
+
+    if (!updatedItem)
+      throw new HttpException(`Item ${id} not found.`, HttpStatus.NOT_FOUND);
 
     return updatedItem;
   }
 
-  remove(id: number) {
-    const itemIndex = this.reviews.findIndex((item) => item.id === id);
-    if (itemIndex < 0) throw Error("Couldn't find the item.");
-
-    this.reviews.splice(itemIndex, 1);
-
-    return `Item ${itemIndex} delted.`;
+  async remove(id: number) {
+    const deletingItem = await this.findOne(id);
+    // no error handling, as findOne does it
+    const deletedItem = await this.repository.remove(deletingItem);
+    return deletedItem;
   }
 }
