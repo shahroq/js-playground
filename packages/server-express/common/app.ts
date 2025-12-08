@@ -9,16 +9,15 @@ import {
   globalErrorHandler,
   undefinedRoutesHandler,
   AppError,
-  appendSystemDataHandler,
+  attachSystemDataHandler,
 } from "@/common/container";
 
 export const bootstrap = (): Application => {
   const app: Application = express();
 
-  const beforeMWs = [express.json(), cors(), appendSystemDataHandler];
+  const beforeMWs = [express.json(), cors()];
   const afterMWs = [undefinedRoutesHandler, globalErrorHandler];
-  config.env === "development" && beforeMWs.push(appendSystemDataHandler);
-
+  config.env === "development" && app.use(attachSystemDataHandler);
   app.use(beforeMWs);
 
   app.get("/favicon.ico", (_req, res) => res.status(204).end());

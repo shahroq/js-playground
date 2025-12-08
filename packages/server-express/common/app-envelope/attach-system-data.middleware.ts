@@ -6,15 +6,13 @@ let SYSTEM_DATA: { info?: string | null; timestamp?: string } = {
 };
 
 /**
- * add system info in dev environment
+ * attach system data to envelope in dev environment
  */
-export function appendSystemDataHandler(
+export function attachSystemDataHandler(
   _req: Request,
   res: Response,
   next: NextFunction
 ) {
-  if (config.env !== "development") next();
-
   const originalJson = res.json;
 
   res.json = function (body) {
