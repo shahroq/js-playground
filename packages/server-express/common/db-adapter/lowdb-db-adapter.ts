@@ -9,10 +9,12 @@ export class LowDBDBAdapter implements IDBAdapter {
   private dbClient: Low<DatabaseSchema>;
   private filePath = config.database_path ?? "";
   private defaultData: DatabaseSchema = defaultData;
+  private userId: number;
 
   constructor() {
     const adapter = new JSONFile<DatabaseSchema>(this.filePath);
     this.dbClient = new Low(adapter, this.defaultData);
+    this.userId = config.user_id;
   }
 
   async connect(): Promise<void> {
@@ -109,8 +111,8 @@ export class LowDBDBAdapter implements IDBAdapter {
       id: data.id || this.dbClient.data[collection].length + 1,
       created_at: utils.formatISO(),
       updated_at: utils.formatISO(),
-      created_by: config.user_id,
-      updated_by: config.user_id,
+      created_by: this.userId,
+      updated_by: this.userId,
     };
     this.dbClient.data[collection].push(newItem);
     await this.dbClient.write();
@@ -134,7 +136,7 @@ export class LowDBDBAdapter implements IDBAdapter {
       ...items[index],
       ...data,
       updated_at: utils.formatISO(),
-      updated_by: config.user_id,
+      updated_by: this.userId,
     };
     await this.dbClient.write();
 

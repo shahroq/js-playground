@@ -7,8 +7,11 @@ export class FileDBAdapter implements IDBAdapter {
   private db: DatabaseSchema = {};
   private filePath = config.database_path ?? "";
   private defaultData: DatabaseSchema = defaultData;
+  private userId: number;
 
-  constructor() {}
+  constructor() {
+    this.userId = config.user_id;
+  }
 
   async connect(): Promise<void> {
     await fs.ensureFile(this.filePath);
@@ -94,8 +97,8 @@ export class FileDBAdapter implements IDBAdapter {
       id: data.id ?? this.getNextId(collection),
       created_at: utils.formatISO(),
       updated_at: utils.formatISO(),
-      created_by: config.user_id,
-      updated_by: config.user_id,
+      created_by: this.userId,
+      updated_by: this.userId,
     };
     (this.data[collection] as any[]).push(newItem);
     await this.writeFile();
@@ -118,7 +121,7 @@ export class FileDBAdapter implements IDBAdapter {
       ...items[index],
       ...data,
       updated_at: utils.formatISO(),
-      updated_by: config.user_id,
+      updated_by: this.userId,
     };
     await this.writeFile();
 

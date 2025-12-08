@@ -6,9 +6,11 @@ import type { INormQuery } from "@/common/query-object/types";
 
 export class MemoryDBAdapter implements IDBAdapter {
   private dbClient;
+  private userId: number;
 
   constructor() {
     this.dbClient = data;
+    this.userId = config.user_id;
   }
 
   connect(): void {
@@ -46,8 +48,8 @@ export class MemoryDBAdapter implements IDBAdapter {
       ...data,
       created_at: utils.formatISO(),
       updated_at: utils.formatISO(),
-      created_by: config.user_id,
-      updated_by: config.user_id,
+      created_by: this.userId,
+      updated_by: this.userId,
     };
 
     m.push(newItem);
@@ -68,7 +70,7 @@ export class MemoryDBAdapter implements IDBAdapter {
       ...m[itemIndex],
       ...data,
       updated_at: utils.formatISO(),
-      updated_by: config.user_id,
+      updated_by: this.userId,
     };
 
     m[itemIndex] = updatedItem;

@@ -30,12 +30,14 @@ type ModelDelegate = ProductDelegate | ReviewDelegate | UserDelegate;
 
 export class PrismaDBAdapter implements IDBAdapter {
   private dbClient: PrismaClient;
+  private userId: number;
 
   constructor() {
     // Prisma will use the DATABASE_URL from .env
     // Example: DATABASE_URL=“mysql://user:password@localhost:3306/mydb”
     // Or: DATABASE_URL=“file:./data.db”
     this.dbClient = new PrismaClient();
+    this.userId = config.user_id;
   }
 
   async connect(): Promise<void> {
@@ -83,8 +85,8 @@ export class PrismaDBAdapter implements IDBAdapter {
     const newItem = {
       ...data,
       created_at: utils.formatISO(),
-      created_by: config.user_id,
-      updated_by: config.user_id,
+      created_by: this.userId,
+      updated_by: this.userId,
     };
     const m = this.getModel(collection);
 
@@ -106,7 +108,7 @@ export class PrismaDBAdapter implements IDBAdapter {
     const updatedItem = {
       ...data,
       updated_at: utils.formatISO(),
-      updated_by: config.user_id,
+      updated_by: this.userId,
     };
 
     const m = this.getModel(collection);

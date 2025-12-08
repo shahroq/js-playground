@@ -1,38 +1,40 @@
 import { join } from "path";
 import { utils } from "./container";
 
+export type Env = "development" | "production" | "test";
+
 const root = process.cwd();
 
 const config = {
   root_path: `${root}`,
   data_path: `${root}/data`,
 
-  version: process.env.VERSION || "0.0.0",
-  env: process.env.NODE_ENV || "development",
-  base_url: process.env.BASE_URL,
-  port: parseInt(process.env.PORT || "3000"),
-  debug: process.env.DEBUG === "true",
-  user_id: process.env.USER_ID_TMP || 1, // use it till auth is not implemented
+  version: <string>process.env.VERSION || "0.0.0",
+  env: <Env>process.env.NODE_ENV || "development",
+  base_url: <string>process.env.BASE_URL,
+  port: <number>(process.env.PORT || 3000),
+  debug: <boolean>!!(process.env.DEBUG === "true"),
+  user_id: <number>(process.env.USER_ID_TMP || 1), // use it till auth is not implemented
 
-  pagination_per_page: process.env.PAGINATION_PER_PAGE || 10,
+  pagination_per_page: <number>(process.env.PAGINATION_PER_PAGE || 10),
 
-  app_envelope_strategy: process.env.APP_ENVELOPE_STRATEGY,
+  app_envelope_strategy: <string>process.env.APP_ENVELOPE_STRATEGY,
 
-  validation_strategy: process.env.VALIDATION_STRATEGY,
+  validation_strategy: <string>process.env.VALIDATION_STRATEGY,
 
-  database_url: process.env.DATABASE_URL as string | null,
-  database_adapter_strategy: process.env.DATABASE_ADAPTER_STRATEGY,
+  database_url: <string | null>process.env.DATABASE_URL,
+  database_adapter_strategy: <string>process.env.DATABASE_ADAPTER_STRATEGY,
 
-  database_type: null as string | null,
-  database_name: null as string | null,
-  database_path: null as string | null,
+  database_type: <string | null>null,
+  database_name: <string | null>null,
+  database_path: <string | null>null,
 
-  http_client_strategy: process.env.HTTP_CLIENT_STRATEGY,
-  api_url_jsonplaceholder: process.env.API_URL_JSONPLACEHOLDER,
-  api_url_restfulapi: process.env.API_URL_RESTFULAPI,
+  http_client_strategy: <string>process.env.HTTP_CLIENT_STRATEGY,
+  api_url_jsonplaceholder: <string>process.env.API_URL_JSONPLACEHOLDER,
+  api_url_restfulapi: <string>process.env.API_URL_RESTFULAPI,
 
   // overall system info, to display on envelop if needed (dev env)
-  system_info: null as string | null,
+  system_info: <string | null>null,
 };
 
 config.database_type = getDBType(config.database_url);
