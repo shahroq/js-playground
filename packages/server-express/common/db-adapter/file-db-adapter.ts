@@ -94,8 +94,8 @@ export class FileDBAdapter implements IDBAdapter {
       id: data.id ?? this.getNextId(collection),
       created_at: utils.formatISO(),
       updated_at: utils.formatISO(),
-      created_by: 1,
-      updated_by: 1,
+      created_by: config.user_id,
+      updated_by: config.user_id,
     };
     (this.data[collection] as any[]).push(newItem);
     await this.writeFile();
@@ -118,7 +118,7 @@ export class FileDBAdapter implements IDBAdapter {
       ...items[index],
       ...data,
       updated_at: utils.formatISO(),
-      updated_by: 1,
+      updated_by: config.user_id,
     };
     await this.writeFile();
 

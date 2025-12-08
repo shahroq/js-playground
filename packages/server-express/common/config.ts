@@ -12,6 +12,7 @@ const config = {
   base_url: process.env.BASE_URL,
   port: parseInt(process.env.PORT || "3000"),
   debug: process.env.DEBUG === "true",
+  user_id: process.env.USER_ID_TMP || 1, // use it till auth is not implemented
 
   pagination_per_page: process.env.PAGINATION_PER_PAGE || 10,
 

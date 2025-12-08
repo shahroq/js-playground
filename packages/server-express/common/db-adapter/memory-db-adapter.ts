@@ -1,5 +1,5 @@
 import data from "@/data/memory-json/data.json";
-import { utils } from "@/common/container";
+import { config, utils } from "@/common/container";
 import type { IDBAdapter } from "./db-adapter.interface";
 import type { EntityId, CollectionName } from "@/common/types";
 import type { INormQuery } from "@/common/query-object/types";
@@ -46,8 +46,8 @@ export class MemoryDBAdapter implements IDBAdapter {
       ...data,
       created_at: utils.formatISO(),
       updated_at: utils.formatISO(),
-      created_by: 1,
-      updated_by: 1,
+      created_by: config.user_id,
+      updated_by: config.user_id,
     };
 
     m.push(newItem);
@@ -68,7 +68,7 @@ export class MemoryDBAdapter implements IDBAdapter {
       ...m[itemIndex],
       ...data,
       updated_at: utils.formatISO(),
-      updated_by: 3,
+      updated_by: config.user_id,
     };
 
     m[itemIndex] = updatedItem;

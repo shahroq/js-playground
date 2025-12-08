@@ -4,7 +4,7 @@ import type {
   ReviewDelegate,
   UserDelegate,
 } from "@/generated/prisma/models";
-import { utils } from "@/common/container";
+import { config, utils } from "@/common/container";
 import type { IDBAdapter } from "./db-adapter.interface";
 import type { EntityId, CollectionName } from "@/common/types";
 import type {
@@ -83,8 +83,8 @@ export class PrismaDBAdapter implements IDBAdapter {
     const newItem = {
       ...data,
       created_at: utils.formatISO(),
-      created_by: 1,
-      updated_by: 1,
+      created_by: config.user_id,
+      updated_by: config.user_id,
     };
     const m = this.getModel(collection);
 
@@ -106,7 +106,7 @@ export class PrismaDBAdapter implements IDBAdapter {
     const updatedItem = {
       ...data,
       updated_at: utils.formatISO(),
-      updated_by: 1,
+      updated_by: config.user_id,
     };
 
     const m = this.getModel(collection);
