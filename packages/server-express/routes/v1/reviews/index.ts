@@ -15,7 +15,7 @@ router.get(
 );
 router.get("/:id", validate("reviews.findOne"), ctrl.show.bind(ctrl));
 router.post("/", validate("reviews.create"), ctrl.store.bind(ctrl));
-router.put("/:id", validate("reviews.update"), ctrl.update.bind(ctrl));
+router.patch("/:id", validate("reviews.update"), ctrl.update.bind(ctrl));
 router.delete("/:id", validate("reviews.delete"), ctrl.destroy.bind(ctrl));
 
 export default router;
