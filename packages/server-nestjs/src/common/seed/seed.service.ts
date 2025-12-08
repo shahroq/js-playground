@@ -1,8 +1,8 @@
-import { Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Review } from "src/catalog/review.entity";
-import { Repository } from "typeorm";
-import dbSource from "./../../../data/data-source.json";
+import { Injectable } from '@nestjs/common';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import dbSource from './../../../data/data-source.json';
+import { Review } from 'src/modules/reviews/entities/review.entity';
 
 const reviewData = dbSource.reviews.map((i) => ({
   product_id: Number(i.product_id),
@@ -15,13 +15,13 @@ const reviewData = dbSource.reviews.map((i) => ({
 @Injectable()
 export class SeedService {
   constructor(
-    @InjectRepository(Review) private reviewRepo: Repository<Review>
+    @InjectRepository(Review) private reviewRepo: Repository<Review>,
   ) {}
 
   async run() {
-    console.log("Stage 2: Running seeder...");
+    console.log('Stage 2: Running seeder...');
     // await this.seedReviews();
-    console.log("Data seeder completed.");
+    console.log('Data seeder completed.');
   }
 
   private async seedReviews() {
