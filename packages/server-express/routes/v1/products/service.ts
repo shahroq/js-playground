@@ -3,7 +3,7 @@ import type { EntityId } from "@/common/types";
 import { ProductRepository } from "./repository";
 import { ReviewRepository } from "@reviews/repository";
 import type { Product, IProductResult } from "./types";
-import type { IRawQuery } from "@/common/query-object/types";
+import type { INormQuery } from "@/common/query-object/types";
 
 export class ProductService {
   constructor(
@@ -11,14 +11,13 @@ export class ProductService {
     private readonly reviewRepository: ReviewRepository
   ) {}
 
-  async findAll(rawQuery: IRawQuery): Promise<IProductResult> {
+  async findAll(normQuery: INormQuery): Promise<IProductResult> {
     let [items, total] = await Promise.all([
-      this.repository.findAll(rawQuery),
-      this.repository.count(rawQuery),
+      this.repository.findAll(normQuery),
+      this.repository.count(normQuery),
     ]);
 
     // TODO: remove this dependency, build meta somewhere else maybe?
-    const normQuery = this.repository.normalizeQuery(rawQuery);
     const meta = MetaData.build(normQuery, total);
 
     // get expansions: reviews
@@ -36,10 +35,9 @@ export class ProductService {
     return { items, meta };
   }
 
-  async findOne(id: EntityId, rawQuery: IRawQuery): Promise<IProductResult> {
+  async findOne(id: EntityId, normQuery: INormQuery): Promise<IProductResult> {
     const item = await this.repository.findById(id);
 
-    const normQuery = this.repository.normalizeQuery(rawQuery);
     if (normQuery.expansion?.include?.includes("reviews")) {
       const reviews = await this.reviewRepository.findByProductId(
         item?.id as EntityId
