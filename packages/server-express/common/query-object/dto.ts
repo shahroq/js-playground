@@ -27,8 +27,8 @@ export class ExpansionDto {
   ) {}
 }
 
-// --- Normalized Query DTO ---
-export class NormQueryDto {
+// --- Normalized Query DTO For List End Points ---
+export class NormQueryDtoList {
   constructor(
     readonly pagination?: PaginationDto,
     readonly orderBy?: OrderByDto,
@@ -38,11 +38,19 @@ export class NormQueryDto {
   ) {}
 }
 
+// --- Normalized Query DTO For Show End Points ---
+export class NormQueryDtoShow {
+  constructor(
+    readonly selection?: SelectionDto,
+    readonly expansion?: ExpansionDto
+  ) {}
+}
+
 // --- Extend Express Request ---
 declare global {
   namespace Express {
     interface Request {
-      normQuery?: NormQueryDto;
+      normQuery?: NormQueryDtoShow | NormQueryDtoList;
     }
   }
 }

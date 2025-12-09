@@ -16,7 +16,8 @@ const RESERVED_KEYS = [
   "include",
 ];
 
-export function normalizeQueryHandler() {
+export function normalizeQueryHandler(dto?: any, options?: any) {
+  // 1. normalize based on dto/options
   return (req: Request, res: Response, next: NextFunction) => {
     const q = req.query;
 

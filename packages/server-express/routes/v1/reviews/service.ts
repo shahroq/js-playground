@@ -3,7 +3,7 @@ import type { EntityId } from "@/common/types";
 import { ReviewRepository } from "./repository";
 import type { IReviewResult, Review } from "./types";
 import { ProductRepository } from "@products/repository";
-import type { IRawQuery } from "@/common/query-object/types";
+import type { INormQuery } from "@/common/query-object/types";
 
 export class ReviewService {
   constructor(
@@ -11,13 +11,12 @@ export class ReviewService {
     private readonly productRepository: ProductRepository
   ) {}
 
-  async findAll(rawQuery: IRawQuery): Promise<IReviewResult> {
+  async findAll(normQuery: INormQuery): Promise<IReviewResult> {
     let [items, total] = await Promise.all([
-      this.repository.findAll(rawQuery),
-      this.repository.count(rawQuery),
+      this.repository.findAll(normQuery),
+      this.repository.count(normQuery),
     ]);
 
-    const normQuery = this.repository.normalizeQuery(rawQuery);
     const meta = MetaData.build(normQuery, total);
 
     // get expansions: products
@@ -33,10 +32,9 @@ export class ReviewService {
     return { items, meta };
   }
 
-  async findOne(id: EntityId, rawQuery: IRawQuery): Promise<IReviewResult> {
+  async findOne(id: EntityId, normQuery: INormQuery): Promise<IReviewResult> {
     const item = await this.repository.findById(id);
 
-    const normQuery = this.repository.normalizeQuery(rawQuery);
     // get expansions: products
     if (normQuery.expansion?.include?.includes("products")) {
       const product = await this.productRepository.findById(
