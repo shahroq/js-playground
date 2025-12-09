@@ -1,8 +1,7 @@
-import { CheckIsLogLevel } from "./../../../generated/prisma/internal/prismaNamespace";
 import type { Request, Response, NextFunction } from "express";
 import { get } from "lodash";
 import { ZodError } from "zod";
-import type { ErrorDetail } from "@/common/app-error/types.js";
+import type { ErrorDetail } from "@/common/error/types.js";
 import { AppError } from "@/common/container";
 import type { ValidationAction, ValidatorMiddleware } from "../types";
 import { schemas } from "./schema.ts";

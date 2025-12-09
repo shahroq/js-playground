@@ -1,4 +1,4 @@
-export type E = AppError | Error | null;
+export type E = AppError | Error;
 
 export type ErrorCode =
   | "ERR_NF"

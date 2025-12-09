@@ -18,6 +18,7 @@ const config = {
 
   pagination_per_page: <number>(process.env.PAGINATION_PER_PAGE || 10),
 
+  envelop_system_info: <boolean>!!(process.env.ENVELOP_SYSTEM_INFO === "true"),
   app_envelope_strategy: <string>process.env.APP_ENVELOPE_STRATEGY,
 
   validation_strategy: <string>process.env.VALIDATION_STRATEGY,

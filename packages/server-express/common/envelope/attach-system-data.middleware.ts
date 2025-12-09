@@ -1,7 +1,7 @@
 import { config, utils } from "@/common/container";
 import type { Request, Response, NextFunction } from "express";
 
-let SYSTEM_DATA: { info?: string | null; timestamp?: string } = {
+let attachment: { info?: string | null; timestamp?: string } = {
   info: config.system_info,
 };
 
@@ -16,12 +16,12 @@ export function attachSystemDataHandler(
   const originalJson = res.json;
 
   res.json = function (body) {
-    // Merge the fixed system info with the actual response body
-    SYSTEM_DATA = { ...SYSTEM_DATA, timestamp: utils.formatISO() };
-    const finalBody = { system: SYSTEM_DATA, ...body };
+    // Merge the attachment with the actual response body
+    attachment = { ...attachment, timestamp: utils.formatISO() };
+    const newEnvelope = { system: attachment, ...body };
 
     // Use the original Express json method (preserves statusCode, headers, etc.)
-    return originalJson.call(this, finalBody);
+    return originalJson.call(this, newEnvelope);
   };
 
   next();

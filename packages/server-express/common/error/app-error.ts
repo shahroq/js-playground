@@ -1,4 +1,4 @@
-import type { ErrorMetaData, ErrorDetail, ErrorCode } from "./types";
+import type { ErrorMetaData, ErrorDetail, ErrorCode, E } from "./types";
 
 export default class AppError extends Error {
   public meta: ErrorMetaData & {
@@ -20,28 +20,6 @@ export default class AppError extends Error {
 
     // Set the prototype explicitly
     Object.setPrototypeOf(this, AppError.prototype);
-  }
-
-  static getMessage(e: unknown): string {
-    if (e instanceof Error) return e.message;
-    if (e && typeof e === "object" && "message" in e) return String(e.message);
-    if (typeof e === "string") return e;
-    return "An error occured";
-  }
-
-  static getStatusCode(e: unknown): number {
-    if (e instanceof AppError && e.meta.statusCode) return e.meta.statusCode;
-    return 500;
-  }
-
-  static getDetails(e: unknown): ErrorDetail[] {
-    if (e instanceof AppError && e.meta.details) return e.meta.details;
-    return [];
-  }
-
-  static getCode(e: unknown): ErrorCode {
-    if (e instanceof AppError && e.meta.code) return e.meta.code;
-    return "ERR_UNKNOWN";
   }
 
   // Static factory methods for common errors
@@ -153,9 +131,11 @@ export default class AppError extends Error {
 /**
  * Type guard for AppError
  */
-export function isAppError(e: any): e is AppError {
+export function isAppError(error: E): error is AppError {
   return (
-    e instanceof Error && "statusCode" in e && typeof e.statusCode === "number"
+    error instanceof AppError &&
+    "meta" in error &&
+    typeof error?.meta?.statusCode === "number"
   );
 }
 

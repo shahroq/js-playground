@@ -1,6 +1,6 @@
 // common
 import config from "./config";
-import { getAppEnvelope } from "./app-envelope/factory";
+import { getAppEnvelope } from "./envelope/factory";
 import { getValidatorMiddleware } from "./validation/factory";
 import { getDBAdapter } from "./db-adapter/factory";
 import { getHttpClient } from "./http-client/factory";
@@ -22,11 +22,12 @@ import { ObjectController } from "@/routes/v1/objects/controller";
 
 // re-exports
 export * as utils from "./utils/utils";
-export { default as AppError, isAppError } from "./app-error/app-error";
+export { default as AppError, isAppError } from "./error/app-error";
 export * from "@/common/meta-data/meta-data";
-export * from "@/common/app-error/global-error.middleware";
+export * from "@/common/error/global-error.middleware";
 export * from "@/common/middlewares/undefined-routes.middleware";
-export * from "@/common/app-envelope/attach-system-data.middleware";
+export * from "@/common/envelope/attach-system-data.middleware";
+export * from "@/common/envelope/envelop-response.middleware";
 export * from "@/common/query-object/normalize-query.middleware";
 
 /**

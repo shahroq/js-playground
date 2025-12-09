@@ -1,66 +1,90 @@
-import { AppError, config } from "@/common/container";
-import type { AppEnvelope } from "./app-envelope.interface";
-import type { E } from "../app-error/types";
+import { isAppError } from "@/common/container";
+import type { Envelope } from "./envelope.interface";
+import type { E } from "../error/types";
 
 type JSendStatus = "success" | "fail" | "error";
 
-type JSendFormat = {
-  status: JSendStatus;
-  data?: any;
-  message?: string;
-  code?: number;
+type JSendSuccess = {
+  status: "success";
+  data: any;
 };
 
-export class JSend implements AppEnvelope {
-  create(error: E, data: any = null) {
-    const status = this.getStatus(error);
+type JSendFail = {
+  status: "fail";
+  data: any;
+};
+
+type JSendError = {
+  status: "error";
+  message: string;
+  code?: number;
+  data?: any;
+};
+
+type JSendFormat = JSendSuccess | JSendFail | JSendError;
+
+export class JSendEnvelope implements Envelope {
+  constructor(
+    private readonly _error?: E | null,
+    private readonly _data?: any
+  ) {}
+
+  get data() {
+    return this._data;
+  }
+
+  get error() {
+    return this._error;
+  }
+
+  build(): JSendFormat {
+    const status = this.getStatus();
     let envelope;
 
     switch (status) {
       case "success":
-        envelope = this.formatSuccess(data);
+        envelope = this.formatSuccess();
         break;
       case "fail":
-        envelope = this.formatFail(error, data);
+        envelope = this.formatFail();
         break;
       case "error":
-        envelope = this.formatError(error, data);
+        envelope = this.formatError();
         break;
     }
 
     return envelope;
   }
 
-  private formatSuccess(data: any): JSendFormat {
+  private formatSuccess(): JSendSuccess {
     return {
       status: "success",
-      data,
+      data: this.data,
     };
   }
 
-  private formatFail(error: E, data: any): JSendFormat {
+  private formatFail(): JSendFail {
     return {
       status: "fail",
-      message: data?.message,
-      ...(AppError.getDetails(error) && {
-        data: { errors: AppError.getDetails(error) },
-      }),
+      data: {
+        message: this.error.message,
+        ...(this.error?.meta?.code && { code: this.error.meta.code }),
+        ...(this.error?.meta?.details && { details: this.error.meta.details }),
+      },
     };
   }
 
-  private formatError(error: E, data: any): JSendFormat {
+  private formatError(): JSendError {
     return {
       status: "error",
-      message: error?.message,
-      ...(data || AppError.getDetails(error)
-        ? { data: data ?? AppError.getDetails(error) }
-        : {}),
+      message: this.error?.message ?? "Internal Server Error",
+      ...(this.error?.code && { code: this.error.code }),
     };
   }
 
-  private getStatus(error: E): JSendStatus {
-    if (!error) return "success";
-    if (`${AppError.getStatusCode(error)}`.startsWith("4")) return "fail";
+  private getStatus(): JSendStatus {
+    if (!this.error) return "success";
+    if (isAppError(this.error)) return "fail";
     return "error";
   }
 }
