@@ -150,6 +150,15 @@ export default class AppError extends Error {
   }
 }
 
+/**
+ * Type guard for AppError
+ */
+export function isAppError(e: any): e is AppError {
+  return (
+    e instanceof Error && "statusCode" in e && typeof e.statusCode === "number"
+  );
+}
+
 // sample usage
 /*
 throw AppError.badRequest();
