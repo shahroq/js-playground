@@ -1,6 +1,6 @@
-import path from "path";
-import { fileURLToPath } from "url";
-import { setTimeout } from "node:timers/promises";
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { setTimeout } from 'node:timers/promises';
 
 export function add(a: number, b: number) {
   return a + b;
@@ -34,7 +34,7 @@ export function add(a: number, b: number) {
  */
 export function isRealString(value: unknown): value is string {
   return (
-    typeof value === "string" && value.trim() !== "" && isNaN(Number(value))
+    typeof value === 'string' && value.trim() !== '' && isNaN(Number(value))
   );
 }
 
@@ -54,7 +54,7 @@ export function isRealString(value: unknown): value is string {
  */
 export function formatISO(
   date: Date = new Date(),
-  local: boolean = false
+  local: boolean = false,
 ): string {
   if (!local) return date.toISOString();
 
@@ -68,7 +68,7 @@ export function formatISO(
 export function isFileURL(value: string): boolean {
   try {
     const url = new URL(value);
-    return url.protocol === "file:";
+    return url.protocol === 'file:';
   } catch {
     return false;
   }
@@ -86,18 +86,18 @@ interface GetDbIdentifierOptions {
 /** returns database name, which can be file name(json, sqllite) or database name (mysql, postgres, etc) */
 export function getDBIdentifier(
   dbUrl: string,
-  { withExtension = false }: GetDbIdentifierOptions = {}
+  { withExtension = false }: GetDbIdentifierOptions = {},
 ): string {
   try {
     const url = new URL(dbUrl);
 
-    if (url.protocol === "file:") {
+    if (url.protocol === 'file:') {
       const filename = path.basename(fileURLToPath(url));
       return withExtension ? filename : path.parse(filename).name;
     }
 
     // For non-file URLs (e.g., mysql://, postgres://)
-    return url.pathname.replace(/^\//, "");
+    return url.pathname.replace(/^\//, '');
   } catch {
     // Handle plain file paths (not valid URLs)
     const filename = path.basename(dbUrl);
@@ -111,7 +111,7 @@ console.log(getDBIdentifier("mysql://root@localhost/testdb")); // → "testdb"
 console.log(getDBIdentifier("./local.sqlite", { withExtension: true })); // → "local.sqlite"
 */
 
-type TruncatePosition = "start" | "middle" | "end";
+type TruncatePosition = 'start' | 'middle' | 'end';
 interface TruncateOptions {
   maxLength?: number;
   position?: TruncatePosition;
@@ -119,20 +119,20 @@ interface TruncateOptions {
 }
 
 export function truncateString(str: string, options: TruncateOptions): string {
-  const { maxLength = 30, position = "end", ellipsis = "..." } = options;
+  const { maxLength = 30, position = 'end', ellipsis = '...' } = options;
 
   if (str.length <= maxLength) return str;
 
   const visibleLength = maxLength - ellipsis.length;
 
   switch (position) {
-    case "start":
+    case 'start':
       return ellipsis + str.slice(-visibleLength);
-    case "middle": {
+    case 'middle': {
       const half = Math.floor(visibleLength / 2);
       return str.slice(0, half) + ellipsis + str.slice(-half);
     }
-    case "end":
+    case 'end':
     default:
       return str.slice(0, visibleLength) + ellipsis;
   }
@@ -145,17 +145,17 @@ export function truncateString(str: string, options: TruncateOptions): string {
 export async function getUserAsync(id: number) {
   console.log(`getting user from db with id: ${id}`);
   await setTimeout(1000);
-  return { id, username: "shm", role: "ADMIN" };
+  return { id, username: 'shm', role: 'ADMIN' };
 }
 
 export function getUserSync(id: number) {
   console.log(`getting user from db with id: ${id}`);
-  return { id, username: "shm", role: "ADMIN" };
+  return { id, username: 'shm', role: 'ADMIN' };
 }
 
 export function isAdmin(user_id: number) {
   const user = getUserSync(user_id);
-  return user.role == "ADMIN";
+  return user.role == 'ADMIN';
 }
 
 // test

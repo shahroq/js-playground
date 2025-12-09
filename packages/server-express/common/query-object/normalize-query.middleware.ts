@@ -1,3 +1,4 @@
+import type { QueryOptions } from "@/common/query-object/types";
 import type { Request, Response, NextFunction } from "express";
 import type {
   Expansion,
@@ -16,7 +17,7 @@ const RESERVED_KEYS = [
   "include",
 ];
 
-export function normalizeQueryHandler(dto?: any, options?: any) {
+export function normalizeQueryHandler(dto?: any, queryOptions?: QueryOptions) {
   // 1. normalize based on dto/options
   return (req: Request, res: Response, next: NextFunction) => {
     const q = req.query;

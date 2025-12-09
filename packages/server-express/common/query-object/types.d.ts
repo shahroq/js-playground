@@ -43,6 +43,16 @@ export interface INormQuery {
   expansion?: Expansion;
 }
 
+export interface QueryOptions {
+  defaultPerPage?: number;
+  selectableFields: string[]; // whitelist
+  defaultOrder?: OrderBy;
+  allowedSortFields?: string[]; // whitelist for sort validation
+  searchableFields?: string[]; // for q/search handling
+  filterableFields?: string[]; // whitelist
+  expandableCollections?: CollectionName[]; // whitelist
+}
+
 declare global {
   namespace Express {
     interface Request {
@@ -55,14 +65,4 @@ declare global {
       };
     }
   }
-}
-
-export interface QueryOptions {
-  defaultPerPage?: number;
-  selectableFields: string[]; // whitelist
-  defaultOrder?: OrderBy;
-  allowedSortFields?: string[]; // whitelist for sort validation
-  searchableFields?: string[]; // for q/search handling
-  filterableFields?: string[]; // whitelist
-  expandableCollections?: CollectionName[]; // whitelist
 }

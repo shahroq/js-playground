@@ -1,11 +1,11 @@
 import type { IDBAdapter } from "@/common/db-adapter/db-adapter.interface";
 import type { Product } from "./types";
 import { BaseRepository } from "@/common/repository/base.repository";
-import { options } from "./options";
+import { productsQueryOptions as queryOptions } from "@/common/container";
 
 export class ProductRepository extends BaseRepository<Product> {
   constructor(dbAdapter: IDBAdapter) {
-    super("products", options, dbAdapter);
+    super("products", queryOptions, dbAdapter);
   }
 
   /*

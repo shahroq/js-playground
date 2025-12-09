@@ -3,20 +3,20 @@ import {
   reviewController as ctrl,
   validate,
   normalizeQueryHandler as normalize,
+  reviewsQueryOptions as queryOptions,
 } from "@/common/container";
 import { NormQueryDtoList, NormQueryDtoShow } from "@/common/query-object/dto";
-import { options } from "./options";
 
 const router = express.Router();
 
 router.get(
   "/",
-  [validate("reviews.findAll"), normalize(NormQueryDtoList, options)],
+  [validate("reviews.findAll"), normalize(NormQueryDtoList, queryOptions)],
   ctrl.index.bind(ctrl)
 );
 router.get(
   "/:id",
-  [validate("reviews.findOne"), normalize(NormQueryDtoShow, options)],
+  [validate("reviews.findOne"), normalize(NormQueryDtoShow, queryOptions)],
   ctrl.show.bind(ctrl)
 );
 router.post("/", validate("reviews.create"), ctrl.store.bind(ctrl));

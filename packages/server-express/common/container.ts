@@ -1,3 +1,4 @@
+import { queryOptions } from "./../routes/v1/reviews/options";
 // common
 import config from "./config";
 import { getAppEnvelope } from "./envelope/factory";
@@ -29,6 +30,8 @@ export * from "@/common/middlewares/undefined-routes.middleware";
 export * from "@/common/envelope/attach-system-data.middleware";
 export * from "@/common/envelope/envelop-response.middleware";
 export * from "@/common/query-object/normalize-query.middleware";
+export { queryOptions as productsQueryOptions } from "@products/options";
+export { queryOptions as reviewsQueryOptions } from "@reviews/options";
 
 /**
  *  Composition Root & Barrel Export
