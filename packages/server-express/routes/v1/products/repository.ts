@@ -1,22 +1,11 @@
 import type { IDBAdapter } from "@/common/db-adapter/db-adapter.interface";
 import type { Product } from "./types";
 import { BaseRepository } from "@/common/repository/base.repository";
+import { options } from "./options";
 
 export class ProductRepository extends BaseRepository<Product> {
   constructor(dbAdapter: IDBAdapter) {
-    super(
-      "products",
-      {
-        // defaultPerPage: 1,
-        selectableFields: ["id", "name", "category", "price", "in_stock"],
-        defaultOrder: { sort: "id", direction: "asc" },
-        allowedSortFields: ["id", "name", "price", "created_at"],
-        searchableFields: ["name", "description"],
-        filterableFields: ["id", "name", "category", "price", "in_stock"],
-        expandableCollections: ["reviews"],
-      },
-      dbAdapter
-    );
+    super("products", options, dbAdapter);
   }
 
   /*
