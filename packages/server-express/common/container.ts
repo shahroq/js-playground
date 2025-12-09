@@ -1,7 +1,7 @@
 // common
 import config from "./config";
 import { getAppEnvelope } from "./envelope/factory";
-import { getValidatorMiddleware } from "./validation/factory";
+import { getValidatorHandler } from "./validation/factory";
 import { getDBAdapter } from "./db-adapter/factory";
 import { getHttpClient } from "./http-client/factory";
 
@@ -36,7 +36,7 @@ export * from "@/common/query-object/normalize-query.middleware";
 
 // 0. Common Services
 export const appEnvelope = getAppEnvelope();
-export const validate = getValidatorMiddleware();
+export const validate = getValidatorHandler();
 export const dbAdapter = getDBAdapter();
 export const httpClientJsonPlaceHolder = getHttpClient(
   config.api_url_jsonplaceholder as string

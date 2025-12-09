@@ -3,10 +3,10 @@ import { get } from "lodash";
 import { ZodError } from "zod";
 import type { ErrorDetail } from "@/common/error/types.js";
 import { AppError } from "@/common/container";
-import type { ValidationAction, ValidatorMiddleware } from "../types";
+import type { ValidationAction, ValidatorHandler } from "../types";
 import { schemas } from "./schema.ts";
 
-export const zodValidatorMiddleware: ValidatorMiddleware = (
+export const zodValidatorHandler: ValidatorHandler = (
   action: ValidationAction
 ) => {
   const schema = get(schemas, action);

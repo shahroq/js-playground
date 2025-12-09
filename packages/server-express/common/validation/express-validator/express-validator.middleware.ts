@@ -2,7 +2,7 @@ import type { Request, Response, NextFunction } from "express";
 import { get } from "lodash";
 import type { ErrorDetail } from "@/common/error/types.js";
 import { AppError } from "@/common/container";
-import type { ValidationAction, ValidatorMiddleware } from "../types";
+import type { ValidationAction, ValidatorHandler } from "../types";
 import { chains } from "./chain.ts";
 import {
   validationResult,
@@ -10,7 +10,7 @@ import {
   type Result,
 } from "express-validator";
 
-export const expressValidatorMiddleware: ValidatorMiddleware = (
+export const expressValidatorHandler: ValidatorHandler = (
   action: ValidationAction
 ) => {
   const chain = get(chains, action);

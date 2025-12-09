@@ -27,7 +27,7 @@ export interface ValidationSchema/Payload {
 }
 */
 
-export type ValidatorMiddleware = (
+export type ValidatorHandler = (
   action: ValidationAction
 ) => (req: Request, res: Response, next: NextFunction) => void | Promise<void>;
 

@@ -3,10 +3,10 @@ import { get } from "lodash";
 import Joi from "joi";
 import type { ErrorDetail } from "@/common/error/types.js";
 import { AppError } from "@/common/container";
-import type { ValidationAction, ValidatorMiddleware } from "../types";
+import type { ValidationAction, ValidatorHandler } from "../types";
 import { schemas } from "./schema.ts";
 
-export const joiValidatorMiddleware: ValidatorMiddleware = (
+export const joiValidatorHandler: ValidatorHandler = (
   action: ValidationAction
 ) => {
   const schema = get(schemas, action);
