@@ -8,11 +8,7 @@ export class PostController {
 
   constructor(private readonly service: PostService) {}
 
-  async index(
-    _req: Request,
-    res: Response,
-    _next: NextFunction
-  ): Promise<void> {
+  async index(_: any, res: Response): Promise<void> {
     const items: Post[] = await this.service.findAll();
 
     res.status(200).json({ [`${this.collection}s`]: items });

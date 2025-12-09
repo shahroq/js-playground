@@ -1,5 +1,5 @@
 import { config, utils } from "@/common/container";
-import type { Request, Response, NextFunction } from "express";
+import type { Response, NextFunction } from "express";
 
 let attachment: { info?: string | null; timestamp?: string } = {
   info: config.system_info,
@@ -9,7 +9,7 @@ let attachment: { info?: string | null; timestamp?: string } = {
  * attach system data to envelope in dev environment
  */
 export function attachSystemDataHandler(
-  _req: Request,
+  _: any,
   res: Response,
   next: NextFunction
 ) {

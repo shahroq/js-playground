@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import type { Application, NextFunction, Request, Response } from "express";
+import type { Application, NextFunction, Response } from "express";
 import v1Router from "@/routes/v1";
 import {
   config,
@@ -22,21 +22,21 @@ export const bootstrap = (): Application => {
     app.use(attachSystemDataHandler);
   app.use(beforeMWs);
 
-  app.get("/favicon.ico", (_req, res) => res.status(204).end());
+  app.get("/favicon.ico", (_, res) => res.status(204).end());
 
   // home
-  app.get("/", (_req: Request, res: Response) => {
+  app.get("/", (_: any, res: Response) => {
     console.log(`I am at home`);
     res.send(`API Sandbox Home: Hello World [${utils.formatISO()}]`);
   });
 
   // health
-  app.get("/health", (_req: Request, res: Response) => {
+  app.get("/health", (_: any, res: Response) => {
     res.json({ ok: false, environment: config.env });
   });
 
   // sandbox
-  app.get("/sandbox", (_req: Request, res: Response, next: NextFunction) => {
+  app.get("/sandbox", (_: any, res: Response, next: NextFunction) => {
     let error = null;
     let errorApp = null;
     let data = null;

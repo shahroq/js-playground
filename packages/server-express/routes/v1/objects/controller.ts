@@ -1,4 +1,4 @@
-import type { Request, Response } from "express";
+import type { Response } from "express";
 import type { Object } from "./types";
 import { ObjectService } from "./service";
 
@@ -7,7 +7,7 @@ export class ObjectController {
 
   constructor(private readonly service: ObjectService) {}
 
-  async index(_req: Request, res: Response): Promise<void> {
+  async index(_: any, res: Response): Promise<void> {
     const items: Object[] = await this.service.findAll();
 
     res.status(200).json({ [`${this.collection}s`]: items });

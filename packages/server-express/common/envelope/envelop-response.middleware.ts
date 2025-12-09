@@ -1,4 +1,4 @@
-import type { Request, Response, NextFunction } from "express";
+import type { Response, NextFunction } from "express";
 import { appEnvelope, isAppError } from "@/common/container";
 import type { E } from "../error/types";
 
@@ -6,7 +6,7 @@ import type { E } from "../error/types";
  * envelop the response in a specified format
  */
 export function envelopResponseHandler(
-  _req: Request,
+  _: any,
   res: Response,
   next: NextFunction
 ) {

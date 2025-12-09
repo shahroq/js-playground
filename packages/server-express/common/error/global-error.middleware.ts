@@ -1,10 +1,10 @@
-import type { Request, Response, NextFunction } from "express";
+import type { Response, NextFunction } from "express";
 import { config } from "@/common/container";
 import type { E } from "./types";
 
 export function globalErrorHandler(
   error: E,
-  _req: Request,
+  _: any,
   res: Response,
   next: NextFunction
 ): void {

@@ -1,5 +1,5 @@
 import type { QueryOptions } from "@/common/query-object/types";
-import type { Request, Response, NextFunction } from "express";
+import type { Request, NextFunction } from "express";
 import type {
   Expansion,
   Filter,
@@ -19,7 +19,7 @@ const RESERVED_KEYS = [
 
 export function normalizeQueryHandler(dto?: any, queryOptions?: QueryOptions) {
   // 1. normalize based on dto/options
-  return (req: Request, res: Response, next: NextFunction) => {
+  return (req: Request, _: any, next: NextFunction) => {
     const q = req.query;
 
     req.normQuery = {
