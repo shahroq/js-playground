@@ -1,3 +1,10 @@
+/*
+ProductCreateDTO;
+ProductUpdateDTO;
+ProductResultDTO;
+// ProductResultWithReviewDTO; // no need, make it optional in above
+*/
+
 export class CreateReviewDto {
   readonly product_id: number;
   readonly content: string;
