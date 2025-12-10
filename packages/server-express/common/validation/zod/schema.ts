@@ -75,14 +75,14 @@ const createReview = {
   body: z.object({
     product_id: z.number().int(),
     content: z.string().nullable().optional(),
-    rating: z.number().min(1).max(5),
+    rating: z.number().int().min(1).max(5),
   }),
 };
 
 const updateReview = {
   params: sharedSchemas.findOne.params,
   body: z.object({
-    rating: z.number().min(1).max(5).optional(),
+    rating: z.number().int().min(1).max(5).optional(),
     content: z.string().nullable().optional(),
   }),
 };

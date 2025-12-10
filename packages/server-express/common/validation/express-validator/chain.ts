@@ -72,14 +72,14 @@ const updateReview = [
 export const chains = {
   products: {
     ...sharedChains,
-    createItem: createProduct,
-    updateItem: updateProduct,
-    deleteItem: sharedChains.findOne,
+    create: createProduct,
+    update: updateProduct,
+    delete: sharedChains.findOne,
   },
   reviews: {
     ...sharedChains,
-    createItem: createReview,
-    updateItem: updateReview,
-    deleteItem: sharedChains.findOne,
+    create: createReview,
+    update: updateReview,
+    delete: sharedChains.findOne,
   },
 };

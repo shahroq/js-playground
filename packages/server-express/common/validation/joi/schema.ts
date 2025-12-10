@@ -51,14 +51,14 @@ const createReview = {
   body: Joi.object({
     product_id: Joi.number().integer().required(),
     content: Joi.string().optional().allow(null),
-    rating: Joi.number().min(1).max(5).required(),
+    rating: Joi.number().integer().min(1).max(5).required(),
   }),
 };
 
 const updateReview = {
   params: sharedSchemas.findOne.params,
   body: Joi.object({
-    rating: Joi.number().min(1).max(5).optional(),
+    rating: Joi.number().integer().min(1).max(5).optional(),
     content: Joi.string().optional().allow(null),
   }),
 };
@@ -69,14 +69,14 @@ const updateReview = {
 export const schemas = {
   products: {
     ...sharedSchemas,
-    createItem: createProduct,
-    updateItem: updateProduct,
-    deleteItem: sharedSchemas.findOne,
+    create: createProduct,
+    update: updateProduct,
+    delete: sharedSchemas.findOne,
   },
   reviews: {
     ...sharedSchemas,
-    createItem: createReview,
-    updateItem: updateReview,
-    deleteItem: sharedSchemas.findOne,
+    create: createReview,
+    update: updateReview,
+    delete: sharedSchemas.findOne,
   },
 };
