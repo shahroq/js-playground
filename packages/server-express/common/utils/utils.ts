@@ -161,3 +161,19 @@ export function isAdmin(user_id: number) {
 // test
 // const admin = isAdmin(1);
 // console.log(admin);
+
+/**
+ * Renames a key in an object, returning a new object with the renamed key
+ * @param obj - The source object
+ * @param oldKey - The key to rename
+ * @param newKey - The new key name
+ * @returns A new object with the renamed key
+ */
+export function renameKey<
+  T extends Record<string, any>,
+  K extends keyof T,
+  N extends string,
+>(obj: T, oldKey: K, newKey: N): Omit<T, K> & Record<N, T[K]> {
+  const { [oldKey]: value, ...rest } = obj;
+  return { ...rest, [newKey]: value } as Omit<T, K> & Record<N, T[K]>;
+}

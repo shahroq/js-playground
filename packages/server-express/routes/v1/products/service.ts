@@ -1,4 +1,4 @@
-import { MetaData } from "@/common/container";
+import { MetaData, utils } from "@/common/container";
 import type { EntityId } from "@/common/types";
 import { ProductRepository } from "./repository";
 import { ReviewRepository } from "@reviews/repository";
@@ -27,7 +27,9 @@ export class ProductService {
           const reviews = await this.reviewRepository.findByProductId(
             i.id as EntityId
           );
-          return { ...i, ...reviews };
+
+          const newReviews = utils.renameKey(reviews, "items", "reviews");
+          return { ...i, ...newReviews };
         })
       );
     }
