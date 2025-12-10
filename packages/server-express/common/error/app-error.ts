@@ -139,6 +139,19 @@ export function isAppError(error: E): error is AppError {
   );
 }
 
+export function getErrorMessage(error: E): string {
+  if (error instanceof Error) {
+    return error.message;
+  }
+  if (error && typeof error === "object" && "message" in error) {
+    return String(error.message);
+  }
+  if (typeof error === "string") {
+    return error;
+  }
+  return "An error occurred";
+}
+
 // sample usage
 /*
 throw AppError.badRequest();
