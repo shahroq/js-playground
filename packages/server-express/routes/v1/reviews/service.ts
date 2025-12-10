@@ -38,10 +38,11 @@ export class ReviewService {
     // get expansions: products
     if (normQuery.expansion?.include?.includes("products")) {
       const product = await this.productRepository.findById(
-        item?.id as EntityId
+        item?.product_id as EntityId
       );
       if (item && product) item.product = product;
     }
+
     return item ? { item } : {};
   }
 

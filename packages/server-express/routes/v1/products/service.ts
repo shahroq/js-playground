@@ -27,7 +27,7 @@ export class ProductService {
           const reviews = await this.reviewRepository.findByProductId(
             i.id as EntityId
           );
-          return { ...i, reviews };
+          return { ...i, ...reviews };
         })
       );
     }
@@ -36,13 +36,13 @@ export class ProductService {
   }
 
   async findOne(id: EntityId, normQuery: INormQuery): Promise<IProductResult> {
-    const item = await this.repository.findById(id);
+    let item = await this.repository.findById(id);
 
     if (normQuery.expansion?.include?.includes("reviews")) {
       const reviews = await this.reviewRepository.findByProductId(
         item?.id as EntityId
       );
-      if (item && reviews) item.reviews = reviews;
+      if (item && reviews) item = { ...item, ...reviews };
     }
 
     return item ? { item } : {};

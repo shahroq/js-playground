@@ -10,33 +10,32 @@ export class ReviewRepository extends BaseRepository<Review> {
     super("reviews", queryOptions, dbAdapter);
   }
 
+  // used by service of product module
   async findByProductId(productId: EntityId): Promise<IReviewResult> {
-    const reviews = await this.findAll({
-      product_id: productId,
-      sort: "created_at",
-      direction: "desc",
+    const items = await this.findAll({
+      filter: {
+        product_id: productId,
+      },
+      orderBy: {
+        sort: "created_at",
+        direction: "desc",
+      },
     });
-    const review_count = await this.count({ product_id: productId });
-    const average_rating = await this.average({ product_id: productId });
+    const total_count = await this.count({
+      filter: { product_id: productId },
+    });
+    const average_rating = await this.average({
+      filter: { product_id: productId },
+    });
 
-    return { reviews, review_count, average_rating };
+    return { items, total_count, average_rating };
   }
 
-  async findByUserId(userId: EntityId): Promise<Review[]> {
-    return this.findAll({
-      user_id: userId,
-      sort: "created_at",
-      direction: "desc",
-    });
-  }
+  // async findByUserId(userId: EntityId): Promise<Review[]> {}
 
   async average(normQuery: INormQuery): Promise<number | null> {
     return this.dbAdapter.avg<Review>(this.collection, normQuery, "rating");
   }
 
-  /*
-  async findByRating(minRating: number): Promise<Review[]> {
-    // ..
-  }
-  */
+  // async findByRating(minRating: number): Promise<Review[]> {}
 }

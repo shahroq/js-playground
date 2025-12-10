@@ -13,12 +13,12 @@ export class PostService {
       const items = await httpClient.get<Post[]>(`/posts`);
       res
         .status(200)
-        .json(formatter.format(null, { [`${collection}s`]: items }));
+        .json({ [`${collection}s`]: items });
     } catch (error) {
       console.log(error);
-      // res.json(formatter.format(error));
-      // return next(AppError.internal());
-      res.status(500).json(formatter.format(error));
+      // res.json(error);
+      // return next(error);
+      res.status(500).json(error);
     }
     */
   }

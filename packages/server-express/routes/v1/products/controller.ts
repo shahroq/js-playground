@@ -8,7 +8,7 @@ export class ProductController {
   constructor(private readonly service: ProductService) {}
 
   async index(req: Request, res: Response) {
-    const { items, meta } = await this.service.findAll(req.normQuery);
+    const { items, meta } = await this.service.findAll(req.normQuery ?? {});
 
     res.status(200).json({ [`${this.collection}s`]: items, meta });
   }
@@ -17,7 +17,7 @@ export class ProductController {
     const { id } = req.params;
     if (!id) return next(AppError.badRequest());
 
-    const { item } = await this.service.findOne(+id, req.normQuery);
+    const { item } = await this.service.findOne(+id, req.normQuery ?? {});
     if (!item) return next(AppError.notFound());
 
     res.status(200).json({ [this.collection]: item });

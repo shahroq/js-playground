@@ -14,10 +14,14 @@ export interface Review {
   product?: Product;
 }
 
-export interface IReviewQuery extends INormQuery {}
-
 export interface IReviewResult {
   item?: Review;
   items?: Review[];
+
+  total_count?: number;
+  average_rating?: float;
+
   meta?: IMeta;
 }
+
+export interface IReviewQuery extends INormQuery {}

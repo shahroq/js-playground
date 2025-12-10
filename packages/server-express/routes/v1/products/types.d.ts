@@ -14,24 +14,21 @@ export interface Product {
   updated_by?: number;
 
   reviews?: Review[];
-}
-
-export interface IProductQuery extends INormQuery {
-  // id?: EntityId;
-  /*
-  search?: string;
-  categoryId?: number;
-  */
+  review_count?: number; // number of ...
+  average_rating?: number | null; // average of ...
 }
 
 export interface IProductResult {
   item?: Product;
   items?: Product[];
+
   meta?: IMeta;
 }
 
-export interface IProductResultWithReviews extends IProductResult {
-  reviews?: Review[];
-  review_count?: number;
-  average_rating?: number | null;
+export interface IProductQuery extends INormQuery {
+  /*
+  id?: EntityId;
+  search?: string;
+  categoryId?: number;
+  */
 }

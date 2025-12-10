@@ -18,8 +18,7 @@ export abstract class BaseRepository<T> {
   }
 
   async findById(id: EntityId): Promise<T | null> {
-    return this.findOne({ id, per_page: 1 });
-    // return this.dbAdapter.findById<T>(this.collection, id);
+    return this.findOne({ filter: { id } });
   }
 
   async create(data: T): Promise<T> {
