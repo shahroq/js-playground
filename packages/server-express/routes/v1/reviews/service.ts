@@ -17,7 +17,7 @@ export class ReviewService {
       this.repository.count(normQuery),
     ]);
 
-    const meta = MetaData.build(normQuery, total);
+    const meta = new MetaData(normQuery, total).build();
 
     // get expansions: products
     if (normQuery.expansion?.include?.includes("products")) {

@@ -18,7 +18,7 @@ export class ProductService {
     ]);
 
     // TODO: remove this dependency, build meta somewhere else maybe?
-    const meta = MetaData.build(normQuery, total);
+    const meta = new MetaData(normQuery, total).build();
 
     // get expansions: reviews
     if (normQuery.expansion?.include?.includes("reviews")) {

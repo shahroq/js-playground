@@ -36,7 +36,7 @@ export type Expansion = {
 
 // Normalized query params after processing
 export interface INormQuery {
-  pagination?: Pagination;
+  pagination: Pagination;
   orderBy?: OrderBy;
   filter?: Filter;
   selection?: Selection;

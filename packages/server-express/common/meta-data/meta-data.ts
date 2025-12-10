@@ -2,19 +2,22 @@ import type { IMeta } from "@/common/types";
 import type { INormQuery } from "@/common/query-object/types";
 
 export class MetaData {
-  private constructor() {}
+  constructor(
+    private readonly normQuery: INormQuery,
+    private readonly total: number
+  ) {}
 
-  static build(normQuery: INormQuery, total: number): IMeta {
+  build(): IMeta {
     const {
       pagination: { page, per_page },
-    } = normQuery;
+    } = this.normQuery;
 
     return {
       page,
       per_page,
-      total_pages: Math.ceil(total / per_page),
-      total_count: total,
-      has_next_page: page * per_page < total,
+      total_pages: Math.ceil(this.total / per_page),
+      total_count: this.total,
+      has_next_page: page * per_page < this.total,
       has_prev_page: page > 1,
     };
   }
