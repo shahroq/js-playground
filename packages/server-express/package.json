@@ -21,7 +21,7 @@
     "prisma:migrate:deploy:test": "dotenv -e .env.test.local -- prisma migrate deploy",
     "prisma:boot": "bun run prisma validate && bun run prisma format && bun run prisma:clean && bun run prisma:migrate:dev && bun run prisma:migrate:dev && bun run prisma:migrate:deploy:test",
     "//[Seed]": "",
-    "seed": "bun run ./common/seed/seeder.ts",
+    "seed": "bun run ./common/seed/index.ts",
     "seed-test": "bun run ./common/seed/seeder-test.ts"
   },
   "devDependencies": {

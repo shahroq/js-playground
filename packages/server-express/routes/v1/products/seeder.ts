@@ -4,11 +4,13 @@ import { productRepository } from "@/common/container";
 const data = dataSource.products.map((i) => ({
   name: i.name,
   description: i.description,
-  price: parseFloat(i.price),
+  price: i.price,
   category: i.category,
   in_stock: Boolean(i.in_stock),
-  created_by: i.created_by,
-  updated_by: i.updated_by,
+  created_at: new Date(),
+  updated_at: new Date(),
+  created_by: +i.created_by,
+  updated_by: +i.updated_by,
 }));
 
 export async function seed(reset: boolean = true) {

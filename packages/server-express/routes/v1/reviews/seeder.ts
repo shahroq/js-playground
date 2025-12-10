@@ -2,11 +2,13 @@ import dataSource from "@/data/data-source.json";
 import { reviewRepository } from "@/common/container";
 
 const data = dataSource.reviews.map((i) => ({
-  product_id: Number(i.product_id),
+  product_id: +i.product_id,
   content: i.content,
-  rating: i.rating,
-  created_by: i.created_by,
-  updated_by: i.updated_by,
+  rating: +i.rating,
+  created_at: new Date(),
+  updated_at: new Date(),
+  created_by: +i.created_by,
+  updated_by: +i.updated_by,
 }));
 
 export async function seed(reset: boolean = true) {
