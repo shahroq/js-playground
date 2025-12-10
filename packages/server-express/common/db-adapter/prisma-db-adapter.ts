@@ -37,7 +37,7 @@ export class PrismaDBAdapter implements IDBAdapter {
     // Example: DATABASE_URL=“mysql://user:password@localhost:3306/mydb”
     // Or: DATABASE_URL=“file:./data.db”
     this.dbClient = new PrismaClient();
-    this.userId = config.user_id;
+    this.userId = +config.user_id;
   }
 
   async connect(): Promise<void> {
