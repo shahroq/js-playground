@@ -1,11 +1,11 @@
 import type { QueryOptions } from "@/common/query-object/types";
 
 export const queryOptions: QueryOptions = {
-  defaultPerPage: 4,
+  defaultLimit: 4,
+  defaultOrderBy: { sort: "id", direction: "asc" },
   selectableFields: ["id", "content", "rating", "product_id"],
-  defaultOrder: { sort: "id", direction: "asc" },
-  allowedSortFields: ["id", "title", "created_at"],
-  searchableFields: [],
+  sortableFields: ["id", "title", "created_at"],
   filterableFields: ["id", "product_id"],
+  searchableFields: [],
   expandableCollections: ["products"],
 };

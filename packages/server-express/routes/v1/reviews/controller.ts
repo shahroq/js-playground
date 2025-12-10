@@ -23,7 +23,7 @@ export class ReviewController {
     res.status(200).json({ [this.collection]: item });
   }
 
-  async store(req: Request, res: Response, next: NextFunction) {
+  async store(req: Request, res: Response) {
     const { body } = req;
 
     const { item: newItem } = await this.service.create(body);

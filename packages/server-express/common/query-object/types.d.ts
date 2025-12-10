@@ -44,25 +44,19 @@ export interface INormQuery {
 }
 
 export interface QueryOptions {
-  defaultPerPage?: number;
-  selectableFields: string[]; // whitelist
-  defaultOrder?: OrderBy;
-  allowedSortFields?: string[]; // whitelist for sort validation
-  searchableFields?: string[]; // for q/search handling
-  filterableFields?: string[]; // whitelist
-  expandableCollections?: CollectionName[]; // whitelist
+  defaultLimit?: number;
+  defaultOrderBy?: OrderBy;
+  selectableFields: string[]; // whitelist for SELECT
+  sortableFields?: string[]; // whitelist for ORDER BY
+  filterableFields?: string[]; // whitelist for WHERE
+  searchableFields?: string[]; // whitelist for WHERE
+  expandableCollections?: CollectionName[]; // whitelist for JOIN (sub collections)
 }
 
 declare global {
   namespace Express {
     interface Request {
-      normQuery?: {
-        pagination: Pagination;
-        orderBy?: OrderBy;
-        filters: Filter;
-        selection: Selection;
-        expansion: Expansion;
-      };
+      normQuery?: INormQuery;
     }
   }
 }

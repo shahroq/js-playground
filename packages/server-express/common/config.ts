@@ -16,7 +16,7 @@ const config = {
   debug: <boolean>!!(process.env.DEBUG === "true"),
   user_id: <number>(process.env.USER_ID_TMP || 1), // use it till auth is not implemented
 
-  pagination_per_page: <number>(process.env.PAGINATION_PER_PAGE || 10),
+  global_pagination_limit: <number>(process.env.GLOBAL_PAGINATION_LIMIT || 10),
 
   envelop_system_info: <boolean>!!(process.env.ENVELOP_SYSTEM_INFO === "true"),
   app_envelope_strategy: <string>process.env.APP_ENVELOPE_STRATEGY,
