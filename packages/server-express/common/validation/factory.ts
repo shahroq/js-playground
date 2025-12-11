@@ -7,7 +7,6 @@ import { config } from "@/common/container.ts";
 // Factory function to get validation middleware
 export function getValidatorHandler(): ValidatorHandler {
   const strategy = config.validation_strategy as ValidationStrategy;
-  console.log(strategy);
   console.log(`⚙️  Getting middleware for validation strategy (${strategy})`);
 
   switch (strategy) {
