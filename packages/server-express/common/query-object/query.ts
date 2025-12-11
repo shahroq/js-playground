@@ -26,20 +26,38 @@ const RESERVED_KEYS = [
  * TODO: use passed DTO
  */
 export class Query {
+  private _normalized: any;
+
   constructor(
-    private readonly query: any,
-    private readonly queryOptions?: QueryOptions,
+    private query: any,
+    private readonly queryOptions: QueryOptions,
     private readonly dto?: any
   ) {}
 
-  normalize(): INormQuery {
-    return {
+  get normalized() {
+    this.normalize();
+    return this._normalized;
+  }
+
+  append(query: any) {
+    this.query = {
+      ...this.query,
+      ...query,
+    };
+
+    return this;
+  }
+
+  private normalize() {
+    this._normalized = {
       pagination: this.normalizePagination(),
       orderBy: this.normalizeOrderBy(),
       filter: this.normalizeFilters(),
       selection: this.normalizeSelection(),
       expansion: this.normalizeExpansion(),
     };
+
+    return this;
   }
 
   private normalizePagination(): Pagination {

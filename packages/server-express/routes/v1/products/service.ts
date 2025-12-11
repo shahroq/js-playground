@@ -24,7 +24,7 @@ export class ProductService {
     if (normQuery.expansion?.include?.includes("reviews")) {
       items = await Promise.all(
         items.map(async (item) => {
-          const reviews = await this.reviewRepository.findByProductId(
+          const reviews = await this.reviewRepository.findAllByProductId(
             item.id as EntityId
           );
 
@@ -41,7 +41,7 @@ export class ProductService {
     let item = await this.repository.findById(id);
 
     if (normQuery.expansion?.include?.includes("reviews")) {
-      const reviews = await this.reviewRepository.findByProductId(
+      const reviews = await this.reviewRepository.findAllByProductId(
         item?.id as EntityId
       );
       if (item && reviews) {

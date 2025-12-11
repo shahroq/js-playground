@@ -5,6 +5,7 @@ const data = dataSource.reviews.map((i) => ({
   product_id: +i.product_id,
   content: i.content,
   rating: +i.rating,
+  status: i.status.toUpperCase(),
   created_at: new Date(),
   updated_at: new Date(),
   created_by: +i.created_by,

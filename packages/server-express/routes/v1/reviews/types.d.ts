@@ -1,6 +1,12 @@
 import type { EntityId, IMeta, INormQuery } from "@/common/types";
 import type { Product } from "@/routes/v1/products/types";
 
+export enum ReviewStatus {
+  APPROVED = "APPROVED",
+  PENDING = "PENDING",
+  REJECTED = "REJECTED",
+}
+
 export interface Review {
   id?: EntityId;
   product_id: number;

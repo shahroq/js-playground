@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { ReviewStatus } from "@/routes/v1/reviews/types.d";
 
 /**
  * Shared Schemas
@@ -12,7 +13,6 @@ const sharedSchemas = {
       in_stock: z.boolean().optional(),
     }),
   },
-
   findOne: {
     params: z.object({
       id: z.coerce.number().int(),
@@ -76,6 +76,7 @@ const createReview = {
     product_id: z.number().int(),
     content: z.string().nullable().optional(),
     rating: z.number().int().min(1).max(5),
+    status: z.enum(ReviewStatus).optional(),
   }),
 };
 
@@ -84,6 +85,14 @@ const updateReview = {
   body: z.object({
     rating: z.number().int().min(1).max(5).optional(),
     content: z.string().nullable().optional(),
+    status: z.enum(ReviewStatus).optional(),
+  }),
+};
+
+const updateReviewStatus = {
+  params: sharedSchemas.findOne.params,
+  body: z.object({
+    status: z.enum(ReviewStatus).optional(),
   }),
 };
 

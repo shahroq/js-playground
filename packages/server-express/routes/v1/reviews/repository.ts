@@ -3,7 +3,7 @@ import type { IReviewResult, Review } from "./types";
 import { BaseRepository } from "@/common/repository/base.repository";
 import type { INormQuery } from "@/common/query-object/types";
 import type { IDBAdapter } from "@/common/db-adapter/db-adapter.interface";
-import { reviewsQueryOptions as queryOptions } from "@/common/container";
+import { Query, reviewsQueryOptions as queryOptions } from "@/common/container";
 
 export class ReviewRepository extends BaseRepository<Review> {
   constructor(dbAdapter: IDBAdapter) {
@@ -11,31 +11,30 @@ export class ReviewRepository extends BaseRepository<Review> {
   }
 
   // used by service of product module
-  async findByProductId(productId: EntityId): Promise<IReviewResult> {
-    const items = await this.findAll({
-      filter: {
+  // TODO: should it be here? or at service layer
+  async findAllByProductId(productId: EntityId): Promise<IReviewResult> {
+    const q = new Query(
+      {
         product_id: productId,
-      },
-      orderBy: {
         sort: "created_at",
         direction: "desc",
       },
-    });
-    const total_count = await this.count({
-      filter: { product_id: productId },
-    });
-    const average_rating = await this.average({
-      filter: { product_id: productId },
-    });
+      queryOptions
+    );
+
+    const items = await this.findAll(q.normalized);
+
+    const total_count = await this.count(q.normalized);
+    const average_rating = await this.average(q.normalized);
 
     return { items, total_count, average_rating };
   }
 
-  // async findByUserId(userId: EntityId): Promise<Review[]> {}
+  // async findAllByUserId(userId: EntityId): Promise<Review[]> {}
 
   async average(normQuery: INormQuery): Promise<number | null> {
     return this.dbAdapter.avg<Review>(this.collection, normQuery, "rating");
   }
 
-  // async findByRating(minRating: number): Promise<Review[]> {}
+  // async findAllByRating(minRating: number): Promise<Review[]> {}
 }
