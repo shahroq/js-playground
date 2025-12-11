@@ -11,12 +11,12 @@ const router = express.Router();
 
 router.get(
   "/",
-  [validate("reviews.findAll"), normalize(NormQueryDtoList, queryOptions)],
+  [validate("reviews.findAll"), normalize(queryOptions, NormQueryDtoList)],
   ctrl.index.bind(ctrl)
 );
 router.get(
   "/:id",
-  [validate("reviews.findOne"), normalize(NormQueryDtoShow, queryOptions)],
+  [validate("reviews.findOne"), normalize(queryOptions, NormQueryDtoShow)],
   ctrl.show.bind(ctrl)
 );
 router.post("/", validate("reviews.create"), ctrl.store.bind(ctrl));

@@ -10,12 +10,12 @@ const router = express.Router();
 
 router.get(
   "/",
-  [validate("products.findAll"), normalize({}, queryOptions)],
+  [validate("products.findAll"), normalize(queryOptions)],
   ctrl.index.bind(ctrl)
 );
 router.get(
   "/:id",
-  [validate("products.findOne"), normalize({}, queryOptions)],
+  [validate("products.findOne"), normalize(queryOptions)],
   ctrl.show.bind(ctrl)
 );
 router.post("/", validate("products.create"), ctrl.store.bind(ctrl));
