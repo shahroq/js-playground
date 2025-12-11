@@ -23,13 +23,13 @@ export class ProductService {
     // get expansions: reviews
     if (normQuery.expansion?.include?.includes("reviews")) {
       items = await Promise.all(
-        items.map(async (i) => {
+        items.map(async (item) => {
           const reviews = await this.reviewRepository.findByProductId(
-            i.id as EntityId
+            item.id as EntityId
           );
 
           const newReviews = utils.renameKey(reviews, "items", "reviews");
-          return { ...i, ...newReviews };
+          return { ...item, ...newReviews };
         })
       );
     }
@@ -44,7 +44,11 @@ export class ProductService {
       const reviews = await this.reviewRepository.findByProductId(
         item?.id as EntityId
       );
-      if (item && reviews) item = { ...item, ...reviews };
+      if (item && reviews) {
+        item = { ...item, ...reviews };
+        // @ts-ignore
+        item = utils.renameKey(item, "items", "reviews");
+      }
     }
 
     return item ? { item } : {};
