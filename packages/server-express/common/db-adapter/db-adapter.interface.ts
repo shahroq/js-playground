@@ -1,5 +1,5 @@
 import type { Awaitable, CollectionName, EntityId } from "@/common/types";
-import type { INormQuery } from "@/common/query-object/types";
+import type { INormQuery } from "@/common/app-query/types";
 
 // export type DatabaseStrategy = "file-json" | "lowdb-json" | "prisma-sqlite";
 export type DBAdapterStrategy = "memory" | "file" | "lowdb" | "prisma";

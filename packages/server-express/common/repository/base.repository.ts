@@ -1,5 +1,5 @@
 import type { EntityId, CollectionName } from "@/common/types";
-import type { INormQuery, QueryOptions } from "@/common/query-object/types";
+import type { INormQuery, QueryOptions } from "@/common/app-query/types";
 import type { IDBAdapter } from "@/common/db-adapter/db-adapter.interface";
 
 export abstract class BaseRepository<T> {

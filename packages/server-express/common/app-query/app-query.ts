@@ -20,12 +20,12 @@ const RESERVED_KEYS = [
 ];
 
 /**
- * Query: Works with queriee, specifically for normalizing based on app-defined standards
+ * App Query: Works with queries, specifically for normalizing based on app-defined standards
  * Normalize and validate raw query parameters coming from an HTTP request
  * into a consistent `INormQuery`.
  * TODO: use passed DTO
  */
-export class Query {
+export class AppQuery {
   private _normalized: any;
 
   constructor(
@@ -34,7 +34,7 @@ export class Query {
     private readonly dto?: any
   ) {}
 
-  get normalized() {
+  get normalized(): INormQuery {
     this.normalize();
     return this._normalized;
   }

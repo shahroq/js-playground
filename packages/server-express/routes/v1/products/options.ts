@@ -1,4 +1,4 @@
-import type { QueryOptions } from "@/common/query-object/types";
+import type { QueryOptions } from "@/common/app-query/types";
 
 export const queryOptions: QueryOptions = {
   defaultLimit: 3,

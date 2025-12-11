@@ -1,5 +1,5 @@
-import { Query } from "@/common/container";
-import type { QueryOptions } from "@/common/query-object/types";
+import { AppQuery } from "@/common/container";
+import type { QueryOptions } from "@/common/app-query/types";
 import type { Request, NextFunction } from "express";
 
 export function normalizeQueryHandler(
@@ -8,7 +8,7 @@ export function normalizeQueryHandler(
 ) {
   return (req: Request, _: any, next: NextFunction) => {
     // get normalized based on dto/options
-    req.normQuery = new Query(req.query, queryOptions, dto).normalized;
+    req.normQuery = new AppQuery(req.query, queryOptions, dto).normalized;
 
     next();
   };

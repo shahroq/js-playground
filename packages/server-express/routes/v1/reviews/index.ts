@@ -5,7 +5,7 @@ import {
   normalizeQueryHandler as normalize,
   reviewsQueryOptions as queryOptions,
 } from "@/common/container";
-import { NormQueryDtoList, NormQueryDtoShow } from "@/common/query-object/dto";
+import { NormQueryDtoList, NormQueryDtoShow } from "@/common/app-query/dto";
 
 const router = express.Router();
 

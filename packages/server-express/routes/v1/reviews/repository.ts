@@ -1,9 +1,12 @@
 import type { EntityId } from "@/common/types";
 import type { IReviewResult, Review } from "./types";
 import { BaseRepository } from "@/common/repository/base.repository";
-import type { INormQuery } from "@/common/query-object/types";
+import type { INormQuery } from "@/common/app-query/types";
 import type { IDBAdapter } from "@/common/db-adapter/db-adapter.interface";
-import { Query, reviewsQueryOptions as queryOptions } from "@/common/container";
+import {
+  AppQuery,
+  reviewsQueryOptions as queryOptions,
+} from "@/common/container";
 
 export class ReviewRepository extends BaseRepository<Review> {
   constructor(dbAdapter: IDBAdapter) {
@@ -13,7 +16,7 @@ export class ReviewRepository extends BaseRepository<Review> {
   // used by service of product module
   // TODO: should it be here? or at service layer
   async findAllByProductId(productId: EntityId): Promise<IReviewResult> {
-    const q = new Query(
+    const q = new AppQuery(
       {
         product_id: productId,
         sort: "created_at",

@@ -3,7 +3,7 @@ import type { EntityId } from "@/common/types";
 import { ProductRepository } from "./repository";
 import { ReviewRepository } from "@reviews/repository";
 import type { Product, IProductResult } from "./types";
-import type { INormQuery } from "@/common/query-object/types";
+import type { INormQuery } from "@/common/app-query/types";
 
 export class ProductService {
   constructor(

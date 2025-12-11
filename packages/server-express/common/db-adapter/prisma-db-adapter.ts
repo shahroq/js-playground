@@ -13,7 +13,7 @@ import type {
   OrderBy,
   Filter,
   Selection,
-} from "@/common/query-object/types";
+} from "@/common/app-query/types";
 
 const collectionModelMap: Record<
   CollectionName,

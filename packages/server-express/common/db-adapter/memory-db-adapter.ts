@@ -2,7 +2,7 @@ import data from "@/data/memory-json/data.json";
 import { config, utils } from "@/common/container";
 import type { IDBAdapter } from "./db-adapter.interface";
 import type { EntityId, CollectionName } from "@/common/types";
-import type { INormQuery } from "@/common/query-object/types";
+import type { INormQuery } from "@/common/app-query/types";
 
 export class MemoryDBAdapter implements IDBAdapter {
   private dbClient;
