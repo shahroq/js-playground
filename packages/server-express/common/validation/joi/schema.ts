@@ -1,4 +1,5 @@
 import Joi from "joi";
+import { ReviewStatus } from "@/routes/v1/reviews/types.d";
 
 /**
  * Shared Schemas
@@ -58,8 +59,11 @@ const createReview = {
 const updateReview = {
   params: sharedSchemas.findOne.params,
   body: Joi.object({
-    rating: Joi.number().integer().min(1).max(5).optional(),
     content: Joi.string().optional().allow(null),
+    rating: Joi.number().integer().min(1).max(5).optional(),
+    status: Joi.string()
+      .valid(...Object.values(ReviewStatus))
+      .optional(),
   }),
 };
 

@@ -1,4 +1,5 @@
 import { body, param, query } from "express-validator";
+import { ReviewStatus } from "@/routes/v1/reviews/types.d";
 
 /**
  * Shared Validation Chains
@@ -55,6 +56,12 @@ const createReview = [
   body("rating")
     .isInt({ min: 1, max: 5 })
     .withMessage("Rating must be between 1 and 5"),
+  body("status")
+    .optional()
+    .isIn(Object.values(ReviewStatus))
+    .withMessage(
+      `status must be one of: ${Object.values(ReviewStatus).join(", ")}`
+    ),
 ];
 
 const updateReview = [
