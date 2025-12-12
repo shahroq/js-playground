@@ -4,8 +4,8 @@ import type {
   ReviewDelegate,
   UserDelegate,
 } from "@/generated/prisma/models";
-import { AppQuery, config, utils } from "@/common/container";
-import type { IDBAdapter } from "./db-adapter.interface";
+import { AppQuery, config } from "@/common/container";
+import { buildAuditFields, type IDBAdapter } from "./db-adapter.interface";
 import type { EntityId, CollectionName } from "@/common/types";
 import type {
   Pagination,
@@ -71,6 +71,8 @@ export class PrismaDBAdapter implements IDBAdapter {
   }
 
   async findOne<T>(collection: CollectionName, appQuery: AppQuery) {
+    appQuery.append({ per_page: 1 });
+
     const q = this.query<T>(appQuery);
     const m = this.getModel(collection);
 
@@ -87,9 +89,9 @@ export class PrismaDBAdapter implements IDBAdapter {
 
     const newItem = {
       ...data,
-      created_at: utils.formatISO(),
-      created_by: this.userId,
-      updated_by: this.userId,
+      ...buildAuditFields(["created_at", "created_by", "updated_by"], {
+        userId: this.userId,
+      }),
     };
 
     // @ts-ignore
@@ -99,18 +101,18 @@ export class PrismaDBAdapter implements IDBAdapter {
   }
 
   async update<T>(collection: CollectionName, id: EntityId, data: Partial<T>) {
-    // first check if exists
-    // ..
-
     const m = this.getModel(collection);
 
+    // first check if exists
+    // TODO: consider status
     const existing = await this.findById<T>(collection, id);
     if (!existing) return null;
 
     const updatedItem = {
       ...data,
-      updated_at: utils.formatISO(),
-      updated_by: this.userId,
+      ...buildAuditFields(["updated_at", "updated_by"], {
+        userId: this.userId,
+      }),
     };
 
     // @ts-ignore

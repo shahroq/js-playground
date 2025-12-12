@@ -3,7 +3,7 @@ import { JSONFile } from "lowdb/node";
 import fs from "fs-extra";
 import { AppQuery, config, utils } from "@/common/container";
 import { defaultData, type DatabaseSchema } from "@/data/lowdb-json/schema";
-import type { IDBAdapter } from "./db-adapter.interface";
+import { buildAuditFields, type IDBAdapter } from "./db-adapter.interface";
 import type { CollectionName, EntityId } from "../types";
 
 export class LowDBDBAdapter implements IDBAdapter {
@@ -70,10 +70,12 @@ export class LowDBDBAdapter implements IDBAdapter {
     const newItem = {
       ...data,
       id: m.length + 1,
-      created_at: utils.formatISO(),
-      updated_at: utils.formatISO(),
-      created_by: this.userId,
-      updated_by: this.userId,
+      ...buildAuditFields(
+        ["created_at", "created_by", "updated_at", "updated_by"],
+        {
+          userId: this.userId,
+        }
+      ),
     };
 
     m.push(newItem);
@@ -91,8 +93,9 @@ export class LowDBDBAdapter implements IDBAdapter {
     const updatedItem = {
       ...m[itemIndex],
       ...data,
-      updated_at: utils.formatISO(),
-      updated_by: this.userId,
+      ...buildAuditFields(["updated_at", "updated_by"], {
+        userId: this.userId,
+      }),
     };
 
     m[itemIndex] = updatedItem;
