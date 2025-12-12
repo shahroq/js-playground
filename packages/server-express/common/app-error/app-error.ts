@@ -1,4 +1,4 @@
-import type { ErrorMetaData, ErrorDetail, ErrorCode, E } from "./types";
+import type { ErrorMetaData, ErrorCode, E } from "./types";
 
 export default class AppError extends Error {
   public meta: ErrorMetaData & {
@@ -141,7 +141,7 @@ export function isAppError(error: E): error is AppError {
 
 export function getErrorMessage(error: E): string {
   if (error instanceof Error) {
-    return error.message;
+    return error?.meta?.publicMessage ?? error.message;
   }
   if (error && typeof error === "object" && "message" in error) {
     return String(error.message);
@@ -149,7 +149,7 @@ export function getErrorMessage(error: E): string {
   if (typeof error === "string") {
     return error;
   }
-  return "An error occurred";
+  return "Internal Server Error";
 }
 
 // sample usage

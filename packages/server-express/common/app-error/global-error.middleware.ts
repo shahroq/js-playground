@@ -14,12 +14,16 @@ export function globalErrorHandler(
   // TODO: log errors (winston, etc)
   // ..
 
-  // TODO: fix this? is it possible to override error message
-  // add a prefix to error message
-  // error.messageOverriden = `Global Err: ${error.message}`;
+  // generate public message
+  let publicMessage = "";
 
-  // check if it's prisma error (expose too much)
-  if (error?.name?.startsWith(`Prisma`)) error.messageOverriden = `ORM Error.`;
+  // check if it's prisma error (exposes too much)
+  if (error?.name?.startsWith(`Prisma`)) publicMessage += `ORM Error.`;
+
+  // add a prefix to error message
+  // publicMessage += `Global Err: ${error.message}`;
+
+  if (publicMessage) error.meta.publicMessage = publicMessage;
 
   res.json(error);
 }

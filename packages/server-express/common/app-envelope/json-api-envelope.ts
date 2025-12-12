@@ -1,3 +1,4 @@
+import { getErrorMessage } from "../app-error/app-error";
 import type { E } from "../app-error/types";
 import { isAppError } from "../container";
 import type { Envelope } from "./envelope.interface";
@@ -49,7 +50,7 @@ export class JsonApiEnvelope implements Envelope {
     return {
       errors: [
         {
-          title: appErr.message,
+          title: getErrorMessage(appErr),
           ...(appErr.meta?.code && { code: appErr.meta.code }),
           ...(appErr.meta && { meta: appErr.meta }),
         },
@@ -61,7 +62,7 @@ export class JsonApiEnvelope implements Envelope {
     return {
       errors: [
         {
-          title: this.error?.message ?? "Internal Server Error",
+          title: getErrorMessage(this.error),
         },
       ],
     };

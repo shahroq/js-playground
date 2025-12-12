@@ -1,6 +1,7 @@
 import { isAppError } from "@/common/container";
 import type { Envelope } from "./envelope.interface";
 import type { E } from "../app-error/types";
+import { getErrorMessage } from "../app-error/app-error";
 
 type JSendStatus = "success" | "fail" | "error";
 
@@ -67,7 +68,7 @@ export class JSendEnvelope implements Envelope {
     return {
       status: "fail",
       data: {
-        message: this.error.message,
+        message: getErrorMessage(this.error),
         ...(this.error?.meta?.code && { code: this.error.meta.code }),
         ...(this.error?.meta?.details && { details: this.error.meta.details }),
       },
@@ -77,7 +78,7 @@ export class JSendEnvelope implements Envelope {
   private formatError(): JSendError {
     return {
       status: "error",
-      message: this.error?.message ?? "Internal Server Error",
+      message: getErrorMessage(this.error),
       ...(this.error?.code && { code: this.error.code }),
     };
   }
