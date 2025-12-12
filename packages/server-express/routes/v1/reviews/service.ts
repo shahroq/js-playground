@@ -1,5 +1,5 @@
 import { ReviewStatus } from "./types.d";
-import { AppQuery, MetaData } from "@/common/container";
+import { AppQuery, config, MetaData } from "@/common/container";
 import type { EntityId } from "@/common/types";
 import { ReviewRepository } from "./repository";
 import type { IReviewResult, Review } from "./types";
@@ -60,6 +60,8 @@ export class ReviewService {
   }
 
   async create(data: Review): Promise<IReviewResult> {
+    if (!data?.status) data = { ...data, status: config.default_review_status };
+
     const newItem = await this.repository.create(data);
     return { item: newItem };
   }

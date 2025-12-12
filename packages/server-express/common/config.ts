@@ -1,5 +1,6 @@
 import { join } from "path";
 import { utils } from "./container";
+import { ReviewStatus } from "@/generated/prisma/enums";
 
 export type Env = "development" | "production" | "test";
 
@@ -19,7 +20,11 @@ const config = {
 
   user_id: <number>(process.env.USER_ID_TMP || 1), // use it till auth is not implemented
 
-  global_pagination_limit: <number>(process.env.GLOBAL_PAGINATION_LIMIT || 10),
+  default_pagination_limit: <number>(
+    (process.env.DEFAULT_PAGINATION_LIMIT || 10)
+  ),
+  default_review_status:
+    (process.env.DEFAULT_REVIEW_STATUS as ReviewStatus) || ReviewStatus.PENDING,
 
   envelop_system_info: <boolean>!!(process.env.ENVELOP_SYSTEM_INFO === "true"),
   app_envelope_strategy: <string>process.env.APP_ENVELOPE_STRATEGY,

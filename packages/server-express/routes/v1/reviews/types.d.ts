@@ -12,6 +12,7 @@ export interface Review {
   product_id: number;
   content: string;
   rating: number;
+  status: ReviewStatus;
   created_at: Date;
   updated_at: Date;
   created_by: number;
