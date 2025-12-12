@@ -10,27 +10,32 @@ const config = {
   root_path: `${root}`,
   data_path: `${root}/data`,
 
+  // basics
   version: <string>process.env.VERSION || "0.0.0",
   env: <Env>process.env.NODE_ENV || "development",
   base_url: <string>process.env.BASE_URL,
   port: <number>(process.env.PORT || 3000),
 
+  // debug
   debug: <boolean>!!(process.env.DEBUG === "true"),
   debug_orm: <boolean>!!(process.env.DEBUG_ORM === "true"),
 
-  user_id: <number>(process.env.USER_ID_TMP || 1), // use it till auth is not implemented
-
+  // defaults
+  user_id: <number>(process.env.DEFAULT_USER_ID || 1), // use it till auth is not implemented
   default_pagination_limit: <number>(
     (process.env.DEFAULT_PAGINATION_LIMIT || 10)
   ),
   default_review_status:
     (process.env.DEFAULT_REVIEW_STATUS as ReviewStatus) || ReviewStatus.PENDING,
 
+  // app-response
   envelop_system_info: <boolean>!!(process.env.ENVELOP_SYSTEM_INFO === "true"),
   app_envelope_strategy: <string>process.env.APP_ENVELOPE_STRATEGY,
 
+  // validation
   validation_strategy: <string>process.env.VALIDATION_STRATEGY,
 
+  // database
   database_url: <string | null>process.env.DATABASE_URL,
   database_adapter_strategy: <string>process.env.DATABASE_ADAPTER_STRATEGY,
 
@@ -38,6 +43,7 @@ const config = {
   database_name: <string | null>null,
   database_path: <string | null>null,
 
+  // http-client
   http_client_strategy: <string>process.env.HTTP_CLIENT_STRATEGY,
   api_url_jsonplaceholder: <string>process.env.API_URL_JSONPLACEHOLDER,
   api_url_restfulapi: <string>process.env.API_URL_RESTFULAPI,
