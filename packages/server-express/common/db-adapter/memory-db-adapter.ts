@@ -12,11 +12,11 @@ export class MemoryDBAdapter implements IDBAdapter {
     this.userId = +config.user_id;
   }
 
-  connect(): void {
+  connect() {
     console.log(`🌕 Fetching initial data from json file`);
   }
 
-  disconnect(): void {
+  disconnect() {
     //
   }
 
@@ -24,7 +24,7 @@ export class MemoryDBAdapter implements IDBAdapter {
     return this.dbClient[collection];
   }
 
-  findAll<T>(collection: CollectionName, appQuery: AppQuery): T[] {
+  findAll<T>(collection: CollectionName, appQuery: AppQuery) {
     const m = this.getModel(collection);
 
     const items = m;
@@ -32,7 +32,7 @@ export class MemoryDBAdapter implements IDBAdapter {
     return items;
   }
 
-  findOne<T>(collection: CollectionName, appQuery: AppQuery): T | null {
+  findOne<T>(collection: CollectionName, appQuery: AppQuery) {
     const m = this.getModel(collection);
     const id = appQuery.normQuery.filter?.id;
 
@@ -41,11 +41,11 @@ export class MemoryDBAdapter implements IDBAdapter {
     return item || null;
   }
 
-  findById<T>(collection: CollectionName, id: EntityId): T | null {
+  findById<T>(collection: CollectionName, id: EntityId) {
     return this.findOne<T>(collection, new AppQuery({ id }));
   }
 
-  create<T>(collection: CollectionName, data: T): T {
+  create<T>(collection: CollectionName, data: T) {
     const m = this.getModel(collection);
 
     const newItem = {
@@ -62,11 +62,7 @@ export class MemoryDBAdapter implements IDBAdapter {
     return newItem;
   }
 
-  update<T>(
-    collection: CollectionName,
-    id: EntityId,
-    data: Partial<T>
-  ): T | null {
+  update<T>(collection: CollectionName, id: EntityId, data: Partial<T>) {
     const m = this.getModel(collection);
 
     const itemIndex = m.findIndex((item) => item.id === id);
@@ -84,7 +80,7 @@ export class MemoryDBAdapter implements IDBAdapter {
     return updatedItem;
   }
 
-  delete<T>(collection: CollectionName, id: EntityId): boolean | null {
+  delete<T>(collection: CollectionName, id: EntityId) {
     const m = this.getModel(collection);
 
     const itemIndex = m.findIndex((item) => item.id === id);
@@ -95,7 +91,7 @@ export class MemoryDBAdapter implements IDBAdapter {
     return true;
   }
 
-  deleteMany<T>(collection: CollectionName, appQuery: AppQuery): number {
+  deleteMany<T>(collection: CollectionName, appQuery: AppQuery) {
     const m = this.getModel(collection);
 
     const deletedCount = m.length;
@@ -103,7 +99,7 @@ export class MemoryDBAdapter implements IDBAdapter {
     return deletedCount;
   }
 
-  count<T>(collection: CollectionName, appQuery: AppQuery): number {
+  count<T>(collection: CollectionName, appQuery: AppQuery) {
     const m = this.getModel(collection);
     return m.length;
   }
@@ -112,7 +108,7 @@ export class MemoryDBAdapter implements IDBAdapter {
     collection: CollectionName,
     appQuery: AppQuery,
     field: keyof T & string
-  ): number | null {
+  ) {
     const m = this.getModel(collection);
 
     let sum = 0;

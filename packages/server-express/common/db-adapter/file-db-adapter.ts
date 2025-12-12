@@ -14,7 +14,7 @@ export class FileDBAdapter implements IDBAdapter {
     this.userId = config.user_id;
   }
 
-  async connect(): Promise<void> {
+  async connect() {
     await fs.ensureFile(this.filePath);
     await this.readFile();
     console.log(
@@ -24,7 +24,7 @@ export class FileDBAdapter implements IDBAdapter {
     );
   }
 
-  async disconnect(): Promise<void> {
+  async disconnect() {
     await this.writeFile();
     console.log("🌒 FS JSON disconnected");
   }
@@ -35,10 +35,7 @@ export class FileDBAdapter implements IDBAdapter {
     return m;
   }
 
-  async findAll<T>(
-    collection: CollectionName,
-    appQuery: AppQuery
-  ): Promise<T[]> {
+  async findAll<T>(collection: CollectionName, appQuery: AppQuery) {
     const m = await this.getModel(collection);
     console.log(m);
 
@@ -47,10 +44,7 @@ export class FileDBAdapter implements IDBAdapter {
     return items;
   }
 
-  async findOne<T>(
-    collection: CollectionName,
-    appQuery: AppQuery
-  ): Promise<T | null> {
+  async findOne<T>(collection: CollectionName, appQuery: AppQuery) {
     const m = await this.getModel(collection);
     const id = appQuery.normQuery.filter?.id;
 
@@ -59,17 +53,11 @@ export class FileDBAdapter implements IDBAdapter {
     return item || null;
   }
 
-  async findById<T>(
-    collection: CollectionName,
-    id: EntityId
-  ): Promise<T | null> {
+  async findById<T>(collection: CollectionName, id: EntityId) {
     return this.findOne<T>(collection, new AppQuery({ id }));
   }
 
-  async create<T extends { id?: any }>(
-    collection: CollectionName,
-    data: T
-  ): Promise<T> {
+  async create<T extends { id?: any }>(collection: CollectionName, data: T) {
     const m = await this.getModel(collection);
 
     const newItem = {
@@ -87,11 +75,7 @@ export class FileDBAdapter implements IDBAdapter {
     return { ...newItem } as T;
   }
 
-  async update<T>(
-    collection: CollectionName,
-    id: EntityId,
-    data: Partial<T>
-  ): Promise<T | null> {
+  async update<T>(collection: CollectionName, id: EntityId, data: Partial<T>) {
     const m = await this.getModel(collection);
 
     const itemIndex = m.findIndex((item: any) => item.id === id);
@@ -109,10 +93,7 @@ export class FileDBAdapter implements IDBAdapter {
     return updatedItem;
   }
 
-  async delete(
-    collection: CollectionName,
-    id: EntityId
-  ): Promise<boolean | null> {
+  async delete(collection: CollectionName, id: EntityId) {
     const m = await this.getModel(collection);
 
     const itemIndex = m.findIndex((item: any) => item.id === id);
@@ -125,17 +106,11 @@ export class FileDBAdapter implements IDBAdapter {
     return true;
   }
 
-  async deleteMany<T>(
-    collection: CollectionName,
-    appQuery: AppQuery
-  ): Promise<number> {
+  async deleteMany<T>(collection: CollectionName, appQuery: AppQuery) {
     //
   }
 
-  async count<T>(
-    collection: CollectionName,
-    appQuery: AppQuery
-  ): Promise<number> {
+  async count<T>(collection: CollectionName, appQuery: AppQuery) {
     const m = await this.getModel(collection);
     return m.length;
   }

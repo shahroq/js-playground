@@ -53,7 +53,7 @@ export class PrismaDBAdapter implements IDBAdapter {
     console.log("🌕 Prisma connected");
   }
 
-  async disconnect(): Promise<void> {
+  async disconnect() {
     await this.dbClient.$disconnect();
     console.log("🌒 Prisma disconnected");
   }
@@ -62,10 +62,7 @@ export class PrismaDBAdapter implements IDBAdapter {
     return this.dbClient[collectionModelMap[collection]];
   }
 
-  async findAll<T>(
-    collection: CollectionName,
-    appQuery: AppQuery
-  ): Promise<T[]> {
+  async findAll<T>(collection: CollectionName, appQuery: AppQuery) {
     const q = this.query<T>(appQuery);
     const m = this.getModel(collection);
 
@@ -73,10 +70,7 @@ export class PrismaDBAdapter implements IDBAdapter {
     return await m.findMany(q);
   }
 
-  async findOne<T>(
-    collection: CollectionName,
-    appQuery: AppQuery
-  ): Promise<T | null> {
+  async findOne<T>(collection: CollectionName, appQuery: AppQuery) {
     const q = this.query<T>(appQuery);
     const m = this.getModel(collection);
 
@@ -84,14 +78,11 @@ export class PrismaDBAdapter implements IDBAdapter {
     return await m.findFirst(q);
   }
 
-  async findById<T>(
-    collection: CollectionName,
-    id: EntityId
-  ): Promise<T | null> {
+  async findById<T>(collection: CollectionName, id: EntityId) {
     return this.findOne<T>(collection, new AppQuery({ id }));
   }
 
-  async create<T>(collection: CollectionName, data: T): Promise<T> {
+  async create<T>(collection: CollectionName, data: T) {
     const m = this.getModel(collection);
 
     const newItem = {
@@ -107,11 +98,7 @@ export class PrismaDBAdapter implements IDBAdapter {
     });
   }
 
-  async update<T>(
-    collection: CollectionName,
-    id: EntityId,
-    data: Partial<T>
-  ): Promise<T | null> {
+  async update<T>(collection: CollectionName, id: EntityId, data: Partial<T>) {
     // first check if exists
     // ..
 
@@ -133,7 +120,7 @@ export class PrismaDBAdapter implements IDBAdapter {
     });
   }
 
-  async delete<T>(collection: CollectionName, id: EntityId): Promise<boolean> {
+  async delete<T>(collection: CollectionName, id: EntityId) {
     const m = this.getModel(collection);
 
     // @ts-ignore
@@ -142,10 +129,7 @@ export class PrismaDBAdapter implements IDBAdapter {
     return !!result.count;
   }
 
-  async deleteMany<T>(
-    collection: CollectionName,
-    appQuery: AppQuery
-  ): Promise<number> {
+  async deleteMany<T>(collection: CollectionName, appQuery: AppQuery) {
     await this.dbClient.$executeRawUnsafe(`PRAGMA foreign_keys = OFF;`);
     const q = this.query<T>(appQuery);
     const m = this.getModel(collection);
@@ -155,10 +139,7 @@ export class PrismaDBAdapter implements IDBAdapter {
     return result.count;
   }
 
-  async count<T>(
-    collection: CollectionName,
-    appQuery: AppQuery
-  ): Promise<number> {
+  async count<T>(collection: CollectionName, appQuery: AppQuery) {
     const q = this.query<T>(appQuery, false, false, false);
     const m = this.getModel(collection);
 
@@ -170,7 +151,7 @@ export class PrismaDBAdapter implements IDBAdapter {
     collection: CollectionName,
     appQuery: AppQuery,
     field: keyof T & string
-  ): Promise<number | null> {
+  ) {
     const q = this.query<T>(appQuery, false, false, false);
     const m = this.getModel(collection);
 
