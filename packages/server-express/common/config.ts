@@ -13,7 +13,10 @@ const config = {
   env: <Env>process.env.NODE_ENV || "development",
   base_url: <string>process.env.BASE_URL,
   port: <number>(process.env.PORT || 3000),
+
   debug: <boolean>!!(process.env.DEBUG === "true"),
+  debug_orm: <boolean>!!(process.env.DEBUG_ORM === "true"),
+
   user_id: <number>(process.env.USER_ID_TMP || 1), // use it till auth is not implemented
 
   global_pagination_limit: <number>(process.env.GLOBAL_PAGINATION_LIMIT || 10),

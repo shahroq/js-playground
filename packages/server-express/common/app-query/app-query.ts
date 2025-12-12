@@ -1,6 +1,6 @@
-import type { INormQuery, QueryOptions } from "./types";
-import { config } from "@/common/container";
-
+import type { INormQuery, IRawQuery, QueryOptions } from "./types";
+import { config, defaultQueryOptions } from "@/common/container";
+import type { CollectionName } from "../types";
 import type {
   Expansion,
   Filter,
@@ -8,7 +8,6 @@ import type {
   Pagination,
   Selection,
 } from "./types";
-import type { CollectionName } from "../types";
 
 const RESERVED_KEYS = [
   "page",
@@ -21,25 +20,25 @@ const RESERVED_KEYS = [
 
 /**
  * App Query: Works with queries, specifically for normalizing based on app-defined standards
- * Normalize and validate raw query parameters coming from an HTTP request
- * into a consistent `INormQuery`.
- * TODO: use passed DTO
+ * Normalize and validate raw query parameters coming from an HTTP request into a consistent `INormQuery`.
+ * TODO: use passed DTO? I remove it for now
  */
 export class AppQuery {
-  private _normalized: any;
+  private _normQuery: INormQuery;
 
   constructor(
-    private query: any,
-    private readonly queryOptions: QueryOptions,
-    private readonly dto?: any
-  ) {}
-
-  get normalized(): INormQuery {
-    this.normalize();
-    return this._normalized;
+    private query: IRawQuery,
+    private readonly queryOptions?: QueryOptions
+  ) {
+    this.queryOptions = this.queryOptions ?? defaultQueryOptions;
   }
 
-  append(query: any) {
+  get normQuery(): INormQuery {
+    this.normalize();
+    return this._normQuery;
+  }
+
+  append(query: IRawQuery) {
     this.query = {
       ...this.query,
       ...query,
@@ -49,7 +48,7 @@ export class AppQuery {
   }
 
   private normalize() {
-    this._normalized = {
+    this._normQuery = {
       pagination: this.normalizePagination(),
       orderBy: this.normalizeOrderBy(),
       filter: this.normalizeFilters(),
@@ -63,9 +62,12 @@ export class AppQuery {
   private normalizePagination(): Pagination {
     const { defaultLimit } = this.queryOptions ?? {};
 
-    const page = +this.query.page || 1;
-    const per_page =
-      +this.query.per_page || defaultLimit || config.global_pagination_limit;
+    const page = +(this.query.page ?? 1);
+    const per_page = +(
+      this.query.per_page ??
+      defaultLimit ??
+      config.global_pagination_limit
+    );
     const offset = (page - 1) * per_page;
 
     return { page, per_page, offset };

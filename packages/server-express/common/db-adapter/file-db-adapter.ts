@@ -1,7 +1,8 @@
 import fs from "fs-extra";
-import { config, utils } from "@/common/container";
+import { AppQuery, config, utils } from "@/common/container";
 import { defaultData, type DatabaseSchema } from "@/data/file-json/schema";
 import type { IDBAdapter } from "./db-adapter.interface";
+import type { CollectionName, EntityId } from "../types";
 
 export class FileDBAdapter implements IDBAdapter {
   private db: DatabaseSchema = {};
@@ -28,145 +29,135 @@ export class FileDBAdapter implements IDBAdapter {
     console.log("🌒 FS JSON disconnected");
   }
 
-  /*
-  async findAll<T>(collection: string): Promise<T[]> {
+  private async getModel(collection: CollectionName): ModelDelegate {
     await this.readFile();
-    return (this.data[collection] || []) as T[];
+    const m = (this.data[collection] || []) as T[];
+    return m;
   }
-  */
 
-  async find<T>(collection: string, filter: QueryFilter<T> = {}): Promise<T[]> {
-    await this.readFile();
-    let items = (this.data[collection] || []) as T[];
+  async findAll<T>(
+    collection: CollectionName,
+    appQuery: AppQuery
+  ): Promise<T[]> {
+    const m = await this.getModel(collection);
+    console.log(m);
 
-    if (filter.where) {
-      if (typeof filter.where === "function") {
-        items = items.filter(filter.where);
-      } else {
-        items = items.filter((item) =>
-          Object.entries(filter.where as object).every(
-            ([key, value]) => (item as any)[key] === value
-          )
-        );
-      }
-    }
-
-    if (filter.orderBy) {
-      const { field, direction } = filter.orderBy;
-      items.sort((a, b) => {
-        const aVal = a[field];
-        const bVal = b[field];
-        if (aVal < bVal) return direction === "asc" ? -1 : 1;
-        if (aVal > bVal) return direction === "asc" ? 1 : -1;
-        return 0;
-      });
-    }
-
-    if (filter.offset !== undefined) items = items.slice(filter.offset);
-    if (filter.per_page !== undefined) items = items.slice(0, filter.per_page);
+    const items = m;
 
     return items;
   }
 
   async findOne<T>(
-    collection: string,
-    filter: QueryFilter<T>
+    collection: CollectionName,
+    appQuery: AppQuery
   ): Promise<T | null> {
-    const results = await this.find(collection, { ...filter, per_page: 1 });
-    return results[0] || null;
+    const m = await this.getModel(collection);
+    const id = appQuery.normQuery.filter?.id;
+
+    const item = m.find((i) => i.id == id);
+
+    return item || null;
   }
 
   async findById<T>(
-    collection: string,
-    id: string | number
+    collection: CollectionName,
+    id: EntityId
   ): Promise<T | null> {
-    await this.readFile();
-    const items = this.data[collection] || [];
-    return items.find((item: any) => item.id === id) || null;
+    return this.findOne<T>(collection, new AppQuery({ id }));
   }
 
   async create<T extends { id?: any }>(
-    collection: string,
+    collection: CollectionName,
     data: T
   ): Promise<T> {
-    await this.readFile();
-    if (!this.data[collection]) this.data[collection] = [];
+    const m = await this.getModel(collection);
 
     const newItem = {
       ...data,
-      id: data.id ?? this.getNextId(collection),
+      id: m.length + 1,
       created_at: utils.formatISO(),
       updated_at: utils.formatISO(),
       created_by: this.userId,
       updated_by: this.userId,
     };
-    (this.data[collection] as any[]).push(newItem);
+
+    m.push(newItem);
     await this.writeFile();
 
     return { ...newItem } as T;
   }
 
   async update<T>(
-    collection: string,
-    id: string | number,
+    collection: CollectionName,
+    id: EntityId,
     data: Partial<T>
   ): Promise<T | null> {
-    await this.readFile();
-    const items = this.data[collection] || [];
-    const index = items.findIndex((item: any) => item.id === id);
+    const m = await this.getModel(collection);
 
-    if (index === -1) return null;
+    const itemIndex = m.findIndex((item: any) => item.id === id);
+    if (itemIndex < 0) return null;
 
-    items[index] = {
-      ...items[index],
+    const updatedItem = {
+      ...m[itemIndex],
       ...data,
       updated_at: utils.formatISO(),
       updated_by: this.userId,
     };
+    m[itemIndex] = updatedItem;
     await this.writeFile();
 
-    return { ...items[index] };
+    return updatedItem;
   }
 
-  async delete(collection: string, id: string | number): Promise<boolean> {
-    await this.readFile();
-    const items = this.data[collection] || [];
-    const index = items.findIndex((item: any) => item.id === id);
+  async delete(
+    collection: CollectionName,
+    id: EntityId
+  ): Promise<boolean | null> {
+    const m = await this.getModel(collection);
 
-    if (index === -1) return false;
+    const itemIndex = m.findIndex((item: any) => item.id === id);
+    if (itemIndex < 0) return null;
 
-    items.splice(index, 1);
+    m.splice(itemIndex, 1);
+
     await this.writeFile();
+
     return true;
   }
 
   async deleteMany<T>(
-    collection: string,
-    filter: QueryFilter<T> = {}
+    collection: CollectionName,
+    appQuery: AppQuery
   ): Promise<number> {
-    await this.readFile();
-
-    const items: T[] = this.data[collection] || [];
-    const remaining = items.filter(
-      (item) =>
-        !Object.entries(filter).every(
-          ([key, value]) => (item as any)[key] === value
-        )
-    );
-    const deletedCount = items.length - remaining.length;
-
-    this.data[collection] = remaining;
-    await this.writeFile();
-    return deletedCount;
+    //
   }
 
-  async count<T>(collection: string, filter?: QueryFilter<T>): Promise<number> {
-    if (!filter || !filter.where) {
-      await this.readFile();
-      return (this.data[collection] || []).length;
+  async count<T>(
+    collection: CollectionName,
+    appQuery: AppQuery
+  ): Promise<number> {
+    const m = await this.getModel(collection);
+    return m.length;
+  }
+
+  async avg<T>(
+    collection: CollectionName,
+    appQuery: AppQuery,
+    field: keyof T & string
+  ): Promise<number | null> {
+    const m = await this.getModel(collection);
+
+    let sum = 0;
+    let count = 0;
+
+    for (const item of m) {
+      const value = (item as any)[field];
+      if (typeof value === "number") {
+        sum += value;
+        count++;
+      }
     }
-    const results = await this.find(collection, filter);
-    return results.length;
+    return count === 0 ? null : sum / count;
   }
 
   async createDB(identifier: string) {
@@ -210,18 +201,5 @@ export class FileDBAdapter implements IDBAdapter {
         updated_at: utils.formatISO(),
       },
     };
-  }
-
-  private getNextId(collection: string): number {
-    const items = this.data[collection] || [];
-    if (items.length === 0) return 1;
-
-    // Find the maximum existing numeric ID and increment
-    const maxId = items
-      .map((item: any) => Number(item.id))
-      .filter((id) => !isNaN(id))
-      .reduce((max, id) => Math.max(max, id), 0);
-
-    return maxId + 1;
   }
 }

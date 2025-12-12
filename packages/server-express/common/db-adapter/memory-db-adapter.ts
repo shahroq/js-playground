@@ -1,8 +1,7 @@
 import data from "@/data/memory-json/data.json";
-import { config, utils } from "@/common/container";
+import { AppQuery, config, utils } from "@/common/container";
 import type { IDBAdapter } from "./db-adapter.interface";
 import type { EntityId, CollectionName } from "@/common/types";
-import type { INormQuery } from "@/common/app-query/types";
 
 export class MemoryDBAdapter implements IDBAdapter {
   private dbClient;
@@ -21,31 +20,37 @@ export class MemoryDBAdapter implements IDBAdapter {
     //
   }
 
-  find<T>(collection: CollectionName, normQuery: INormQuery): T[] {
+  private getModel(collection: CollectionName) {
+    return this.dbClient[collection];
+  }
+
+  findAll<T>(collection: CollectionName, appQuery: AppQuery): T[] {
     const m = this.getModel(collection);
 
     const items = m;
+
     return items;
   }
 
-  findOne<T>(collection: CollectionName, normQuery: INormQuery): T | null {
+  findOne<T>(collection: CollectionName, appQuery: AppQuery): T | null {
     const m = this.getModel(collection);
-    const id = normQuery.filter?.id;
+    const id = appQuery.normQuery.filter?.id;
 
     const item = m.find((item) => item.id == id);
-    if (!item) return null;
 
-    return item;
+    return item || null;
   }
 
   findById<T>(collection: CollectionName, id: EntityId): T | null {
-    return this.findOne<T>(collection, { filter: { id } });
+    return this.findOne<T>(collection, new AppQuery({ id }));
   }
 
   create<T>(collection: CollectionName, data: T): T {
     const m = this.getModel(collection);
+
     const newItem = {
       ...data,
+      id: m.length + 1,
       created_at: utils.formatISO(),
       updated_at: utils.formatISO(),
       created_by: this.userId,
@@ -53,6 +58,7 @@ export class MemoryDBAdapter implements IDBAdapter {
     };
 
     m.push(newItem);
+
     return newItem;
   }
 
@@ -64,7 +70,7 @@ export class MemoryDBAdapter implements IDBAdapter {
     const m = this.getModel(collection);
 
     const itemIndex = m.findIndex((item) => item.id === id);
-    if (itemIndex < 0) throw Error("Couldn't find the item.");
+    if (itemIndex < 0) return null;
 
     const updatedItem = {
       ...m[itemIndex],
@@ -78,18 +84,18 @@ export class MemoryDBAdapter implements IDBAdapter {
     return updatedItem;
   }
 
-  delete<T>(collection: CollectionName, id: EntityId): boolean {
+  delete<T>(collection: CollectionName, id: EntityId): boolean | null {
     const m = this.getModel(collection);
 
     const itemIndex = m.findIndex((item) => item.id === id);
-    if (itemIndex < 0) throw Error("Couldn't find the item.");
+    if (itemIndex < 0) return null;
 
     m.splice(itemIndex, 1);
 
     return true;
   }
 
-  deleteMany<T>(collection: CollectionName, normQuery: INormQuery): number {
+  deleteMany<T>(collection: CollectionName, appQuery: AppQuery): number {
     const m = this.getModel(collection);
 
     const deletedCount = m.length;
@@ -97,14 +103,14 @@ export class MemoryDBAdapter implements IDBAdapter {
     return deletedCount;
   }
 
-  count<T>(collection: CollectionName, normQuery: INormQuery): number {
+  count<T>(collection: CollectionName, appQuery: AppQuery): number {
     const m = this.getModel(collection);
     return m.length;
   }
 
   avg<T>(
     collection: CollectionName,
-    normQuery: INormQuery,
+    appQuery: AppQuery,
     field: keyof T & string
   ): number | null {
     const m = this.getModel(collection);
@@ -128,9 +134,5 @@ export class MemoryDBAdapter implements IDBAdapter {
 
   migrate() {
     //
-  }
-
-  private getModel(collection: CollectionName) {
-    return this.dbClient[collection];
   }
 }

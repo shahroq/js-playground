@@ -5,18 +5,17 @@ import {
   normalizeQueryHandler as normalize,
   reviewsQueryOptions as queryOptions,
 } from "@/common/container";
-import { NormQueryDtoList, NormQueryDtoShow } from "@/common/app-query/dto";
 
 const router = express.Router();
 
 router.get(
   "/",
-  [validate("reviews.findAll"), normalize(queryOptions, NormQueryDtoList)],
+  [validate("reviews.findAll"), normalize(queryOptions)],
   ctrl.index.bind(ctrl)
 );
 router.get(
   "/:id",
-  [validate("reviews.findOne"), normalize(queryOptions, NormQueryDtoShow)],
+  [validate("reviews.findOne"), normalize(queryOptions)],
   ctrl.show.bind(ctrl)
 );
 router.post("/", validate("reviews.create"), ctrl.store.bind(ctrl));

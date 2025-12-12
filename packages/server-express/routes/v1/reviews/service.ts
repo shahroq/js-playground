@@ -1,9 +1,9 @@
-import { MetaData } from "@/common/container";
+import { ReviewStatus } from "./types.d";
+import { AppQuery, MetaData } from "@/common/container";
 import type { EntityId } from "@/common/types";
 import { ReviewRepository } from "./repository";
 import type { IReviewResult, Review } from "./types";
 import { ProductRepository } from "@products/repository";
-import type { INormQuery } from "@/common/app-query/types";
 
 export class ReviewService {
   constructor(
@@ -11,32 +11,45 @@ export class ReviewService {
     private readonly productRepository: ProductRepository
   ) {}
 
-  async findAll(normQuery: INormQuery): Promise<IReviewResult> {
+  async findAll(appQuery: AppQuery): Promise<IReviewResult> {
+    // add status filter all the times
+    appQuery.append({ status: ReviewStatus.APPROVED });
+
     let [items, total] = await Promise.all([
-      this.repository.findAll(normQuery),
-      this.repository.count(normQuery),
+      this.repository.findAll(appQuery),
+      this.repository.count(appQuery),
     ]);
 
-    const meta = new MetaData(normQuery, total).build();
-
+    // TODO: abstract away
     // get expansions: products
-    if (normQuery.expansion?.include?.includes("products")) {
+    if (appQuery.normQuery.expansion?.include?.includes("products")) {
       items = await Promise.all(
-        items.map(async (i) => {
-          const product = await this.productRepository.findById(i.product_id);
-          return { ...i, product: product ?? undefined };
+        items.map(async (item) => {
+          // get product
+          const product = await this.productRepository.findById(
+            item.product_id
+          );
+          return { ...item, product: product ?? undefined };
         })
       );
     }
 
+    // get meta data
+    const meta = new MetaData(appQuery, total).build();
+
     return { items, meta };
   }
 
-  async findOne(id: EntityId, normQuery: INormQuery): Promise<IReviewResult> {
-    const item = await this.repository.findById(id);
+  async findOne(id: EntityId, appQuery: AppQuery): Promise<IReviewResult> {
+    appQuery.append({ id });
+    // add status filter all the times
+    // appQuery.append({ status: ReviewStatus.APPROVED });
+
+    const item = await this.repository.findOne(appQuery);
 
     // get expansions: products
-    if (normQuery.expansion?.include?.includes("products")) {
+    // TODO: abstract away
+    if (appQuery.normQuery.expansion?.include?.includes("products")) {
       const product = await this.productRepository.findById(
         item?.product_id as EntityId
       );
@@ -52,6 +65,11 @@ export class ReviewService {
   }
 
   async update(id: EntityId, data: Partial<Review>): Promise<IReviewResult> {
+    // check if this is updatable
+    // const appQuery = new AppQuery({ id, status: ReviewStatus.PENDING });
+    // const existingReview = await this.repository.findOne(appQuery);
+    //...
+
     const updatedItem = await this.repository.update(id, data);
     return updatedItem ? { item: updatedItem } : {};
   }

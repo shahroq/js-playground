@@ -1,16 +1,29 @@
-export interface IRawQuery {
-  // pagination
-  page?: number | string;
-  per_page?: number | string;
-  // sort
-  sort?: string; // field name
-  direction?: "asc" | "desc";
-  // selection
-  fields?: string[];
-  // expansion
-  include?: CollectionName[];
-  // filter: other dynamic fields allowed
-  [key: string]: unknown;
+declare global {
+  namespace Express {
+    interface Request {
+      normQuery?: INormQuery;
+      appQuery?: Query;
+    }
+  }
+}
+
+export interface QueryOptions {
+  defaultLimit?: number;
+  defaultOrderBy?: OrderBy;
+  selectableFields: string[]; // whitelist for SELECT
+  sortableFields?: string[]; // whitelist for ORDER BY
+  filterableFields?: string[]; // whitelist for WHERE
+  searchableFields?: string[]; // whitelist for WHERE
+  expandableCollections?: CollectionName[]; // whitelist for JOIN (sub collections)
+}
+
+// Normalized query params after processing
+export interface INormQuery {
+  pagination?: Pagination;
+  orderBy?: OrderBy;
+  filter?: Filter;
+  selection?: Selection;
+  expansion?: Expansion;
 }
 
 export type Pagination = {
@@ -34,29 +47,21 @@ export type Expansion = {
   include?: CollectionName[];
 };
 
-// Normalized query params after processing
-export interface INormQuery {
-  pagination?: Pagination;
-  orderBy?: OrderBy;
-  filter?: Filter;
-  selection?: Selection;
-  expansion?: Expansion;
-}
+export interface IRawQuery {
+  // Selection (LIMIT)
+  page?: number | string;
+  per_page?: number | string;
 
-export interface QueryOptions {
-  defaultLimit?: number;
-  defaultOrderBy?: OrderBy;
-  selectableFields: string[]; // whitelist for SELECT
-  sortableFields?: string[]; // whitelist for ORDER BY
-  filterableFields?: string[]; // whitelist for WHERE
-  searchableFields?: string[]; // whitelist for WHERE
-  expandableCollections?: CollectionName[]; // whitelist for JOIN (sub collections)
-}
+  // OrderBy (ORDER BY)
+  sort?: string; // field name
+  direction?: "asc" | "desc";
 
-declare global {
-  namespace Express {
-    interface Request {
-      normQuery?: INormQuery;
-    }
-  }
+  // Selection (SELECT)
+  fields?: string[];
+
+  // Expansion (JOIN)
+  include?: CollectionName[];
+
+  // Filters (WHERE) other dynamic fields allowed
+  [key: string]: unknown;
 }

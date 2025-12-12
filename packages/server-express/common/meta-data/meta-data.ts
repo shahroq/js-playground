@@ -1,16 +1,21 @@
 import type { IMeta } from "@/common/types";
-import type { INormQuery } from "@/common/app-query/types";
+import type { AppQuery } from "@/common/container";
+
+// TODO: asbtract? relate to Query maybe? or app-response? total in here?
+// rename to AppResponseMetaData?
 
 export class MetaData {
   constructor(
-    private readonly normQuery: INormQuery,
+    private readonly appQuery: AppQuery,
     private readonly total: number
   ) {}
 
   build(): IMeta {
+    const normQuery = this.appQuery.normQuery;
+
     const {
       pagination: { page, per_page },
-    } = this.normQuery;
+    } = normQuery;
 
     return {
       page,

@@ -1,9 +1,8 @@
-import { MetaData, utils } from "@/common/container";
+import { MetaData, utils, AppQuery } from "@/common/container";
 import type { EntityId } from "@/common/types";
 import { ProductRepository } from "./repository";
 import { ReviewRepository } from "@reviews/repository";
 import type { Product, IProductResult } from "./types";
-import type { INormQuery } from "@/common/app-query/types";
 
 export class ProductService {
   constructor(
@@ -11,17 +10,15 @@ export class ProductService {
     private readonly reviewRepository: ReviewRepository
   ) {}
 
-  async findAll(normQuery: INormQuery): Promise<IProductResult> {
+  async findAll(appQuery: AppQuery): Promise<IProductResult> {
     let [items, total] = await Promise.all([
-      this.repository.findAll(normQuery),
-      this.repository.count(normQuery),
+      this.repository.findAll(appQuery),
+      this.repository.count(appQuery),
     ]);
 
-    // TODO: remove this dependency, build meta somewhere else maybe?
-    const meta = new MetaData(normQuery, total).build();
-
+    // TODO: abstract away
     // get expansions: reviews
-    if (normQuery.expansion?.include?.includes("reviews")) {
+    if (appQuery.normQuery.expansion?.include?.includes("reviews")) {
       items = await Promise.all(
         items.map(async (item) => {
           const reviews = await this.reviewRepository.findAllByProductId(
@@ -34,13 +31,18 @@ export class ProductService {
       );
     }
 
+    // TODO: remove this dependency, build meta somewhere else maybe?
+    // get meta data
+    const meta = new MetaData(appQuery, total).build();
+
     return { items, meta };
   }
 
-  async findOne(id: EntityId, normQuery: INormQuery): Promise<IProductResult> {
+  async findOne(id: EntityId, appQuery: AppQuery): Promise<IProductResult> {
     let item = await this.repository.findById(id);
 
-    if (normQuery.expansion?.include?.includes("reviews")) {
+    // get expansions: reviews
+    if (appQuery.normQuery.expansion?.include?.includes("reviews")) {
       const reviews = await this.reviewRepository.findAllByProductId(
         item?.id as EntityId
       );
@@ -59,10 +61,7 @@ export class ProductService {
     return { item: newItem };
   }
 
-  async updateItem(
-    id: EntityId,
-    data: Partial<Product>
-  ): Promise<IProductResult> {
+  async update(id: EntityId, data: Partial<Product>): Promise<IProductResult> {
     const updatedItem = await this.repository.update(id, data);
     return updatedItem ? { item: updatedItem } : {};
   }

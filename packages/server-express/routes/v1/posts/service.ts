@@ -10,15 +10,7 @@ export class PostService {
 
     /*
     try {
-      const items = await httpClient.get<Post[]>(`/posts`);
-      res
-        .status(200)
-        .json({ [`${collection}s`]: items });
     } catch (error) {
-      console.log(error);
-      // res.json(error);
-      // return next(error);
-      res.status(500).json(error);
     }
     */
   }

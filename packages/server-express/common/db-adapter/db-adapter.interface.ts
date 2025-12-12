@@ -1,5 +1,5 @@
 import type { Awaitable, CollectionName, EntityId } from "@/common/types";
-import type { INormQuery } from "@/common/app-query/types";
+import type { AppQuery } from "../container";
 
 // export type DatabaseStrategy = "file-json" | "lowdb-json" | "prisma-sqlite";
 export type DBAdapterStrategy = "memory" | "file" | "lowdb" | "prisma";
@@ -9,11 +9,11 @@ export interface IDBAdapter {
 
   disconnect(): Awaitable<void>;
 
-  find<T>(collection: CollectionName, normQuery: INormQuery): Awaitable<T[]>;
+  findAll<T>(collection: CollectionName, appQuery: AppQuery): Awaitable<T[]>;
 
   findOne<T>(
     collection: CollectionName,
-    normQuery: INormQuery
+    appQuery: AppQuery
   ): Awaitable<T | null>;
 
   findById<T>(collection: CollectionName, id: EntityId): Awaitable<T | null>;
@@ -26,21 +26,21 @@ export interface IDBAdapter {
     data: Partial<T>
   ): Awaitable<T | null>;
 
-  delete<T>(collection: CollectionName, id: EntityId): Awaitable<boolean>;
+  delete<T>(
+    collection: CollectionName,
+    id: EntityId
+  ): Awaitable<boolean | null>;
 
   deleteMany<T>(
     collection: CollectionName,
-    normQuery: INormQuery
+    appQuery: AppQuery
   ): Awaitable<number>;
 
-  count<T>(
-    collection: CollectionName,
-    normQuery: INormQuery
-  ): Awaitable<number>;
+  count<T>(collection: CollectionName, appQuery: AppQuery): Awaitable<number>;
 
   avg<T>(
     collection: CollectionName,
-    normQuery: INormQuery,
+    appQuery: AppQuery,
     field: keyof T & string
   ): Awaitable<number | null>;
 

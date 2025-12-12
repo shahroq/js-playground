@@ -1,6 +1,7 @@
 import type { EntityId, CollectionName } from "@/common/types";
-import type { INormQuery, QueryOptions } from "@/common/app-query/types";
+import type { QueryOptions } from "@/common/app-query/types";
 import type { IDBAdapter } from "@/common/db-adapter/db-adapter.interface";
+import { AppQuery } from "@/common/container";
 
 export abstract class BaseRepository<T> {
   constructor(
@@ -9,16 +10,18 @@ export abstract class BaseRepository<T> {
     protected readonly dbAdapter: IDBAdapter
   ) {}
 
-  async findAll(normQuery: INormQuery): Promise<T[]> {
-    return this.dbAdapter.find<T>(this.collection, normQuery);
+  async findAll(appQuery: AppQuery): Promise<T[]> {
+    return this.dbAdapter.findAll<T>(this.collection, appQuery);
   }
 
-  async findOne(normQuery: INormQuery): Promise<T | null> {
-    return this.dbAdapter.findOne<T>(this.collection, normQuery);
+  async findOne(appQuery: AppQuery): Promise<T | null> {
+    // TODO: how to remove per_page? If set the it on default.option.ts, it will override the config.
+    appQuery.append({ per_page: 1 });
+    return this.dbAdapter.findOne<T>(this.collection, appQuery);
   }
 
   async findById(id: EntityId): Promise<T | null> {
-    return this.findOne({ filter: { id } });
+    return this.findOne(new AppQuery({ id }));
   }
 
   async create(data: T): Promise<T> {
@@ -30,14 +33,14 @@ export abstract class BaseRepository<T> {
   }
 
   async delete(id: EntityId): Promise<boolean> {
-    return this.dbAdapter.delete(this.collection, id);
+    return await this.dbAdapter.delete(this.collection, id);
   }
 
-  async deleteMany(normQuery: INormQuery): Promise<number> {
-    return this.dbAdapter.deleteMany(this.collection, normQuery);
+  async deleteMany(appQuery: AppQuery): Promise<number> {
+    return await this.dbAdapter.deleteMany(this.collection, appQuery);
   }
 
-  async count(normQuery: INormQuery): Promise<number> {
-    return this.dbAdapter.count<T>(this.collection, normQuery);
+  async count(appQuery: AppQuery): Promise<number> {
+    return this.dbAdapter.count<T>(this.collection, appQuery);
   }
 }

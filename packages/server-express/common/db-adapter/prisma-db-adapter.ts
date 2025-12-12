@@ -4,11 +4,10 @@ import type {
   ReviewDelegate,
   UserDelegate,
 } from "@/generated/prisma/models";
-import { config, utils } from "@/common/container";
+import { AppQuery, config, utils } from "@/common/container";
 import type { IDBAdapter } from "./db-adapter.interface";
 import type { EntityId, CollectionName } from "@/common/types";
 import type {
-  INormQuery,
   Pagination,
   OrderBy,
   Filter,
@@ -36,7 +35,14 @@ export class PrismaDBAdapter implements IDBAdapter {
     // Prisma will use the DATABASE_URL from .env
     // Example: DATABASE_URL=“mysql://user:password@localhost:3306/mydb”
     // Or: DATABASE_URL=“file:./data.db”
-    this.dbClient = new PrismaClient();
+
+    // prisma options
+    let options = {};
+    // log the query for debugging
+    if (config.debug_orm)
+      options = { ...options, log: ["query", "info", "warn", "error"] };
+
+    this.dbClient = new PrismaClient(options);
     this.userId = +config.user_id;
   }
 
@@ -52,11 +58,15 @@ export class PrismaDBAdapter implements IDBAdapter {
     console.log("🌒 Prisma disconnected");
   }
 
-  async find<T>(
+  private getModel(collection: CollectionName): ModelDelegate {
+    return this.dbClient[collectionModelMap[collection]];
+  }
+
+  async findAll<T>(
     collection: CollectionName,
-    normQuery: INormQuery
+    appQuery: AppQuery
   ): Promise<T[]> {
-    const q = this.query<T>(normQuery);
+    const q = this.query<T>(appQuery);
     const m = this.getModel(collection);
 
     // @ts-ignore
@@ -65,9 +75,9 @@ export class PrismaDBAdapter implements IDBAdapter {
 
   async findOne<T>(
     collection: CollectionName,
-    normQuery: INormQuery
+    appQuery: AppQuery
   ): Promise<T | null> {
-    const q = this.query<T>(normQuery);
+    const q = this.query<T>(appQuery);
     const m = this.getModel(collection);
 
     // @ts-ignore
@@ -78,17 +88,18 @@ export class PrismaDBAdapter implements IDBAdapter {
     collection: CollectionName,
     id: EntityId
   ): Promise<T | null> {
-    return this.findOne<T>(collection, { filter: { id } });
+    return this.findOne<T>(collection, new AppQuery({ id }));
   }
 
   async create<T>(collection: CollectionName, data: T): Promise<T> {
+    const m = this.getModel(collection);
+
     const newItem = {
       ...data,
       created_at: utils.formatISO(),
       created_by: this.userId,
       updated_by: this.userId,
     };
-    const m = this.getModel(collection);
 
     // @ts-ignore
     return await m.create({
@@ -102,6 +113,10 @@ export class PrismaDBAdapter implements IDBAdapter {
     data: Partial<T>
   ): Promise<T | null> {
     // first check if exists
+    // ..
+
+    const m = this.getModel(collection);
+
     const existing = await this.findById<T>(collection, id);
     if (!existing) return null;
 
@@ -110,8 +125,6 @@ export class PrismaDBAdapter implements IDBAdapter {
       updated_at: utils.formatISO(),
       updated_by: this.userId,
     };
-
-    const m = this.getModel(collection);
 
     // @ts-ignore
     return await m.update({
@@ -124,16 +137,17 @@ export class PrismaDBAdapter implements IDBAdapter {
     const m = this.getModel(collection);
 
     // @ts-ignore
-    const result = m.deleteMany({ where: { id } });
+    const result = await m.deleteMany({ where: { id } });
 
     return !!result.count;
   }
 
   async deleteMany<T>(
     collection: CollectionName,
-    normQuery: INormQuery
+    appQuery: AppQuery
   ): Promise<number> {
     await this.dbClient.$executeRawUnsafe(`PRAGMA foreign_keys = OFF;`);
+    const q = this.query<T>(appQuery);
     const m = this.getModel(collection);
 
     // @ts-ignore
@@ -143,9 +157,9 @@ export class PrismaDBAdapter implements IDBAdapter {
 
   async count<T>(
     collection: CollectionName,
-    normQuery: INormQuery
+    appQuery: AppQuery
   ): Promise<number> {
-    const q = this.query<T>(normQuery, false, false, false);
+    const q = this.query<T>(appQuery, false, false, false);
     const m = this.getModel(collection);
 
     // @ts-ignore
@@ -154,10 +168,10 @@ export class PrismaDBAdapter implements IDBAdapter {
 
   async avg<T>(
     collection: CollectionName,
-    normQuery: INormQuery,
+    appQuery: AppQuery,
     field: keyof T & string
   ): Promise<number | null> {
-    const q = this.query<T>(normQuery, false, false, false);
+    const q = this.query<T>(appQuery, false, false, false);
     const m = this.getModel(collection);
 
     // @ts-ignore
@@ -179,17 +193,13 @@ export class PrismaDBAdapter implements IDBAdapter {
     // this.createDB(config.database_name);
   }
 
-  private getModel(collection: CollectionName): ModelDelegate {
-    return this.dbClient[collectionModelMap[collection]];
-  }
-
   private query<T>(
-    normQuery: INormQuery,
+    appQuery: AppQuery,
     includePagination: boolean = true,
     includeSorting: boolean = true,
     includeSelection: boolean = true
   ) {
-    const { pagination, orderBy, filter, selection } = normQuery;
+    const { pagination, orderBy, filter, selection } = appQuery.normQuery;
     return {
       ...(includePagination ? this.buildPagination(pagination) : {}),
       ...(includeSorting ? this.buildSorting(orderBy) : {}),

@@ -9,15 +9,15 @@ export class ProductRepository extends BaseRepository<Product> {
   }
 
   /*
-  async findByCategory(category: string): Promise<Product[]> {
+  async findAllByCategory(category: string): Promise<Product[]> {
     return this.find({ where: { category } });
   }
 
-  async findInStock(): Promise<Product[]> {
+  async findAllInStock(): Promise<Product[]> {
     return this.find({ where: { in_stock: true } });
   }
 
-  async findByPriceRange(min: number, max: number): Promise<Product[]> {
+  async findAllByPriceRange(min: number, max: number): Promise<Product[]> {
     return this.find({
       where: (product: Product) => product.price >= min && product.price <= max,
     });

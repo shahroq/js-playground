@@ -1,9 +1,10 @@
 import { Low } from "lowdb";
 import { JSONFile } from "lowdb/node";
 import fs from "fs-extra";
-import { config, utils } from "@/common/container";
+import { AppQuery, config, utils } from "@/common/container";
 import { defaultData, type DatabaseSchema } from "@/data/lowdb-json/schema";
 import type { IDBAdapter } from "./db-adapter.interface";
+import type { CollectionName, EntityId } from "../types";
 
 export class LowDBDBAdapter implements IDBAdapter {
   private dbClient: Low<DatabaseSchema>;
@@ -34,167 +35,137 @@ export class LowDBDBAdapter implements IDBAdapter {
     console.log("🌒 LowDB disconnected");
   }
 
-  async find<T>(collection: string, filter: QueryFilter<T> = {}): Promise<T[]> {
+  private async getModel(collection: CollectionName) {
     await this.dbClient.read();
-    let items = (this.dbClient.data[collection] || []) as T[];
+    // const m = (this.dbClient.data[collection] || []) as T[];
+    const m = this.dbClient.data[collection] || [];
 
-    if (filter.where) {
-      if (typeof filter.where === "function") {
-        items = items.filter(filter.where);
-      } else {
-        items = items.filter((item) => {
-          return Object.entries(filter.where as object).every(
-            ([key, value]) => {
-              return (item as any)[key] === value;
-            }
-          );
-        });
-      }
-    }
+    return m;
+  }
 
-    if (filter.orderBy) {
-      const { field, direction } = filter.orderBy;
-      items.sort((a, b) => {
-        const aVal = a[field];
-        const bVal = b[field];
-        if (aVal < bVal) return direction === "asc" ? -1 : 1;
-        if (aVal > bVal) return direction === "asc" ? 1 : -1;
-        return 0;
-      });
-    }
+  async findAll<T>(
+    collection: CollectionName,
+    appQuery: AppQuery
+  ): Promise<T[]> {
+    const m = await this.getModel(collection);
 
-    if (filter.offset !== undefined) {
-      items = items.slice(filter.offset);
-    }
-
-    if (filter.per_page !== undefined) {
-      items = items.slice(0, filter.per_page);
-    }
+    const items = m;
 
     return items;
   }
 
   async findOne<T>(
-    collection: string,
-    filter: QueryFilter<T>
+    collection: CollectionName,
+    appQuery: AppQuery
   ): Promise<T | null> {
-    const results = await this.find(collection, { ...filter, per_page: 1 });
-    return results[0] || null;
-  }
+    const m = await this.getModel(collection);
+    const id = appQuery.normQuery.filter?.id;
 
-  /*
-  async findAll<T>(collection: string): Promise<T[]> {
-    await this.dbClient.read();
-    return (this.dbClient.data[collection] || []) as T[];
+    const item = m.find((i) => i.id == id);
+
+    return item || null;
   }
-  */
 
   async findById<T>(
-    collection: string,
-    id: string | number
+    collection: CollectionName,
+    id: EntityId
   ): Promise<T | null> {
-    await this.dbClient.read();
-    const items = this.dbClient.data[collection] || [];
-    return items.find((item: any) => item.id === id) || null;
+    return this.findOne<T>(collection, new AppQuery({ id }));
   }
 
   async create<T extends { id?: any }>(
-    collection: string,
+    collection: CollectionName,
     data: T
   ): Promise<T> {
-    await this.dbClient.read();
-
-    if (!this.dbClient.data[collection]) this.dbClient.data[collection] = [];
+    const m = await this.getModel(collection);
 
     const newItem = {
       ...data,
-      id: data.id || this.dbClient.data[collection].length + 1,
+      id: m.length + 1,
       created_at: utils.formatISO(),
       updated_at: utils.formatISO(),
       created_by: this.userId,
       updated_by: this.userId,
     };
-    this.dbClient.data[collection].push(newItem);
+
+    m.push(newItem);
     await this.dbClient.write();
 
     return { ...newItem } as T;
   }
 
   async update<T>(
-    collection: string,
-    id: string | number,
+    collection: CollectionName,
+    id: EntityId,
     data: Partial<T>
   ): Promise<T | null> {
-    await this.dbClient.read();
+    const m = await this.getModel(collection);
 
-    const items = this.dbClient.data[collection] || [];
-    const index = items.findIndex((item: any) => item.id === id);
+    const itemIndex = m.findIndex((item: any) => item.id === id);
+    if (itemIndex < 0) return null;
 
-    if (index === -1) return null;
-
-    items[index] = {
-      ...items[index],
+    const updatedItem = {
+      ...m[itemIndex],
       ...data,
       updated_at: utils.formatISO(),
       updated_by: this.userId,
     };
+
+    m[itemIndex] = updatedItem;
     await this.dbClient.write();
 
-    return { ...items[index] };
+    return updatedItem;
   }
 
-  async delete(collection: string, id: string | number): Promise<boolean> {
-    await this.dbClient.read();
-    const items = this.dbClient.data[collection] || [];
-    const index = items.findIndex((item: any) => item.id === id);
+  async delete(
+    collection: CollectionName,
+    id: EntityId
+  ): Promise<boolean | null> {
+    const m = await this.getModel(collection);
 
-    if (index === -1) return false;
+    const itemIndex = m.findIndex((item: any) => item.id === id);
+    if (itemIndex < 0) return null;
 
-    items.splice(index, 1);
+    m.splice(itemIndex, 1);
+
     await this.dbClient.write();
 
     return true;
   }
 
   async deleteMany<T>(
-    collection: string,
-    filter: QueryFilter<T> = {}
+    collection: CollectionName,
+    appQuery: AppQuery
   ): Promise<number> {
-    console.log(collection);
-    await this.dbClient.read(); // ensure fresh data
-    console.log(this.dbClient.data);
-    /*
-    // Get the collection (e.g., users, products, etc.)
-    const items: T[] = this.db.data?.[collection] || [];
-    console.log(items);
-    // Keep only items that do NOT match the filter
-    const remaining = items.filter((item) => {
-      // return true if item should be kept
-      return !Object.entries(filter).every(
-        ([key, value]) => item[key] === value
-      );
-    });
-
-    // Count how many were deleted
-    const deletedCount = items.length - remaining.length;
-
-    // Write updated data back
-
-    this.db.data[collection] = remaining;
-
-    await this.db.write();
-
-    return deletedCount;
-    */
+    //
   }
 
-  async count<T>(collection: string, filter?: QueryFilter<T>): Promise<number> {
-    if (!filter || !filter.where) {
-      await this.dbClient.read();
-      return (this.dbClient.data[collection] || []).length;
+  async count<T>(
+    collection: CollectionName,
+    appQuery: AppQuery
+  ): Promise<number> {
+    const m = await this.getModel(collection);
+    return m.length;
+  }
+
+  async avg<T>(
+    collection: CollectionName,
+    appQuery: AppQuery,
+    field: keyof T & string
+  ): Promise<number | null> {
+    const m = await this.getModel(collection);
+
+    let sum = 0;
+    let count = 0;
+
+    for (const item of m) {
+      const value = (item as any)[field];
+      if (typeof value === "number") {
+        sum += value;
+        count++;
+      }
     }
-    const results = await this.find(collection, filter);
-    return results.length;
+    return count === 0 ? null : sum / count;
   }
 
   async createDB(identifier: string) {
