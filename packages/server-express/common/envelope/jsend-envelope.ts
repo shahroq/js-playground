@@ -1,6 +1,6 @@
 import { isAppError } from "@/common/container";
 import type { Envelope } from "./envelope.interface";
-import type { E } from "../error/types";
+import type { E } from "../app-error/types";
 
 type JSendStatus = "success" | "fail" | "error";
 

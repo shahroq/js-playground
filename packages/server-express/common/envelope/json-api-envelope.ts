@@ -1,4 +1,4 @@
-import type { E } from "../error/types";
+import type { E } from "../app-error/types";
 import { isAppError } from "../container";
 import type { Envelope } from "./envelope.interface";
 

@@ -1,6 +1,6 @@
 import type { Response, NextFunction } from "express";
 import { appEnvelope, isAppError } from "@/common/container";
-import type { E } from "../error/types";
+import type { E } from "../app-error/types";
 
 /**
  * envelop the response in a specified format
