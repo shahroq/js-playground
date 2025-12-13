@@ -15,7 +15,6 @@ export class ReviewController {
 
   async show(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
-    if (!id) return next(AppError.badRequest());
 
     const { item } = await this.service.findOne(+id, req.appQuery ?? {});
     if (!item) return next(AppError.notFound());
@@ -33,7 +32,6 @@ export class ReviewController {
 
   async update(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
-    if (!id) return next(AppError.badRequest());
 
     const { body } = req;
 
@@ -45,7 +43,6 @@ export class ReviewController {
 
   async destroy(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
-    if (!id) return next(AppError.badRequest());
 
     const deleted = await this.service.delete(+id);
     if (!deleted) return next(AppError.notFound());

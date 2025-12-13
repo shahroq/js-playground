@@ -16,7 +16,6 @@ export class PostController {
 
   async show(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
-    if (!id) return next(AppError.badRequest());
 
     const item = await this.service.find(+id);
     if (!item) return next(AppError.notFound());
