@@ -1,5 +1,3 @@
-import type { Awaitable } from "../types";
-
 export type MAilerStrategy = "console-log" | "mailtrap";
 
 export interface IMail {

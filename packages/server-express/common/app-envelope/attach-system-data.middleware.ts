@@ -8,7 +8,7 @@ let attachment: { info?: string | null; timestamp?: string } = {
 /**
  * attach system data to envelope in dev environment
  */
-export function attachSystemDataHandler(
+export function attachSystemInfoHandler(
   _: any,
   res: Response,
   next: NextFunction

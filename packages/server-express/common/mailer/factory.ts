@@ -5,7 +5,7 @@ import { MailtrapMailer } from "./mailtrap-adapter";
 let mailer = null;
 
 export function getMailer() {
-  const format = config.mailer_strategy || "console-log";
+  const format = config.mailer.adapter_strategy || "console-log";
 
   console.log(`⚙️  Getting mailer adapter for strategy: (${format})`);
 
@@ -30,7 +30,7 @@ export function resetMailer(): void {
 /*
 // sample usage
 const mail = {
-  to: config.mailer_admin_email,
+  to: config.mailer.admin_email,
   subject: "Sandbox",
   text: "Sent from sand box",
 };

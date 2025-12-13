@@ -9,7 +9,7 @@ import {
   undefinedRoutesHandler,
   AppError,
   envelopResponseHandler,
-  attachSystemDataHandler,
+  attachSystemInfoHandler,
 } from "@/common/container";
 
 export const bootstrap = (): Application => {
@@ -18,8 +18,8 @@ export const bootstrap = (): Application => {
   const beforeMWs = [express.json(), cors(), envelopResponseHandler];
   const afterMWs = [undefinedRoutesHandler, globalErrorHandler];
   config.env === "development" &&
-    config.envelop_system_info &&
-    app.use(attachSystemDataHandler);
+    config.app_envelope.include_system_info &&
+    app.use(attachSystemInfoHandler);
   app.use(beforeMWs);
 
   app.get("/favicon.ico", (_, res) => res.status(204).end());
@@ -36,10 +36,21 @@ export const bootstrap = (): Application => {
   });
 
   // sandbox
-  app.get("/sandbox", (_: any, res: Response, next: NextFunction) => {
+  app.get("/sandbox", async (_: any, res: Response, next: NextFunction) => {
+    let data = null;
+
+    /*
+    const mail = {
+      to: config.mailer.admin_email,
+      subject: "Sandbox",
+      text: "Sent from sand box",
+    };
+    await mailer.send(mail).catch((error) => new AppError("Mailtrap Error."));
+    res.json("mail sent!");
+    */
+    /*
     let error = null;
     let errorApp = null;
-    let data = null;
 
     error = new Error("error sent from sandbox");
     errorApp = new AppError("custom error sent from sandbox", {
@@ -52,6 +63,8 @@ export const bootstrap = (): Application => {
 
     // throw errorApp;
     // next(errorApp);
+
+    */
 
     res.json(data);
   });

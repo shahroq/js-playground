@@ -9,7 +9,7 @@ export class MemoryDBAdapter implements IDBAdapter {
 
   constructor() {
     this.dbClient = data;
-    this.userId = +config.user_id;
+    this.userId = +config.default.user_id;
   }
 
   connect() {

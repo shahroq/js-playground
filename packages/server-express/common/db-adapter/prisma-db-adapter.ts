@@ -39,11 +39,11 @@ export class PrismaDBAdapter implements IDBAdapter {
     // prisma options
     let options = {};
     // log the query for debugging
-    if (config.debug_orm)
+    if (config.debug.show_executed_sql)
       options = { ...options, log: ["query", "info", "warn", "error"] };
 
     this.dbClient = new PrismaClient(options);
-    this.userId = +config.user_id;
+    this.userId = +config.default.user_id;
   }
 
   async connect(): Promise<void> {
@@ -173,7 +173,7 @@ export class PrismaDBAdapter implements IDBAdapter {
   async migrate() {
     // migration is done via prisma cli
     console.log(`Migration is not necessary for Prisma. It's done via cli.`);
-    // this.createDB(config.database_name);
+    // this.createDB(config.database.name);
   }
 
   private query<T>(

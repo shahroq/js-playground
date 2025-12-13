@@ -11,9 +11,9 @@ let dbAdapterInstance: IDBAdapter | null = null;
 export function getDBAdapter(): IDBAdapter {
   if (dbAdapterInstance) return dbAdapterInstance;
 
-  const strategy = config.database_adapter_strategy as DBAdapterStrategy;
+  const strategy = config.database.adapter_strategy as DBAdapterStrategy;
   let dbAdapter;
-  console.log(`⚙️  Getting db adapter (${strategy}/${config.database_type})`);
+  console.log(`⚙️  Getting db adapter (${strategy}/${config.database.type})`);
 
   switch (strategy) {
     case "memory":
@@ -48,8 +48,8 @@ export function resetDBAdapter(): void {
 // class-based
 export class DatabaseFactory {
   static create(): IDatabase {
-    const strategy = config.database_strategy as DatabaseStrategy;
-    const databaseFile = config.database_filname || "database.json";
+    const strategy = config.database.strategy as DatabaseStrategy;
+    const databaseFile = config.database.filname || "database.json";
     const filePath = join(config.data_path, strategy, databaseFile);
     let dbAdapter;
 

@@ -44,10 +44,10 @@ export const appEnvelope = getAppEnvelope();
 export const validate = getValidatorHandler();
 export const dbAdapter = getDBAdapter();
 export const httpClientJsonPlaceHolder = getHttpClient(
-  config.api_url_jsonplaceholder as string
+  config.http_client.api_url_jsonplaceholder as string
 );
 export const httpClientRestfulapi = getHttpClient(
-  config.api_url_restfulapi as string
+  config.http_client.api_url_restfulapi as string
 );
 export const mailer = getMailer();
 

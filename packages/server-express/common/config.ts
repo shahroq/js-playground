@@ -18,64 +18,85 @@ const config = {
   version: <string>process.env.VERSION || "0.0.0",
 
   // debug
-  debug: <boolean>!!(process.env.DEBUG === "true"),
-  debug_orm: <boolean>!!(process.env.DEBUG_ORM === "true"),
+  debug: {
+    show_thrown_errors: <boolean>(
+      !!(process.env.DEBUG_SHOW_THROWN_ERROR === "true")
+    ),
+    show_executed_sql: <boolean>(
+      !!(process.env.DEBUG_SHOW_EXECUTED_SQL === "true")
+    ),
+  },
 
   // defaults
-  user_id: <number>(process.env.DEFAULT_USER_ID || 1), // use it till auth is not implemented
-  default_pagination_limit: <number>(
-    (process.env.DEFAULT_PAGINATION_LIMIT || 10)
-  ),
-  default_review_status:
-    (process.env.DEFAULT_REVIEW_STATUS as ReviewStatus) || ReviewStatus.PENDING,
+  default: {
+    user_id: <number>(process.env.DEFAULT_USER_ID || 1), // use it till auth is not implemented
+    pagination_limit: <number>(process.env.DEFAULT_PAGINATION_LIMIT || 10),
+    review_status:
+      (process.env.DEFAULT_REVIEW_STATUS as ReviewStatus) ||
+      ReviewStatus.PENDING,
+  },
 
-  // app-response
-  envelop_system_info: <boolean>!!(process.env.ENVELOP_SYSTEM_INFO === "true"),
-  app_envelope_strategy: <string>process.env.APP_ENVELOPE_STRATEGY,
+  // app-envelope (response)
+  app_envelope: {
+    strategy: <string>process.env.APP_ENVELOPE_STRATEGY,
+    include_system_info: <boolean>(
+      !!(process.env.APP_ENVELOPE_INCLUDE_SYSTEM_INFO === "true")
+    ),
+  },
 
   // validation
-  validation_strategy: <string>process.env.VALIDATION_STRATEGY,
+  validation: {
+    strategy: <string>process.env.VALIDATION_STRATEGY,
+  },
 
   // database
-  database_url: <string | null>process.env.DATABASE_URL,
-  database_adapter_strategy: <string>process.env.DATABASE_ADAPTER_STRATEGY,
+  database: {
+    adapter_strategy: <string>process.env.DATABASE_ADAPTER_STRATEGY,
+    url: <string | null>process.env.DATABASE_URL,
 
-  database_type: <string | null>null,
-  database_name: <string | null>null,
-  database_path: <string | null>null,
+    type: <string | null>null,
+    name: <string | null>null,
+    path: <string | null>null,
+  },
 
   // http-client
-  http_client_strategy: <string>process.env.HTTP_CLIENT_STRATEGY,
-  api_url_jsonplaceholder: <string>process.env.API_URL_JSONPLACEHOLDER,
-  api_url_restfulapi: <string>process.env.API_URL_RESTFULAPI,
+  http_client: {
+    strategy: <string>process.env.HTTP_CLIENT_STRATEGY,
+    api_url_jsonplaceholder: <string>(
+      process.env.HTTP_CLIENT_API_URL_JSONPLACEHOLDER
+    ),
+    api_url_restfulapi: <string>process.env.HTTP_CLIENT_API_URL_RESTFULAPI,
+  },
 
   // mailer
-  mailer_strategy: <string>process.env.MAILER_STRATEGY,
-  mailer_protocol: <string>process.env.MAILER_PROTOCOL || "smpt",
-  mailer_host: <string>process.env.MAILER_HOST || "",
-  mailer_port: <number>(process.env.MAILER_PORT || 0),
-  mailer_username: <string>process.env.MAILER_USERNAME || "",
-  mailer_password: <string>process.env.MAILER_PASSWORD || "",
-  mailer_admin_email: <string>process.env.MAILER_ADMIN_EMAIL || "",
+  mailer: {
+    adapter_strategy: <string>process.env.MAILER_STRATEGY,
+    protocol: <string>process.env.MAILER_PROTOCOL || "smpt",
+    host: <string>process.env.MAILER_HOST || "",
+    port: <number>(process.env.MAILER_PORT || 0),
+    username: <string>process.env.MAILER_USERNAME || "",
+    password: <string>process.env.MAILER_PASSWORD || "",
+    admin_email: <string>process.env.MAILER_ADMIN_EMAIL || "",
 
-  mailtrap_api_token: <string>process.env.MAILTRAP_API_TOKEN || "",
+    mailtrap_api_token: <string>process.env.MAILTRAP_API_TOKEN || "",
+  },
 
   // overall system info, to display on envelop if needed (dev env)
   system_info: <string | null>null,
 };
 
-config.database_type = getDBType(config.database_url);
-config.database_name = getDBName(config.database_url);
-config.database_path = getDBPath(config.database_url);
+config.database.type = getDBType(config.database.url);
+config.database.name = getDBName(config.database.url);
+config.database.path = getDBPath(config.database.url);
 config.system_info = getSystemInfo();
 // console.log(config);
 
-export function getDBType(database_url: string | null) {
-  if (!database_url) return null;
+export function getDBType(url: string | null) {
+  if (!url) return null;
 
   // 1. Handle file-based URLs
-  if (utils.isFileURL(database_url)) {
-    const lower = database_url.toLowerCase();
+  if (utils.isFileURL(url)) {
+    const lower = url.toLowerCase();
 
     if (lower.endsWith(".json")) return "json";
     if (lower.endsWith(".db") || lower.endsWith(".sqlite")) return "sqlite";
@@ -84,7 +105,7 @@ export function getDBType(database_url: string | null) {
   }
 
   // 2. Extract protocol (e.g., mysql://, postgres://)
-  const protocolMatch = database_url.match(/^([a-zA-Z0-9+]+):\/\//);
+  const protocolMatch = url.match(/^([a-zA-Z0-9+]+):\/\//);
   // ensure the capture exists before accessing it
   if (protocolMatch && protocolMatch[1]) {
     return protocolMatch[1].toLowerCase(); // "mysql", "postgres", etc.
@@ -93,18 +114,18 @@ export function getDBType(database_url: string | null) {
   return "unknown";
 }
 
-function getDBName(database_url: string | null) {
-  if (!database_url) return null;
-  return utils.getDBIdentifier(database_url, {});
+function getDBName(url: string | null) {
+  if (!url) return null;
+  return utils.getDBIdentifier(url, {});
 }
 
-function getDBPath(database_url: string | null) {
-  if (!database_url) return null;
-  return utils.isFileURL(database_url)
+function getDBPath(url: string | null) {
+  if (!url) return null;
+  return utils.isFileURL(url)
     ? join(
         config.data_path,
-        `${config.database_adapter_strategy}-${config.database_type}`,
-        utils.getDBIdentifier(database_url, { withExtension: true })
+        `${config.database.adapter_strategy}-${config.database.type}`,
+        utils.getDBIdentifier(url, { withExtension: true })
       )
     : null;
 }
@@ -115,10 +136,10 @@ export function getSystemInfo() {
 
   system.push(
     "express",
-    config.app_envelope_strategy,
-    config.database_adapter_strategy,
-    config.validation_strategy,
-    config.http_client_strategy
+    config.app_envelope.strategy,
+    config.database.adapter_strategy,
+    config.validation.strategy,
+    config.http_client.strategy
   );
 
   return system.join(":");
@@ -135,11 +156,11 @@ export function getSystemInfo() {
   debug: true,
   app_response_strategy: "jsend",
   validation_strategy: "zod",
-  database_type: "sqlite",
-  database_url: "file:./database.db",
-  database_name: "database",
-  database_path: "/Users/shahroq/code/sandbox/ts-projects/sandbox-api-design-2025/packages/server/data/prisma-sqlite/database.db",
-  database_adapter_strategy: "prisma",
+  database.type: "sqlite",
+  database.url: "file:./database.db",
+  database.name: "database",
+  database.path: "/Users/shahroq/code/sandbox/ts-projects/sandbox-api-design-2025/packages/server/data/prisma-sqlite/database.db",
+  database.adapter_strategy: "prisma",
   http_client_strategy: "axios",
   api_url_jsonplaceholder: "https://jsonplaceholder.typicode.com",
 }
@@ -149,8 +170,8 @@ export function getSystemInfo() {
 dotenv.config({ path: ".env.test.local" });
 console.log(process.env);
 config.test = {
-  database_filname: process.env.Db_FILENAME || undefined, // only for file-based strategies
-  database_url: process.env.Db_URL, // only for db engines
+  database.filname: process.env.Db_FILENAME || undefined, // only for file-based strategies
+  database.url: process.env.Db_URL, // only for db engines
 };
 */
 

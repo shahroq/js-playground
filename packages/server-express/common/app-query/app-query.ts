@@ -66,7 +66,7 @@ export class AppQuery {
     const per_page = +(
       this.query.per_page ??
       defaultLimit ??
-      config.default_pagination_limit
+      config.default.pagination_limit
     );
     const offset = (page - 1) * per_page;
 

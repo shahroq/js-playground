@@ -60,7 +60,7 @@ export class ReviewService {
   }
 
   async create(data: Review): Promise<IReviewResult> {
-    if (!data?.status) data = { ...data, status: config.default_review_status };
+    if (!data?.status) data = { ...data, status: config.default.review_status };
 
     const newItem = await this.repository.create(data);
     return { item: newItem };

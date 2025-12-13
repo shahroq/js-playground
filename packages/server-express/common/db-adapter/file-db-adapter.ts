@@ -7,12 +7,12 @@ import type { CollectionName, EntityId } from "../types";
 
 export class FileDBAdapter implements IDBAdapter {
   private db: DatabaseSchema = {};
-  private filePath = config.database_path ?? "";
+  private filePath = config.database.path ?? "";
   private defaultData: DatabaseSchema = defaultData;
   private userId: number;
 
   constructor() {
-    this.userId = config.user_id;
+    this.userId = config.default.user_id;
   }
 
   async connect() {

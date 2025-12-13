@@ -8,14 +8,14 @@ import type { CollectionName, EntityId } from "../types";
 
 export class LowDBDBAdapter implements IDBAdapter {
   private dbClient: Low<DatabaseSchema>;
-  private filePath = config.database_path ?? "";
+  private filePath = config.database.path ?? "";
   private defaultData: DatabaseSchema = defaultData;
   private userId: number;
 
   constructor() {
     const adapter = new JSONFile<DatabaseSchema>(this.filePath);
     this.dbClient = new Low(adapter, this.defaultData);
-    this.userId = config.user_id;
+    this.userId = config.default.user_id;
   }
 
   async connect() {

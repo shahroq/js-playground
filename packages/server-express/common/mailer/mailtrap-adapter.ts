@@ -9,11 +9,11 @@ export class MailtrapMailer implements IMailer {
 
   constructor() {
     const options: SMTPTransport.Options = {
-      host: config.mailer_host,
-      port: config.mailer_port,
+      host: config.mailer.host,
+      port: config.mailer.port,
       auth: {
-        user: config.mailer_username,
-        pass: config.mailer_password,
+        user: config.mailer.username,
+        pass: config.mailer.password,
       },
     };
     this.transporter = nodemailer.createTransport(options);
@@ -21,7 +21,7 @@ export class MailtrapMailer implements IMailer {
 
   async send(mail: IMail) {
     const normMail = {
-      from: `${config.app_name} <${config.mailer_admin_email}>`,
+      from: `${config.app_name} <${config.mailer.admin_email}>`,
       to: mail.to,
       subject: mail.subject,
       text: mail.text,

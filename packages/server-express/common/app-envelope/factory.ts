@@ -5,7 +5,7 @@ import { JsonApiEnvelope } from "./json-api-envelope.ts";
 let envelope = null;
 
 export function getAppEnvelope() {
-  const format = config.app_envelope_strategy || "jsend";
+  const format = config.app_envelope.strategy || "jsend";
 
   console.log(
     `⚙️  Getting app response envelpe strategy class for (${format})`

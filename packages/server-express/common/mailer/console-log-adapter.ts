@@ -7,7 +7,7 @@ export class ConsoleLogMailer implements IMailer {
 
   async send(mail: IMail) {
     const normMail = {
-      from: `${config.app_name} <${config.mailer_admin_email}>`,
+      from: `${config.app_name} <${config.mailer.admin_email}>`,
       to: mail.to,
       subject: mail.subject,
       text: mail.text,

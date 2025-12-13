@@ -9,7 +9,7 @@ export function globalErrorHandler(
   next: NextFunction
 ): void {
   // the error is best to pass to default error handler
-  if (res.headersSent || config.debug) return next(error);
+  if (res.headersSent || config.debug.show_thrown_errors) return next(error);
 
   // TODO: log errors (winston, etc)
   // ..
