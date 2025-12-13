@@ -11,10 +11,11 @@ const config = {
   data_path: `${root}/data`,
 
   // basics
-  version: <string>process.env.VERSION || "0.0.0",
   env: <Env>process.env.NODE_ENV || "development",
   base_url: <string>process.env.BASE_URL,
   port: <number>(process.env.PORT || 3000),
+  app_name: <string>process.env.APP_NAME || "APP",
+  version: <string>process.env.VERSION || "0.0.0",
 
   // debug
   debug: <boolean>!!(process.env.DEBUG === "true"),
@@ -47,6 +48,17 @@ const config = {
   http_client_strategy: <string>process.env.HTTP_CLIENT_STRATEGY,
   api_url_jsonplaceholder: <string>process.env.API_URL_JSONPLACEHOLDER,
   api_url_restfulapi: <string>process.env.API_URL_RESTFULAPI,
+
+  // mailer
+  mailer_strategy: <string>process.env.MAILER_STRATEGY,
+  mailer_protocol: <string>process.env.MAILER_PROTOCOL || "smpt",
+  mailer_host: <string>process.env.MAILER_HOST || "",
+  mailer_port: <number>(process.env.MAILER_PORT || 0),
+  mailer_username: <string>process.env.MAILER_USERNAME || "",
+  mailer_password: <string>process.env.MAILER_PASSWORD || "",
+  mailer_admin_email: <string>process.env.MAILER_ADMIN_EMAIL || "",
+
+  mailtrap_api_token: <string>process.env.MAILTRAP_API_TOKEN || "",
 
   // overall system info, to display on envelop if needed (dev env)
   system_info: <string | null>null,

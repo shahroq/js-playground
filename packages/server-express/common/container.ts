@@ -19,6 +19,7 @@ import { PostController } from "@posts/controller";
 
 import { ObjectService } from "@/routes/v1/objects/service";
 import { ObjectController } from "@/routes/v1/objects/controller";
+import { getMailer } from "./mailer/factory";
 
 // re-exports
 export * as utils from "./utils/utils";
@@ -48,6 +49,7 @@ export const httpClientJsonPlaceHolder = getHttpClient(
 export const httpClientRestfulapi = getHttpClient(
   config.api_url_restfulapi as string
 );
+export const mailer = getMailer();
 
 // 1. Repositories
 export const productRepository = new ProductRepository(dbAdapter);
