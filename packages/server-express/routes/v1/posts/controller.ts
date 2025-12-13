@@ -15,9 +15,7 @@ export class PostController {
   };
 
   show = async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
-
-    const item = await this.service.find(+id);
+    const item = await this.service.find(req.params as EntityId);
     if (!item) return next(AppError.notFound());
 
     res.status(200).json({ [this.collection]: item });
