@@ -11,15 +11,15 @@ const router = express.Router();
 router.get(
   "/",
   [validate("reviews.findAll"), normalize(queryOptions)],
-  ctrl.index.bind(ctrl)
+  ctrl.index
 );
 router.get(
   "/:id",
   [validate("reviews.findOne"), normalize(queryOptions)],
-  ctrl.show.bind(ctrl)
+  ctrl.show
 );
-router.post("/", validate("reviews.create"), ctrl.store.bind(ctrl));
-router.patch("/:id", validate("reviews.update"), ctrl.update.bind(ctrl));
-router.delete("/:id", validate("reviews.delete"), ctrl.destroy.bind(ctrl));
+router.post("/", validate("reviews.create"), ctrl.store);
+router.patch("/:id", validate("reviews.update"), ctrl.update);
+router.delete("/:id", validate("reviews.delete"), ctrl.destroy);
 
 export default router;

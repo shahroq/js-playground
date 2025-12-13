@@ -3,6 +3,6 @@ import { objectController as ctrl } from "@/common/container";
 
 const router = express.Router();
 
-router.get("/", ctrl.index.bind(ctrl));
+router.get("/", ctrl.index);
 
 export default router;

@@ -8,18 +8,18 @@ export class PostController {
 
   constructor(private readonly service: PostService) {}
 
-  async index(_: any, res: Response): Promise<void> {
+  index = async (_: any, res: Response) => {
     const items: Post[] = await this.service.findAll();
 
     res.status(200).json({ [`${this.collection}s`]: items });
-  }
+  };
 
-  async show(req: Request, res: Response, next: NextFunction) {
+  show = async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
 
     const item = await this.service.find(+id);
     if (!item) return next(AppError.notFound());
 
     res.status(200).json({ [this.collection]: item });
-  }
+  };
 }
