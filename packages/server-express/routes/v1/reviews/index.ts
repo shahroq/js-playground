@@ -2,20 +2,20 @@ import express from "express";
 import {
   reviewController as ctrl,
   validate,
-  normalizeQueryHandler as normalize,
-  reviewsQueryOptions as queryOptions,
+  normalizeQueryHandler as normalizeQuery,
+  reviewsQueryOptions as options,
 } from "@/common/container";
 
 const router = express.Router();
 
 router.get(
   "/",
-  [validate("reviews.findAll"), normalize(queryOptions)],
+  [validate("reviews.findAll"), normalizeQuery(options)],
   ctrl.index
 );
 router.get(
   "/:id",
-  [validate("reviews.findOne"), normalize(queryOptions)],
+  [validate("reviews.findOne"), normalizeQuery(options)],
   ctrl.show
 );
 router.post("/", validate("reviews.create"), ctrl.store);
