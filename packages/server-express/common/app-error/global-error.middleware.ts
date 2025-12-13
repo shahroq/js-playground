@@ -18,7 +18,7 @@ export function globalErrorHandler(
   let publicMessage = "";
 
   // check if it's prisma error (exposes too much)
-  if (error?.name?.startsWith(`Prisma`)) publicMessage += `ORM Error.`;
+  // if (error?.name?.startsWith(`Prisma`)) publicMessage += `ORM Error.`;
 
   // add a prefix to error message
   // publicMessage += `Global Err: ${error.message}`;

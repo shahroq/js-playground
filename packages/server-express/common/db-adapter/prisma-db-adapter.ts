@@ -104,7 +104,6 @@ export class PrismaDBAdapter implements IDBAdapter {
     const m = this.getModel(collection);
 
     // first check if exists
-    // TODO: consider status
     const existing = await this.findById<T>(collection, id);
     if (!existing) return null;
 
