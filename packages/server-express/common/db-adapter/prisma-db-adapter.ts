@@ -116,7 +116,7 @@ export class PrismaDBAdapter implements IDBAdapter {
 
     // @ts-ignore
     return await m.update({
-      where: { id },
+      where: { id: id },
       data: updatedItem,
     });
   }

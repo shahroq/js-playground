@@ -1,7 +1,7 @@
-import type { NextFunction, Request, Response } from "express";
-import { AppError } from "@/common/container";
+import type { Request, Response } from "express";
 import type { Post } from "./types";
 import { PostService } from "./service";
+import type { EntityId } from "@/common/types";
 
 export class PostController {
   private collection = "post";
@@ -9,14 +9,13 @@ export class PostController {
   constructor(private readonly service: PostService) {}
 
   index = async (_: any, res: Response) => {
-    const items: Post[] = await this.service.findAll();
+    const items: Post[] = await this.service.getItems();
 
     res.status(200).json({ [`${this.collection}s`]: items });
   };
 
-  show = async (req: Request, res: Response, next: NextFunction) => {
-    const item = await this.service.find(req.params as EntityId);
-    if (!item) return next(AppError.notFound());
+  show = async (req: Request, res: Response) => {
+    const item = await this.service.getItem(req.params.id as EntityId);
 
     res.status(200).json({ [this.collection]: item });
   };

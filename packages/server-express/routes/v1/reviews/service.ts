@@ -1,5 +1,5 @@
 import { ReviewStatus } from "./types.d";
-import { AppQuery, config, MetaData } from "@/common/container";
+import { AppError, AppQuery, config, MetaData } from "@/common/container";
 import type { EntityId } from "@/common/types";
 import { ReviewRepository } from "./repository";
 import type { IReviewResult, Review } from "./types";
@@ -11,7 +11,7 @@ export class ReviewService {
     private readonly productRepository: ProductRepository
   ) {}
 
-  async findAll(appQuery: AppQuery): Promise<IReviewResult> {
+  async getItems(appQuery: AppQuery): Promise<IReviewResult> {
     // add status filter all the times
     appQuery.append({ status: ReviewStatus.APPROVED });
 
@@ -40,12 +40,13 @@ export class ReviewService {
     return { items, meta };
   }
 
-  async findOne(id: EntityId, appQuery: AppQuery): Promise<IReviewResult> {
+  async getItem(id: EntityId, appQuery: AppQuery): Promise<Review> {
     appQuery.append({ id });
     // add status filter all the times
     // appQuery.append({ status: ReviewStatus.APPROVED });
 
     const item = await this.repository.findOne(appQuery);
+    if (!item) throw AppError.notFound();
 
     // get expansions: products
     // TODO: abstract away
@@ -56,28 +57,32 @@ export class ReviewService {
       if (item && product) item.product = product;
     }
 
-    return item ? { item } : {};
+    return item;
   }
 
-  async create(data: Review): Promise<IReviewResult> {
+  async createItem(data: Review): Promise<Review> {
     if (!data?.status) data = { ...data, status: config.default.review_status };
 
     const newItem = await this.repository.create(data);
-    return { item: newItem };
+    return newItem;
   }
 
-  async update(id: EntityId, data: Partial<Review>): Promise<IReviewResult> {
+  async updateItem(id: EntityId, data: Partial<Review>): Promise<Review> {
     // check if this is updatable
     // const appQuery = new AppQuery({ id, status: ReviewStatus.PENDING });
     // const existingReview = await this.repository.findOne(appQuery);
     //...
 
-    const updatedItem = await this.repository.update(id, data);
-    return updatedItem ? { item: updatedItem } : {};
+    const updatedItem = await this.repository.update(+id, data);
+    if (!updatedItem) throw AppError.notFound();
+
+    return updatedItem;
   }
 
-  async delete(id: EntityId): Promise<boolean> {
-    const deleted = await this.repository.delete(id);
+  async deleteItem(id: EntityId): Promise<boolean> {
+    const deleted = await this.repository.delete(+id);
+    if (!deleted) throw AppError.notFound();
+
     return deleted;
   }
 }

@@ -8,7 +8,7 @@ export class ObjectController {
   constructor(private readonly service: ObjectService) {}
 
   index = async (_: any, res: Response): Promise<void> => {
-    const items: Object[] = await this.service.findAll();
+    const items: Object[] = await this.service.getItems();
 
     res.status(200).json({ [`${this.collection}s`]: items });
   };
