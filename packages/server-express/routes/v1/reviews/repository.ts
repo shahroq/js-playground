@@ -1,5 +1,5 @@
 import type { EntityId } from "@/common/types";
-import type { IReviewResult, Review } from "./types";
+import type { IReviewResult, Review, ReviewStatus } from "./types";
 import { BaseRepository } from "@/common/repository/base.repository";
 import type { IDBAdapter } from "@/common/db-adapter/db-adapter.interface";
 import {
@@ -36,6 +36,13 @@ export class ReviewRepository extends BaseRepository<Review> {
 
   async average(appQuery: AppQuery): Promise<number | null> {
     return this.dbAdapter.avg<Review>(this.collection, appQuery, "rating");
+  }
+
+  async updateStatus(
+    id: EntityId,
+    status: ReviewStatus
+  ): Promise<Review | null> {
+    return await this.dbAdapter.update<Review>(this.collection, id, { status });
   }
 
   // async findAllByRating(minRating: number): Promise<Review[]> {}

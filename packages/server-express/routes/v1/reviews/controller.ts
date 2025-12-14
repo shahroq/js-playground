@@ -42,4 +42,20 @@ export class ReviewController {
 
     res.status(200).json({ message: `${this.collection} deleted.` });
   };
+
+  approve = async (req: Request, res: Response) => {
+    const updatedItem = await this.service.approveItem(
+      req.params.id as EntityId
+    );
+
+    res.status(200).json({ [this.collection]: updatedItem });
+  };
+
+  reject = async (req: Request, res: Response) => {
+    const updatedItem = await this.service.rejectItem(
+      req.params.id as EntityId
+    );
+
+    res.status(200).json({ [this.collection]: updatedItem });
+  };
 }

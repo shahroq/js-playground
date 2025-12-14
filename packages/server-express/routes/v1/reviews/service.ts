@@ -85,4 +85,45 @@ export class ReviewService {
 
     return deleted;
   }
+
+  async approveItem(id: EntityId): Promise<Review> {
+    const updatingReview = await this.repository.findById(+id);
+    if (!updatingReview) throw AppError.notFound();
+
+    if (updatingReview.status !== ReviewStatus.PENDING)
+      throw new AppError("Only PENDING reviews can be APPROVED");
+
+    /*
+    why not call update insteda of new method: updateStatus
+    gpt: Status Change: Service/Repo Responsibility
+    - Repository update() makes illegal writes easy
+    - Repositories should encode write intent, not just writes
+    - Data invariants belong in the repository too
+    - Repository methods are commands, not helpers
+    - Side effects & atomicity: Status changes often require atomic updates. If you rely on generic update(): Callers might forget fields
+     */
+    const updatedItem = await this.repository.updateStatus(
+      +id,
+      ReviewStatus.APPROVED
+    );
+    if (!updatedItem) throw AppError.notFound();
+
+    return updatedItem;
+  }
+
+  async rejectItem(id: EntityId): Promise<Review> {
+    const updatingReview = await this.repository.findById(+id);
+    if (!updatingReview) throw AppError.notFound();
+
+    if (updatingReview.status !== ReviewStatus.PENDING)
+      throw new AppError("Only PENDING reviews can be REJECTED");
+
+    const updatedItem = await this.repository.updateStatus(
+      +id,
+      ReviewStatus.REJECTED
+    );
+    if (!updatedItem) throw AppError.notFound();
+
+    return updatedItem;
+  }
 }
