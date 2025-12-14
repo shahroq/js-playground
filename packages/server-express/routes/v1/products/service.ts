@@ -2,7 +2,7 @@ import { MetaData, utils, AppQuery, AppError } from "@/common/container";
 import type { EntityId } from "@/common/types";
 import { ProductRepository } from "./repository";
 import { ReviewRepository } from "@reviews/repository";
-import type { IProductResult, Product } from "./types";
+import type { IProductResult, IProduct } from "./types";
 
 export class ProductService {
   constructor(
@@ -38,7 +38,7 @@ export class ProductService {
     return { items, meta };
   }
 
-  async getItem(id: EntityId, appQuery: AppQuery): Promise<Product> {
+  async getItem(id: EntityId, appQuery: AppQuery): Promise<IProduct> {
     appQuery.append({ id });
 
     let item = await this.repository.findOne(appQuery);
@@ -59,12 +59,12 @@ export class ProductService {
     return item;
   }
 
-  async createItem(data: Product): Promise<Product> {
+  async createItem(data: IProduct): Promise<IProduct> {
     const newItem = await this.repository.create(data);
     return newItem;
   }
 
-  async updateItem(id: EntityId, data: Partial<Product>): Promise<Product> {
+  async updateItem(id: EntityId, data: Partial<IProduct>): Promise<IProduct> {
     const updatedItem = await this.repository.update(+id, data);
     if (!updatedItem) throw AppError.notFound();
 

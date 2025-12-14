@@ -1,6 +1,6 @@
 import type { EntityId } from "@/common/types";
 
-export interface Post {
+export interface IPost {
   id?: EntityId;
   title: string;
   body: string;

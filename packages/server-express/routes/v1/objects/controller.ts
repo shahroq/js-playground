@@ -1,5 +1,5 @@
 import type { Response } from "express";
-import type { Object } from "./types";
+import type { IObject } from "./types";
 import { ObjectService } from "./service";
 
 export class ObjectController {
@@ -8,7 +8,7 @@ export class ObjectController {
   constructor(private readonly service: ObjectService) {}
 
   index = async (_: any, res: Response): Promise<void> => {
-    const items: Object[] = await this.service.getItems();
+    const items: IObject[] = await this.service.getItems();
 
     res.status(200).json({ [`${this.collection}s`]: items });
   };

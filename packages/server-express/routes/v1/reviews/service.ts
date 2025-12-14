@@ -2,7 +2,7 @@ import { ReviewStatus } from "./types.d";
 import { AppError, AppQuery, config, MetaData } from "@/common/container";
 import type { EntityId } from "@/common/types";
 import { ReviewRepository } from "./repository";
-import type { IReviewResult, Review } from "./types";
+import type { IReviewResult, IReview } from "./types";
 import { ProductRepository } from "@products/repository";
 
 export class ReviewService {
@@ -40,7 +40,7 @@ export class ReviewService {
     return { items, meta };
   }
 
-  async getItem(id: EntityId, appQuery: AppQuery): Promise<Review> {
+  async getItem(id: EntityId, appQuery: AppQuery): Promise<IReview> {
     appQuery.append({ id });
     // add status filter all the times
     // appQuery.append({ status: ReviewStatus.APPROVED });
@@ -60,14 +60,14 @@ export class ReviewService {
     return item;
   }
 
-  async createItem(data: Review): Promise<Review> {
+  async createItem(data: IReview): Promise<IReview> {
     if (!data?.status) data = { ...data, status: config.default.review_status };
 
     const newItem = await this.repository.create(data);
     return newItem;
   }
 
-  async updateItem(id: EntityId, data: Partial<Review>): Promise<Review> {
+  async updateItem(id: EntityId, data: Partial<IReview>): Promise<IReview> {
     // check if this is updatable
     // const appQuery = new AppQuery({ id, status: ReviewStatus.PENDING });
     // const existingReview = await this.repository.findOne(appQuery);
@@ -86,7 +86,7 @@ export class ReviewService {
     return deleted;
   }
 
-  async approveItem(id: EntityId): Promise<Review> {
+  async approveItem(id: EntityId): Promise<IReview> {
     const updatingReview = await this.repository.findById(+id);
     if (!updatingReview) throw AppError.notFound();
 
@@ -111,7 +111,7 @@ export class ReviewService {
     return updatedItem;
   }
 
-  async rejectItem(id: EntityId): Promise<Review> {
+  async rejectItem(id: EntityId): Promise<IReview> {
     const updatingReview = await this.repository.findById(+id);
     if (!updatingReview) throw AppError.notFound();
 

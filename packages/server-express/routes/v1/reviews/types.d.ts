@@ -1,5 +1,5 @@
 import type { EntityId, IMeta, INormQuery } from "@/common/types";
-import type { Product } from "@/routes/v1/products/types";
+import type { IProduct } from "@/routes/v1/products/types";
 
 export enum ReviewStatus {
   APPROVED = "APPROVED",
@@ -7,7 +7,7 @@ export enum ReviewStatus {
   REJECTED = "REJECTED",
 }
 
-export interface Review {
+export interface IReview {
   id?: EntityId;
   product_id: number;
   content: string;
@@ -18,12 +18,12 @@ export interface Review {
   created_by: number;
   updated_by: number;
 
-  product?: Product;
+  product?: IProduct;
 }
 
 export interface IReviewResult {
-  item?: Review;
-  items?: Review[];
+  item?: IReview;
+  items?: IReview[];
 
   total_count?: number;
   average_rating?: float;

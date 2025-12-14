@@ -1,7 +1,7 @@
 import type { EntityId, IMeta, INormQuery } from "@/common/types";
-import type { Review } from "@/routes/v1/reviews/types";
+import type { IReview } from "@/routes/v1/reviews/types";
 
-export interface Product {
+export interface IProduct {
   id?: EntityId;
   name: string;
   description?: string;
@@ -13,14 +13,14 @@ export interface Product {
   created_by?: number;
   updated_by?: number;
 
-  reviews?: Review[];
+  reviews?: IReview[];
   review_count?: number; // number of ...
   average_rating?: number | null; // average of ...
 }
 
 export interface IProductResult {
-  item?: Product;
-  items?: Product[];
+  item?: IProduct;
+  items?: IProduct[];
 
   meta?: IMeta;
 }
