@@ -24,12 +24,12 @@ export abstract class BaseRepository<T> {
     return this.findOne(new AppQuery({ id }));
   }
 
-  async create(data: T): Promise<T> {
-    return await this.dbAdapter.create<T>(this.collection, data);
+  async create(payload: T): Promise<T> {
+    return await this.dbAdapter.create<T>(this.collection, payload);
   }
 
-  async update(id: EntityId, data: Partial<T>): Promise<T | null> {
-    return await this.dbAdapter.update<T>(this.collection, id, data);
+  async update(id: EntityId, payload: Partial<T>): Promise<T | null> {
+    return await this.dbAdapter.update<T>(this.collection, id, payload);
   }
 
   async delete(id: EntityId): Promise<boolean> {

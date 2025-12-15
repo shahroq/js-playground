@@ -8,7 +8,7 @@ export class ReviewController {
   constructor(private readonly service: ReviewService) {}
 
   index = async (_req: Request, res: Response) => {
-    const { items, meta } = await this.service.getItems(res.locals.appQuery);
+    const [items, meta] = await this.service.getItems(res.locals.appQuery);
 
     res.status(200).json({ [`${this.collection}s`]: items, meta });
   };

@@ -7,8 +7,8 @@ import {
 } from "@/common/container";
 import type { EntityId } from "@/common/types";
 import { ReviewRepository } from "./repository";
-import type { IReviewResult, IReview } from "./types";
 import { ProductRepository } from "@products/repository";
+import { ReviewDto, CreateReviewDto, UpdateReviewDto } from "./dto";
 
 export class ReviewService {
   constructor(
@@ -16,7 +16,7 @@ export class ReviewService {
     private readonly productRepository: ProductRepository
   ) {}
 
-  async getItems(appQuery: AppQuery): Promise<IReviewResult> {
+  async getItems(appQuery: AppQuery) {
     // add status filter all the times
     appQuery.append({ status: ReviewStatus.APPROVED });
 
@@ -24,9 +24,6 @@ export class ReviewService {
       this.repository.findAll(appQuery),
       this.repository.count(appQuery),
     ]);
-
-    // get pagination summary
-    const meta = PaginationSummaryDto.from(appQuery, total);
 
     // TODO: abstract away
     // get expansions: products
@@ -42,10 +39,13 @@ export class ReviewService {
       );
     }
 
-    return { items, meta };
+    return [
+      ReviewDto.fromMany(items),
+      PaginationSummaryDto.from(appQuery, total),
+    ];
   }
 
-  async getItem(id: EntityId, appQuery: AppQuery): Promise<IReview> {
+  async getItem(id: EntityId, appQuery: AppQuery) {
     appQuery.append({ id });
     // add status filter all the times
     // appQuery.append({ status: ReviewStatus.APPROVED });
@@ -62,26 +62,30 @@ export class ReviewService {
       if (item && product) item.product = product;
     }
 
-    return item;
+    return ReviewDto.from(item);
   }
 
-  async createItem(data: IReview): Promise<IReview> {
-    if (!data?.status) data = { ...data, status: config.default.review_status };
+  async createItem(createItemDto: CreateReviewDto) {
+    if (!createItemDto?.status)
+      createItemDto = {
+        ...createItemDto,
+        status: config.default.review_status,
+      };
 
-    const newItem = await this.repository.create(data);
-    return newItem;
+    const newItem = await this.repository.create(createItemDto);
+    return ReviewDto.from(newItem);
   }
 
-  async updateItem(id: EntityId, data: Partial<IReview>): Promise<IReview> {
+  async updateItem(id: EntityId, updateItemDto: UpdateReviewDto) {
     // check if this is updatable
     // const appQuery = new AppQuery({ id, status: ReviewStatus.PENDING });
     // const existingReview = await this.repository.findOne(appQuery);
     //...
 
-    const updatedItem = await this.repository.update(+id, data);
+    const updatedItem = await this.repository.update(+id, updateItemDto);
     if (!updatedItem) throw AppError.notFound();
 
-    return updatedItem;
+    return ReviewDto.from(updatedItem);
   }
 
   async deleteItem(id: EntityId): Promise<boolean> {
@@ -91,7 +95,7 @@ export class ReviewService {
     return deleted;
   }
 
-  async approveItem(id: EntityId): Promise<IReview> {
+  async approveItem(id: EntityId): Promise<ReviewDto> {
     const updatingReview = await this.repository.findById(+id);
     if (!updatingReview) throw AppError.notFound();
 
@@ -113,10 +117,10 @@ export class ReviewService {
     );
     if (!updatedItem) throw AppError.notFound();
 
-    return updatedItem;
+    return ReviewDto.from(updatedItem);
   }
 
-  async rejectItem(id: EntityId): Promise<IReview> {
+  async rejectItem(id: EntityId): Promise<ReviewDto> {
     const updatingReview = await this.repository.findById(+id);
     if (!updatingReview) throw AppError.notFound();
 
@@ -129,6 +133,6 @@ export class ReviewService {
     );
     if (!updatedItem) throw AppError.notFound();
 
-    return updatedItem;
+    return ReviewDto.from(updatedItem);
   }
 }

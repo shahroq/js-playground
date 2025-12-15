@@ -9,7 +9,7 @@ export enum ReviewStatus {
 
 // raw review (from db)
 export interface IReview {
-  id?: EntityId;
+  id: EntityId;
   product_id: number;
   content: string;
   rating: number;
@@ -22,7 +22,7 @@ export interface IReview {
   product?: IProduct;
 }
 
-//extra: to remove
+//extra: to remove/only used in findAllByProductId() [which should be refactored]
 export interface IReviewResult {
   item?: IReview;
   items?: IReview[];
@@ -33,4 +33,5 @@ export interface IReviewResult {
   meta?: IMeta;
 }
 
+// dto?
 export interface IReviewQuery extends INormQuery {}
