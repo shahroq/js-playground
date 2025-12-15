@@ -24,7 +24,7 @@ import { getMailer } from "./mailer/factory";
 // re-exports
 export * as utils from "./utils/utils";
 export { default as AppError, isAppError } from "./app-error/app-error";
-export * from "@/common/meta-data/meta-data";
+export * from "@/common/pagination/pagination-summary.dto";
 export * from "@/common/app-error/global-error.middleware";
 export * from "@/common/middlewares/undefined-routes.middleware";
 export * from "@/common/app-envelope/attach-system-data.middleware";

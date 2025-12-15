@@ -1,5 +1,10 @@
 import { ReviewStatus } from "./types.d";
-import { AppError, AppQuery, config, MetaData } from "@/common/container";
+import {
+  AppError,
+  AppQuery,
+  config,
+  PaginationSummaryDto,
+} from "@/common/container";
 import type { EntityId } from "@/common/types";
 import { ReviewRepository } from "./repository";
 import type { IReviewResult, IReview } from "./types";
@@ -20,8 +25,8 @@ export class ReviewService {
       this.repository.count(appQuery),
     ]);
 
-    // get meta data
-    const meta = new MetaData(appQuery, total).build();
+    // get pagination summary
+    const meta = PaginationSummaryDto.from(appQuery, total);
 
     // TODO: abstract away
     // get expansions: products

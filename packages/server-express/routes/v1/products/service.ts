@@ -1,4 +1,9 @@
-import { MetaData, utils, AppQuery, AppError } from "@/common/container";
+import {
+  utils,
+  AppQuery,
+  AppError,
+  PaginationSummaryDto,
+} from "@/common/container";
 import type { EntityId } from "@/common/types";
 import { ProductRepository } from "./repository";
 import { ReviewRepository } from "@reviews/repository";
@@ -16,9 +21,8 @@ export class ProductService {
       this.repository.count(appQuery),
     ]);
 
-    // TODO: remove this dependency, build meta somewhere else maybe?
-    // get meta data
-    const meta = new MetaData(appQuery, total).build();
+    // get pagination summary
+    const meta = PaginationSummaryDto.from(appQuery, total);
 
     // TODO: abstract away
     // get expansions: reviews
