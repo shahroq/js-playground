@@ -3,11 +3,13 @@ import {
   AppQuery,
   AppError,
   PaginationSummaryDto,
+  CreateProductDto,
+  ProductDto,
+  UpdateProductDto,
 } from "@/common/container";
 import type { EntityId } from "@/common/types";
 import { ProductRepository } from "./repository";
 import { ReviewRepository } from "@reviews/repository";
-import type { IProductResult, IProduct } from "./types";
 
 export class ProductService {
   constructor(
@@ -15,14 +17,11 @@ export class ProductService {
     private readonly reviewRepository: ReviewRepository
   ) {}
 
-  async getItems(appQuery: AppQuery): Promise<IProductResult> {
+  async getItems(appQuery: AppQuery) {
     let [items, total] = await Promise.all([
       this.repository.findAll(appQuery),
       this.repository.count(appQuery),
     ]);
-
-    // get pagination summary
-    const meta = PaginationSummaryDto.from(appQuery, total);
 
     // TODO: abstract away
     // get expansions: reviews
@@ -39,10 +38,13 @@ export class ProductService {
       );
     }
 
-    return { items, meta };
+    return [
+      ProductDto.fromMany(items),
+      PaginationSummaryDto.from(appQuery, total),
+    ];
   }
 
-  async getItem(id: EntityId, appQuery: AppQuery): Promise<IProduct> {
+  async getItem(id: EntityId, appQuery: AppQuery) {
     appQuery.append({ id });
 
     let item = await this.repository.findOne(appQuery);
@@ -60,22 +62,22 @@ export class ProductService {
       }
     }
 
-    return item;
+    return ProductDto.from(item);
   }
 
-  async createItem(data: IProduct): Promise<IProduct> {
-    const newItem = await this.repository.create(data);
-    return newItem;
+  async createItem(createItemDto: CreateProductDto) {
+    const newItem = await this.repository.create(createItemDto);
+    return ProductDto.from(newItem);
   }
 
-  async updateItem(id: EntityId, data: Partial<IProduct>): Promise<IProduct> {
-    const updatedItem = await this.repository.update(+id, data);
+  async updateItem(id: EntityId, updateItemDto: UpdateProductDto) {
+    const updatedItem = await this.repository.update(+id, updateItemDto);
     if (!updatedItem) throw AppError.notFound();
 
-    return updatedItem;
+    return ProductDto.from(updatedItem);
   }
 
-  async deleteItem(id: EntityId): Promise<boolean> {
+  async deleteItem(id: EntityId) {
     const deleted = await this.repository.delete(+id);
     if (!deleted) throw AppError.notFound();
 

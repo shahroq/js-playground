@@ -48,6 +48,7 @@ export class ReviewDto {
   }
 }
 
+// extraneous?
 export class ReviewListDto {
   readonly reviews: ReviewDto[];
 

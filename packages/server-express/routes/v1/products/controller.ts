@@ -1,4 +1,4 @@
-import type { NextFunction, Request, Response } from "express";
+import type { Request, Response } from "express";
 import type { ProductService } from "./service";
 import type { EntityId } from "@/common/types";
 
@@ -8,7 +8,7 @@ export class ProductController {
   constructor(private readonly service: ProductService) {}
 
   index = async (_req: Request, res: Response) => {
-    const { items, meta } = await this.service.getItems(res.locals.appQuery);
+    const [items, meta] = await this.service.getItems(res.locals.appQuery);
 
     res.status(200).json({ [`${this.collection}s`]: items, meta });
   };
@@ -28,7 +28,7 @@ export class ProductController {
     res.status(201).json({ [this.collection]: newItem });
   };
 
-  update = async (req: Request, res: Response, next: NextFunction) => {
+  update = async (req: Request, res: Response) => {
     const updatedItem = await this.service.updateItem(
       req.params.id as EntityId,
       req.body
@@ -37,8 +37,8 @@ export class ProductController {
     res.status(200).json({ [this.collection]: updatedItem });
   };
 
-  destroy = async (req: Request, res: Response, next: NextFunction) => {
-    const deleted = await this.service.deleteItem(req.params.id as EntityId);
+  destroy = async (req: Request, res: Response) => {
+    await this.service.deleteItem(req.params.id as EntityId);
 
     res.status(200).json({ message: `${this.collection} deleted.` });
   };

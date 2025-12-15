@@ -1,23 +1,25 @@
 import type { EntityId, IMeta, INormQuery } from "@/common/types";
 import type { IReview } from "@/routes/v1/reviews/types";
 
+// raw product (from db)
 export interface IProduct {
-  id?: EntityId;
+  id: EntityId;
   name: string;
-  description?: string;
+  description: string;
   price: number;
   category: string;
   in_stock: boolean;
-  created_at?: Date;
-  updated_at?: Date;
-  created_by?: number;
-  updated_by?: number;
+  created_at: Date;
+  updated_at: Date;
+  created_by: number;
+  updated_by: number;
 
   reviews?: IReview[];
   review_count?: number; // number of ...
   average_rating?: number | null; // average of ...
 }
 
+// extraneous?
 export interface IProductResult {
   item?: IProduct;
   items?: IProduct[];

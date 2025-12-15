@@ -4,22 +4,25 @@ import { getAppEnvelope } from "./app-envelope/factory";
 import { getValidatorHandler } from "./validation/factory";
 import { getDBAdapter } from "./db-adapter/factory";
 import { getHttpClient } from "./http-client/factory";
+import { getMailer } from "./mailer/factory";
 
 // routes
 import { ProductRepository } from "@products/repository";
 import { ProductService } from "@products/service";
 import { ProductController } from "@products/controller";
+export * from "@products/dto";
 
 import { ReviewRepository } from "@reviews/repository";
 import { ReviewService } from "@reviews/service";
 import { ReviewController } from "@reviews/controller";
+export * from "@reviews/dto";
 
 import { PostService } from "@posts/service";
 import { PostController } from "@posts/controller";
+export * from "@posts/dto";
 
 import { ObjectService } from "@/routes/v1/objects/service";
 import { ObjectController } from "@/routes/v1/objects/controller";
-import { getMailer } from "./mailer/factory";
 
 // re-exports
 export * as utils from "./utils/utils";

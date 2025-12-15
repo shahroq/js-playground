@@ -1,13 +1,14 @@
-import { AppError } from "@/common/container";
+import { AppError, PostDto } from "@/common/container";
 import type { IPost } from "./types";
 import type { IHttpClient } from "@/common/http-client/http-client.interface";
-import type { EntityId } from "@/common/types";
 
 export class PostService {
   constructor(private readonly httpClient: IHttpClient) {}
 
-  async getItems(): Promise<IPost[]> {
-    return this.httpClient.get<IPost[]>(`/posts`);
+  async getItems() {
+    const items = await this.httpClient.get<IPost[]>(`/posts`);
+
+    return PostDto.fromMany(items);
 
     /*
     try {
@@ -16,10 +17,10 @@ export class PostService {
     */
   }
 
-  async getItem(id: EntityId): Promise<IPost | null> {
-    const item = await this.httpClient.get<IPost>(`/posts/${id}`);
+  async getItem(id: number) {
+    const item = await this.httpClient.get<IPost>(`/posts/${+id}`);
     if (!item) throw AppError.notFound();
 
-    return item;
+    return PostDto.from(item);
   }
 }

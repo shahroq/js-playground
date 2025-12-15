@@ -22,7 +22,7 @@ export interface IReview {
   product?: IProduct;
 }
 
-//extra: to remove/only used in findAllByProductId() [which should be refactored]
+// extraneous? to remove/only used in findAllByProductId() [which should be refactored]
 export interface IReviewResult {
   item?: IReview;
   items?: IReview[];

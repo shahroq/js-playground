@@ -4,11 +4,13 @@ import {
   AppQuery,
   config,
   PaginationSummaryDto,
+  ReviewDto,
+  CreateReviewDto,
+  UpdateReviewDto,
 } from "@/common/container";
 import type { EntityId } from "@/common/types";
 import { ReviewRepository } from "./repository";
 import { ProductRepository } from "@products/repository";
-import { ReviewDto, CreateReviewDto, UpdateReviewDto } from "./dto";
 
 export class ReviewService {
   constructor(
@@ -88,7 +90,7 @@ export class ReviewService {
     return ReviewDto.from(updatedItem);
   }
 
-  async deleteItem(id: EntityId): Promise<boolean> {
+  async deleteItem(id: EntityId) {
     const deleted = await this.repository.delete(+id);
     if (!deleted) throw AppError.notFound();
 

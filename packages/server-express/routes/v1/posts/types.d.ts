@@ -1,8 +1,8 @@
 import type { EntityId } from "@/common/types";
 
 export interface IPost {
-  id?: EntityId;
+  id?: number;
+  userId: number;
   title: string;
   body: string;
-  userId: number;
 }
