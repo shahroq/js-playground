@@ -16,6 +16,10 @@ export class ProductService {
       this.repository.count(appQuery),
     ]);
 
+    // TODO: remove this dependency, build meta somewhere else maybe?
+    // get meta data
+    const meta = new MetaData(appQuery, total).build();
+
     // TODO: abstract away
     // get expansions: reviews
     if (appQuery.normQuery.expansion?.include?.includes("reviews")) {
@@ -30,10 +34,6 @@ export class ProductService {
         })
       );
     }
-
-    // TODO: remove this dependency, build meta somewhere else maybe?
-    // get meta data
-    const meta = new MetaData(appQuery, total).build();
 
     return { items, meta };
   }

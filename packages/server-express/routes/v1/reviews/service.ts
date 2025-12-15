@@ -20,6 +20,9 @@ export class ReviewService {
       this.repository.count(appQuery),
     ]);
 
+    // get meta data
+    const meta = new MetaData(appQuery, total).build();
+
     // TODO: abstract away
     // get expansions: products
     if (appQuery.normQuery.expansion?.include?.includes("products")) {
@@ -33,9 +36,6 @@ export class ReviewService {
         })
       );
     }
-
-    // get meta data
-    const meta = new MetaData(appQuery, total).build();
 
     return { items, meta };
   }
