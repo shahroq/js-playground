@@ -27,18 +27,12 @@ export class ReviewService {
       this.repository.count(appQuery),
     ]);
 
-    // TODO: abstract away
     // get expansions: products
-    if (appQuery.normQuery.expansion?.include?.includes("products")) {
-      items = await Promise.all(
-        items.map(async (item) => {
-          // get product
-          const product = await this.productRepository.findById(
-            item.product_id
-          );
-          return { ...item, product: product ?? undefined };
-        })
-      );
+    // TODO: not performatnt, get'em with WHERE IN query
+    const expansionList = appQuery.normQuery?.expansion?.include ?? [];
+    if (expansionList.includes("products")) {
+      for (const item of items)
+        item.product = await this.getReviewProduct(item.product_id);
     }
 
     return [
@@ -55,13 +49,10 @@ export class ReviewService {
     const item = await this.repository.findOne(appQuery);
     if (!item) throw AppError.notFound();
 
-    // get expansions: products
-    // TODO: abstract away
-    if (appQuery.normQuery.expansion?.include?.includes("products")) {
-      const product = await this.productRepository.findById(
-        item?.product_id as EntityId
-      );
-      if (item && product) item.product = product;
+    // get expansions
+    const expansionList = appQuery.normQuery?.expansion?.include ?? [];
+    if (expansionList.includes("products")) {
+      item.product = await this.getReviewProduct(item.product_id);
     }
 
     return ReviewDto.from(item);
@@ -136,5 +127,10 @@ export class ReviewService {
     if (!updatedItem) throw AppError.notFound();
 
     return ReviewDto.from(updatedItem);
+  }
+
+  private async getReviewProduct(id: EntityId) {
+    const product = await this.productRepository.findById(id);
+    return product ?? {};
   }
 }

@@ -1,5 +1,6 @@
 import type { EntityId } from "@/common/types";
 import type { IProduct } from "./types";
+import { ReviewDto } from "@reviews/dto";
 
 // Request Dto s
 export class CreateProductDto {
@@ -26,7 +27,10 @@ export class ProductDto {
     public readonly describtion: string,
     public readonly category: string,
     public readonly in_stock: boolean,
-    public readonly submitted_at: Date
+    public readonly submitted_at: Date,
+    public readonly reviews: ReviewDto[],
+    public readonly review_count: number,
+    public readonly average_rating: number
   ) {}
 
   static from(entity: IProduct): ProductDto {
@@ -36,7 +40,10 @@ export class ProductDto {
       entity.description,
       entity.category,
       entity.in_stock,
-      entity.created_at
+      entity.created_at,
+      entity.reviews ? ReviewDto.fromMany(entity.reviews) : undefined,
+      entity.review_count,
+      entity.average_rating
     );
   }
 

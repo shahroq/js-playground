@@ -14,7 +14,7 @@ export class ReviewRepository extends BaseRepository<IReview> {
 
   // used by service of product module
   // TODO: should it be here? or at service layer
-  async findAllByProductId(productId: EntityId): Promise<IReviewResult> {
+  async findAllByProductId(productId: EntityId) {
     const appQuery = new AppQuery(
       {
         product_id: productId,
@@ -26,10 +26,10 @@ export class ReviewRepository extends BaseRepository<IReview> {
 
     const items = await this.findAll(appQuery);
 
-    const total_count = await this.count(appQuery);
+    const review_count = await this.count(appQuery);
     const average_rating = await this.average(appQuery);
 
-    return { items, total_count, average_rating };
+    return { reviews: items, review_count, average_rating };
   }
 
   // async findAllByUserId(userId: EntityId): Promise<Review[]> {}

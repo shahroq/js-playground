@@ -1,5 +1,4 @@
 import {
-  utils,
   AppQuery,
   AppError,
   PaginationSummaryDto,
@@ -23,19 +22,11 @@ export class ProductService {
       this.repository.count(appQuery),
     ]);
 
-    // TODO: abstract away
-    // get expansions: reviews
-    if (appQuery.normQuery.expansion?.include?.includes("reviews")) {
-      items = await Promise.all(
-        items.map(async (item) => {
-          const reviews = await this.reviewRepository.findAllByProductId(
-            item.id as EntityId
-          );
-
-          const newReviews = utils.renameKey(reviews, "items", "reviews");
-          return { ...item, ...newReviews };
-        })
-      );
+    // get expansions
+    const expansionList = appQuery.normQuery?.expansion?.include ?? [];
+    if (expansionList.includes("reviews")) {
+      for (const item of items)
+        Object.assign(item, await this.getProductReviews(item.id));
     }
 
     return [
@@ -47,19 +38,13 @@ export class ProductService {
   async getItem(id: EntityId, appQuery: AppQuery) {
     appQuery.append({ id });
 
-    let item = await this.repository.findOne(appQuery);
+    const item = await this.repository.findOne(appQuery);
     if (!item) throw AppError.notFound();
 
-    // get expansions: reviews
-    if (appQuery.normQuery.expansion?.include?.includes("reviews")) {
-      const reviews = await this.reviewRepository.findAllByProductId(
-        item?.id as EntityId
-      );
-      if (item && reviews) {
-        item = { ...item, ...reviews };
-        // @ts-ignore
-        item = utils.renameKey(item, "items", "reviews");
-      }
+    // get expansions
+    const expansionList = appQuery.normQuery?.expansion?.include ?? [];
+    if (expansionList.includes("reviews")) {
+      Object.assign(item, await this.getProductReviews(item.id));
     }
 
     return ProductDto.from(item);
@@ -82,5 +67,10 @@ export class ProductService {
     if (!deleted) throw AppError.notFound();
 
     return deleted;
+  }
+
+  private async getProductReviews(id: EntityId) {
+    const reviews = await this.reviewRepository.findAllByProductId(id);
+    return reviews ?? {};
   }
 }

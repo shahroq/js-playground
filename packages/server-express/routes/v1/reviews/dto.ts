@@ -1,3 +1,4 @@
+import { ProductDto } from "@products/dto";
 import type { PaginationSummaryDto } from "@/common/container";
 import type { EntityId } from "@/common/types";
 import type { IReview } from "./types";
@@ -29,7 +30,8 @@ export class ReviewDto {
     public readonly content: string,
     public readonly rating: number,
     public readonly status: ReviewStatus,
-    public readonly submitted_at: Date
+    public readonly submitted_at: Date,
+    public readonly product: ProductDto
   ) {}
 
   static from(entity: IReview): ReviewDto {
@@ -39,7 +41,8 @@ export class ReviewDto {
       entity.content,
       entity.rating,
       entity.status,
-      entity.created_at
+      entity.created_at,
+      entity.product ? ProductDto.from(entity.product) : undefined
     );
   }
 
