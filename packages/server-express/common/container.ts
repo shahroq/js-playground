@@ -44,6 +44,7 @@ export { queryOptions as reviewsQueryOptions } from "@/routes/v1/reviews/query.o
  */
 
 // 0. Common Services
+export * from "@/common/i118n/t";
 export const appEnvelope = getAppEnvelope();
 export const validate = getValidatorHandler();
 export const dbAdapter = getDBAdapter();
