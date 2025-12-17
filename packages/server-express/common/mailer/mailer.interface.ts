@@ -1,4 +1,4 @@
-export type MAilerStrategy = "console-log" | "mailtrap";
+export type MailerStrategy = "console-log" | "mailtrap";
 
 export interface IMail {
   to: string;

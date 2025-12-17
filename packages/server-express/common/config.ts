@@ -1,6 +1,12 @@
 import { join } from "path";
 import { utils } from "./container";
 import { ReviewStatus } from "@/generated/prisma/enums";
+import { LogLevel, type LoggerStrategy } from "./logger/logger.interface";
+import type { MailerStrategy } from "./mailer/mailer.interface";
+import type { HttpClientStrategy } from "./http-client/http-client.interface";
+import type { ValidationStrategy } from "./validation/types";
+import type { AppEnvelopeStrategy } from "./app-envelope/envelope.interface";
+import type { DBAdapterStrategy } from "./db-adapter/db-adapter.interface";
 
 export type Env = "development" | "production" | "test";
 
@@ -29,8 +35,10 @@ const config = {
 
   // logging
   logging: {
-    morgan_enabled: <boolean>!!(process.env.MORGAN_ENABLED === "true"),
-    morgan_format: <string>process.env.MORAGN_FORMAT || "tiny",
+    strategy: <LoggerStrategy>process.env.LOGGING_strategy || "winston",
+    level: <LogLevel>process.env.LOGGING_LEVEL || LogLevel.INFO,
+    morgan_enabled: <boolean>!!(process.env.LOGGING_MORGAN_ENABLED === "true"),
+    morgan_format: <string>process.env.LOGGING_MORAGN_FORMAT || "tiny",
   },
 
   // defaults
@@ -44,7 +52,7 @@ const config = {
 
   // app-envelope (response)
   app_envelope: {
-    strategy: <string>process.env.APP_ENVELOPE_STRATEGY,
+    strategy: <AppEnvelopeStrategy>process.env.APP_ENVELOPE_STRATEGY,
     include_system_info: <boolean>(
       !!(process.env.APP_ENVELOPE_INCLUDE_SYSTEM_INFO === "true")
     ),
@@ -52,12 +60,12 @@ const config = {
 
   // validation
   validation: {
-    strategy: <string>process.env.VALIDATION_STRATEGY,
+    strategy: <ValidationStrategy>process.env.VALIDATION_STRATEGY,
   },
 
   // database
   database: {
-    adapter_strategy: <string>process.env.DATABASE_ADAPTER_STRATEGY,
+    adapter_strategy: <DBAdapterStrategy>process.env.DATABASE_ADAPTER_STRATEGY,
     url: <string | null>process.env.DATABASE_URL,
 
     type: <string | null>null,
@@ -67,7 +75,7 @@ const config = {
 
   // http-client
   http_client: {
-    strategy: <string>process.env.HTTP_CLIENT_STRATEGY,
+    strategy: <HttpClientStrategy>process.env.HTTP_CLIENT_STRATEGY,
     api_url_jsonplaceholder: <string>(
       process.env.HTTP_CLIENT_API_URL_JSONPLACEHOLDER
     ),
@@ -76,7 +84,7 @@ const config = {
 
   // mailer
   mailer: {
-    adapter_strategy: <string>process.env.MAILER_STRATEGY,
+    strategy: <MailerStrategy>process.env.MAILER_STRATEGY,
     protocol: <string>process.env.MAILER_PROTOCOL || "smpt",
     host: <string>process.env.MAILER_HOST || "",
     port: <number>(process.env.MAILER_PORT || 0),

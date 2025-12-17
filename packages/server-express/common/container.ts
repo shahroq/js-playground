@@ -5,6 +5,7 @@ import { getValidatorHandler } from "./validation/factory";
 import { getDBAdapter } from "./db-adapter/factory";
 import { getHttpClient } from "./http-client/factory";
 import { getMailer } from "./mailer/factory";
+import { getLogger } from "./logger/factory";
 
 // routes
 import { ProductRepository } from "@products/repository";
@@ -53,6 +54,7 @@ export const httpClientRestfulapi = getHttpClient(
   config.http_client.api_url_restfulapi as string
 );
 export const mailer = getMailer();
+export const logger = getLogger();
 
 // 1. Repositories
 export const productRepository = new ProductRepository(dbAdapter);

@@ -1,19 +1,13 @@
-import type { Response, NextFunction } from "express";
-import { config } from "@/common/container";
+import type { Request, Response, NextFunction } from "express";
+import { config, logger } from "@/common/container";
 import type { E } from "./types";
 
 export function globalErrorHandler(
   error: E,
-  _: any,
+  req: Request,
   res: Response,
   next: NextFunction
 ): void {
-  // the error is best to pass to default error handler
-  if (res.headersSent || config.debug.show_thrown_errors) return next(error);
-
-  // TODO: log errors (winston, etc)
-  // ..
-
   // generate public message
   let publicMessage = "";
 
@@ -24,6 +18,15 @@ export function globalErrorHandler(
   // publicMessage += `Global Err: ${error.message}`;
 
   if (publicMessage) error.meta.publicMessage = publicMessage;
+
+  // logger
+  logger.error(publicMessage || error.message, {
+    stack: error.stack,
+    path: req.originalUrl,
+  });
+
+  // the error is best to pass to default error handler
+  if (res.headersSent || config.debug.show_thrown_errors) return next(error);
 
   res.json(error);
 }
