@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import morgan from "morgan";
 import type { Application, NextFunction, Response } from "express";
 import v1Router from "@/routes/v1";
 import {
@@ -17,6 +18,8 @@ export const bootstrap = (): Application => {
 
   const beforeMWs = [express.json(), cors(), envelopResponseHandler];
   const afterMWs = [undefinedRoutesHandler, globalErrorHandler];
+  config.logging.morgan_enabled &&
+    app.use(morgan(config.logging.morgan_format));
   config.env === "development" &&
     config.app_envelope.include_system_info &&
     app.use(attachSystemInfoHandler);

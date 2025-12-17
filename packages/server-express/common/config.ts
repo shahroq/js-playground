@@ -27,6 +27,12 @@ const config = {
     ),
   },
 
+  // logging
+  logging: {
+    morgan_enabled: <boolean>!!(process.env.MORGAN_ENABLED === "true"),
+    morgan_format: <string>process.env.MORAGN_FORMAT || "tiny",
+  },
+
   // defaults
   default: {
     user_id: <number>(process.env.DEFAULT_USER_ID || 1), // use it till auth is not implemented
