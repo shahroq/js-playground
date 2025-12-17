@@ -28,9 +28,9 @@ export class ProductDto {
     public readonly category: string,
     public readonly in_stock: boolean,
     public readonly submitted_at: Date,
-    public readonly reviews: ReviewDto[],
-    public readonly review_count: number,
-    public readonly average_rating: number
+    public readonly reviews?: ReviewDto[],
+    public readonly review_count?: number,
+    public readonly average_rating?: number
   ) {}
 
   static from(entity: IProduct): ProductDto {
@@ -42,8 +42,8 @@ export class ProductDto {
       entity.in_stock,
       entity.created_at,
       entity.reviews ? ReviewDto.fromMany(entity.reviews) : undefined,
-      entity.review_count,
-      entity.average_rating
+      entity.review_count ?? undefined,
+      entity.average_rating ?? undefined
     );
   }
 

@@ -31,7 +31,7 @@ export class ReviewDto {
     public readonly rating: number,
     public readonly status: ReviewStatus,
     public readonly submitted_at: Date,
-    public readonly product: ProductDto
+    public readonly product?: ProductDto
   ) {}
 
   static from(entity: IReview): ReviewDto {
@@ -52,6 +52,7 @@ export class ReviewDto {
 }
 
 // extraneous?
+/*
 export class ReviewListDto {
   readonly reviews: ReviewDto[];
 
@@ -60,3 +61,4 @@ export class ReviewListDto {
 
   readonly meta?: PaginationSummaryDto;
 }
+*/

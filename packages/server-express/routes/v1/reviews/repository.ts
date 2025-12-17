@@ -1,5 +1,5 @@
 import type { EntityId } from "@/common/types";
-import type { IReviewResult, IReview, ReviewStatus } from "./types";
+import type { IReview, ReviewStatus } from "./types";
 import { BaseRepository } from "@/common/repository/base.repository";
 import type { IDBAdapter } from "@/common/db-adapter/db-adapter.interface";
 import {
