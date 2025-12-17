@@ -5,11 +5,11 @@ import { MailtrapMailer } from "./mailtrap-adapter";
 let mailer = null;
 
 export function getMailer() {
-  const format = config.mailer.adapter_strategy || "console-log";
+  const strategy = config.mailer.strategy || "console-log";
 
-  console.log(`⚙️  Getting mailer adapter for strategy: (${format})`);
+  console.log(`⚙️  Getting mailer adapter for strategy: (${strategy})`);
 
-  switch (format) {
+  switch (strategy) {
     case "console-log":
       mailer = new ConsoleLogMailer();
       break;
@@ -17,7 +17,7 @@ export function getMailer() {
       mailer = new MailtrapMailer();
       break;
     default:
-      throw new Error(`Unsupported mailer format: ${format}`);
+      throw new Error(`Unsupported mailer format: ${strategy}`);
   }
 
   return mailer;
