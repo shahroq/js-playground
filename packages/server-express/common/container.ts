@@ -1,8 +1,8 @@
 // common
 import config from "./config";
-import { getAppEnvelope } from "./app-envelope/factory";
+import { getEnvelope } from "./envelope/factory";
 import { getValidatorHandler } from "./validation/factory";
-import { getDBAdapter } from "./db-adapter/factory";
+import { getDbClient } from "./db-client/factory";
 import { getHttpClient } from "./http-client/factory";
 import { getMailer } from "./mailer/factory";
 import { getLogger } from "./logger/factory";
@@ -27,15 +27,15 @@ import { ObjectController } from "@/routes/v1/objects/controller";
 
 // re-exports
 export * as utils from "./utils/utils";
-export { default as AppError, isAppError } from "./app-error/app-error";
+export { default as AppError, isAppError } from "./error/app-error";
 export * from "@/common/pagination/pagination-summary.dto";
-export * from "@/common/app-error/global-error.middleware";
+export * from "@/common/error/global-error.middleware";
 export * from "@/common/middlewares/undefined-routes.middleware";
-export * from "@/common/app-envelope/attach-system-data.middleware";
-export * from "@/common/app-envelope/envelop-response.middleware";
-export * from "@/common/app-query/normalize-query.middleware";
-export * from "@/common/app-query/app-query";
-export { queryOptions as defaultQueryOptions } from "@/common/app-query/default.options";
+export * from "@/common/envelope/attach-system-data.middleware";
+export * from "@/common/envelope/envelop-response.middleware";
+export * from "@/common/query/normalize-query.middleware";
+export * from "@/common/query/app-query";
+export { queryOptions as defaultQueryOptions } from "@/common/query/default.options";
 export { queryOptions as productsQueryOptions } from "@/routes/v1/products/query.options";
 export { queryOptions as reviewsQueryOptions } from "@/routes/v1/reviews/query.options";
 
@@ -45,9 +45,9 @@ export { queryOptions as reviewsQueryOptions } from "@/routes/v1/reviews/query.o
 
 // 0. Common Services
 export * from "@/common/i118n/t";
-export const appEnvelope = getAppEnvelope();
+export const Envelope = getEnvelope();
 export const validate = getValidatorHandler();
-export const dbAdapter = getDBAdapter();
+export const dbAdapter = getDbClient();
 export const httpClientJsonPlaceHolder = getHttpClient(
   config.http_client.api_url_jsonplaceholder as string
 );

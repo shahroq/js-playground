@@ -1,7 +1,7 @@
 import { isAppError } from "@/common/container";
-import type { Envelope } from "./envelope.interface";
-import type { E } from "../app-error/types";
-import { getErrorMessage } from "../app-error/app-error";
+import type { IEnvelope } from "./envelope.interface";
+import type { E } from "../error/types";
+import { getErrorMessage } from "../error/app-error";
 
 type JSendStatus = "success" | "fail" | "error";
 
@@ -24,7 +24,7 @@ type JSendError = {
 
 type JSendFormat = JSendSuccess | JSendFail | JSendError;
 
-export class JSendEnvelope implements Envelope {
+export class JSendAdapter implements IEnvelope {
   constructor(
     private readonly _error?: E | null,
     private readonly _data?: any

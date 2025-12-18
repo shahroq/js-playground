@@ -1,6 +1,6 @@
 import type { Response, NextFunction } from "express";
-import { appEnvelope, isAppError } from "@/common/container";
-import type { E } from "../app-error/types";
+import { Envelope, isAppError } from "@/common/container";
+import type { E } from "@/common/error/types";
 
 /**
  * envelop the response in a specified format
@@ -14,7 +14,7 @@ export function envelopResponseHandler(
 
   res.json = function (body) {
     const { error, data } = extractResponse(body);
-    const envelope = new appEnvelope(error, data).build();
+    const envelope = new Envelope(error, data).build();
 
     return originalJson.call(this, envelope);
   };

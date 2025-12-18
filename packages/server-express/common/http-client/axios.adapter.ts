@@ -5,7 +5,7 @@ import type {
   RequestConfig,
 } from "./http-client.interface";
 
-export class AxiosHttpClient implements IHttpClient {
+export class AxiosAdapter implements IHttpClient {
   private httpClient: AxiosInstance;
 
   constructor(baseConfig: HttpClientConfig) {

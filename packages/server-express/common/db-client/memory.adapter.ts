@@ -1,9 +1,9 @@
 import data from "@/data/memory-json/data.json";
-import { AppQuery, config, utils } from "@/common/container";
-import { buildAuditFields, type IDBAdapter } from "./db-adapter.interface";
+import { AppQuery, config } from "@/common/container";
+import { buildAuditFields, type IDbClient } from "./db-client.interface";
 import type { EntityId, CollectionName } from "@/common/types";
 
-export class MemoryDBAdapter implements IDBAdapter {
+export class MemoryAdapter implements IDbClient {
   private dbClient;
   private userId: number;
 

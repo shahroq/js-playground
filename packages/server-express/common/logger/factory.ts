@@ -1,19 +1,17 @@
-import { config } from "@/common/container.ts";
-import { LogLevel } from "./logger.interface";
+import { config, t } from "@/common/container.ts";
+
 import { WinstonAdapter } from "./winston.adapter";
 import { ConsoleLogAdapter } from "./console-log.adapter";
 
 let logger = null;
 
 export function getLogger() {
-  const startegy = config.logging.strategy || "console-log";
-  const level = config.logging.level || LogLevel.INFO;
+  const adapter = "logger";
+  const strategy = config.logger.strategy || "console-log";
 
-  console.log(
-    `⚙️  Getting logger adapter for strategy: (${startegy}/${level})`
-  );
+  console.log(t("console.getAdapter", { adapter, strategy }));
 
-  switch (startegy) {
+  switch (strategy) {
     case "console-log":
       logger = new ConsoleLogAdapter();
       break;
@@ -21,7 +19,7 @@ export function getLogger() {
       logger = new WinstonAdapter();
       break;
     default:
-      throw new Error(`Unsupported logging startegy: ${startegy}`);
+      throw new Error(t("console.noAdapter", { adapter, strategy }));
   }
 
   return logger;

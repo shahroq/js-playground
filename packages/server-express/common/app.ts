@@ -19,10 +19,9 @@ export const bootstrap = (): Application => {
 
   const beforeMWs = [express.json(), cors(), envelopResponseHandler];
   const afterMWs = [undefinedRoutesHandler, globalErrorHandler];
-  config.logging.morgan_enabled &&
-    app.use(morgan(config.logging.morgan_format));
+  config.logger.morgan_enabled && app.use(morgan(config.logger.morgan_format));
   config.env === "development" &&
-    config.app_envelope.include_system_info &&
+    config.envelope.include_system_info &&
     app.use(attachSystemInfoHandler);
   app.use(beforeMWs);
 

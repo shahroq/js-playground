@@ -7,7 +7,7 @@ export class WinstonAdapter implements ILogger {
 
   constructor() {
     this.logger = winston.createLogger({
-      level: config.logging.level,
+      level: config.logger.level,
       // format: winston.format.json(),
       format: winston.format.combine(
         winston.format.timestamp(),

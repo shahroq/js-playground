@@ -1,7 +1,6 @@
 import type { Awaitable, CollectionName, EntityId } from "@/common/types";
 import type { AppQuery } from "../container";
 
-// export type DatabaseStrategy = "file-json" | "lowdb-json" | "prisma-sqlite";
 export type DBAdapterStrategy = "memory" | "file" | "lowdb" | "prisma";
 
 export type AuditField =
@@ -16,7 +15,7 @@ export interface CurrentContext {
   now?: () => Date; // optional for testability
 }
 
-export interface IDBAdapter {
+export interface IDbClient {
   connect(): Awaitable<void>;
 
   disconnect(): Awaitable<void>;

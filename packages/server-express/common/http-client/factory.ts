@@ -1,25 +1,29 @@
-import type { IHttpClient, HttpClientStrategy } from "./http-client.interface";
-import { AxiosHttpClient } from "./axios-http-client";
-import { config } from "@/common/container";
+import type { IHttpClient } from "./http-client.interface";
+import { AxiosAdapter } from "./axios.adapter";
+import { config, t } from "@/common/container";
 
 const httpClientInstances = new Map<string, IHttpClient>();
 
+let httpClient;
+
 // multipleton!
 export function getHttpClient(baseURL: string): IHttpClient {
+  const adapter = "http-client";
+  const strategy = config.http_client.strategy;
+
+  console.log(
+    t("console.getAdapter", { adapter, strategy: `${strategy}:${baseURL}` })
+  );
+
   const existing = httpClientInstances.get(baseURL);
   if (existing) return existing;
 
-  const strategy = config.http_client.strategy as HttpClientStrategy;
-  console.log(`⚙️  Getting http client (${strategy}) for ${baseURL}`);
-
-  let httpClient;
-
   switch (strategy) {
     case "axios":
-      httpClient = new AxiosHttpClient({ baseURL });
+      httpClient = new AxiosAdapter({ baseURL });
       break;
     default:
-      throw new Error(`Unsupported http client strategy: ${strategy}`);
+      throw new Error(t("console.noAdapter", { adapter, strategy }));
   }
 
   // Store the instance for future calls

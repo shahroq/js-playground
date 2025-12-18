@@ -1,48 +1,56 @@
-import { config } from "@/common/container";
-import { MemoryDBAdapter } from "./memory-db-adapter";
-import { FileDBAdapter } from "./file-db-adapter";
-import { LowDBDBAdapter } from "./lowdb-db-adapter";
-import { PrismaDBAdapter } from "./prisma-db-adapter";
-import type { DBAdapterStrategy, IDBAdapter } from "./db-adapter.interface";
+import { config, t } from "@/common/container";
+import { MemoryAdapter } from "./memory.adapter";
+import { FileAdapter } from "./file.adapter";
+import { LowDbAdapter } from "./lowdb.adapter";
+import { PrismaAdapter } from "./prisma.adapter";
+import type { IDbClient } from "./db-client.interface";
 
-let dbAdapterInstance: IDBAdapter | null = null;
+let dbClientInstance: IDbClient | null = null;
 
 // add identifier here (filepath, or db engine name)?
-export function getDBAdapter(): IDBAdapter {
-  if (dbAdapterInstance) return dbAdapterInstance;
+export function getDbClient(): IDbClient {
+  if (dbClientInstance) return dbClientInstance;
 
-  const strategy = config.database.adapter_strategy as DBAdapterStrategy;
-  let dbAdapter;
-  console.log(`⚙️  Getting db adapter (${strategy}/${config.database.type})`);
+  let dbClient;
+
+  const adapter = "db-client";
+  const strategy = config.database.client_strategy;
+
+  console.log(
+    t("console.getAdapter", {
+      adapter,
+      strategy: `${strategy}/${config.database.type}`,
+    })
+  );
 
   switch (strategy) {
     case "memory":
-      dbAdapter = new MemoryDBAdapter();
+      dbClient = new MemoryAdapter();
       break;
     case "file":
-      dbAdapter = new FileDBAdapter();
+      dbClient = new FileAdapter();
       break;
     case "lowdb":
-      dbAdapter = new LowDBDBAdapter();
+      dbClient = new LowDbAdapter();
       break;
     case "prisma":
-      dbAdapter = new PrismaDBAdapter();
+      dbClient = new PrismaAdapter();
       break;
     default:
-      throw new Error(`Unsupported database adapter strategy: ${strategy}`);
+      throw new Error(t("console.noAdapter", { adapter, strategy }));
   }
 
-  dbAdapter.connect();
+  dbClient.connect();
 
   // Store the instance for future calls
-  dbAdapterInstance = dbAdapter;
+  dbClientInstance = dbClient;
 
-  return dbAdapterInstance;
+  return dbClientInstance;
 }
 
 // useful for testing
 export function resetDBAdapter(): void {
-  dbAdapterInstance = null;
+  dbClientInstance = null;
 }
 /*
 // class-based

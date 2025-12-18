@@ -4,7 +4,7 @@ import { config } from "@/common/container";
 
 import type { IMail, IMailer } from "./mailer.interface";
 
-export class MailtrapMailer implements IMailer {
+export class MailtrapAdapter implements IMailer {
   private transporter;
 
   constructor() {

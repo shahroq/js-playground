@@ -5,14 +5,14 @@ import type {
   UserDelegate,
 } from "@/generated/prisma/models";
 import { AppQuery, config } from "@/common/container";
-import { buildAuditFields, type IDBAdapter } from "./db-adapter.interface";
+import { buildAuditFields, type IDbClient } from "./db-client.interface";
 import type { EntityId, CollectionName } from "@/common/types";
 import type {
   Pagination,
   OrderBy,
   Filter,
   Selection,
-} from "@/common/app-query/types";
+} from "@/common/query/types";
 
 const collectionModelMap: Record<
   CollectionName,
@@ -27,7 +27,7 @@ type ModelName = (typeof collectionModelMap)[CollectionName];
 // type ModelName = Uncapitalize<Prisma.ModelName>;
 type ModelDelegate = ProductDelegate | ReviewDelegate | UserDelegate;
 
-export class PrismaDBAdapter implements IDBAdapter {
+export class PrismaAdapter implements IDbClient {
   private dbClient: PrismaClient;
   private userId: number;
 

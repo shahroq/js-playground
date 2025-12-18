@@ -1,14 +1,14 @@
 import type { EntityId } from "@/common/types";
 import type { IReview, ReviewStatus } from "./types";
 import { BaseRepository } from "@/common/repository/base.repository";
-import type { IDBAdapter } from "@/common/db-adapter/db-adapter.interface";
+import type { IDbClient } from "@/common/db-client/db-client.interface";
 import {
   AppQuery,
   reviewsQueryOptions as queryOptions,
 } from "@/common/container";
 
 export class ReviewRepository extends BaseRepository<IReview> {
-  constructor(dbAdapter: IDBAdapter) {
+  constructor(dbAdapter: IDbClient) {
     super("reviews", queryOptions, dbAdapter);
   }
 

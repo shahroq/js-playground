@@ -1,4 +1,4 @@
-import type { QueryOptions } from "@/common/app-query/types";
+import type { QueryOptions } from "@/common/query/types";
 
 // default query options (to be merged in every module)
 export const queryOptions: QueryOptions = {

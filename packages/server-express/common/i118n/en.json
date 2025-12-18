@@ -3,8 +3,8 @@
   "locale": "en-US",
   "helloWorld": "Hello {{name}}!",
   "console": {
-    "getAdapter": "⚙️  Getting {{adapter}} adapter for strategy: {{strategy}}",
-    "noAdapter": "❌ Unsupported {{adapter}} strategy: {{strategy}}"
+    "getAdapter": "⚙️  Getting `{{adapter}}` adapter with strategy: `{{strategy}}`",
+    "noAdapter": "❌ Unsupported `{{adapter}}` strategy: `{{strategy}}`"
   },
   "review": {},
   "product": {}

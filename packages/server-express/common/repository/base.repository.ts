@@ -1,13 +1,13 @@
 import type { EntityId, CollectionName } from "@/common/types";
-import type { QueryOptions } from "@/common/app-query/types";
-import type { IDBAdapter } from "@/common/db-adapter/db-adapter.interface";
+import type { QueryOptions } from "@/common/query/types";
+import type { IDbClient } from "@/common/db-client/db-client.interface";
 import { AppQuery } from "@/common/container";
 
 export abstract class BaseRepository<T> {
   constructor(
     protected readonly collection: CollectionName,
     protected readonly queryOptions: QueryOptions,
-    protected readonly dbAdapter: IDBAdapter
+    protected readonly dbAdapter: IDbClient
   ) {}
 
   async findAll(appQuery: AppQuery): Promise<T[]> {

@@ -5,8 +5,8 @@ import { LogLevel, type LoggerStrategy } from "./logger/logger.interface";
 import type { MailerStrategy } from "./mailer/mailer.interface";
 import type { HttpClientStrategy } from "./http-client/http-client.interface";
 import type { ValidationStrategy } from "./validation/types";
-import type { AppEnvelopeStrategy } from "./app-envelope/envelope.interface";
-import type { DBAdapterStrategy } from "./db-adapter/db-adapter.interface";
+import type { EnvelopeStrategy } from "./envelope/envelope.interface";
+import type { DBAdapterStrategy } from "./db-client/db-client.interface";
 
 export type Env = "development" | "production" | "test";
 
@@ -33,12 +33,12 @@ const config = {
     ),
   },
 
-  // logging
-  logging: {
-    strategy: <LoggerStrategy>process.env.LOGGING_strategy || "winston",
-    level: <LogLevel>process.env.LOGGING_LEVEL || LogLevel.INFO,
-    morgan_enabled: <boolean>!!(process.env.LOGGING_MORGAN_ENABLED === "true"),
-    morgan_format: <string>process.env.LOGGING_MORAGN_FORMAT || "tiny",
+  // logger
+  logger: {
+    strategy: <LoggerStrategy>process.env.LOGGER_strategy || "winston",
+    level: <LogLevel>process.env.LOGGER_LEVEL || LogLevel.INFO,
+    morgan_enabled: <boolean>!!(process.env.LOGGER_MORGAN_ENABLED === "true"),
+    morgan_format: <string>process.env.LOGGER_MORAGN_FORMAT || "tiny",
   },
 
   // defaults
@@ -51,10 +51,10 @@ const config = {
   },
 
   // app-envelope (response)
-  app_envelope: {
-    strategy: <AppEnvelopeStrategy>process.env.APP_ENVELOPE_STRATEGY,
+  envelope: {
+    strategy: <EnvelopeStrategy>process.env.ENVELOPE_STRATEGY,
     include_system_info: <boolean>(
-      !!(process.env.APP_ENVELOPE_INCLUDE_SYSTEM_INFO === "true")
+      !!(process.env.ENVELOPE_INCLUDE_SYSTEM_INFO === "true")
     ),
   },
 
@@ -65,7 +65,7 @@ const config = {
 
   // database
   database: {
-    adapter_strategy: <DBAdapterStrategy>process.env.DATABASE_ADAPTER_STRATEGY,
+    client_strategy: <DBAdapterStrategy>process.env.DATABASE_CLIENT_STRATEGY,
     url: <string | null>process.env.DATABASE_URL,
 
     type: <string | null>null,
@@ -138,7 +138,7 @@ function getDBPath(url: string | null) {
   return utils.isFileURL(url)
     ? join(
         config.data_path,
-        `${config.database.adapter_strategy}-${config.database.type}`,
+        `${config.database.client_strategy}-${config.database.type}`,
         utils.getDBIdentifier(url, { withExtension: true })
       )
     : null;
@@ -150,8 +150,8 @@ export function getSystemInfo() {
 
   system.push(
     "express",
-    config.app_envelope.strategy,
-    config.database.adapter_strategy,
+    config.envelope.strategy,
+    config.database.client_strategy,
     config.validation.strategy,
     config.http_client.strategy
   );

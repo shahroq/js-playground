@@ -1,5 +1,5 @@
-import type { QueryOptions } from "@/common/app-query/types";
-import { queryOptions as defaultQueryOptions } from "@/common/app-query/default.options";
+import type { QueryOptions } from "@/common/query/types";
+import { queryOptions as defaultQueryOptions } from "@/common/query/default.options";
 
 export const queryOptions: QueryOptions = {
   ...defaultQueryOptions,

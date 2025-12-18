@@ -3,10 +3,10 @@ import { JSONFile } from "lowdb/node";
 import fs from "fs-extra";
 import { AppQuery, config, utils } from "@/common/container";
 import { defaultData, type DatabaseSchema } from "@/data/lowdb-json/schema";
-import { buildAuditFields, type IDBAdapter } from "./db-adapter.interface";
+import { buildAuditFields, type IDbClient } from "./db-client.interface";
 import type { CollectionName, EntityId } from "../types";
 
-export class LowDBDBAdapter implements IDBAdapter {
+export class LowDbAdapter implements IDbClient {
   private dbClient: Low<DatabaseSchema>;
   private filePath = config.database.path ?? "";
   private defaultData: DatabaseSchema = defaultData;

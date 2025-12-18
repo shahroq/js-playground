@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 import { AppQuery } from "@/common/container";
-import type { QueryOptions } from "@/common/app-query/types";
+import type { QueryOptions } from "@/common/query/types";
 
 export function normalizeQueryHandler(options: QueryOptions) {
   return (req: Request, res: Response, next: NextFunction) => {
