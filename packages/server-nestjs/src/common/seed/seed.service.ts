@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import dbSource from './../../../data/data-source.json';
-import { Review } from 'src/modules/reviews/entities/review.entity';
+import { Review } from 'src/modules/reviews/review.entity';
 
 const reviewData = dbSource.reviews.map((i) => ({
   product_id: Number(i.product_id),

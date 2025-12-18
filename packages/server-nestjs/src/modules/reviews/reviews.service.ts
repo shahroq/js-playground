@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { UpdateReviewDto } from './dto/update-review.dto';
-import { Review } from './entities/review.entity';
+import { Review } from './review.entity';
 import { formatISO } from './../../common/utils/utils';
 import { ConfigService } from '@nestjs/config';
 
