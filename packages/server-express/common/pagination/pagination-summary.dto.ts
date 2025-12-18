@@ -1,5 +1,6 @@
 import { config, type AppQuery } from "@/common/container";
 
+// response dto
 export class PaginationSummaryDto {
   private constructor(
     public readonly page: number,
