@@ -4,9 +4,9 @@ import { zodValidatorHandler } from "./zod/zod-validator.middleware.ts";
 import { expressValidatorHandler } from "./express-validator/express-validator.middleware.ts";
 import { config, t } from "@/common/container.ts";
 
-let validator = null;
+let handler = null;
 
-// Factory function to get validation middleware
+// factory: validation middleware
 export function getValidatorHandler(): ValidatorHandler {
   const adapter = "validation";
   const strategy = config.validation.strategy;
@@ -15,17 +15,17 @@ export function getValidatorHandler(): ValidatorHandler {
 
   switch (strategy) {
     case "express-validator":
-      validator = expressValidatorHandler;
+      handler = expressValidatorHandler;
       break;
     case "joi":
-      validator = joiValidatorHandler;
+      handler = joiValidatorHandler;
       break;
     case "zod":
-      validator = zodValidatorHandler;
+      handler = zodValidatorHandler;
       break;
     default:
       throw new Error(t("console.noAdapter", { adapter, strategy }));
   }
 
-  return validator;
+  return handler;
 }

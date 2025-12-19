@@ -2,9 +2,10 @@ import { config, t } from "@/common/container.ts";
 import { ConsoleLogAdapter } from "./console-log.adapter";
 import { MailtrapAdapter } from "./mailtrap.adapter";
 
-let mailer = null;
+let instance = null;
 
-export function getMailer() {
+// factory: mailer
+export function createMailer() {
   const adapter = "mailer";
   const strategy = config.mailer.strategy || "console-log";
 
@@ -12,20 +13,20 @@ export function getMailer() {
 
   switch (strategy) {
     case "console-log":
-      mailer = new ConsoleLogAdapter();
+      instance = new ConsoleLogAdapter();
       break;
     case "mailtrap":
-      mailer = new MailtrapAdapter();
+      instance = new MailtrapAdapter();
       break;
     default:
       throw new Error(t("console.noAdapter", { adapter, strategy }));
   }
 
-  return mailer;
+  return instance;
 }
 
 export function resetMailer(): void {
-  mailer = null;
+  instance = null;
 }
 
 /*

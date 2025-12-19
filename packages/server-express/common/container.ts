@@ -2,10 +2,10 @@
 import config from "./config";
 import { getEnvelope } from "./envelope/factory";
 import { getValidatorHandler } from "./validation/factory";
-import { getDbClient } from "./db-client/factory";
-import { getHttpClient } from "./http-client/factory";
-import { getMailer } from "./mailer/factory";
-import { getLogger } from "./logger/factory";
+import { createDbClient } from "./db-client/factory";
+import { createHttpClient } from "./http-client/factory";
+import { createMailer } from "./mailer/factory";
+import { createLogger } from "./logger/factory";
 
 // routes
 import { ProductRepository } from "@products/repository";
@@ -47,15 +47,15 @@ export { queryOptions as reviewsQueryOptions } from "@/routes/v1/reviews/query.o
 export * from "@/common/i118n/t";
 export const Envelope = getEnvelope();
 export const validate = getValidatorHandler();
-export const dbAdapter = getDbClient();
-export const httpClientJsonPlaceHolder = getHttpClient(
+export const dbAdapter = createDbClient();
+export const httpClientJsonPlaceHolder = createHttpClient(
   config.http_client.api_url_jsonplaceholder as string
 );
-export const httpClientRestfulapi = getHttpClient(
+export const httpClientRestfulapi = createHttpClient(
   config.http_client.api_url_restfulapi as string
 );
-export const mailer = getMailer();
-export const logger = getLogger();
+export const mailer = createMailer();
+export const logger = createLogger();
 
 // 1. Repositories
 export const productRepository = new ProductRepository(dbAdapter);

@@ -1,11 +1,11 @@
 import { config, t } from "@/common/container.ts";
-
 import { WinstonAdapter } from "./winston.adapter";
 import { ConsoleLogAdapter } from "./console-log.adapter";
 
-let logger = null;
+let instance = null;
 
-export function getLogger() {
+// factory: logger
+export function createLogger() {
   const adapter = "logger";
   const strategy = config.logger.strategy || "console-log";
 
@@ -13,18 +13,18 @@ export function getLogger() {
 
   switch (strategy) {
     case "console-log":
-      logger = new ConsoleLogAdapter();
+      instance = new ConsoleLogAdapter();
       break;
     case "winston":
-      logger = new WinstonAdapter();
+      instance = new WinstonAdapter();
       break;
     default:
       throw new Error(t("console.noAdapter", { adapter, strategy }));
   }
 
-  return logger;
+  return instance;
 }
 
 export function resetLogger(): void {
-  logger = null;
+  instance = null;
 }

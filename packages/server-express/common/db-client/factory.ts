@@ -5,11 +5,12 @@ import { LowDbAdapter } from "./lowdb.adapter";
 import { PrismaAdapter } from "./prisma.adapter";
 import type { IDbClient } from "./db-client.interface";
 
-let dbClientInstance: IDbClient | null = null;
+let instance: IDbClient | null = null;
 
 // add identifier here (filepath, or db engine name)?
-export function getDbClient(): IDbClient {
-  if (dbClientInstance) return dbClientInstance;
+// factory: db client
+export function createDbClient(): IDbClient {
+  if (instance) return instance;
 
   let dbClient;
 
@@ -43,14 +44,14 @@ export function getDbClient(): IDbClient {
   dbClient.connect();
 
   // Store the instance for future calls
-  dbClientInstance = dbClient;
+  instance = dbClient;
 
-  return dbClientInstance;
+  return instance;
 }
 
 // useful for testing
 export function resetDBAdapter(): void {
-  dbClientInstance = null;
+  instance = null;
 }
 /*
 // class-based

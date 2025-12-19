@@ -2,8 +2,9 @@ import { config, t } from "@/common/container.ts";
 import { JSendAdapter } from "./jsend.adapter.ts";
 import { JsonApiAdapter } from "./json-api.adapter.ts";
 
-let Envelope = null;
+let className = null;
 
+// factory: envelope (app response format)
 export function getEnvelope() {
   const adapter = "envelope";
   const strategy = config.envelope.strategy || "jsend";
@@ -12,18 +13,18 @@ export function getEnvelope() {
 
   switch (strategy) {
     case "jsend":
-      Envelope = JSendAdapter;
+      className = JSendAdapter;
       break;
     case "json-api":
-      Envelope = JsonApiAdapter;
+      className = JsonApiAdapter;
       break;
     default:
       throw new Error(t("console.noAdapter", { adapter, strategy }));
   }
 
-  return Envelope;
+  return className;
 }
 
 export function resetAppEnvelope(): void {
-  Envelope = null;
+  className = null;
 }

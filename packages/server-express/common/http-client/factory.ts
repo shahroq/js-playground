@@ -2,12 +2,11 @@ import type { IHttpClient } from "./http-client.interface";
 import { AxiosAdapter } from "./axios.adapter";
 import { config, t } from "@/common/container";
 
-const httpClientInstances = new Map<string, IHttpClient>();
+const instances = new Map<string, IHttpClient>();
+let instance;
 
-let httpClient;
-
-// multipleton!
-export function getHttpClient(baseURL: string): IHttpClient {
+// factory: http client (multipleton!)
+export function createHttpClient(baseURL: string): IHttpClient {
   const adapter = "http-client";
   const strategy = config.http_client.strategy;
 
@@ -15,24 +14,24 @@ export function getHttpClient(baseURL: string): IHttpClient {
     t("console.getAdapter", { adapter, strategy: `${strategy}:${baseURL}` })
   );
 
-  const existing = httpClientInstances.get(baseURL);
+  const existing = instances.get(baseURL);
   if (existing) return existing;
 
   switch (strategy) {
     case "axios":
-      httpClient = new AxiosAdapter({ baseURL });
+      instance = new AxiosAdapter({ baseURL });
       break;
     default:
       throw new Error(t("console.noAdapter", { adapter, strategy }));
   }
 
   // Store the instance for future calls
-  httpClientInstances.set(baseURL, httpClient);
+  instances.set(baseURL, instance);
 
-  return httpClient;
+  return instance;
 }
 
 // useful for testing
 export function resetHttpClients(): void {
-  httpClientInstances.clear();
+  instances.clear();
 }
