@@ -1,9 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateReviewDto } from './dto/create-review.dto';
-import { UpdateReviewDto } from './dto/update-review.dto';
-import { Review } from './review.entity';
+import { CreateReviewDto, UpdateReviewDto } from './reviews.dto';
+import { Review } from './reviews.entity';
 import { formatISO } from './../../common/utils/utils';
 import { ConfigService } from '@nestjs/config';
 
@@ -16,7 +15,7 @@ export class ReviewsService {
     private readonly repository: Repository<Review>,
     private readonly config: ConfigService,
   ) {
-    this.userId = this.config.get<number>('user_id') ?? 1;
+    this.userId = this.config.get<number>('default.user_id') ?? 1;
   }
 
   async findAll() {

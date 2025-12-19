@@ -1,19 +1,22 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import config from './common/config/config';
+import configuration from './common/config/configuration';
 import { CommonModule } from './common/common.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ReviewsModule } from './modules/reviews/reviews.module';
+import { configSchemas } from './common/config/schema';
 // import { SeedService } from './common/seed/seed.service';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
+      // ignoreEnvFile: true,
+      validationSchema: configSchemas,
       isGlobal: true,
       envFilePath: '.env',
-      load: [config],
+      load: [configuration],
     }),
     TypeOrmModule.forRoot({
       type: 'sqlite',

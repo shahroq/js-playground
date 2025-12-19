@@ -1,4 +1,5 @@
 import { IsNumber, IsString, Max, Min } from 'class-validator';
+import { PartialType } from '@nestjs/mapped-types';
 
 export class CreateReviewDto {
   @IsNumber()
@@ -12,3 +13,5 @@ export class CreateReviewDto {
   @Max(5)
   readonly rating: number;
 }
+
+export class UpdateReviewDto extends PartialType(CreateReviewDto) {}
