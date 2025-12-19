@@ -5,6 +5,7 @@ import configuration from './common/config/configuration';
 import { CommonModule } from './common/common.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ProductsModule } from './modules/products/products.module';
 import { ReviewsModule } from './modules/reviews/reviews.module';
 import { configSchemas } from './common/config/schema';
 // import { SeedService } from './common/seed/seed.service';
@@ -38,6 +39,7 @@ import { configSchemas } from './common/config/schema';
       }),
     }),
     */
+    ProductsModule,
     ReviewsModule,
     CommonModule,
   ],
