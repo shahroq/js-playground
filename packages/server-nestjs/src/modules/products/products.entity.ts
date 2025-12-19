@@ -9,7 +9,7 @@ export class Product {
   name: string;
 
   @Column()
-  descriptiont: string;
+  description: string;
 
   @Column()
   categories: string;
