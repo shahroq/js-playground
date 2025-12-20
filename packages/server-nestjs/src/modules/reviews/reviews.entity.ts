@@ -5,7 +5,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Product } from '../products/products.entity';
+import { Product } from '../products/entities/product.entity';
 import { Exclude, Expose } from 'class-transformer';
 
 @Entity('reviews')

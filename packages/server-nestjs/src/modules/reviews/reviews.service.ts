@@ -5,7 +5,7 @@ import { CreateReviewDto, UpdateReviewDto } from './reviews.dto';
 import { Review } from './reviews.entity';
 import { formatISO } from './../../common/utils/utils';
 import { ConfigService } from '@nestjs/config';
-import { Product } from '../products/products.entity';
+import { Product } from '../products/entities/product.entity';
 
 @Injectable()
 export class ReviewsService {

@@ -1,8 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateProductDto, UpdateProductDto } from './products.dto';
-import { Product } from './products.entity';
+import { CreateProductDto } from './dto/create-product.dto';
+import { UpdateProductDto } from './dto/update-product.dto';
+import { Product } from './entities/product.entity';
 import { formatISO } from './../../common/utils/utils';
 import { ConfigService } from '@nestjs/config';
 import { Review } from '../reviews/reviews.entity';
