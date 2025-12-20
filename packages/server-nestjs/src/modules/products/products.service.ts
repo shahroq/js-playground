@@ -7,7 +7,7 @@ import { Product } from './entities/product.entity';
 import { formatISO } from './../../common/utils/utils';
 import { ConfigService } from '@nestjs/config';
 import { Review } from '../reviews/reviews.entity';
-import { Category } from '../categories/categories.entity';
+import { Category } from './entities/category.entity';
 
 @Injectable()
 export class ProductsService {

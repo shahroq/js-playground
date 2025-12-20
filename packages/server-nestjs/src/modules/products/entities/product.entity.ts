@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Review } from '../../reviews/reviews.entity';
-import { Category } from '../../categories/categories.entity';
+import { Category } from './category.entity';
 import { Exclude, Expose, Transform } from 'class-transformer';
 
 @Entity('products')
