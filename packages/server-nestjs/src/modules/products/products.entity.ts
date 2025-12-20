@@ -1,5 +1,13 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Review } from '../reviews/reviews.entity';
+import { Category } from '../categories/categories.entity';
 
 @Entity('products')
 export class Product {
@@ -20,9 +28,6 @@ export class Product {
   price: number;
 
   @Column()
-  categories: string;
-
-  @Column()
   in_stock: boolean;
 
   @Column()
@@ -36,6 +41,22 @@ export class Product {
 
   @Column()
   updated_by: number;
+
+  @JoinTable({
+    name: 'products_categories', // join table name
+    joinColumn: {
+      name: 'product_id', // FK column in join table
+      referencedColumnName: 'id', // Product.id
+    },
+    inverseJoinColumn: {
+      name: 'category_id', // FK column in join table
+      referencedColumnName: 'id', // Category.id
+    },
+  })
+  @ManyToMany(() => Category, (category) => category.products, {
+    cascade: true,
+  })
+  categories: Category[];
 
   @OneToMany(() => Review, (review) => review.product)
   reviews: Review[];

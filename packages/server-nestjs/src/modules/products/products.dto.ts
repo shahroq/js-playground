@@ -13,9 +13,9 @@ export class CreateProductDto {
   @IsNumber()
   readonly price: number;
 
-  @IsString()
+  @IsString({ each: true })
   @Optional()
-  readonly categories: string;
+  readonly categories: string[];
 
   @IsBoolean()
   readonly in_stock: boolean;

@@ -6,6 +6,7 @@ import { Product } from './products.entity';
 import { formatISO } from './../../common/utils/utils';
 import { ConfigService } from '@nestjs/config';
 import { Review } from '../reviews/reviews.entity';
+import { Category } from '../categories/categories.entity';
 
 @Injectable()
 export class ProductsService {
@@ -17,13 +18,15 @@ export class ProductsService {
     private readonly repository: Repository<Product>,
     @InjectRepository(Review)
     private readonly reviewRepository: Repository<Review>,
+    @InjectRepository(Category)
+    private readonly categoryRepository: Repository<Category>,
   ) {
     this.userId = this.config.get<number>('default.user_id') ?? 1;
   }
 
   async findAll() {
     const items = await this.repository.find({
-      relations: ['reviews'],
+      relations: ['reviews', 'categories'],
     });
     return items;
   }
@@ -32,7 +35,7 @@ export class ProductsService {
     // const item = await this.repository.findOneBy({ id });
     const item = await this.repository.findOne({
       where: { id },
-      relations: ['reviews'],
+      relations: ['reviews', 'categories'],
     });
     if (!item)
       throw new HttpException(`Item ${id} not found.`, HttpStatus.NOT_FOUND);
@@ -40,35 +43,41 @@ export class ProductsService {
   }
 
   async create(createProductDto: CreateProductDto) {
+    console.log('A1');
+    const categories = await Promise.all(
+      createProductDto.categories.map((name) =>
+        this.preloadCategoryByName(name),
+      ),
+    );
+
     const creatingItem = {
       ...createProductDto,
+      categories,
       created_at: formatISO(),
       updated_at: formatISO(),
       created_by: this.userId,
       updated_by: this.userId,
     };
+
     const item = this.repository.create(creatingItem);
     const createdItem = await this.repository.save(item);
     return createdItem;
   }
 
   async update(id: number, updateProductDto: UpdateProductDto) {
-    /*
-    const exisitingItem = await this.findOne(id);
-    // no error handling, as findOne does it
-
-    const updatingItem = {
-      ...exisitingItem,
-      ...updateProductDto,
-      updated_at: formatISO(),
-      updated_by: this.userId,
-    };
-    */
+    const categories =
+      updateProductDto.categories &&
+      (await Promise.all(
+        updateProductDto.categories.map((name: string) =>
+          this.preloadCategoryByName(name),
+        ),
+      ));
 
     // use .preload():
     const updatingItem = await this.repository.preload({
       id,
       ...updateProductDto,
+      categories,
       updated_at: formatISO(),
       updated_by: this.userId,
     });
@@ -85,5 +94,14 @@ export class ProductsService {
     // no error handling, as findOne does it
     const deletedItem = await this.repository.remove(deletingItem);
     return deletedItem;
+  }
+
+  private async preloadCategoryByName(name: string): Promise<Category> {
+    const existingCategory = await this.categoryRepository.findOne({
+      where: { name },
+    });
+    if (existingCategory) return existingCategory;
+
+    return this.categoryRepository.create({ name });
   }
 }
