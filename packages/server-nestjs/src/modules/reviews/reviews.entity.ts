@@ -1,12 +1,16 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Product } from '../products/products.entity';
 
 @Entity('reviews')
 export class Review {
   @PrimaryGeneratedColumn()
   id: number;
-
-  @Column()
-  product_id: number;
 
   @Column()
   content: string;
@@ -25,4 +29,8 @@ export class Review {
 
   @Column()
   updated_by: number;
+
+  @ManyToOne(() => Product, (product) => product.reviews)
+  @JoinColumn({ name: 'product_id' })
+  product: Product;
 }

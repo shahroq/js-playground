@@ -5,32 +5,43 @@ import { CreateReviewDto, UpdateReviewDto } from './reviews.dto';
 import { Review } from './reviews.entity';
 import { formatISO } from './../../common/utils/utils';
 import { ConfigService } from '@nestjs/config';
+import { Product } from '../products/products.entity';
 
 @Injectable()
 export class ReviewsService {
   private userId: number;
 
   constructor(
+    private readonly config: ConfigService,
     @InjectRepository(Review)
     private readonly repository: Repository<Review>,
-    private readonly config: ConfigService,
+    @InjectRepository(Product)
+    private readonly productRepository: Repository<Product>,
   ) {
     this.userId = this.config.get<number>('default.user_id') ?? 1;
   }
 
   async findAll() {
-    const items = await this.repository.find();
+    const items = await this.repository.find({
+      relations: ['product'],
+    });
     return items;
   }
 
   async findOne(id: number) {
-    const item = await this.repository.findOneBy({ id });
+    const item = await this.repository.findOne({
+      where: { id },
+      relations: ['product'],
+    });
     if (!item)
       throw new HttpException(`Item ${id} not found.`, HttpStatus.NOT_FOUND);
     return item;
   }
 
   async create(createReviewDto: CreateReviewDto) {
+    // const product = await this.productRepo.findOne({ where: { id: createReviewDto.productId } });
+    // if (!product) throw new Error('Product not found');
+
     const creatingItem = {
       ...createReviewDto,
       created_at: formatISO(),
