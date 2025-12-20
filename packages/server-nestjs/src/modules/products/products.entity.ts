@@ -8,9 +8,11 @@ import {
 } from 'typeorm';
 import { Review } from '../reviews/reviews.entity';
 import { Category } from '../categories/categories.entity';
+import { Exclude, Expose, Transform } from 'class-transformer';
 
 @Entity('products')
 export class Product {
+  @Exclude()
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -30,18 +32,26 @@ export class Product {
   @Column()
   in_stock: boolean;
 
+  @Expose({ name: 'createAt' })
   @Column()
   created_at: string;
 
+  @Exclude()
   @Column()
   updated_at: string;
 
+  @Exclude()
   @Column()
   created_by: number;
 
+  @Exclude()
   @Column()
   updated_by: number;
 
+  @Transform(
+    ({ value }: { value: Category[] }) =>
+      value?.map((cat) => cat.name).join(', ') ?? '',
+  )
   @JoinTable({
     name: 'products_categories', // join table name
     joinColumn: {
@@ -57,6 +67,13 @@ export class Product {
     cascade: true,
   })
   categories: Category[];
+
+  /*
+  @Expose()
+  get categoryNames(): string {
+    return this.categories?.map((cat) => cat.name).join(', ') ?? '';
+  }
+  */
 
   @OneToMany(() => Review, (review) => review.product)
   reviews: Review[];

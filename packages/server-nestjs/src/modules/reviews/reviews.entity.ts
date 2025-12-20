@@ -6,9 +6,11 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Product } from '../products/products.entity';
+import { Exclude, Expose } from 'class-transformer';
 
 @Entity('reviews')
 export class Review {
+  @Exclude()
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -18,15 +20,19 @@ export class Review {
   @Column()
   rating: number;
 
+  @Expose({ name: 'submittedAt' })
   @Column()
   created_at: string;
 
+  @Exclude()
   @Column()
   updated_at: string;
 
+  @Exclude()
   @Column()
   created_by: number;
 
+  @Exclude()
   @Column()
   updated_by: number;
 
