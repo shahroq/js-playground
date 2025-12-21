@@ -88,15 +88,15 @@ export class ReviewService {
     return deleted;
   }
 
-  async approveItem(id: EntityId): Promise<ReviewDto> {
-    const updatingReview = await this.repository.findById(+id);
-    if (!updatingReview) throw AppError.notFound();
+  async rejectItem(id: EntityId): Promise<ReviewDto> {
+    const updatingItem = await this.repository.findById(+id);
+    if (!updatingItem) throw AppError.notFound();
 
-    if (updatingReview.status !== ReviewStatus.PENDING)
-      throw new AppError("Only PENDING reviews can be APPROVED");
+    if (updatingItem.status !== ReviewStatus.PENDING)
+      throw new AppError("Only PENDING reviews can be REJECTED");
 
     /*
-    why not call update insteda of new method: updateStatus
+    why not call update instead of new method: updateStatus
     gpt: Status Change: Service/Repo Responsibility
     - Repository update() makes illegal writes easy
     - Repositories should encode write intent, not just writes
@@ -106,23 +106,23 @@ export class ReviewService {
      */
     const updatedItem = await this.repository.updateStatus(
       +id,
-      ReviewStatus.APPROVED
+      ReviewStatus.REJECTED
     );
     if (!updatedItem) throw AppError.notFound();
 
     return ReviewDto.from(updatedItem);
   }
 
-  async rejectItem(id: EntityId): Promise<ReviewDto> {
+  async approveItem(id: EntityId): Promise<ReviewDto> {
     const updatingReview = await this.repository.findById(+id);
     if (!updatingReview) throw AppError.notFound();
 
     if (updatingReview.status !== ReviewStatus.PENDING)
-      throw new AppError("Only PENDING reviews can be REJECTED");
+      throw new AppError("Only PENDING reviews can be APPROVED");
 
     const updatedItem = await this.repository.updateStatus(
       +id,
-      ReviewStatus.REJECTED
+      ReviewStatus.APPROVED
     );
     if (!updatedItem) throw AppError.notFound();
 
