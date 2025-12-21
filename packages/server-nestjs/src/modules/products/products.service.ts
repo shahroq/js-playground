@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -33,18 +33,16 @@ export class ProductsService {
   }
 
   async findOne(id: number) {
-    // const item = await this.repository.findOneBy({ id });
     const item = await this.repository.findOne({
       where: { id },
       relations: ['reviews', 'categories'],
     });
-    if (!item)
-      throw new HttpException(`Item ${id} not found.`, HttpStatus.NOT_FOUND);
+    if (!item) throw new NotFoundException(`Item ${id} not found.`);
+
     return item;
   }
 
   async create(createProductDto: CreateProductDto) {
-    console.log('A1');
     const categories = await Promise.all(
       createProductDto.categories.map((name) =>
         this.preloadCategoryByName(name),
@@ -82,9 +80,7 @@ export class ProductsService {
       updated_at: formatISO(),
       updated_by: this.userId,
     });
-
-    if (!updatingItem)
-      throw new HttpException(`Item ${id} not found.`, HttpStatus.NOT_FOUND);
+    if (!updatingItem) throw new NotFoundException(`Item ${id} not found.`);
 
     const updatedItem = await this.repository.save(updatingItem);
     return updatedItem;

@@ -1,4 +1,8 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateReviewDto, UpdateReviewDto } from './reviews.dto';
@@ -6,6 +10,7 @@ import { Review } from './reviews.entity';
 import { formatISO } from './../../common/utils/utils';
 import { ConfigService } from '@nestjs/config';
 import { Product } from '../products/entities/product.entity';
+import { ReviewStatus } from './reviews.types';
 
 @Injectable()
 export class ReviewsService {
@@ -33,22 +38,27 @@ export class ReviewsService {
       where: { id },
       relations: ['product'],
     });
-    if (!item)
-      throw new HttpException(`Item ${id} not found.`, HttpStatus.NOT_FOUND);
+    if (!item) throw new NotFoundException(`Item ${id} not found.`);
+
     return item;
   }
 
   async create(createReviewDto: CreateReviewDto) {
-    // const product = await this.productRepo.findOne({ where: { id: createReviewDto.productId } });
-    // if (!product) throw new Error('Product not found');
+    const { product_id } = createReviewDto;
+    const product = await this.productRepository.findOneBy({ id: product_id });
+    if (!product)
+      throw new NotFoundException(`Product ${product_id} not found.`);
 
     const creatingItem = {
       ...createReviewDto,
+      status: ReviewStatus.PENDING,
       created_at: formatISO(),
       updated_at: formatISO(),
       created_by: this.userId,
       updated_by: this.userId,
+      product,
     };
+
     const item = this.repository.create(creatingItem);
     const createdItem = await this.repository.save(item);
     return createdItem;
@@ -56,11 +66,11 @@ export class ReviewsService {
 
   async update(id: number, updateReviewDto: UpdateReviewDto) {
     /*
-    const exisitingItem = await this.findOne(id);
+    const updatingItem = await this.findOne(id);
     // no error handling, as findOne does it
 
     const updatingItem = {
-      ...exisitingItem,
+      ...updatingItem,
       ...updateReviewDto,
       updated_at: formatISO(),
       updated_by: this.userId,
@@ -74,9 +84,7 @@ export class ReviewsService {
       updated_at: formatISO(),
       updated_by: this.userId,
     });
-
-    if (!updatingItem)
-      throw new HttpException(`Item ${id} not found.`, HttpStatus.NOT_FOUND);
+    if (!updatingItem) throw new NotFoundException(`Item ${id} not found.`);
 
     const updatedItem = await this.repository.save(updatingItem);
     return updatedItem;
@@ -87,5 +95,41 @@ export class ReviewsService {
     // no error handling, as findOne does it
     const deletedItem = await this.repository.remove(deletingItem);
     return deletedItem;
+  }
+
+  async reject(id: number) {
+    const updatingItem = await this.repository.findOneBy({ id });
+    if (!updatingItem) throw new NotFoundException(`Item ${id} not found.`);
+    if (updatingItem.status !== ReviewStatus.PENDING)
+      throw new BadRequestException('Only PENDING reviews can be REJECTED');
+
+    Object.assign(updatingItem, {
+      status: ReviewStatus.REJECTED,
+      updated_at: formatISO(),
+      updated_by: this.userId,
+    });
+
+    const updatedItem = await this.repository.save(updatingItem);
+    if (!updatedItem) throw new NotFoundException(`Item ${id} not found.`);
+
+    return updatedItem;
+  }
+
+  async approve(id: number) {
+    const updatingItem = await this.repository.findOneBy({ id });
+    if (!updatingItem) throw new NotFoundException(`Item ${id} not found.`);
+    if (updatingItem.status !== ReviewStatus.PENDING)
+      throw new BadRequestException('Only PENDING reviews can be APPROVED');
+
+    Object.assign(updatingItem, {
+      status: ReviewStatus.APPROVED,
+      updated_at: formatISO(),
+      updated_by: this.userId,
+    });
+
+    const updatedItem = await this.repository.save(updatingItem);
+    if (!updatedItem) throw new NotFoundException(`Item ${id} not found.`);
+
+    return updatedItem;
   }
 }

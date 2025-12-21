@@ -7,6 +7,7 @@ import {
 } from 'typeorm';
 import { Product } from '../products/entities/product.entity';
 import { Exclude, Expose } from 'class-transformer';
+import { ReviewStatus } from './reviews.types';
 
 @Entity('reviews')
 export class Review {
@@ -19,6 +20,11 @@ export class Review {
 
   @Column()
   rating: number;
+
+  @Column({
+    default: ReviewStatus.PENDING,
+  })
+  status: ReviewStatus;
 
   @Expose({ name: 'submittedAt' })
   @Column()
