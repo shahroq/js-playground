@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import configuration from './common/config/configuration';
@@ -8,6 +8,7 @@ import { AppService } from './app.service';
 import { ProductsModule } from './modules/products/products.module';
 import { ReviewsModule } from './modules/reviews/reviews.module';
 import { configSchemas } from './common/config/schema';
+import { LoggerMiddleware } from './common/middlewares/logger.middleware';
 // import { SeedService } from './common/seed/seed.service';
 
 @Module({
@@ -49,3 +50,10 @@ import { configSchemas } from './common/config/schema';
   // exports: [SeedService],
 })
 export class AppModule {}
+/*
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes('*');
+  }
+}
+*/

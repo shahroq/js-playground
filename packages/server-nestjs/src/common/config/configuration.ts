@@ -16,5 +16,7 @@ export default () => {
       type: <DatabaseType>process.env.DATABASE_TYPE,
       url: <string>process.env.DATABASE_URL,
     },
+
+    api_key: <string>process.env.API_KEY,
   };
 };
