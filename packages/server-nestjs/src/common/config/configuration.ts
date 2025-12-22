@@ -1,4 +1,5 @@
 import { DatabaseType } from 'typeorm';
+import { EnvelopeStrategy } from '../envelope/envelope.interface';
 
 export type Env = 'development' | 'production' | 'test';
 
@@ -10,6 +11,10 @@ export default () => {
 
     default: {
       user_id: <number>(process.env.DEFAULT_USER_ID || 1),
+    },
+
+    envelope: {
+      strategy: <EnvelopeStrategy>(process.env.ENVELOPE_STRATEGY || 'jsend'),
     },
 
     database: {
