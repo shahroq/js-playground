@@ -14,7 +14,7 @@ export function envelopResponseHandler(
 
   res.json = function (body) {
     const { error, data } = extractResponse(body);
-    const envelope = new Envelope(error, data).build();
+    const envelope = new Envelope(error, data);
 
     return originalJson.call(this, envelope);
   };

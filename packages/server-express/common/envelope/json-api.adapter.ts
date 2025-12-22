@@ -3,6 +3,8 @@ import type { E } from "../error/types";
 import { isAppError } from "../container";
 import type { IEnvelope } from "./envelope.interface";
 
+type JsonApiJsonApi = "success" | "fail" | "error";
+
 type JsonApiErrorObject = {
   title: string;
   code?: number | string;
@@ -27,16 +29,18 @@ export class JsonApiAdapter implements IEnvelope {
     return this._error;
   }
 
-  build(): JsonApiFormat {
-    if (!this.error) {
-      return this.formatSuccess();
-    }
+  toJSON(): JsonApiFormat {
+    const status = this.getStatus();
 
-    if (isAppError(this.error)) {
-      return this.formatFail();
-    }
-
+    if (status === "success") return this.formatSuccess();
+    if (status === "fail") return this.formatFail();
     return this.formatError();
+  }
+
+  private getStatus(): JsonApiJsonApi {
+    if (!this.error) return "success";
+    if (isAppError(this.error)) return "fail";
+    return "error";
   }
 
   private formatSuccess(): { data: any } {

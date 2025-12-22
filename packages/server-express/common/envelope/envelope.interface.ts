@@ -6,5 +6,5 @@ export interface IEnvelope {
   error?: E | null;
   data?: any;
 
-  build(): any;
+  toJSON(): any;
 }

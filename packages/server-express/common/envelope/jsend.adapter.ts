@@ -1,7 +1,7 @@
 import { isAppError } from "@/common/container";
 import type { IEnvelope } from "./envelope.interface";
 import type { E } from "../error/types";
-import { getErrorMessage } from "../error/app-error";
+import AppError, { getErrorMessage } from "../error/app-error";
 
 type JSendStatus = "success" | "fail" | "error";
 
@@ -38,23 +38,18 @@ export class JSendAdapter implements IEnvelope {
     return this._error;
   }
 
-  build(): JSendFormat {
+  toJSON(): JSendFormat {
     const status = this.getStatus();
-    let envelope;
 
-    switch (status) {
-      case "success":
-        envelope = this.formatSuccess();
-        break;
-      case "fail":
-        envelope = this.formatFail();
-        break;
-      case "error":
-        envelope = this.formatError();
-        break;
-    }
+    if (status === "success") return this.formatSuccess();
+    if (status === "fail") return this.formatFail();
+    return this.formatError();
+  }
 
-    return envelope;
+  private getStatus(): JSendStatus {
+    if (!this.error) return "success";
+    if (isAppError(this.error)) return "fail";
+    return "error";
   }
 
   private formatSuccess(): JSendSuccess {
@@ -81,12 +76,6 @@ export class JSendAdapter implements IEnvelope {
       message: getErrorMessage(this.error),
       ...(this.error?.code && { code: this.error.code }),
     };
-  }
-
-  private getStatus(): JSendStatus {
-    if (!this.error) return "success";
-    if (isAppError(this.error)) return "fail";
-    return "error";
   }
 }
 

@@ -32,7 +32,7 @@ export * from "@/common/pagination/pagination-summary.dto";
 export * from "@/common/error/global-error.middleware";
 export * from "@/common/middlewares/undefined-routes.middleware";
 export * from "@/common/envelope/attach-system-data.middleware";
-export * from "@/common/envelope/envelop-response.middleware";
+export * from "@/common/envelope/wrap-response.middleware";
 export * from "@/common/query/normalize-query.middleware";
 export * from "@/common/query/app-query";
 export { queryOptions as defaultQueryOptions } from "@/common/query/default.options";
