@@ -16,19 +16,21 @@ import { UpdateProductDto } from './dto/update-product.dto';
 export class ProductsController {
   constructor(private readonly service: ProductsService) {}
 
-  @Post()
-  create(@Body() createProductDto: CreateProductDto) {
-    return this.service.create(createProductDto);
-  }
-
   @Get()
-  findAll() {
-    return this.service.findAll();
+  async findAll() {
+    const products = await this.service.findAll();
+    return { products };
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.service.findOne(id);
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    const product = await this.service.findOne(id);
+    return { product };
+  }
+
+  @Post()
+  create(@Body() createProductDto: CreateProductDto) {
+    return this.service.create(createProductDto);
   }
 
   @Patch(':id')

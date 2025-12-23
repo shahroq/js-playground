@@ -18,21 +18,23 @@ import { AppParseIntPipe } from 'src/common/pipes/app-parse-int.pipe';
 export class ReviewsController {
   constructor(private readonly service: ReviewsService) {}
 
-  @Roles('admin', 'moderator')
-  @Post()
-  create(@Body() createReviewDto: CreateReviewDto) {
-    return this.service.create(createReviewDto);
-  }
-
   @Get()
   async findAll() {
     // await new Promise((resolve) => setTimeout(resolve, 5000));
-    return this.service.findAll();
+    const reviews = await this.service.findAll();
+    return { reviews };
   }
 
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.service.findOne(id);
+    const review = await this.service.findOne(id);
+    return { review };
+  }
+
+  @Roles('admin', 'moderator')
+  @Post()
+  create(@Body() createReviewDto: CreateReviewDto) {
+    return this.service.create(createReviewDto);
   }
 
   @Patch(':id')
