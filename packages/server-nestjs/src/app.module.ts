@@ -9,6 +9,9 @@ import { ProductsModule } from './modules/products/products.module';
 import { ReviewsModule } from './modules/reviews/reviews.module';
 import { configSchemas } from './common/config/schema';
 import { LoggerMiddleware } from './common/middlewares/logger.middleware';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { WrapResponseInterceptor } from './common/interceptors/wrap-response.interceptor';
+import { TimeoutInterceptor } from './common/interceptors/timeout.interceptor';
 // import { SeedService } from './common/seed/seed.service';
 
 @Module({
@@ -45,7 +48,17 @@ import { LoggerMiddleware } from './common/middlewares/logger.middleware';
     CommonModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: TimeoutInterceptor,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: WrapResponseInterceptor,
+    },
+  ],
   // providers: [AppService, SeedService],
   // exports: [SeedService],
 })

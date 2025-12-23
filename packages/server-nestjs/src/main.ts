@@ -9,7 +9,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const config = app.get(ConfigService);
 
-  app.setGlobalPrefix('/api/v2');
+  app.setGlobalPrefix('/api/v1');
 
   // or: as it need configService, initiate in app.module
   // app.useGlobalGuards(new ApiKeyGuard(config));
@@ -23,8 +23,8 @@ async function bootstrap() {
   );
   app.useGlobalInterceptors(
     new ClassSerializerInterceptor(app.get(Reflector)),
-    new WrapResponseInterceptor(),
-    new TimeoutInterceptor(2000),
+    // new TimeoutInterceptor(), // moved to app.module
+    // new WrapResponseInterceptor(), // moved to app.module
   );
 
   const port = config.get<number>('port') || 3000;

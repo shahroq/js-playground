@@ -6,11 +6,11 @@ export type Env = 'development' | 'production' | 'test';
 export default () => {
   return {
     env: <Env>(process.env.NODE_ENV || 'development'),
-    port: <number>(process.env.PORT || 3003),
-    user_id: <number>(process.env.USER_ID_TMP || 11),
+    port: Number(process.env.PORT || 3003),
 
     default: {
-      user_id: <number>(process.env.DEFAULT_USER_ID || 1),
+      user_id: Number(process.env.DEFAULT_USER_ID || 1),
+      timeout: Number(process.env.DEFAULT_TIMEOUT || 3000),
     },
 
     envelope: {
