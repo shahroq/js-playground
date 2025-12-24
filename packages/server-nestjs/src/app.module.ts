@@ -5,8 +5,6 @@ import configuration from './common/config/configuration';
 import { CommonModule } from './common/common.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ProductsModule } from './modules/products/products.module';
-import { ReviewsModule } from './modules/reviews/reviews.module';
 import { configSchemas } from './common/config/schema';
 // import { LoggerMiddleware } from './common/middlewares/logger.middleware';
 import { APP_INTERCEPTOR } from '@nestjs/core';
@@ -14,9 +12,16 @@ import { WrapResponseInterceptor } from './common/interceptors/wrap-response.int
 import { TimeoutInterceptor } from './common/interceptors/timeout.interceptor';
 import { getEnvelopeAdapter } from './common/envelope/factory';
 // import { SeedService } from './common/seed/seed.service';
+import { ProductsModule } from './modules/products/products.module';
+import { ReviewsModule } from './modules/reviews/reviews.module';
+import { PostsModule } from './modules/posts/posts.module';
 
 @Module({
   imports: [
+    CommonModule,
+    ProductsModule,
+    ReviewsModule,
+    PostsModule,
     ConfigModule.forRoot({
       // ignoreEnvFile: true,
       validationSchema: configSchemas,
@@ -24,29 +29,17 @@ import { getEnvelopeAdapter } from './common/envelope/factory';
       envFilePath: '.env',
       load: [configuration],
     }),
-    TypeOrmModule.forRoot({
-      type: 'sqlite',
-      // type: process.env.DATABASE_TYPE,
-      // database: './data/data.sqlite',
-      database: process.env.DATABASE_URL,
-      autoLoadEntities: true,
-      // entities: [],
-      // logging: true,
-      synchronize: true,
-    }),
-    /*
     TypeOrmModule.forRootAsync({
-      // imports: [ConfigModule], // optional if global
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
         type: 'sqlite',
-        database: process.env.DATABASE_URL,
+        database: config.get<string>('database.url'),
+        autoLoadEntities: true,
+        // entities: [],
+        // logging: true,
+        synchronize: true,
       }),
     }),
-    */
-    ProductsModule,
-    ReviewsModule,
-    CommonModule,
   ],
   controllers: [AppController],
   providers: [
