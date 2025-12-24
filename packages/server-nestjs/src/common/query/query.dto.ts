@@ -1,3 +1,4 @@
+import { IntersectionType } from '@nestjs/mapped-types';
 import { IsIn, IsOptional, IsPositive, IsString } from 'class-validator';
 
 export class PaginationQueryDto {
@@ -36,6 +37,14 @@ export class SelectionQueryDto {
 export class ExpansionQueryDto {
   include?: string[]; // replace `string` with CollectionName if needed
 }
+
+export class QueryDto extends IntersectionType(
+  PaginationQueryDto,
+  OrderByQueryDto,
+  FilterQueryDto,
+  SelectionQueryDto,
+  ExpansionQueryDto,
+) {}
 
 // --- Normalized Query DTO For List End Points ---
 export class NormQueryDtoList {

@@ -14,7 +14,11 @@ import { CreateReviewDto } from './dto/create-review.dto';
 import { UpdateReviewDto } from './dto/update-review.dto';
 // import { Roles } from 'src/common/decorators/roles.decorator';
 import { Roles } from '../../common/decorators/roles.decorator';
-import { PaginationQueryDto } from 'src/common/query/query.dto';
+import {
+  OrderByQueryDto,
+  PaginationQueryDto,
+  QueryDto,
+} from 'src/common/query/query.dto';
 import { NormalizeQueryPipe } from 'src/common/pipes/normalize-query.pipe';
 
 @Controller('reviews')
@@ -23,8 +27,10 @@ export class ReviewsController {
 
   @Get()
   async findAll(
-    @Query(NormalizeQueryPipe) paginationQueryDto: PaginationQueryDto,
+    @Query() paginationQueryDto: PaginationQueryDto,
+    @Query(new NormalizeQueryPipe({ x: 1 })) queryDto: QueryDto,
   ) {
+    // const x = queryDto.include;
     // await new Promise((resolve) => setTimeout(resolve, 5000));
     const reviews = await this.service.findAll(paginationQueryDto);
     return { reviews };
