@@ -1,4 +1,4 @@
-export class PaginationDto {
+export class PaginationQueryDto {
   constructor(
     readonly page: number,
     readonly per_page: number,
@@ -6,22 +6,22 @@ export class PaginationDto {
   ) {}
 }
 
-export class OrderByDto {
+export class OrderByQueryDto {
   constructor(
     readonly sort: string,
     readonly direction: "asc" | "desc"
   ) {}
 }
 
-export class FilterDto {
+export class FilterQueryDto {
   constructor(readonly filters: Record<string, any> = {}) {}
 }
 
-export class SelectionDto {
+export class SelectionQueryDto {
   constructor(readonly fields?: string[]) {}
 }
 
-export class ExpansionDto {
+export class ExpansionQueryDto {
   constructor(
     readonly include?: string[] // replace `string` with CollectionName if needed
   ) {}
@@ -30,19 +30,19 @@ export class ExpansionDto {
 // --- Normalized Query DTO For List End Points ---
 export class NormQueryDtoList {
   constructor(
-    readonly pagination?: PaginationDto,
-    readonly orderBy?: OrderByDto,
-    readonly filters?: FilterDto,
-    readonly selection?: SelectionDto,
-    readonly expansion?: ExpansionDto
+    readonly pagination?: PaginationQueryDto,
+    readonly orderBy?: OrderByQueryDto,
+    readonly filters?: FilterQueryDto,
+    readonly selection?: SelectionQueryDto,
+    readonly expansion?: ExpansionQueryDto
   ) {}
 }
 
 // --- Normalized Query DTO For Show End Points ---
 export class NormQueryDtoShow {
   constructor(
-    readonly selection?: SelectionDto,
-    readonly expansion?: ExpansionDto
+    readonly selection?: SelectionQueryDto,
+    readonly expansion?: ExpansionQueryDto
   ) {}
 }
 
