@@ -12,6 +12,7 @@ import { formatISO } from './../../common/utils/utils';
 import { ConfigService } from '@nestjs/config';
 import { Product } from '../products/entities/product.entity';
 import { ReviewStatus } from './reviews.types';
+import { PaginationQueryDto } from 'src/common/query/query.dto';
 
 @Injectable()
 export class ReviewsService {
@@ -27,8 +28,15 @@ export class ReviewsService {
     this.userId = this.config.get<number>('default.user_id') ?? 1;
   }
 
-  async findAll() {
+  async findAll(paginationQueryDto: PaginationQueryDto) {
+    const page = +(paginationQueryDto.page ?? 1);
+    const per_page = +(paginationQueryDto.per_page ?? 3);
+    const offset = (page - 1) * per_page;
+    // console.log('Pagination:', page, per_page, offset);
+
     const items = await this.repository.find({
+      take: per_page,
+      skip: offset,
       relations: ['product'],
     });
     return items;
