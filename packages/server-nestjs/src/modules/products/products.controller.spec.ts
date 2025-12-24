@@ -3,7 +3,7 @@ import { ProductsController } from './products.controller';
 import { ProductsService } from './products.service';
 import { ConfigService } from '@nestjs/config';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { Review } from '../reviews/reviews.entity';
+import { Review } from '../reviews/entities/review.entity';
 import { Category } from './entities/category.entity';
 import { Product } from './entities/product.entity';
 

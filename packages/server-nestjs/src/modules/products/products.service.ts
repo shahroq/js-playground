@@ -6,7 +6,7 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
 import { formatISO } from './../../common/utils/utils';
 import { ConfigService } from '@nestjs/config';
-import { Review } from '../reviews/reviews.entity';
+import { Review } from '../reviews/entities/review.entity';
 import { Category } from './entities/category.entity';
 
 @Injectable()

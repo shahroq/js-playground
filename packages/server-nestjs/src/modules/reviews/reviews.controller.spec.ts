@@ -4,7 +4,7 @@ import { ReviewsService } from './reviews.service';
 import { ConfigService } from '@nestjs/config';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Product } from '../products/entities/product.entity';
-import { Review } from './reviews.entity';
+import { Review } from './entities/review.entity';
 
 describe('ReviewsController', () => {
   let controller: ReviewsController;

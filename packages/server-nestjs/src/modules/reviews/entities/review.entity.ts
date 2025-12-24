@@ -5,13 +5,13 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Product } from '../products/entities/product.entity';
+import { Product } from '../../products/entities/product.entity';
 import { Exclude, Expose } from 'class-transformer';
-import { ReviewStatus } from './reviews.types';
+import { ReviewStatus } from '../reviews.types';
 
 @Entity('reviews')
 export class Review {
-  @Exclude()
+  // @Exclude()
   @PrimaryGeneratedColumn()
   id: number;
 

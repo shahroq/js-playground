@@ -6,7 +6,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Review } from '../../reviews/reviews.entity';
+import { Review } from '../../reviews/entities/review.entity';
 import { Category } from './category.entity';
 import { Exclude, Expose, Transform } from 'class-transformer';
 

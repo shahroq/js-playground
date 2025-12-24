@@ -9,10 +9,10 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 import { ReviewsService } from './reviews.service';
-import { CreateReviewDto, UpdateReviewDto } from './reviews.dto';
+import { CreateReviewDto } from './dto/create-review.dto';
+import { UpdateReviewDto } from './dto/update-review.dto';
 // import { Roles } from 'src/common/decorators/roles.decorator';
 import { Roles } from '../../common/decorators/roles.decorator';
-import { AppParseIntPipe } from 'src/common/pipes/app-parse-int.pipe';
 
 @Controller('reviews')
 export class ReviewsController {

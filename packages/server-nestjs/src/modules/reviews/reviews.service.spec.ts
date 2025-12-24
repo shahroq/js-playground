@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ReviewsService } from './reviews.service';
 import { ConfigService } from '@nestjs/config';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { Review } from './reviews.entity';
+import { Review } from './entities/review.entity';
 import { Product } from '../products/entities/product.entity';
 
 describe('ReviewsService', () => {

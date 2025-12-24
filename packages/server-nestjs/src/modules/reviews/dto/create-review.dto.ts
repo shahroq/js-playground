@@ -6,8 +6,7 @@ import {
   Max,
   Min,
 } from 'class-validator';
-import { PartialType } from '@nestjs/mapped-types';
-import { ReviewStatus } from './reviews.types';
+import { ReviewStatus } from '../reviews.types';
 
 export class CreateReviewDto {
   @IsNumber()
@@ -25,5 +24,3 @@ export class CreateReviewDto {
   @IsOptional()
   status: ReviewStatus;
 }
-
-export class UpdateReviewDto extends PartialType(CreateReviewDto) {}
