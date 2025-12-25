@@ -1,14 +1,12 @@
-import { config, t } from "@/common/container.ts";
+import { t } from "@/common/container.ts";
 import { WinstonAdapter } from "./winston.adapter";
 import { ConsoleLogAdapter } from "./console-log.adapter";
+import type { LoggerStrategy } from "./logger.interface";
 
 let instance = null;
+const adapter = "logger";
 
-// factory: logger
-export function createLogger() {
-  const adapter = "logger";
-  const strategy = config.logger.strategy || "console-log";
-
+export function loggerAdapterFactory(strategy: LoggerStrategy) {
   console.log(t("console.getAdapter", { adapter, strategy }));
 
   switch (strategy) {

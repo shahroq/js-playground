@@ -35,7 +35,7 @@ const config = {
 
   // logger
   logger: {
-    strategy: <LoggerStrategy>process.env.LOGGER_strategy || "winston",
+    strategy: <LoggerStrategy>process.env.LOGGER_strategy || "console-log",
     level: <LogLevel>process.env.LOGGER_LEVEL || LogLevel.INFO,
     morgan_enabled: <boolean>!!(process.env.LOGGER_MORGAN_ENABLED === "true"),
     morgan_format: <string>process.env.LOGGER_MORAGN_FORMAT || "tiny",
@@ -52,7 +52,7 @@ const config = {
 
   // app-envelope (response)
   envelope: {
-    strategy: <EnvelopeStrategy>process.env.ENVELOPE_STRATEGY,
+    strategy: <EnvelopeStrategy>process.env.ENVELOPE_STRATEGY || "jsend",
     include_system_info: <boolean>(
       !!(process.env.ENVELOPE_INCLUDE_SYSTEM_INFO === "true")
     ),
@@ -84,7 +84,7 @@ const config = {
 
   // mailer
   mailer: {
-    strategy: <MailerStrategy>process.env.MAILER_STRATEGY,
+    strategy: <MailerStrategy>process.env.MAILER_STRATEGY || "console-log",
     protocol: <string>process.env.MAILER_PROTOCOL || "smpt",
     host: <string>process.env.MAILER_HOST || "",
     port: <number>(process.env.MAILER_PORT || 0),

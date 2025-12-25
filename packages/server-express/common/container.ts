@@ -1,11 +1,11 @@
 // common
 import config from "./config";
-import { getEnvelope } from "./envelope/factory";
-import { getValidatorHandler } from "./validation/factory";
-import { createDbClient } from "./db-client/factory";
+import { envelopeAdapterFactory } from "./envelope/factory";
+import { validatorHandlerFactory } from "./validation/factory";
+import { DbClientAdapterFactory } from "./db-client/factory";
 import { createHttpClient } from "./http-client/factory";
-import { createMailer } from "./mailer/factory";
-import { createLogger } from "./logger/factory";
+import { mailerAdapterFactory } from "./mailer/factory";
+import { loggerAdapterFactory } from "./logger/factory";
 
 // routes
 import { ProductRepository } from "@products/repository";
@@ -45,17 +45,23 @@ export { queryOptions as reviewsQueryOptions } from "@/routes/v1/reviews/query.o
 
 // 0. Common Services
 export * from "@/common/i118n/t";
-export const Envelope = getEnvelope();
-export const validate = getValidatorHandler();
-export const dbAdapter = createDbClient();
+export const Envelope = envelopeAdapterFactory(config.envelope.strategy);
+export const validate = validatorHandlerFactory(config.validation.strategy);
+export const dbAdapter = DbClientAdapterFactory(
+  config.database.client_strategy
+);
 export const httpClientJsonPlaceHolder = createHttpClient(
-  config.http_client.api_url_jsonplaceholder as string
+  config.http_client.strategy,
+  config.http_client.api_url_jsonplaceholder
 );
 export const httpClientRestfulapi = createHttpClient(
-  config.http_client.api_url_restfulapi as string
+  config.http_client.strategy,
+  config.http_client.api_url_restfulapi
 );
-export const mailer = createMailer();
-export const logger = createLogger();
+export const mailer = mailerAdapterFactory(config.mailer.strategy || "jsend");
+export const logger = loggerAdapterFactory(
+  config.logger.strategy || "console-log"
+);
 
 // 1. Repositories
 export const productRepository = new ProductRepository(dbAdapter);

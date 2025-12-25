@@ -3,19 +3,16 @@ import { MemoryAdapter } from "./memory.adapter";
 import { FileAdapter } from "./file.adapter";
 import { LowDbAdapter } from "./lowdb.adapter";
 import { PrismaAdapter } from "./prisma.adapter";
-import type { IDbClient } from "./db-client.interface";
+import type { DBAdapterStrategy, IDbClient } from "./db-client.interface";
 
 let instance: IDbClient | null = null;
+const adapter = "db-client";
 
 // add identifier here (filepath, or db engine name)?
-// factory: db client
-export function createDbClient(): IDbClient {
+export function DbClientAdapterFactory(strategy: DBAdapterStrategy): IDbClient {
   if (instance) return instance;
 
   let dbClient;
-
-  const adapter = "db-client";
-  const strategy = config.database.client_strategy;
 
   console.log(
     t("console.getAdapter", {

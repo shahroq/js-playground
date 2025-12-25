@@ -1,16 +1,15 @@
-import type { ValidatorHandler } from "./types";
+import type { ValidationStrategy, ValidatorHandler } from "./types";
 import { joiValidatorHandler } from "./joi/joi-validator.middleware.ts";
 import { zodValidatorHandler } from "./zod/zod-validator.middleware.ts";
 import { expressValidatorHandler } from "./express-validator/express-validator.middleware.ts";
-import { config, t } from "@/common/container.ts";
+import { t } from "@/common/container.ts";
 
 let handler = null;
+const adapter = "validation";
 
-// factory: validation middleware
-export function getValidatorHandler(): ValidatorHandler {
-  const adapter = "validation";
-  const strategy = config.validation.strategy;
-
+export function validatorHandlerFactory(
+  strategy: ValidationStrategy
+): ValidatorHandler {
   console.log(t("console.getAdapter", { adapter, strategy }));
 
   switch (strategy) {

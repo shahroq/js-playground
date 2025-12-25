@@ -1,14 +1,12 @@
-import { config, t } from "@/common/container.ts";
+import { t } from "@/common/container.ts";
 import { ConsoleLogAdapter } from "./console-log.adapter";
 import { MailtrapAdapter } from "./mailtrap.adapter";
+import type { MailerStrategy } from "./mailer.interface";
 
 let instance = null;
+const adapter = "mailer";
 
-// factory: mailer
-export function createMailer() {
-  const adapter = "mailer";
-  const strategy = config.mailer.strategy || "console-log";
-
+export function mailerAdapterFactory(strategy: MailerStrategy) {
   console.log(t("console.getAdapter", { adapter, strategy }));
 
   switch (strategy) {

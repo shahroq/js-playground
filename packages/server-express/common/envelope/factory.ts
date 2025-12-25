@@ -1,14 +1,12 @@
-import { config, t } from "@/common/container.ts";
+import { t } from "@/common/container.ts";
 import { JSendAdapter } from "./jsend.adapter.ts";
 import { JsonApiAdapter } from "./json-api.adapter.ts";
+import type { EnvelopeStrategy } from "./envelope.interface.ts";
 
 let className = null;
+const adapter = "envelope";
 
-// factory: envelope (app response format)
-export function getEnvelope() {
-  const adapter = "envelope";
-  const strategy = config.envelope.strategy || "jsend";
-
+export function envelopeAdapterFactory(strategy: EnvelopeStrategy) {
   console.log(t("console.getAdapter", { adapter, strategy }));
 
   switch (strategy) {

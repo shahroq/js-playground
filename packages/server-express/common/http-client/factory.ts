@@ -1,15 +1,16 @@
-import type { IHttpClient } from "./http-client.interface";
+import type { HttpClientStrategy, IHttpClient } from "./http-client.interface";
 import { AxiosAdapter } from "./axios.adapter";
-import { config, t } from "@/common/container";
+import { t } from "@/common/container";
 
 const instances = new Map<string, IHttpClient>();
 let instance;
+const adapter = "http-client";
 
 // factory: http client (multipleton!)
-export function createHttpClient(baseURL: string): IHttpClient {
-  const adapter = "http-client";
-  const strategy = config.http_client.strategy;
-
+export function createHttpClient(
+  strategy: HttpClientStrategy,
+  baseURL: string
+): IHttpClient {
   console.log(
     t("console.getAdapter", { adapter, strategy: `${strategy}:${baseURL}` })
   );
