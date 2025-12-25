@@ -10,6 +10,7 @@ export default () => {
 
     default: {
       user_id: Number(process.env.DEFAULT_USER_ID || 1),
+      pagination_limit: <number>(process.env.DEFAULT_PAGINATION_LIMIT || 10),
       timeout: Number(process.env.DEFAULT_TIMEOUT || 3000),
     },
 
