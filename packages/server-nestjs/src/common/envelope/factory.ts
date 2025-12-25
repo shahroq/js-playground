@@ -1,5 +1,4 @@
-import { ConfigService } from '@nestjs/config';
-import { IEnvelope } from './envelope.interface';
+import { EnvelopeStrategy, IEnvelope } from './envelope.interface';
 import { JSendAdapter } from './jsend.adapter';
 import { JsonApiAdapter } from './json-api.adapter';
 
@@ -8,12 +7,11 @@ export type EnvelopeConstructor = new (
   data: any,
 ) => IEnvelope;
 
-export function getEnvelopeAdapter(
-  configService: ConfigService,
-): EnvelopeConstructor {
-  const adapter = 'envelope';
-  const strategy = configService.get<string>('envelope.strategy', 'jsend');
+const adapter = 'envelope';
 
+export function envelopeAdapterFactory(
+  strategy: EnvelopeStrategy,
+): EnvelopeConstructor {
   switch (strategy) {
     case 'jsend':
       return JSendAdapter;

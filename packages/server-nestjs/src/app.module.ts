@@ -10,11 +10,12 @@ import { configSchemas } from './common/config/schema';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { WrapResponseInterceptor } from './common/interceptors/wrap-response.interceptor';
 import { TimeoutInterceptor } from './common/interceptors/timeout.interceptor';
-import { getEnvelopeAdapter } from './common/envelope/factory';
+import { envelopeAdapterFactory } from './common/envelope/factory';
 // import { SeedService } from './common/seed/seed.service';
 import { ProductsModule } from './modules/products/products.module';
 import { ReviewsModule } from './modules/reviews/reviews.module';
 import { PostsModule } from './modules/posts/posts.module';
+import { EnvelopeStrategy } from './common/envelope/envelope.interface';
 
 @Module({
   imports: [
@@ -31,9 +32,9 @@ import { PostsModule } from './modules/posts/posts.module';
     }),
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
-      useFactory: (config: ConfigService) => ({
+      useFactory: (configService: ConfigService) => ({
         type: 'sqlite',
-        database: config.get<string>('database.url'),
+        database: configService.get<string>('database.url'),
         autoLoadEntities: true,
         // entities: [],
         // logging: true,
@@ -51,8 +52,11 @@ import { PostsModule } from './modules/posts/posts.module';
     },
     {
       provide: 'APP_ENVELOPE',
-      useFactory: getEnvelopeAdapter,
       inject: [ConfigService],
+      useFactory: (configService: ConfigService) =>
+        envelopeAdapterFactory(
+          configService.get<EnvelopeStrategy>('envelope.strategy', 'jsend'),
+        ),
     },
     {
       provide: APP_INTERCEPTOR,
