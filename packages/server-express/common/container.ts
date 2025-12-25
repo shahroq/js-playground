@@ -28,7 +28,7 @@ import { ObjectController } from "@/routes/v1/objects/controller";
 // re-exports
 export * as utils from "./utils/utils";
 export { default as AppError, isAppError } from "./error/app-error";
-export * from "@/common/pagination/pagination-summary.dto";
+export * from "@/common/dto/pagination-summary.dto";
 export * from "@/common/error/global-error.middleware";
 export * from "@/common/middlewares/undefined-routes.middleware";
 export * from "@/common/envelope/attach-system-data.middleware";

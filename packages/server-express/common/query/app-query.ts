@@ -1,13 +1,14 @@
-import type { INormQuery, IRawQuery, QueryPolicy } from "./types";
+import type { NormQuery, QueryPolicy } from "./types";
 import { config, defaultQueryPolicy } from "@/common/container";
-import type { CollectionName } from "../types";
+import type { CollectionName } from "@/common/types";
 import type {
   Expansion,
+  Pagination,
   Filter,
   OrderBy,
-  Pagination,
   Selection,
 } from "./types";
+import type { QueryDto } from "./dto";
 
 const RESERVED_KEYS = [
   "page",
@@ -21,24 +22,23 @@ const RESERVED_KEYS = [
 /**
  * App Query: Works with queries, specifically for normalizing based on app-defined standards
  * Normalize and validate raw query parameters coming from an HTTP request into a consistent `INormQuery`.
- * TODO: use passed DTO? I remove it for now
  */
 export class AppQuery {
-  private _normQuery: INormQuery;
+  private _normQuery: NormQuery;
 
   constructor(
-    private query: IRawQuery,
-    private readonly queryOptions?: QueryPolicy
+    private query: QueryDto,
+    private readonly queryPolicy?: QueryPolicy
   ) {
-    this.queryOptions = this.queryOptions ?? defaultQueryPolicy;
+    this.queryPolicy = this.queryPolicy ?? defaultQueryPolicy;
   }
 
-  get normQuery(): INormQuery {
+  get normQuery(): NormQuery {
     this.normalize();
     return this._normQuery;
   }
 
-  append(query: IRawQuery) {
+  append(query: QueryDto) {
     this.query = {
       ...this.query,
       ...query,
@@ -51,16 +51,16 @@ export class AppQuery {
     this._normQuery = {
       pagination: this.normalizePagination(),
       orderBy: this.normalizeOrderBy(),
-      filter: this.normalizeFilters(),
       selection: this.normalizeSelection(),
       expansion: this.normalizeExpansion(),
+      filter: this.normalizeFilters(),
     };
 
     return this;
   }
 
   private normalizePagination(): Pagination {
-    const { defaultLimit } = this.queryOptions ?? {};
+    const { defaultLimit } = this.queryPolicy ?? {};
 
     const page = +(this.query.page ?? 1);
     const per_page = +(
@@ -75,9 +75,9 @@ export class AppQuery {
 
   private normalizeOrderBy(): OrderBy | undefined {
     let { sort, direction } = this.query;
-    const { defaultOrderBy, sortableFields } = this.queryOptions ?? {};
+    const { defaultOrderBy, sortableFields } = this.queryPolicy ?? {};
 
-    if (!sort) return this.queryOptions?.defaultOrderBy || undefined;
+    if (!sort) return this.queryPolicy?.defaultOrderBy || undefined;
 
     sort = sort ?? undefined;
     direction = direction === "desc" ? "desc" : "asc";
@@ -91,7 +91,7 @@ export class AppQuery {
 
   private normalizeSelection(): Selection | undefined {
     const { fields } = this.query;
-    const { selectableFields } = this.queryOptions ?? {};
+    const { selectableFields } = this.queryPolicy ?? {};
 
     // if (!fields) return { fields: selectableFields };
     if (!fields) return undefined;
@@ -109,7 +109,7 @@ export class AppQuery {
 
   private normalizeExpansion(): Expansion | undefined {
     const { include } = this.query;
-    const { expandableCollections } = this.queryOptions ?? {};
+    const { expandableCollections } = this.queryPolicy ?? {};
 
     if (!include) return undefined;
 
@@ -126,7 +126,7 @@ export class AppQuery {
   }
 
   private normalizeFilters(): Filter | undefined {
-    const { filterableFields } = this.queryOptions ?? {};
+    const { filterableFields } = this.queryPolicy ?? {};
 
     const filter: Filter = {};
 
@@ -148,9 +148,6 @@ export class AppQuery {
     return Object.keys(filter).length > 0 ? filter : undefined;
   }
 
-  /**
-   * Correct types
-   */
   private coerce(v: any) {
     if (typeof v !== "string") return v;
 
