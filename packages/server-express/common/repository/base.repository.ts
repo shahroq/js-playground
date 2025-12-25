@@ -1,12 +1,12 @@
 import type { EntityId, CollectionName } from "@/common/types";
-import type { QueryOptions } from "@/common/query/types";
+import type { QueryPolicy } from "@/common/query/types";
 import type { IDbClient } from "@/common/db-client/db-client.interface";
 import { AppQuery } from "@/common/container";
 
 export abstract class BaseRepository<T> {
   constructor(
     protected readonly collection: CollectionName,
-    protected readonly queryOptions: QueryOptions,
+    protected readonly queryOptions: QueryPolicy,
     protected readonly dbAdapter: IDbClient
   ) {}
 

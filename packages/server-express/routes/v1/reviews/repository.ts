@@ -4,7 +4,7 @@ import { BaseRepository } from "@/common/repository/base.repository";
 import type { IDbClient } from "@/common/db-client/db-client.interface";
 import {
   AppQuery,
-  reviewsQueryOptions as queryOptions,
+  reviewsQueryPolicy as queryOptions,
 } from "@/common/container";
 
 export class ReviewRepository extends BaseRepository<IReview> {

@@ -1,5 +1,5 @@
-import type { INormQuery, IRawQuery, QueryOptions } from "./types";
-import { config, defaultQueryOptions } from "@/common/container";
+import type { INormQuery, IRawQuery, QueryPolicy } from "./types";
+import { config, defaultQueryPolicy } from "@/common/container";
 import type { CollectionName } from "../types";
 import type {
   Expansion,
@@ -28,9 +28,9 @@ export class AppQuery {
 
   constructor(
     private query: IRawQuery,
-    private readonly queryOptions?: QueryOptions
+    private readonly queryOptions?: QueryPolicy
   ) {
-    this.queryOptions = this.queryOptions ?? defaultQueryOptions;
+    this.queryOptions = this.queryOptions ?? defaultQueryPolicy;
   }
 
   get normQuery(): INormQuery {

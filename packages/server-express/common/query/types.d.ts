@@ -1,15 +1,4 @@
-/*
-declare global {
-  namespace Express {
-    interface Request {
-      normQuery?: INormQuery;
-      appQuery?: Query;
-    }
-  }
-}
-*/
-
-export interface QueryOptions {
+export interface QueryPolicy {
   defaultLimit?: number;
   defaultOrderBy?: OrderBy;
   selectableFields: string[]; // whitelist for SELECT

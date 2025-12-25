@@ -1,7 +1,7 @@
-import type { QueryOptions } from "@/common/query/types";
+import type { QueryPolicy } from "@/common/query/types";
 
-// default query options (to be merged in every module)
-export const queryOptions: QueryOptions = {
+// default query policy (to be merged in every module)
+export const queryPolicy: QueryPolicy = {
   defaultLimit: 4,
   defaultOrderBy: { sort: "id", direction: "asc" },
   selectableFields: ["id"],

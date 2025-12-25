@@ -3,19 +3,19 @@ import {
   productController as ctrl,
   normalizeQueryHandler as normalizeQuery,
   validate,
-  productsQueryOptions as options,
+  productsQueryPolicy as policy,
 } from "@/common/container";
 
 const router = express.Router();
 
 router.get(
   "/",
-  [validate("products.findAll"), normalizeQuery(options)],
+  [validate("products.findAll"), normalizeQuery(policy)],
   ctrl.index
 );
 router.get(
   "/:id",
-  [validate("products.findOne"), normalizeQuery(options)],
+  [validate("products.findOne"), normalizeQuery(policy)],
   ctrl.show
 );
 router.post("/", validate("products.create"), ctrl.store);

@@ -1,8 +1,8 @@
-import type { QueryOptions } from "@/common/query/types";
-import { queryOptions as defaultQueryOptions } from "@/common/query/default.options";
+import type { QueryPolicy } from "@/common/query/types";
+import { queryPolicy as defaultQueryPolicy } from "@/common/query/default.policy";
 
-export const queryOptions: QueryOptions = {
-  ...defaultQueryOptions,
+export const queryPolicy: QueryPolicy = {
+  ...defaultQueryPolicy,
   defaultLimit: 4,
   defaultOrderBy: { sort: "id", direction: "asc" },
   selectableFields: ["id", "content", "rating", "status", "product_id"],
