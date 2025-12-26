@@ -12,7 +12,7 @@ import { Exclude, Expose, Transform } from 'class-transformer';
 
 @Entity('products')
 export class Product {
-  @Exclude()
+  // @Exclude()
   @PrimaryGeneratedColumn()
   id: number;
 
