@@ -7,18 +7,23 @@ import {
   Param,
   Delete,
   ParseIntPipe,
+  Query,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { AppQuery } from 'src/common/query/app-query.service';
+import { queryPolicy } from './query.policy';
+import { QueryDto } from 'src/common/query/query.dto';
 
 @Controller('products')
 export class ProductsController {
   constructor(private readonly service: ProductsService) {}
 
   @Get()
-  async findAll() {
-    const products = await this.service.findAll();
+  async findAll(@Query() query: QueryDto) {
+    const appQuery = new AppQuery(query, queryPolicy);
+    const products = await this.service.findAll(appQuery);
     return { products };
   }
 

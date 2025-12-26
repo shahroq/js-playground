@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { FindManyOptions, Repository } from 'typeorm';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { UpdateReviewDto } from './dto/update-review.dto';
 import { Review } from './entities/review.entity';
@@ -12,7 +12,8 @@ import { formatISO } from './../../common/utils/utils';
 import { ConfigService } from '@nestjs/config';
 import { Product } from '../products/entities/product.entity';
 import { ReviewStatus } from './reviews.types';
-import { PaginationQueryDto } from 'src/common/query/query.dto';
+import { AppQuery } from 'src/common/query/app-query.service';
+import { NormQuery } from 'src/common/query/types';
 
 @Injectable()
 export class ReviewsService {
@@ -28,17 +29,32 @@ export class ReviewsService {
     this.userId = this.config.get<number>('default.user_id') ?? 1;
   }
 
-  async findAll(paginationQueryDto: PaginationQueryDto) {
-    const page = +(paginationQueryDto.page ?? 1);
-    const per_page = +(paginationQueryDto.per_page ?? 3);
-    const offset = (page - 1) * per_page;
-    // console.log('Pagination:', page, per_page, offset);
+  // TODO: abstract away
+  buildOptions<T>(normQuery: NormQuery): FindManyOptions<T> {
+    // why not working?!
+    // const { orderBy: { sort }} = normQuery;
+    const perPage = normQuery.pagination?.per_page;
+    const offset = normQuery.pagination?.offset;
+    const sort = normQuery.orderBy?.sort;
+    const direction = normQuery.orderBy?.direction;
 
-    const items = await this.repository.find({
-      take: per_page,
-      skip: offset,
-      relations: ['product'],
-    });
+    const options: FindManyOptions<T> = {};
+
+    if (perPage !== undefined) options.take = perPage;
+    if (offset !== undefined) options.skip = offset;
+    if (sort) {
+      options.order = {
+        [sort]: direction ?? 'ASC',
+      } as FindManyOptions<T>['order'];
+    }
+    options.relations = ['product'];
+
+    return options;
+  }
+
+  async findAll(appQuery: AppQuery) {
+    const options = this.buildOptions(appQuery.normQuery);
+    const items = await this.repository.find(options);
     return items;
   }
 

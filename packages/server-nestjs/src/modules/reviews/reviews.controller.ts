@@ -13,26 +13,19 @@ import { ReviewsService } from './reviews.service';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { UpdateReviewDto } from './dto/update-review.dto';
 // import { Roles } from 'src/common/decorators/roles.decorator';
-import { Roles } from '../../common/decorators/roles.decorator';
-import {
-  OrderByQueryDto,
-  PaginationQueryDto,
-  QueryDto,
-} from 'src/common/query/query.dto';
-import { NormalizeQueryPipe } from 'src/common/pipes/normalize-query.pipe';
+import { QueryDto } from 'src/common/query/query.dto';
+import { AppQuery } from 'src/common/query/app-query.service';
+import { queryPolicy } from './query.policy';
 
 @Controller('reviews')
 export class ReviewsController {
   constructor(private readonly service: ReviewsService) {}
 
   @Get()
-  async findAll(
-    @Query() paginationQueryDto: PaginationQueryDto,
-    @Query(new NormalizeQueryPipe({ x: 1 })) queryDto: QueryDto,
-  ) {
-    // const x = queryDto.include;
+  async findAll(@Query() query: QueryDto) {
     // await new Promise((resolve) => setTimeout(resolve, 5000));
-    const reviews = await this.service.findAll(paginationQueryDto);
+    const appQuery = new AppQuery(query, queryPolicy);
+    const reviews = await this.service.findAll(appQuery);
     return { reviews };
   }
 
@@ -42,7 +35,7 @@ export class ReviewsController {
     return { review };
   }
 
-  @Roles('admin', 'moderator')
+  // @Roles('admin', 'moderator')
   @Post()
   create(@Body() createReviewDto: CreateReviewDto) {
     return this.service.create(createReviewDto);

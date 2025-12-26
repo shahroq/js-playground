@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { FindManyOptions, Repository } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
@@ -8,6 +8,8 @@ import { formatISO } from './../../common/utils/utils';
 import { ConfigService } from '@nestjs/config';
 import { Review } from '../reviews/entities/review.entity';
 import { Category } from './entities/category.entity';
+import { NormQuery } from 'src/common/query/types';
+import { AppQuery } from 'src/common/query/app-query.service';
 
 @Injectable()
 export class ProductsService {
@@ -25,10 +27,32 @@ export class ProductsService {
     this.userId = this.config.get<number>('default.user_id') ?? 1;
   }
 
-  async findAll() {
-    const items = await this.repository.find({
-      relations: ['reviews', 'categories'],
-    });
+  // TODO: abstract away
+  buildOptions<T>(normQuery: NormQuery): FindManyOptions<T> {
+    // why not working?!
+    // const { orderBy: { sort }} = normQuery;
+    const perPage = normQuery.pagination?.per_page;
+    const offset = normQuery.pagination?.offset;
+    const sort = normQuery.orderBy?.sort;
+    const direction = normQuery.orderBy?.direction;
+
+    const options: FindManyOptions<T> = {};
+
+    if (perPage !== undefined) options.take = perPage;
+    if (offset !== undefined) options.skip = offset;
+    if (sort) {
+      options.order = {
+        [sort]: direction ?? 'ASC',
+      } as FindManyOptions<T>['order'];
+    }
+    options.relations = ['reviews', 'categories'];
+
+    return options;
+  }
+
+  async findAll(appQuery: AppQuery) {
+    const options = this.buildOptions(appQuery.normQuery);
+    const items = await this.repository.find(options);
     return items;
   }
 
