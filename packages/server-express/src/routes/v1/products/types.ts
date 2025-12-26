@@ -1,4 +1,5 @@
-import type { EntityId, IMeta, INormQuery } from "@/common/types";
+import type { NormQuery } from "@/common/query/types";
+import type { EntityId, IMeta } from "@/common/types";
 import type { IReview } from "@/routes/v1/reviews/types";
 
 // raw product (from db)
@@ -27,7 +28,7 @@ export interface IProductResult {
   meta?: IMeta;
 }
 
-export interface IProductQuery extends INormQuery {
+export interface IProductQuery extends NormQuery {
   /*
   id?: EntityId;
   search?: string;

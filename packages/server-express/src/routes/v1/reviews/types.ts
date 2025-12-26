@@ -1,4 +1,5 @@
-import type { EntityId, IMeta, INormQuery } from "@/common/types";
+import type { NormQuery } from "@/common/query/types";
+import type { EntityId } from "@/common/types";
 import type { IProduct } from "@/routes/v1/products/types";
 
 export enum ReviewStatus {
@@ -36,4 +37,4 @@ export interface IReviewResult {
 */
 
 // dto?
-export interface IReviewQuery extends INormQuery {}
+export interface IReviewQuery extends NormQuery {}

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ReviewStatus } from "@/routes/v1/reviews/types.d";
+import { ReviewStatus } from "@/routes/v1/reviews/types";
 
 /**
  * Shared Schemas

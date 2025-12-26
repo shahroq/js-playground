@@ -1,8 +1,7 @@
 import { ProductDto } from "@products/dto";
-import type { PaginationSummaryDto } from "@/common/container";
 import type { EntityId } from "@/common/types";
 import type { IReview } from "./types";
-import type { ReviewStatus } from "@/generated/prisma/enums";
+import type { ReviewStatus } from "@root/generated/prisma/enums";
 
 // Request Dto s
 export class CreateReviewDto {

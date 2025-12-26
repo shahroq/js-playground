@@ -28,11 +28,12 @@
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false,
     "paths": {
-      "@/*": ["./*"],
-      "@users/*": ["./routes/v1/users/*"],
-      "@products/*": ["./routes/v1/products/*"],
-      "@reviews/*": ["./routes/v1/reviews/*"],
-      "@posts/*": ["./routes/v1/posts/*"]
+      "@/*": ["./src/*"],
+      "@root/*": ["./*"],
+      "@users/*": ["./src/routes/v1/users/*"],
+      "@products/*": ["./src/routes/v1/products/*"],
+      "@reviews/*": ["./src/routes/v1/reviews/*"],
+      "@posts/*": ["./src/routes/v1/posts/*"]
     }
   },
 

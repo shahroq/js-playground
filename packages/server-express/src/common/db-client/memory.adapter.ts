@@ -1,4 +1,4 @@
-import data from "@/data/memory-json/data.json";
+import data from "@root/data/memory-json/data.json";
 import { AppQuery, config } from "@/common/container";
 import { buildAuditFields, type IDbClient } from "./db-client.interface";
 import type { EntityId, CollectionName } from "@/common/types";

@@ -1,4 +1,4 @@
-import { ReviewStatus } from "./types.d";
+import { ReviewStatus } from "./types";
 import {
   AppError,
   AppQuery,

@@ -1,6 +1,6 @@
 import { join } from "path";
 import { utils } from "./container";
-import { ReviewStatus } from "@/generated/prisma/enums";
+import { ReviewStatus } from "@/../generated/prisma/enums";
 import { LogLevel, type LoggerStrategy } from "./logger/logger.interface";
 import type { MailerStrategy } from "./mailer/mailer.interface";
 import type { HttpClientStrategy } from "./http-client/http-client.interface";

@@ -1,5 +1,5 @@
 import { body, param, query } from "express-validator";
-import { ReviewStatus } from "@/routes/v1/reviews/types.d";
+import { ReviewStatus } from "@/routes/v1/reviews/types";
 
 /**
  * Shared Validation Chains

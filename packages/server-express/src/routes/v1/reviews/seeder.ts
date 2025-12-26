@@ -1,4 +1,4 @@
-import dataSource from "@/data/data-source.json";
+import dataSource from "@root/data/data-source.json";
 import { AppQuery, reviewRepository } from "@/common/container";
 
 const data = dataSource.reviews.map((i) => ({

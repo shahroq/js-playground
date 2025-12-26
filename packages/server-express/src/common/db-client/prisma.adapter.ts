@@ -1,9 +1,9 @@
-import { PrismaClient, Prisma } from "@/generated/prisma/client";
+import { PrismaClient, Prisma } from "@root/generated/prisma/client";
 import type {
   ProductDelegate,
   ReviewDelegate,
   UserDelegate,
-} from "@/generated/prisma/models";
+} from "@root/generated/prisma/models";
 import { AppQuery, config } from "@/common/container";
 import { buildAuditFields, type IDbClient } from "./db-client.interface";
 import type { EntityId, CollectionName } from "@/common/types";

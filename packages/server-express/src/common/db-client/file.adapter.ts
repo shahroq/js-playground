@@ -1,50 +1,43 @@
-import { Low } from "lowdb";
-import { JSONFile } from "lowdb/node";
 import fs from "fs-extra";
 import { AppQuery, config, utils } from "@/common/container";
-import { defaultData, type DatabaseSchema } from "@/data/lowdb-json/schema";
+import { defaultData, type DatabaseSchema } from "@root/data/file-json/schema";
 import { buildAuditFields, type IDbClient } from "./db-client.interface";
 import type { CollectionName, EntityId } from "../types";
 
-export class LowDbAdapter implements IDbClient {
-  private dbClient: Low<DatabaseSchema>;
+export class FileAdapter implements IDbClient {
+  private db: DatabaseSchema = {};
   private filePath = config.database.path ?? "";
   private defaultData: DatabaseSchema = defaultData;
   private userId: number;
 
   constructor() {
-    const adapter = new JSONFile<DatabaseSchema>(this.filePath);
-    this.dbClient = new Low(adapter, this.defaultData);
     this.userId = config.default.user_id;
   }
 
   async connect() {
-    // Ensure file exists before LowDB tries to read it
     await fs.ensureFile(this.filePath);
-    const adapter = new JSONFile<DatabaseSchema>(this.filePath);
-    this.dbClient = new Low(adapter, this.defaultData);
+    await this.readFile();
     console.log(
-      `🌕 Connected to LowDB: ${utils.truncateString(this.filePath, {
+      `🌕 Connected to FS JSON: ${utils.truncateString(this.filePath, {
         position: "start",
       })}`
     );
   }
 
   async disconnect() {
-    await this.dbClient.write();
-    console.log("🌒 LowDB disconnected");
+    await this.writeFile();
+    console.log("🌒 FS JSON disconnected");
   }
 
-  private async getModel(collection: CollectionName) {
-    await this.dbClient.read();
-    // const m = (this.dbClient.data[collection] || []) as T[];
-    const m = this.dbClient.data[collection] || [];
-
+  private async getModel(collection: CollectionName): ModelDelegate {
+    await this.readFile();
+    const m = (this.data[collection] || []) as T[];
     return m;
   }
 
   async findAll<T>(collection: CollectionName, appQuery: AppQuery) {
     const m = await this.getModel(collection);
+    console.log(m);
 
     const items = m;
 
@@ -79,7 +72,7 @@ export class LowDbAdapter implements IDbClient {
     };
 
     m.push(newItem);
-    await this.dbClient.write();
+    await this.writeFile();
 
     return { ...newItem } as T;
   }
@@ -97,9 +90,8 @@ export class LowDbAdapter implements IDbClient {
         userId: this.userId,
       }),
     };
-
     m[itemIndex] = updatedItem;
-    await this.dbClient.write();
+    await this.writeFile();
 
     return updatedItem;
   }
@@ -112,7 +104,7 @@ export class LowDbAdapter implements IDbClient {
 
     m.splice(itemIndex, 1);
 
-    await this.dbClient.write();
+    await this.writeFile();
 
     return true;
   }
@@ -130,7 +122,7 @@ export class LowDbAdapter implements IDbClient {
     collection: CollectionName,
     appQuery: AppQuery,
     field: keyof T & string
-  ) {
+  ): Promise<number | null> {
     const m = await this.getModel(collection);
 
     let sum = 0;
@@ -150,20 +142,6 @@ export class LowDbAdapter implements IDbClient {
     // Creates an empty file if not exist:
     await fs.ensureFile(identifier);
 
-    // main file
-    try {
-      // file exists
-      await this.dbClient.read(); // even if file
-    } catch (err) {
-      // file not exist, create it with defaultData
-      console.warn(
-        `⚠️ Lowdb read failed, initializing DB file (${identifier}) with default data...`
-      );
-      this.dbClient.data = this.defaultData;
-      await this.dbClient.write();
-      await this.dbClient.read();
-    }
-
     // copy main file, for test
     // TODO: do something about it
     const dest = this.filePath.replace(/(\.[^/.]+)$/, "-test$1");
@@ -177,5 +155,29 @@ export class LowDbAdapter implements IDbClient {
     await super.migrate();
     // TODO: do something about creating test db/ maybe duplicate?
     await this.createDB(this.filePath);
+  }
+
+  private async readFile(): Promise<void> {
+    try {
+      this.data = await fs.readJson(this.filePath);
+    } catch {
+      this.data = { ...this.defaultData };
+      await this.writeFile();
+    }
+  }
+
+  private async writeFile(): Promise<void> {
+    this.touchMeta();
+    await fs.writeJson(this.filePath, this.data, { spaces: 2 });
+  }
+
+  private touchMeta(): void {
+    this.data = {
+      ...this.data,
+      meta: {
+        ...this.data.meta,
+        updated_at: utils.formatISO(),
+      },
+    };
   }
 }

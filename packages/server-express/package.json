@@ -5,9 +5,9 @@
   "private": true,
   "scripts": {
     "//[RUN]": "",
-    "start": "bun run index.ts",
-    "start:dev": "bun --watch run index.ts",
-    "dev-testfile": "bun --watch run ./script.ts",
+    "start": "bun run ./src/main.ts",
+    "start:dev": "bun run start --watch",
+    "dev-testfile": "bun run ./src/script.ts --watch",
     "//[Test]": "Test:",
     "test": "bun test",
     "test:watch": "bun test --watch",
@@ -21,8 +21,8 @@
     "prisma:migrate:deploy:test": "dotenv -e .env.test.local -- prisma migrate deploy",
     "prisma:boot": "bun run prisma validate && bun run prisma format && bun run prisma:clean && bun run prisma:migrate:dev && bun run prisma:migrate:dev && bun run prisma:migrate:deploy:test",
     "//[Seed]": "",
-    "seed": "bun run ./common/seed/index.ts",
-    "seed-test": "bun run ./common/seed/seeder-test.ts"
+    "seed": "bun run ./src/common/seed/index.ts",
+    "seed-test": "bun run ./src/common/seed/seeder-test.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",

@@ -1,4 +1,4 @@
-import dataSource from "@/data/data-source.json";
+import dataSource from "@root/data/data-source.json";
 import { AppQuery, productRepository } from "@/common/container";
 
 const data = dataSource.products.map((i) => ({
