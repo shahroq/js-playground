@@ -1,4 +1,5 @@
 import type { CollectionName } from "@/common/types";
+
 import type {
   ExpansionQueryDto,
   FilterQueryDto,
@@ -10,7 +11,7 @@ import type {
 export type QueryPolicy = {
   defaultLimit?: number;
   defaultOrderBy?: OrderBy;
-  selectableFields: string[]; // whitelist for SELECT
+  selectableFields?: string[]; // whitelist for SELECT
   sortableFields?: string[]; // whitelist for ORDER BY
   filterableFields?: string[]; // whitelist for WHERE
   searchableFields?: string[]; // whitelist for WHERE

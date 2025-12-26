@@ -2,6 +2,7 @@ import type { Request, Response, NextFunction } from "express";
 import { AppQuery } from "@/common/container";
 import type { QueryPolicy } from "@/common/query/types";
 
+// extraneous: moved the logic into the controller
 export function normalizeQueryHandler(policy: QueryPolicy) {
   return (req: Request, res: Response, next: NextFunction) => {
     // V1: get normalized based on dto/ploicy
