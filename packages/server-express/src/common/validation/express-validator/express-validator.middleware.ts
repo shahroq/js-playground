@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
 import { get } from "lodash";
 import type { ErrorDetail } from "@/common/error/types.js";
-import { ApiError } from "@/common/container";
+import { AppError } from "@/common/container";
 import type { ValidationAction, ValidatorHandler } from "../types";
 import { chains } from "./chain.ts";
 import {
@@ -14,7 +14,8 @@ export const expressValidatorHandler: ValidatorHandler = (
   action: ValidationAction
 ) => {
   const chain = get(chains, action);
-  if (!chain) throw new ApiError(`Chain not found for action: ${action}`);
+  if (!chain)
+    throw AppError.InternalServerError(`Chain not found for action: ${action}`);
 
   return async (
     req: Request,
@@ -31,7 +32,7 @@ export const expressValidatorHandler: ValidatorHandler = (
     if (!errors.isEmpty()) {
       const details = getErrorDetails(errors);
 
-      return next(ApiError.badRequest("Validation failed.", { details }));
+      return next(AppError.BadRequest("Validation failed.", { details }));
     }
 
     next();

@@ -1,6 +1,6 @@
 import { ReviewStatus } from "./types";
 import {
-  ApiError,
+  AppError,
   AppQuery,
   config,
   PaginationSummaryDto,
@@ -47,7 +47,7 @@ export class ReviewService {
     // appQuery.append({ status: ReviewStatus.APPROVED });
 
     const item = await this.repository.findOne(appQuery);
-    if (!item) throw ApiError.notFound();
+    if (!item) throw AppError.NotFound();
 
     // get expansions
     const expansionList = appQuery.normQuery?.expansion?.include ?? [];
@@ -76,24 +76,24 @@ export class ReviewService {
     //...
 
     const updatedItem = await this.repository.update(+id, updateItemDto);
-    if (!updatedItem) throw ApiError.notFound();
+    if (!updatedItem) throw AppError.NotFound();
 
     return ReviewDto.from(updatedItem);
   }
 
   async deleteItem(id: EntityId) {
     const deleted = await this.repository.delete(+id);
-    if (!deleted) throw ApiError.notFound();
+    if (!deleted) throw AppError.NotFound();
 
     return deleted;
   }
 
   async rejectItem(id: EntityId): Promise<ReviewDto> {
     const updatingItem = await this.repository.findById(+id);
-    if (!updatingItem) throw ApiError.notFound();
+    if (!updatingItem) throw AppError.NotFound();
 
     if (updatingItem.status !== ReviewStatus.PENDING)
-      throw new ApiError("Only PENDING reviews can be REJECTED");
+      throw AppError.BadRequest("Only PENDING reviews can be REJECTED");
 
     /*
     why not call update instead of new method: updateStatus
@@ -108,23 +108,23 @@ export class ReviewService {
       +id,
       ReviewStatus.REJECTED
     );
-    if (!updatedItem) throw ApiError.notFound();
+    if (!updatedItem) throw AppError.NotFound();
 
     return ReviewDto.from(updatedItem);
   }
 
   async approveItem(id: EntityId): Promise<ReviewDto> {
     const updatingReview = await this.repository.findById(+id);
-    if (!updatingReview) throw ApiError.notFound();
+    if (!updatingReview) throw AppError.NotFound();
 
     if (updatingReview.status !== ReviewStatus.PENDING)
-      throw new ApiError("Only PENDING reviews can be APPROVED");
+      throw AppError.BadRequest("Only PENDING reviews can be APPROVED");
 
     const updatedItem = await this.repository.updateStatus(
       +id,
       ReviewStatus.APPROVED
     );
-    if (!updatedItem) throw ApiError.notFound();
+    if (!updatedItem) throw AppError.NotFound();
 
     return ReviewDto.from(updatedItem);
   }

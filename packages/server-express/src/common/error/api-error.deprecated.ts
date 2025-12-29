@@ -1,6 +1,6 @@
 import type { AppErrorProps } from "./types";
 
-// custom error for this app
+// custom error for this app (deprecated implementation)
 export class ApiError extends Error {
   public meta: AppErrorProps & {
     isOperational: boolean;

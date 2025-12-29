@@ -1,5 +1,5 @@
 import type { E } from "../error/types";
-import { isAppError, getErrorMessage } from "../container";
+import { AppError } from "../container";
 import type { IEnvelope } from "./envelope.interface";
 
 type JsonApiStatus = "success" | "fail" | "error";
@@ -38,7 +38,7 @@ export class JsonApiAdapter implements IEnvelope {
 
   private getStatus(): JsonApiStatus {
     if (!this.error) return "success";
-    if (isAppError(this.error)) return "fail";
+    if (AppError.isAppError(this.error)) return "fail";
     return "error";
   }
 
@@ -53,9 +53,9 @@ export class JsonApiAdapter implements IEnvelope {
     return {
       errors: [
         {
-          title: getErrorMessage(appErr),
-          ...(appErr.meta?.code && { code: appErr.meta.code }),
-          ...(appErr.meta && { meta: appErr.meta }),
+          title: AppError.getMessage(appErr),
+          ...(appErr?.code && { code: appErr.code }),
+          ...(appErr?.details && { meta: appErr.details }),
         },
       ],
     };
@@ -65,7 +65,7 @@ export class JsonApiAdapter implements IEnvelope {
     return {
       errors: [
         {
-          title: getErrorMessage(this.error),
+          title: AppError.getMessage(this.error),
         },
       ],
     };

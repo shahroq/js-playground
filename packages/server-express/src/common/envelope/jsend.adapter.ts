@@ -1,4 +1,4 @@
-import { isAppError, getErrorMessage } from "@/common/container";
+import { AppError } from "@/common/container";
 import type { IEnvelope } from "./envelope.interface";
 import type { E } from "../error/types";
 
@@ -47,7 +47,7 @@ export class JSendAdapter implements IEnvelope {
 
   private getStatus(): JSendStatus {
     if (!this.error) return "success";
-    if (isAppError(this.error)) return "fail";
+    if (AppError.isAppError(this.error)) return "fail";
     return "error";
   }
 
@@ -62,9 +62,9 @@ export class JSendAdapter implements IEnvelope {
     return {
       status: "fail",
       data: {
-        message: getErrorMessage(this.error),
-        ...(this.error?.meta?.code && { code: this.error.meta.code }),
-        ...(this.error?.meta?.details && { details: this.error.meta.details }),
+        message: AppError.getMessage(this.error),
+        ...(this.error?.code && { code: this.error.code }),
+        ...(this.error?.details && { details: this.error.details }),
       },
     };
   }
@@ -72,7 +72,7 @@ export class JSendAdapter implements IEnvelope {
   private formatError(): JSendError {
     return {
       status: "error",
-      message: getErrorMessage(this.error),
+      message: AppError.getMessage(this.error),
       ...(this.error?.code && { code: this.error.code }),
     };
   }

@@ -2,7 +2,7 @@ import type { Request, Response, NextFunction } from "express";
 import { get } from "lodash";
 import { ZodError } from "zod";
 import type { ErrorDetail } from "@/common/error/types.js";
-import { ApiError } from "@/common/container";
+import { AppError } from "@/common/container";
 import type { ValidationAction, ValidatorHandler } from "../types";
 import { schemas } from "./schema.ts";
 
@@ -10,7 +10,10 @@ export const zodValidatorHandler: ValidatorHandler = (
   action: ValidationAction
 ) => {
   const schema = get(schemas, action);
-  if (!schema) throw new ApiError(`Schema not found for action: ${action}`);
+  if (!schema)
+    throw AppError.InternalServerError(
+      `Schema not found for action: ${action}`
+    );
 
   return async (
     req: Request,
@@ -25,7 +28,7 @@ export const zodValidatorHandler: ValidatorHandler = (
     } catch (error) {
       if (error instanceof ZodError) {
         const details = getErrorDetails(error);
-        return next(ApiError.badRequest("Validation failed.", { details }));
+        return next(AppError.BadRequest("Validation failed.", { details }));
       }
       next(error);
     }

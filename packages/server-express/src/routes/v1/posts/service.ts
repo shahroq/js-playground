@@ -1,4 +1,4 @@
-import { ApiError, PostDto } from "@/common/container";
+import { AppError, PostDto } from "@/common/container";
 import type { IPost } from "./types";
 import type { IHttpClient } from "@/common/http-client/http-client.interface";
 
@@ -19,7 +19,7 @@ export class PostService {
 
   async getItem(id: number) {
     const item = await this.httpClient.get<IPost>(`/posts/${+id}`);
-    if (!item) throw ApiError.notFound();
+    if (!item) throw AppError.NotFound();
 
     return PostDto.from(item);
   }

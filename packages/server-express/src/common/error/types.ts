@@ -1,6 +1,6 @@
-import type { ApiError } from "./api-error";
+import type { AppError } from "./app-error";
 
-export type E = ApiError | Error;
+export type E = AppError | Error;
 
 export type ErrorCode =
   | "ERR_NF"
@@ -16,7 +16,7 @@ export type ErrorDetail = {
   type?: string;
 };
 
-export type AppErrorProps = {
+export interface AppErrorProps {
   statusCode?: number;
   status?: number; // the status code of the error, mirroring statusCode for general compatibility
 
@@ -31,4 +31,7 @@ export type AppErrorProps = {
 
   // keep details of validation errors
   details?: ErrorDetail[];
-};
+
+  headers?: Record<string, string>;
+  [key: string]: any;
+}

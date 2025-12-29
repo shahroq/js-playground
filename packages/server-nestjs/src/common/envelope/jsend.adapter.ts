@@ -47,7 +47,6 @@ export class JSendAdapter implements IEnvelope {
 
   private getStatus(): JSendStatus {
     if (!this.error) return 'success';
-    // if (isAppError(this.error)) return 'fail';
     return 'error';
   }
 

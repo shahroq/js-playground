@@ -1,14 +1,11 @@
 import type { Request, Response, NextFunction } from "express";
-import { ApiError } from "@/common/container";
+import { AppError } from "../container";
 
 export function undefinedRoutesHandler(
   req: Request,
   _res: Response,
   next: NextFunction
 ) {
-  const e = ApiError.notFound(
-    `Undefined Route: Can't find ${req.originalUrl} on this server.`
-  );
-
-  next(e);
+  const msg = `Undefined Route: Can't find ${req.originalUrl} on this server.`;
+  next(AppError.NotFound(msg, { code: "ERR_NF" }));
 }

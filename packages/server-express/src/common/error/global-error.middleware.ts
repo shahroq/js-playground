@@ -8,7 +8,7 @@ export function globalErrorHandler(
   res: Response,
   next: NextFunction
 ): void {
-  const statusCode = error?.meta?.statusCode || 500;
+  const statusCode = error?.statusCode || 500;
   let publicMessage = "";
 
   // check if it's prisma error (exposes too much)
@@ -17,7 +17,7 @@ export function globalErrorHandler(
   // add a prefix to error message
   // publicMessage += `Global Err: ${error.message}`;
 
-  if (publicMessage) error.meta.publicMessage = publicMessage;
+  if (publicMessage) error.publicMessage = publicMessage;
 
   // logger
   logger.error(publicMessage || error.message, {

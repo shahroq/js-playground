@@ -38,7 +38,6 @@ export class JsonApiAdapter implements IEnvelope {
 
   private getStatus(): JsonApiStatus {
     if (!this.error) return 'success';
-    // if (isAppError(this.error)) return 'fail';
     return 'error';
   }
 

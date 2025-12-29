@@ -1,5 +1,5 @@
 import type { Response, NextFunction } from "express";
-import { Envelope, isAppError } from "@/common/container";
+import { Envelope, AppError } from "@/common/container";
 import type { E } from "@/common/error/types";
 
 /**
@@ -33,7 +33,7 @@ function extractResponse(body: unknown) {
   let data: unknown = null;
 
   // 1. AppError — your own error type
-  if (isAppError(body)) {
+  if (AppError.isAppError(body)) {
     error = body;
     data = null;
   }
