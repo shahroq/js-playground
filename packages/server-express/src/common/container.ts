@@ -11,16 +11,20 @@ import { loggerAdapterFactory } from "./logger/factory";
 import { ProductRepository } from "@products/repository";
 import { ProductService } from "@products/service";
 import { ProductController } from "@products/controller";
-export * from "@products/dto";
+export * from "@products/dto/create-product.dto";
+export * from "@products/dto/update-product.dto";
+export * from "@products/dto/product.dto";
 
 import { ReviewRepository } from "@reviews/repository";
 import { ReviewService } from "@reviews/service";
 import { ReviewController } from "@reviews/controller";
-export * from "@reviews/dto";
+export * from "@reviews/dto/create-review.dto";
+export * from "@reviews/dto/update-review.dto";
+export * from "@reviews/dto/review.dto";
 
 import { PostService } from "@posts/service";
 import { PostController } from "@posts/controller";
-export * from "@posts/dto";
+export * from "@posts/dto/post-dto";
 
 import { ObjectService } from "@/routes/v1/objects/service";
 import { ObjectController } from "@/routes/v1/objects/controller";

@@ -1,23 +1,6 @@
 import type { EntityId } from "@/common/types";
-import type { IProduct } from "./types";
-import { ReviewDto } from "@reviews/dto";
-
-// Request Dto s
-export class CreateProductDto {
-  readonly name: string;
-  readonly description?: string;
-  readonly price: number;
-  readonly category: string;
-  readonly in_stock: boolean;
-}
-
-export class UpdateProductDto implements Partial<CreateProductDto> {
-  readonly name?: string;
-  readonly description?: string;
-  readonly price?: number;
-  readonly category?: string;
-  readonly in_stock?: boolean;
-}
+import type { IProduct } from "../types";
+import { ReviewDto } from "@/common/container";
 
 // Response Dto s
 export class ProductDto {

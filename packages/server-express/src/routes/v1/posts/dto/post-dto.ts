@@ -1,4 +1,4 @@
-import type { IPost } from "./types";
+import type { IPost } from "../types";
 
 // Response Dto s
 export class PostDto {

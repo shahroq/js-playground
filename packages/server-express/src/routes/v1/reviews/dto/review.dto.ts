@@ -1,27 +1,9 @@
-import { ProductDto } from "@products/dto";
 import type { EntityId } from "@/common/types";
-import type { IReview } from "./types";
+import type { IReview } from "../types";
 import type { ReviewStatus } from "@root/generated/prisma/enums";
+import { ProductDto } from "@/common/container";
 
-// Request Dto s
-export class CreateReviewDto {
-  readonly product_id: EntityId;
-  readonly content: string;
-  readonly rating: number;
-  readonly status?: ReviewStatus;
-}
-
-export class UpdateReviewDto implements Partial<CreateReviewDto> {
-  readonly product_id?: EntityId;
-  readonly content?: string;
-  readonly rating?: number;
-  readonly status?: ReviewStatus;
-}
-
-// possible as it has no behavior?
-// export type UpdateReviewDto = Partial<CreateReviewDto>;
-
-// Response Dto s
+// Response DTO
 export class ReviewDto {
   private constructor(
     public readonly id: EntityId,
@@ -49,15 +31,3 @@ export class ReviewDto {
     return entities.map((entity) => ReviewDto.from(entity));
   }
 }
-
-// extraneous?
-/*
-export class ReviewListDto {
-  readonly reviews: ReviewDto[];
-
-  // readonly total_count?: number;
-  // readonly average_rating?: number;
-
-  readonly meta?: PaginationSummaryDto;
-}
-*/
