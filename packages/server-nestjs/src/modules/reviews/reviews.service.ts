@@ -84,7 +84,7 @@ export class ReviewsService {
       product,
     };
 
-    const item = this.repository.create(creatingItem);
+    const item = this.repository.create(creatingItem); // `item` is entity (create creates an entity)
     const createdItem = await this.repository.save(item);
     return createdItem;
   }
@@ -92,7 +92,7 @@ export class ReviewsService {
   async update(id: number, updateReviewDto: UpdateReviewDto) {
     /*
     const updatingItem = await this.findOne(id);
-    // no error handling, as findOne does it
+    // no error handling, as findOne does it 
 
     const updatingItem = {
       ...updatingItem,

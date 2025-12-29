@@ -36,9 +36,9 @@ import { EnvelopeStrategy } from './common/envelope/envelope.interface';
         type: 'sqlite',
         database: configService.get<string>('database.url'),
         autoLoadEntities: true,
-        // entities: [],
+        // entities: [Product, Review, Category],
         // logging: true,
-        synchronize: true,
+        synchronize: true, // only in dev
       }),
     }),
   ],
