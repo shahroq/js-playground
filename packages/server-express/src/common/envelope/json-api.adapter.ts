@@ -1,6 +1,5 @@
-import { getErrorMessage } from "../error/app-error";
 import type { E } from "../error/types";
-import { isAppError } from "../container";
+import { isAppError, getErrorMessage } from "../container";
 import type { IEnvelope } from "./envelope.interface";
 
 type JsonApiStatus = "success" | "fail" | "error";

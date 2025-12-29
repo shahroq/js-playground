@@ -1,6 +1,6 @@
-import type { ErrorMetaData, ErrorCode, E } from "./types";
+import type { ErrorMetaData } from "./types";
 
-export default class AppError extends Error {
+export class AppError extends Error {
   public meta: ErrorMetaData & {
     isOperational: boolean;
   };
@@ -126,30 +126,6 @@ export default class AppError extends Error {
       details: meta?.details,
     });
   }
-}
-
-/**
- * Type guard for AppError
- */
-export function isAppError(error: E): error is AppError {
-  return (
-    error instanceof AppError &&
-    "meta" in error &&
-    typeof error?.meta?.statusCode === "number"
-  );
-}
-
-export function getErrorMessage(error: E): string {
-  if (error instanceof Error) {
-    return error?.meta?.publicMessage ?? error.message;
-  }
-  if (error && typeof error === "object" && "message" in error) {
-    return String(error.message);
-  }
-  if (typeof error === "string") {
-    return error;
-  }
-  return "Internal Server Error";
 }
 
 // sample usage
