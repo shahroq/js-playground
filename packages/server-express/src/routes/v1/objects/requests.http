@@ -1,0 +1,5 @@
+@baseUrl = http://localhost:3001
+@baseUrlModule = {{baseUrl}}/api/v1/objects
+
+### get items
+GET {{baseUrlModule}} HTTP/1.1
