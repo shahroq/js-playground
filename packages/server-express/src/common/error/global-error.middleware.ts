@@ -8,7 +8,7 @@ export function globalErrorHandler(
   res: Response,
   next: NextFunction
 ): void {
-  // generate public message
+  const statusCode = error?.meta?.statusCode || 500;
   let publicMessage = "";
 
   // check if it's prisma error (exposes too much)
@@ -28,5 +28,5 @@ export function globalErrorHandler(
   // the error is best to pass to default error handler
   if (res.headersSent || config.debug.show_thrown_errors) return next(error);
 
-  res.json(error);
+  res.status(statusCode).json(error);
 }
