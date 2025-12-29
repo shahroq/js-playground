@@ -1,11 +1,12 @@
-import type { ErrorMetaData } from "./types";
+import type { AppErrorProps } from "./types";
 
-export class AppError extends Error {
-  public meta: ErrorMetaData & {
+// custom error for this app
+export class ApiError extends Error {
+  public meta: AppErrorProps & {
     isOperational: boolean;
   };
 
-  constructor(message: string, meta: ErrorMetaData = {}) {
+  constructor(message: string, meta: AppErrorProps = {}) {
     super(message);
 
     this.meta = {
@@ -19,16 +20,16 @@ export class AppError extends Error {
     Error.captureStackTrace(this, this.constructor);
 
     // Set the prototype explicitly
-    Object.setPrototypeOf(this, AppError.prototype);
+    Object.setPrototypeOf(this, ApiError.prototype);
   }
 
   // Static factory methods for common errors
   static badRequest(
     message: string = "Bad Request",
-    meta?: Omit<ErrorMetaData, "statusCode">
-  ): AppError {
+    meta?: Omit<AppErrorProps, "statusCode">
+  ): ApiError {
     const statusCode = 400;
-    return new AppError(message, {
+    return new ApiError(message, {
       statusCode,
       isOperational: meta?.isOperational ?? true,
       code: "ERR_VALID",
@@ -38,10 +39,10 @@ export class AppError extends Error {
 
   static unauthorized(
     message: string = "Unauthorized",
-    meta?: Omit<ErrorMetaData, "statusCode">
-  ): AppError {
+    meta?: Omit<AppErrorProps, "statusCode">
+  ): ApiError {
     const statusCode = 401;
-    return new AppError(message, {
+    return new ApiError(message, {
       statusCode,
       isOperational: meta?.isOperational ?? true,
       code: "ERR_AUTH",
@@ -51,10 +52,10 @@ export class AppError extends Error {
 
   static forbidden(
     message: string = "Forbidden",
-    meta?: Omit<ErrorMetaData, "statusCode">
-  ): AppError {
+    meta?: Omit<AppErrorProps, "statusCode">
+  ): ApiError {
     const statusCode = 403;
-    return new AppError(message, {
+    return new ApiError(message, {
       statusCode,
       isOperational: meta?.isOperational ?? true,
       code: "ERR_AUTH",
@@ -64,10 +65,10 @@ export class AppError extends Error {
 
   static notFound(
     message: string = "Resource not found",
-    meta?: Omit<ErrorMetaData, "statusCode">
-  ): AppError {
+    meta?: Omit<AppErrorProps, "statusCode">
+  ): ApiError {
     const statusCode = 404;
-    return new AppError(message, {
+    return new ApiError(message, {
       statusCode,
       isOperational: meta?.isOperational ?? true,
       code: "ERR_NF",
@@ -77,10 +78,10 @@ export class AppError extends Error {
 
   static conflict(
     message: string = "Conflict",
-    meta?: Omit<ErrorMetaData, "statusCode">
-  ): AppError {
+    meta?: Omit<AppErrorProps, "statusCode">
+  ): ApiError {
     const statusCode = 409;
-    return new AppError(message, {
+    return new ApiError(message, {
       statusCode,
       isOperational: meta?.isOperational ?? true,
       code: "ERR_G",
@@ -90,10 +91,10 @@ export class AppError extends Error {
 
   static unprocessableEntity(
     message: string = "Unprocessable Entity",
-    meta?: Omit<ErrorMetaData, "statusCode">
-  ): AppError {
+    meta?: Omit<AppErrorProps, "statusCode">
+  ): ApiError {
     const statusCode = 422;
-    return new AppError(message, {
+    return new ApiError(message, {
       statusCode,
       isOperational: meta?.isOperational ?? true,
       code: "ERR_G",
@@ -103,10 +104,10 @@ export class AppError extends Error {
 
   static tooManyRequests(
     message: string = "Too Many Requests",
-    meta?: Omit<ErrorMetaData, "statusCode">
-  ): AppError {
+    meta?: Omit<AppErrorProps, "statusCode">
+  ): ApiError {
     const statusCode = 429;
-    return new AppError(message, {
+    return new ApiError(message, {
       statusCode,
       isOperational: meta?.isOperational ?? true,
       code: "ERR_G",
@@ -116,10 +117,10 @@ export class AppError extends Error {
 
   static internal(
     message: string = "Internal Server Error",
-    meta?: Omit<ErrorMetaData, "statusCode">
-  ): AppError {
+    meta?: Omit<AppErrorProps, "statusCode">
+  ): ApiError {
     const statusCode = 500;
-    return new AppError(message, {
+    return new ApiError(message, {
       statusCode,
       isOperational: meta?.isOperational ?? false,
       code: "ERR_INT",
@@ -130,11 +131,11 @@ export class AppError extends Error {
 
 // sample usage
 /*
-throw AppError.badRequest();
-throw AppError.badRequest('Invalid input');
-throw AppError.notFound('User not found');
-throw AppError.unauthorized('Invalid token');
+throw CustomError.badRequest();
+throw CustomError.badRequest('Invalid input');
+throw CustomError.notFound('User not found');
+throw CustomError.unauthorized('Invalid token');
 
 // Or use next():
-next(AppError.forbidden('Access denied'));
+next(CustomError.forbidden('Access denied'));
 */

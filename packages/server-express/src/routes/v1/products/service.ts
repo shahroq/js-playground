@@ -1,6 +1,6 @@
 import {
   AppQuery,
-  AppError,
+  ApiError,
   PaginationSummaryDto,
   CreateProductDto,
   ProductDto,
@@ -39,7 +39,7 @@ export class ProductService {
     appQuery.append({ id });
 
     const item = await this.repository.findOne(appQuery);
-    if (!item) throw AppError.notFound();
+    if (!item) throw ApiError.notFound();
 
     // get expansions
     const expansionList = appQuery.normQuery?.expansion?.include ?? [];
@@ -57,14 +57,14 @@ export class ProductService {
 
   async updateItem(id: EntityId, updateItemDto: UpdateProductDto) {
     const updatedItem = await this.repository.update(+id, updateItemDto);
-    if (!updatedItem) throw AppError.notFound();
+    if (!updatedItem) throw ApiError.notFound();
 
     return ProductDto.from(updatedItem);
   }
 
   async deleteItem(id: EntityId) {
     const deleted = await this.repository.delete(+id);
-    if (!deleted) throw AppError.notFound();
+    if (!deleted) throw ApiError.notFound();
 
     return deleted;
   }

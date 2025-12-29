@@ -1,6 +1,6 @@
-import type { AppError } from "./app-error";
+import type { ApiError } from "./api-error";
 
-export type E = AppError | Error;
+export type E = ApiError | Error;
 
 export type ErrorCode =
   | "ERR_NF"
@@ -16,14 +16,19 @@ export type ErrorDetail = {
   type?: string;
 };
 
-export type ErrorMetaData = {
+export type AppErrorProps = {
   statusCode?: number;
+  status?: number; // the status code of the error, mirroring statusCode for general compatibility
+
   // The isOperational flag helps distinguish between expected errors (like validation failures) and unexpected programming errors (like null pointer exceptions).
   isOperational?: boolean;
   // app-defined codes
   code?: ErrorCode;
+
   // first message to show to visitors if exists (in case default error msg exposes too much, like orm case)
-  publicMessage?: string; //
+  expose?: boolean;
+  publicMessage?: string;
+
   // keep details of validation errors
   details?: ErrorDetail[];
 };

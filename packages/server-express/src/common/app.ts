@@ -9,7 +9,7 @@ import {
   logger,
   globalErrorHandler,
   undefinedRoutesHandler,
-  AppError,
+  ApiError,
   envelopResponseHandler,
   attachSystemInfoHandler,
 } from "@/common/container";
