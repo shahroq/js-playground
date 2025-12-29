@@ -1,3 +1,4 @@
+import createError from "http-errors";
 import { AppError } from "./app-error";
 import type { E } from "./types";
 
@@ -5,11 +6,15 @@ import type { E } from "./types";
  * Type guard for AppError
  */
 export function isAppError(error: E): error is AppError {
-  return (
+  const isAppError =
     error instanceof AppError &&
     "meta" in error &&
-    typeof error?.meta?.statusCode === "number"
-  );
+    typeof error?.meta?.statusCode === "number";
+
+  // inherits from the HttpError constructor of the http-errors module
+  const isHttpError = createError.isHttpError(error);
+
+  return isAppError || isHttpError;
 }
 
 export function getErrorMessage(error: E): string {
