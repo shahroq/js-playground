@@ -1,21 +1,21 @@
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { HttpModule } from '@nestjs/axios';
-import { PostsService } from './posts.service';
-import { PostsController } from './posts.controller';
+import { HttpbinController } from './httpbin.controller';
+import { HttpbinService } from './httpbin.service';
 
 @Module({
-  controllers: [PostsController],
-  providers: [PostsService],
+  controllers: [HttpbinController],
+  providers: [HttpbinService],
   imports: [
     HttpModule.registerAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
-        baseURL: config.get<string>('http_client.api_url_jsonplaceholder'),
+        baseURL: config.get<string>('http_client.api_url_httpbin'),
         timeout: config.get<number>('default.timeout', 5000),
         maxRedirects: 5,
       }),
     }),
   ],
 })
-export class PostsModule {}
+export class HttpbinModule {}

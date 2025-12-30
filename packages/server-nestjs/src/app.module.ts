@@ -9,6 +9,7 @@ import { CommonModule } from './common/common.module';
 import { ProductsModule } from './modules/products/products.module';
 import { ReviewsModule } from './modules/reviews/reviews.module';
 import { PostsModule } from './modules/posts/posts.module';
+import { HttpbinModule } from './modules/httpbin/httpbin.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { PostsModule } from './modules/posts/posts.module';
     ProductsModule,
     ReviewsModule,
     PostsModule,
+    HttpbinModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -6,7 +6,7 @@ import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
 import { EnvelopeStrategy } from './envelope-service/envelope.interface';
 import { envelopeAdapterFactory } from './envelope-service/factory';
 import { EnvelopInterceptor } from './interceptors/envelop.interceptor';
-import { EnvelopHttpExceptionFilter } from './filters/http-exception.filter';
+import { EnvelopHttpExceptionFilter } from './filters/envelop-http-exception.filter';
 import { APP_ENVELOPE } from './common.constants';
 // import { SeedService } from './common/seed/seed.service';
 // import { LoggerMiddleware } from './middlewares/logger.middleware';

@@ -29,7 +29,7 @@ export default () => {
       api_url_jsonplaceholder: <string>(
         process.env.HTTP_CLIENT_API_URL_JSONPLACEHOLDER
       ),
-      api_url_restfulapi: <string>process.env.HTTP_CLIENT_API_URL_RESTFULAPI,
+      api_url_httpbin: <string>process.env.HTTP_CLIENT_API_URL_HTTPBIN,
     },
   };
 };
