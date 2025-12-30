@@ -11,7 +11,7 @@ import { PostsController } from './posts.controller';
     HttpModule.registerAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
-        baseURL: config.get<string>('http_client.api_url_jsonplaceholder'),
+        // baseURL: config.get<string>('http_client.api_url_jsonplaceholder'),
         timeout: config.get<number>('default.timeout', 5000),
         maxRedirects: 5,
       }),

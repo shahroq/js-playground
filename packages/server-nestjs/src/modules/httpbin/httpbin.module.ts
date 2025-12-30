@@ -11,7 +11,6 @@ import { HttpbinService } from './httpbin.service';
     HttpModule.registerAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
-        baseURL: config.get<string>('http_client.api_url_httpbin'),
         timeout: config.get<number>('default.timeout', 5000),
         maxRedirects: 5,
       }),

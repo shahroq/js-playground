@@ -1,15 +1,25 @@
 import { Injectable } from '@nestjs/common';
-import { Post } from './entities/post.entity';
-import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
 import { AxiosError } from 'axios';
+import { Post } from './entities/post.entity';
+import { ConfigService } from '@nestjs/config';
+import { HttpService } from '@nestjs/axios';
 
 @Injectable()
 export class PostsService {
-  constructor(private readonly httpService: HttpService) {}
+  private readonly baseUrl: string;
+
+  constructor(
+    private readonly configService: ConfigService,
+    private readonly httpService: HttpService,
+  ) {
+    this.baseUrl = this.configService.get<string>(
+      'http_client.api_url_jsonplaceholder',
+    ) as string;
+  }
 
   async findAll() {
-    const url = `/posts`;
+    const url = `${this.baseUrl}/posts`;
 
     /*
     const data = await this.httpService.axiosRef.get<Promise<Post[]>>(url);
