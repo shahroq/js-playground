@@ -6,7 +6,9 @@ export class PostService {
   constructor(private readonly httpClient: IHttpClient) {}
 
   async getItems() {
-    const items = await this.httpClient.get<IPost[]>(`/posts`);
+    const url = `/posts`;
+
+    const items = await this.httpClient.get<IPost[]>(url);
 
     return PostDto.fromMany(items);
 
