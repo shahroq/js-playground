@@ -1,6 +1,6 @@
 @baseUrl = http://localhost:3002
 @baseUrlModule = {{baseUrl}}/api/v1/reviews
-@id = 17
+@id = 1
 
 ### get items
 GET {{baseUrlModule}} HTTP/1.1

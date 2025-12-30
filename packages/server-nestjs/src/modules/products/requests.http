@@ -16,7 +16,7 @@ Content-Type: application/json
     "name": "New Product 1",
     "description": "Lorem ipsum 1",
     "price": 99.99,
-    "category": ["Electronics"],
+    "categories": ["Electronics"],
     "in_stock": false
 }
 

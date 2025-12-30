@@ -32,7 +32,7 @@ export class Product {
   @Column()
   in_stock: boolean;
 
-  @Expose({ name: 'createAt' })
+  @Expose({ name: 'create_at' })
   @Column()
   created_at: string;
 

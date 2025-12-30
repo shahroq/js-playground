@@ -26,7 +26,7 @@ export class Review {
   })
   status: ReviewStatus;
 
-  @Expose({ name: 'submittedAt' })
+  @Expose({ name: 'submitted_at' })
   @Column()
   created_at: string;
 
