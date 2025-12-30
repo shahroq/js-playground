@@ -1,17 +1,14 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import configuration from './config/configuration';
+import { configSchemas } from './config/schema';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-// import { LoggerMiddleware } from './common/middlewares/logger.middleware';
-// import { CommonModule } from './common/common.module';
-
+import { CommonModule } from './common/common.module';
 import { ProductsModule } from './modules/products/products.module';
 import { ReviewsModule } from './modules/reviews/reviews.module';
 import { PostsModule } from './modules/posts/posts.module';
-import { configSchemas } from './config/schema';
-import configuration from './config/configuration';
-import { CommonModule } from './common/common.module';
 
 @Module({
   imports: [
