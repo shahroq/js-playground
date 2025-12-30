@@ -1,21 +1,17 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CommonModule } from './common/common.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 // import { LoggerMiddleware } from './common/middlewares/logger.middleware';
-import { APP_INTERCEPTOR } from '@nestjs/core';
-import { WrapResponseInterceptor } from './common/interceptors/wrap-response.interceptor';
-import { TimeoutInterceptor } from './common/interceptors/timeout.interceptor';
-import { envelopeAdapterFactory } from './common/envelope-service/factory';
-// import { SeedService } from './common/seed/seed.service';
+// import { CommonModule } from './common/common.module';
+
 import { ProductsModule } from './modules/products/products.module';
 import { ReviewsModule } from './modules/reviews/reviews.module';
 import { PostsModule } from './modules/posts/posts.module';
-import { EnvelopeStrategy } from './common/envelope-service/envelope.interface';
 import { configSchemas } from './config/schema';
 import configuration from './config/configuration';
+import { CommonModule } from './common/common.module';
 
 @Module({
   imports: [
@@ -37,39 +33,12 @@ import configuration from './config/configuration';
         synchronize: true, // only in dev
       }),
     }),
-    // CommonModule,
+    CommonModule,
     ProductsModule,
     ReviewsModule,
     PostsModule,
   ],
   controllers: [AppController],
-  providers: [
-    AppService,
-    // SeedService,
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: TimeoutInterceptor,
-    },
-    {
-      provide: 'APP_ENVELOPE',
-      inject: [ConfigService],
-      useFactory: (configService: ConfigService) =>
-        envelopeAdapterFactory(
-          configService.get<EnvelopeStrategy>('envelope.strategy', 'jsend'),
-        ),
-    },
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: WrapResponseInterceptor,
-    },
-  ],
-  // exports: [SeedService],
+  providers: [AppService],
 })
 export class AppModule {}
-/*
-export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddleware).forRoutes('*');
-  }
-}
-*/
