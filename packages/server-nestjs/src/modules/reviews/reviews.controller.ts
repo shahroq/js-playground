@@ -13,8 +13,8 @@ import { ReviewsService } from './reviews.service';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { UpdateReviewDto } from './dto/update-review.dto';
 // import { Roles } from 'src/common/decorators/roles.decorator';
-import { QueryDto } from 'src/common/query/query.dto';
-import { AppQuery } from 'src/common/query/app-query.service';
+import { QueryDto } from 'src/common/query-service/query.dto';
+import { AppQuery } from 'src/common/query-service/app-query.service';
 import { queryPolicy } from './query.policy';
 
 @Controller('reviews')

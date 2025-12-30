@@ -12,8 +12,8 @@ import { formatISO } from './../../common/utils/utils';
 import { ConfigService } from '@nestjs/config';
 import { Product } from '../products/entities/product.entity';
 import { ReviewStatus } from './reviews.types';
-import { AppQuery } from 'src/common/query/app-query.service';
-import { NormQuery } from 'src/common/query/types';
+import { AppQuery } from 'src/common/query-service/app-query.service';
+import { NormQuery } from 'src/common/query-service/types';
 
 @Injectable()
 export class ReviewsService {

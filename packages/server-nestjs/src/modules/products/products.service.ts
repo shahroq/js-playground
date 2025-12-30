@@ -8,8 +8,8 @@ import { formatISO } from './../../common/utils/utils';
 import { ConfigService } from '@nestjs/config';
 import { Review } from '../reviews/entities/review.entity';
 import { Category } from './entities/category.entity';
-import { NormQuery } from 'src/common/query/types';
-import { AppQuery } from 'src/common/query/app-query.service';
+import { NormQuery } from 'src/common/query-service/types';
+import { AppQuery } from 'src/common/query-service/app-query.service';
 
 @Injectable()
 export class ProductsService {

@@ -12,9 +12,9 @@ import {
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { AppQuery } from 'src/common/query/app-query.service';
+import { AppQuery } from 'src/common/query-service/app-query.service';
 import { queryPolicy } from './query.policy';
-import { QueryDto } from 'src/common/query/query.dto';
+import { QueryDto } from 'src/common/query-service/query.dto';
 
 @Controller('products')
 export class ProductsController {
