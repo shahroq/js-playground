@@ -82,6 +82,19 @@ const config = {
     api_url_restfulapi: <string>process.env.HTTP_CLIENT_API_URL_RESTFULAPI,
   },
 
+  // api infos
+  api: {
+    jsonplaceholder: {
+      url: <string>process.env.API_JSONPLACEHOLDER_URL,
+    },
+    httpbin: {
+      url: <string>process.env.API_HTTPBIN_URL,
+    },
+    restfulapi: {
+      url: <string>process.env.API_RESTFULAPI_URL,
+    },
+  },
+
   // mailer
   mailer: {
     strategy: <MailerStrategy>process.env.MAILER_STRATEGY || "console-log",

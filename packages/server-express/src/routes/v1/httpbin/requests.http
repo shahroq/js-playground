@@ -1,0 +1,5 @@
+@baseUrl = http://localhost:3001
+@baseUrlModule = {{baseUrl}}/api/v1/httpbin
+
+### get
+GET {{baseUrlModule}}/json HTTP/1.1

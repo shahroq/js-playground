@@ -26,8 +26,8 @@ import { PostService } from "@posts/service";
 import { PostController } from "@posts/controller";
 export * from "@posts/dto/post-dto";
 
-import { ObjectService } from "@/routes/v1/objects/service";
-import { ObjectController } from "@/routes/v1/objects/controller";
+import { HttpbinService } from "@httpbin/service";
+import { HttpbinController } from "@httpbin/controller";
 
 // re-exports
 export * as utils from "./utils/utils";
@@ -54,14 +54,7 @@ export const validate = validatorHandlerFactory(config.validation.strategy);
 export const dbAdapter = DbClientAdapterFactory(
   config.database.client_strategy
 );
-export const httpClientJsonPlaceHolder = createHttpClient(
-  config.http_client.strategy,
-  config.http_client.api_url_jsonplaceholder
-);
-export const httpClientRestfulapi = createHttpClient(
-  config.http_client.strategy,
-  config.http_client.api_url_restfulapi
-);
+export const httpClient = createHttpClient(config.http_client.strategy);
 export const mailer = mailerAdapterFactory(config.mailer.strategy || "jsend");
 export const logger = loggerAdapterFactory(
   config.logger.strategy || "console-log"
@@ -80,14 +73,14 @@ export const reviewService = new ReviewService(
   reviewRepository,
   productRepository
 );
-export const postService = new PostService(httpClientJsonPlaceHolder);
-export const objectService = new ObjectService(httpClientRestfulapi);
+export const postService = new PostService(httpClient);
+export const httpbinService = new HttpbinService(httpClient);
 
 // 3. Controllers:
 export const productController = new ProductController(productService);
 export const reviewController = new ReviewController(reviewService);
 export const postController = new PostController(postService);
-export const objectController = new ObjectController(objectService);
+export const httpbinController = new HttpbinController(httpbinService);
 
 // Export all dependencies as a single container object
 export { config };

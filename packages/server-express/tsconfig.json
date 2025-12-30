@@ -33,7 +33,8 @@
       "@users/*": ["./src/routes/v1/users/*"],
       "@products/*": ["./src/routes/v1/products/*"],
       "@reviews/*": ["./src/routes/v1/reviews/*"],
-      "@posts/*": ["./src/routes/v1/posts/*"]
+      "@posts/*": ["./src/routes/v1/posts/*"],
+      "@httpbin/*": ["./src/routes/v1/httpbin/*"]
     }
   },
 
