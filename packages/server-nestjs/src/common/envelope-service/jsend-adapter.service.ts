@@ -25,11 +25,13 @@ type JSendFormat = JSendSuccess | JSendFail | JSendError;
 @Injectable()
 export class JSendAdapter implements IEnvelope {
   constructor(
-    private readonly _error: Error | null,
+    // private readonly _error: Error | null,
+    private readonly _error: any,
     private readonly _data: any,
   ) {}
 
-  private get error(): Error | null {
+  // private get error(): Error | null {
+  private get error(): any {
     return this._error;
   }
 
@@ -47,6 +49,7 @@ export class JSendAdapter implements IEnvelope {
 
   private getStatus(): JSendStatus {
     if (!this.error) return 'success';
+    if (`${this.error?.statusCode}`.startsWith('4')) return 'fail';
     return 'error';
   }
 

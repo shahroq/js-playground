@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { QueryDto } from './query.dto';
 import type { NormQuery, OrderBy, Pagination, QueryPolicy } from './types';
-import { queryPolicy as defaultQueryPolicy } from './default.policy';
+import { queryPolicy as defaultQueryPolicy } from './default.query-policy';
 
 const RESERVED_KEYS = [
   'page',
