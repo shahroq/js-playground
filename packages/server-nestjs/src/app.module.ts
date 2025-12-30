@@ -8,12 +8,12 @@ import { AppService } from './app.service';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { WrapResponseInterceptor } from './common/interceptors/wrap-response.interceptor';
 import { TimeoutInterceptor } from './common/interceptors/timeout.interceptor';
-import { envelopeAdapterFactory } from './common/envelope/factory';
+import { envelopeAdapterFactory } from './common/envelope-service/factory';
 // import { SeedService } from './common/seed/seed.service';
 import { ProductsModule } from './modules/products/products.module';
 import { ReviewsModule } from './modules/reviews/reviews.module';
 import { PostsModule } from './modules/posts/posts.module';
-import { EnvelopeStrategy } from './common/envelope/envelope.interface';
+import { EnvelopeStrategy } from './common/envelope-service/envelope.interface';
 import { configSchemas } from './config/schema';
 import configuration from './config/configuration';
 

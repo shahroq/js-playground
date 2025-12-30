@@ -6,7 +6,7 @@ import {
   NestInterceptor,
 } from '@nestjs/common';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import type { EnvelopeConstructor } from '../envelope/factory';
+import type { EnvelopeConstructor } from '../envelope-service/factory';
 
 // Best strategy: decide which implementation to use outside the interceptor and inject the resolved envelope service into it. gpt conv/Interceptor depends only on abstraction
 

@@ -1,4 +1,4 @@
-import { EnvelopeStrategy } from 'src/common/envelope/envelope.interface';
+import { EnvelopeStrategy } from 'src/common/envelope-service/envelope.interface';
 import { DatabaseType } from 'typeorm';
 
 export type Env = 'development' | 'production' | 'test';
