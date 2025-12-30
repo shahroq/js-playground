@@ -22,6 +22,7 @@ const RESERVED_KEYS = [
 /**
  * App Query: Works with queries, specifically for normalizing based on app-defined standards
  * Normalize and validate raw query parameters coming from an HTTP request into a consistent `INormQuery`.
+ * why not just normalize query? some queries needs to be added at later stage (service, rep)/ so it needs to have append() method/ maybe those needs first should be addressed before refactoring this.
  */
 export class AppQuery {
   private _normQuery: NormQuery;
