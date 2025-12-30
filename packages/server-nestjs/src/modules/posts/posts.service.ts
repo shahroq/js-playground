@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Post } from './entirties/post.entity';
+import { Post } from './entities/post.entity';
 import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
 import { AxiosError } from 'axios';
