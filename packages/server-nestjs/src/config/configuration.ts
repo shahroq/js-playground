@@ -1,5 +1,5 @@
+import { EnvelopeStrategy } from 'src/common/envelope/envelope.interface';
 import { DatabaseType } from 'typeorm';
-import { EnvelopeStrategy } from '../envelope/envelope.interface';
 
 export type Env = 'development' | 'production' | 'test';
 

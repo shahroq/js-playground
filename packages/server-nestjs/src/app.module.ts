@@ -1,11 +1,9 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import configuration from './common/config/configuration';
 import { CommonModule } from './common/common.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { configSchemas } from './common/config/schema';
 // import { LoggerMiddleware } from './common/middlewares/logger.middleware';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { WrapResponseInterceptor } from './common/interceptors/wrap-response.interceptor';
@@ -16,13 +14,11 @@ import { ProductsModule } from './modules/products/products.module';
 import { ReviewsModule } from './modules/reviews/reviews.module';
 import { PostsModule } from './modules/posts/posts.module';
 import { EnvelopeStrategy } from './common/envelope/envelope.interface';
+import { configSchemas } from './config/schema';
+import configuration from './config/configuration';
 
 @Module({
   imports: [
-    CommonModule,
-    ProductsModule,
-    ReviewsModule,
-    PostsModule,
     ConfigModule.forRoot({
       // ignoreEnvFile: true,
       validationSchema: configSchemas,
@@ -41,6 +37,10 @@ import { EnvelopeStrategy } from './common/envelope/envelope.interface';
         synchronize: true, // only in dev
       }),
     }),
+    // CommonModule,
+    ProductsModule,
+    ReviewsModule,
+    PostsModule,
   ],
   controllers: [AppController],
   providers: [
