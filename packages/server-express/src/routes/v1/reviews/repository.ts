@@ -4,12 +4,12 @@ import { BaseRepository } from "@/common/repository/base.repository";
 import type { IDbClient } from "@/common/db-client/db-client.interface";
 import {
   AppQuery,
-  reviewsQueryPolicy as queryOptions,
+  reviewsQueryPolicy as queryPolicy,
 } from "@/common/container";
 
 export class ReviewRepository extends BaseRepository<IReview> {
   constructor(dbAdapter: IDbClient) {
-    super("reviews", queryOptions, dbAdapter);
+    super("reviews", queryPolicy, dbAdapter);
   }
 
   // used by service of product module
@@ -21,7 +21,7 @@ export class ReviewRepository extends BaseRepository<IReview> {
         sort: "created_at",
         direction: "desc",
       },
-      queryOptions
+      queryPolicy
     );
 
     const items = await this.findAll(appQuery);

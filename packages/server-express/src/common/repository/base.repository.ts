@@ -6,7 +6,7 @@ import { AppQuery } from "@/common/container";
 export abstract class BaseRepository<T> {
   constructor(
     protected readonly collection: CollectionName,
-    protected readonly queryOptions: QueryPolicy,
+    protected readonly queryPolicy: QueryPolicy,
     protected readonly dbAdapter: IDbClient
   ) {}
 
