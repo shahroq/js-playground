@@ -1,4 +1,4 @@
-import type { CreateProductDto } from "./create-product.dto";
+import type { CreateProductDto } from "./create.dto";
 
 // Request Dto
 export class UpdateProductDto implements Partial<CreateProductDto> {

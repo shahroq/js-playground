@@ -19,15 +19,15 @@ export * from "@users/dto/user.dto";
 import { ProductRepository } from "@products/repository";
 import { ProductService } from "@products/service";
 import { ProductController } from "@products/controller";
-export * from "@products/dto/create-product.dto";
-export * from "@products/dto/update-product.dto";
+export * from "@/routes/v1/products/dto/create.dto";
+export * from "@/routes/v1/products/dto/update.dto";
 export * from "@products/dto/product.dto";
 
 import { ReviewRepository } from "@reviews/repository";
 import { ReviewService } from "@reviews/service";
 import { ReviewController } from "@reviews/controller";
-export * from "@reviews/dto/create-review.dto";
-export * from "@reviews/dto/update-review.dto";
+export * from "@/routes/v1/reviews/dto/create.dto";
+export * from "@/routes/v1/reviews/dto/update.dto";
 export * from "@reviews/dto/review.dto";
 
 import { PostService } from "@posts/service";

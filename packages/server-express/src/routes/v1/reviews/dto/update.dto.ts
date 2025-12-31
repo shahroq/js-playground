@@ -1,4 +1,4 @@
-import type { CreateReviewDto } from "./create-review.dto";
+import type { CreateReviewDto } from "./create.dto";
 
 // Request DTO
 export class UpdateReviewDto implements Partial<CreateReviewDto> {}
