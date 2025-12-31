@@ -9,6 +9,7 @@ export type ValidationAction =
   | "users.create"
   | "users.update"
   | "users.delete"
+  | "users.login"
   | "products.findAll"
   | "products.findOne"
   | "products.create"

@@ -7,7 +7,7 @@ export const queryPolicy: QueryPolicy = {
   defaultOrderBy: { sort: "id", direction: "asc" },
   selectableFields: ["id", "name", "email", "role"],
   sortableFields: ["id", "role"],
-  filterableFields: ["id", "role"],
-  searchableFields: ["name"],
+  filterableFields: ["id", "role", "email", "password"],
+  searchableFields: ["name", "email", "password"],
   expandableCollections: [],
 };

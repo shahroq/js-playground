@@ -2,6 +2,27 @@
 @baseUrlModule = {{baseUrl}}/api/v1/users
 @id = 1
 
+### register
+POST {{baseUrlModule}}/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Jane Doe",
+    "email": "admin09@email.com",
+    "password": "12345",
+    "role": "USER"
+}
+
+### login
+POST {{baseUrlModule}}/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "admin@email.com",
+    "password": "123453"
+}
+
+
 ### get items
 GET {{baseUrlModule}} HTTP/1.1
 

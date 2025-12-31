@@ -10,6 +10,7 @@ import { loggerAdapterFactory } from "./logger/factory";
 // routes
 import { UserRepository } from "@users/repository";
 import { UserService } from "@users/service";
+import { AuthService } from "@users/auth.service";
 import { UserController } from "@users/controller";
 export * from "@users/dto/create.dto";
 export * from "@users/dto/update.dto";
@@ -75,6 +76,7 @@ export const reviewRepository = new ReviewRepository(dbAdapter);
 
 // 2. Services:
 export const userService = new UserService(userRepository);
+export const authService = new AuthService(userRepository, userService);
 export const productService = new ProductService(
   productRepository,
   reviewRepository
@@ -87,7 +89,7 @@ export const postService = new PostService(httpClient);
 export const httpbinService = new HttpbinService(httpClient);
 
 // 3. Controllers:
-export const userController = new UserController(userService);
+export const userController = new UserController(userService, authService);
 export const productController = new ProductController(productService);
 export const reviewController = new ReviewController(reviewService);
 export const postController = new PostController(postService);

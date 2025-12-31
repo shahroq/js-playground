@@ -1,12 +1,16 @@
 import type { Request, Response } from "express";
 import type { UserService } from "./service";
+import type { AuthService } from "./auth.service";
 import type { EntityId } from "@/common/types";
 import { AppQuery, usersQueryPolicy } from "@/common/container";
 
 export class UserController {
   private collection = "user";
 
-  constructor(private readonly service: UserService) {}
+  constructor(
+    private readonly service: UserService,
+    private readonly authService: AuthService
+  ) {}
 
   index = async (req: Request, res: Response) => {
     const appQuery = new AppQuery(req.query, usersQueryPolicy);
@@ -45,4 +49,19 @@ export class UserController {
 
     res.status(200).json({ message: `${this.collection} deleted.` });
   };
+
+  signUp = async (req: Request, res: Response) => {
+    const newItem = await this.authService.signUp(req.body);
+
+    res.status(201).json({ [this.collection]: newItem });
+  };
+
+  signIn = async (req: Request, res: Response) => {
+    await this.authService.signIn(req.body);
+  };
+  /*
+  signOut = async (req: Request, res: Response) => {
+    await this.authService.signOut();
+  };
+  */
 }

@@ -43,6 +43,13 @@ const updateUser = {
   }),
 };
 
+const loginUser = {
+  body: z.object({
+    email: z.email(),
+    password: z.string().min(5).max(128),
+  }),
+};
+
 /**
  * Product Schemas
  */
@@ -97,6 +104,7 @@ export const schemas = {
     create: createUser,
     update: updateUser,
     delete: sharedSchemas.findOne,
+    login: loginUser,
   },
   products: {
     ...sharedSchemas,
