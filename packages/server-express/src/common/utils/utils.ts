@@ -7,6 +7,32 @@ export function add(a: number, b: number) {
 }
 
 /**
+ * Coerce a value to the target type
+ */
+export function coerce(value: any, targetType: string): any {
+  switch (targetType) {
+    case "number":
+      const num = Number(value);
+      if (isNaN(num)) {
+        throw new Error(`Cannot coerce "${value}" to number`);
+      }
+      return num;
+
+    case "boolean":
+      if (typeof value === "boolean") return value;
+      if (value === "true") return true;
+      if (value === "false") return false;
+      return Boolean(value);
+
+    case "string":
+      return String(value);
+
+    default:
+      return value;
+  }
+}
+
+/**
  * Determines whether the given value is a *real* string — meaning
  * a non-empty string that does **not** represent a numeric value.
  *

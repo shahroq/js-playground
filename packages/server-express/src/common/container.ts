@@ -43,6 +43,7 @@ export * from "./error/app-error";
 export * from "@/common/dto/pagination-summary.dto";
 export * from "@/common/error/global-error.middleware";
 export * from "@/common/middlewares/undefined-routes.middleware";
+export * from "@/common/middlewares/coerce-id.middleware";
 export * from "@/common/envelope/attach-system-data.middleware";
 export * from "@/common/envelope/wrap-response.middleware";
 export * from "@/common/query/normalize-query.middleware";

@@ -46,7 +46,7 @@ export class ReviewsController {
     @Param('id', ParseIntPipe) id: number,
     @Body() updateReviewDto: UpdateReviewDto,
   ) {
-    return this.service.update(+id, updateReviewDto);
+    return this.service.update(id, updateReviewDto);
   }
 
   @Delete(':id')

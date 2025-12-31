@@ -46,14 +46,14 @@ export class UserService {
   }
 
   async updateItem(id: EntityId, updateItemDto: UpdateUserDto) {
-    const updatedItem = await this.repository.update(+id, updateItemDto);
+    const updatedItem = await this.repository.update(id, updateItemDto);
     if (!updatedItem) throw AppError.NotFound();
 
     return UserDto.from(updatedItem);
   }
 
   async deleteItem(id: EntityId) {
-    const deleted = await this.repository.delete(+id);
+    const deleted = await this.repository.delete(id);
     if (!deleted) throw AppError.NotFound();
 
     return deleted;

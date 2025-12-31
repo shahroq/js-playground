@@ -75,21 +75,21 @@ export class ReviewService {
     // const existingReview = await this.repository.findOne(appQuery);
     //...
 
-    const updatedItem = await this.repository.update(+id, updateItemDto);
+    const updatedItem = await this.repository.update(id, updateItemDto);
     if (!updatedItem) throw AppError.NotFound();
 
     return ReviewDto.from(updatedItem);
   }
 
   async deleteItem(id: EntityId) {
-    const deleted = await this.repository.delete(+id);
+    const deleted = await this.repository.delete(id);
     if (!deleted) throw AppError.NotFound();
 
     return deleted;
   }
 
   async rejectItem(id: EntityId): Promise<ReviewDto> {
-    const updatingItem = await this.repository.findById(+id);
+    const updatingItem = await this.repository.findById(id);
     if (!updatingItem) throw AppError.NotFound();
 
     if (updatingItem.status !== ReviewStatus.PENDING)
@@ -105,7 +105,7 @@ export class ReviewService {
     - Side effects & atomicity: Status changes often require atomic updates. If you rely on generic update(): Callers might forget fields
      */
     const updatedItem = await this.repository.updateStatus(
-      +id,
+      id,
       ReviewStatus.REJECTED
     );
     if (!updatedItem) throw AppError.NotFound();
@@ -114,14 +114,14 @@ export class ReviewService {
   }
 
   async approveItem(id: EntityId): Promise<ReviewDto> {
-    const updatingReview = await this.repository.findById(+id);
+    const updatingReview = await this.repository.findById(id);
     if (!updatingReview) throw AppError.NotFound();
 
     if (updatingReview.status !== ReviewStatus.PENDING)
       throw AppError.BadRequest("Only PENDING reviews can be APPROVED");
 
     const updatedItem = await this.repository.updateStatus(
-      +id,
+      id,
       ReviewStatus.APPROVED
     );
     if (!updatedItem) throw AppError.NotFound();
