@@ -1,6 +1,7 @@
 import { join } from "path";
 import { utils } from "./container";
-import { ReviewStatus } from "@/../generated/prisma/enums";
+import { UserRole } from "@users/types";
+import { ReviewStatus } from "@reviews/types";
 import { LogLevel, type LoggerStrategy } from "./logger/logger.interface";
 import type { MailerStrategy } from "./mailer/mailer.interface";
 import type { HttpClientStrategy } from "./http-client/http-client.interface";
@@ -43,6 +44,7 @@ const config = {
 
   // defaults
   default: {
+    user_role: (process.env.DEFAULT_USER_ROLE as UserRole) || UserRole.USER,
     user_id: <number>(process.env.DEFAULT_USER_ID || 1), // use it till auth is not implemented
     pagination_limit: <number>(process.env.DEFAULT_PAGINATION_LIMIT || 10),
     review_status:

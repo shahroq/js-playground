@@ -1,5 +1,6 @@
 import Joi from "joi";
-import { ReviewStatus } from "@/routes/v1/reviews/types";
+import { UserRole } from "@users/types";
+import { ReviewStatus } from "@reviews/types";
 
 /**
  * Shared Schemas
@@ -19,6 +20,32 @@ const sharedSchemas = {
       id: Joi.number().integer().required(),
     }),
   },
+};
+
+/**
+ * User Schemas
+ */
+const createUser = {
+  body: Joi.object({
+    name: Joi.string().required(),
+    email: Joi.string().email().required(),
+    password: Joi.string().min(5).max(128).required(),
+    role: Joi.string()
+      .valid(...Object.values(UserRole))
+      .required(),
+  }),
+};
+
+const updateUser = {
+  params: sharedSchemas.findOne.params, // assuming this is already Joi
+  body: Joi.object({
+    name: Joi.string().optional(),
+    email: Joi.string().email().optional(),
+    password: Joi.string().min(5).max(128).optional(),
+    role: Joi.string()
+      .valid(...Object.values(UserRole))
+      .optional(),
+  }),
 };
 
 /**
@@ -71,6 +98,12 @@ const updateReview = {
  * Export combined schemas
  */
 export const schemas = {
+  users: {
+    ...sharedSchemas,
+    create: createUser,
+    update: updateUser,
+    delete: sharedSchemas.findOne,
+  },
   products: {
     ...sharedSchemas,
     create: createProduct,

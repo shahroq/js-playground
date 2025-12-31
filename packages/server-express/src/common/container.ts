@@ -8,6 +8,13 @@ import { mailerAdapterFactory } from "./mailer/factory";
 import { loggerAdapterFactory } from "./logger/factory";
 
 // routes
+import { UserRepository } from "@users/repository";
+import { UserService } from "@users/service";
+import { UserController } from "@users/controller";
+export * from "@users/dto/create.dto";
+export * from "@users/dto/update.dto";
+export * from "@users/dto/user.dto";
+
 import { ProductRepository } from "@products/repository";
 import { ProductService } from "@products/service";
 import { ProductController } from "@products/controller";
@@ -40,8 +47,9 @@ export * from "@/common/envelope/wrap-response.middleware";
 export * from "@/common/query/normalize-query.middleware";
 export * from "@/common/query/app-query";
 export { queryPolicy as defaultQueryPolicy } from "@/common/query/default.query-policy";
-export { queryPolicy as productsQueryPolicy } from "@/routes/v1/products/query-policy";
-export { queryPolicy as reviewsQueryPolicy } from "@/routes/v1/reviews/query-policy";
+export { queryPolicy as usersQueryPolicy } from "@users/query-policy";
+export { queryPolicy as productsQueryPolicy } from "@products/query-policy";
+export { queryPolicy as reviewsQueryPolicy } from "@reviews/query-policy";
 
 /**
  *  Composition Root & Barrel Export
@@ -61,10 +69,12 @@ export const logger = loggerAdapterFactory(
 );
 
 // 1. Repositories
+export const userRepository = new UserRepository(dbAdapter);
 export const productRepository = new ProductRepository(dbAdapter);
 export const reviewRepository = new ReviewRepository(dbAdapter);
 
 // 2. Services:
+export const userService = new UserService(userRepository);
 export const productService = new ProductService(
   productRepository,
   reviewRepository
@@ -77,6 +87,7 @@ export const postService = new PostService(httpClient);
 export const httpbinService = new HttpbinService(httpClient);
 
 // 3. Controllers:
+export const userController = new UserController(userService);
 export const productController = new ProductController(productService);
 export const reviewController = new ReviewController(reviewService);
 export const postController = new PostController(postService);

@@ -1,5 +1,5 @@
 import { dbAdapter } from "@/common/container";
-//  import { seed as seedUsers } from "@/routes/v1/users/seeder";
+import { seed as seedUsers } from "@/routes/v1/users/seeder";
 import { seed as seedReviews } from "@/routes/v1/reviews/seeder";
 import { seed as seedProducts } from "@/routes/v1/products/seeder";
 
@@ -14,7 +14,7 @@ export const main = async () => {
   console.log("Stage 2: Running seeder...");
   // 2: seed data
   if (1) {
-    // await seedUsers();
+    await seedUsers();
     await seedReviews();
     await seedProducts();
     console.log("Data seeder completed.");

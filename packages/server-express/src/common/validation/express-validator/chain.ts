@@ -1,5 +1,6 @@
 import { body, param, query } from "express-validator";
-import { ReviewStatus } from "@/routes/v1/reviews/types";
+import { UserRole } from "@users/types";
+import { ReviewStatus } from "@reviews/types";
 
 /**
  * Shared Validation Chains
@@ -19,6 +20,28 @@ const sharedChains = {
   ],
 
   findOne: [param("id").isInt().withMessage("ID must be an integer")],
+};
+
+/**
+ * Product Validation Chains
+ */
+export const createUser = {
+  body: [
+    body("name").isString().notEmpty(),
+    body("email").isEmail().normalizeEmail(),
+    body("password").isString().isLength({ min: 5, max: 128 }),
+    body("role").isIn(Object.values(UserRole)),
+  ],
+};
+
+export const updateUser = {
+  params: sharedChains.findOne, // assuming express-validator params
+  body: [
+    body("name").optional().isString(),
+    body("email").optional().isEmail().normalizeEmail(),
+    body("password").optional().isString().isLength({ min: 5, max: 128 }),
+    body("role").optional().isIn(Object.values(UserRole)),
+  ],
 };
 
 /**

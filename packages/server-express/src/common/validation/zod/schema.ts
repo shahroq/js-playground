@@ -1,5 +1,6 @@
 import { z } from "zod";
-import { ReviewStatus } from "@/routes/v1/reviews/types";
+import { UserRole } from "@users/types";
+import { ReviewStatus } from "@reviews/types";
 
 /**
  * Shared Schemas
@@ -26,10 +27,9 @@ const sharedSchemas = {
 const createUser = {
   body: z.object({
     name: z.string(),
-    email: z.string().nullable(),
-    price: z.number().positive().nullable().optional(),
-    category: z.string(),
-    in_stock: z.boolean(),
+    email: z.email(),
+    password: z.string().min(5).max(128),
+    role: z.enum(UserRole),
   }),
 };
 
@@ -37,10 +37,9 @@ const updateUser = {
   params: sharedSchemas.findOne.params,
   body: z.object({
     name: z.string().optional(),
-    description: z.string().nullable().optional(),
-    price: z.number().positive().nullable().optional(),
-    category: z.string().optional(),
-    in_stock: z.boolean().optional(),
+    email: z.email().optional(),
+    password: z.string().min(5).max(128).optional(),
+    role: z.enum(UserRole).optional(),
   }),
 };
 
@@ -89,17 +88,16 @@ const updateReview = {
   }),
 };
 
-const updateReviewStatus = {
-  params: sharedSchemas.findOne.params,
-  body: z.object({
-    status: z.enum(ReviewStatus).optional(),
-  }),
-};
-
 /**
  * Export combined schemas
  */
 export const schemas = {
+  users: {
+    ...sharedSchemas,
+    create: createUser,
+    update: updateUser,
+    delete: sharedSchemas.findOne,
+  },
   products: {
     ...sharedSchemas,
     create: createProduct,
