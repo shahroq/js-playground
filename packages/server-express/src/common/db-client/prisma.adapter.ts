@@ -71,8 +71,6 @@ export class PrismaAdapter implements IDbClient {
   }
 
   async findOne<T>(collection: CollectionName, appQuery: AppQuery) {
-    appQuery.append({ per_page: 1 });
-
     const q = this.query<T>(appQuery);
     const m = this.getModel(collection);
 
