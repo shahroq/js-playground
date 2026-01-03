@@ -121,3 +121,32 @@ const toArray = (value?: string | string[]): string[] => {
     ? value.flatMap((v) => v.split(","))
     : value.split(",");
 };
+
+/*
+  &include=reviews,users&fields=id,name,price&page[number]=1&page[size]=20&sort=-created_at,price&filter[status]=published&filter[category]=tech
+ 
+  // line by line
+  &include=reviews,users
+  
+  &fields=id,name,price
+  
+  &page[number]=1
+  &page[size]=20
+  
+  &sort=-created_at,price
+  
+  &filter[status]=published
+  &filter[category]=tech
+
+  TO:
+  {
+  include: ["reviews"],
+  fields: {
+    products: ["id","name","price"],
+    reviews: ["rating"]
+  },
+  sort: [{ field: "createdAt", direction: "desc" }, { field: "price", direction: "asc" }],
+  page: { number: 1, size: 20 },
+  filter: { status: "published", category: "tech" }
+}
+*/
