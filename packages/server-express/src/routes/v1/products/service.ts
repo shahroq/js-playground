@@ -36,9 +36,7 @@ export class ProductService {
   }
 
   async getItem(id: EntityId, appQuery: AppQuery) {
-    appQuery.append({ id });
-
-    const item = await this.repository.findOne(appQuery);
+    const item = await this.repository.findById(id);
     if (!item) throw AppError.NotFound();
 
     // get expansions

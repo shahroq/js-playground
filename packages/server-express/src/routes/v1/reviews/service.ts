@@ -42,11 +42,9 @@ export class ReviewService {
   }
 
   async getItem(id: EntityId, appQuery: AppQuery) {
-    appQuery.append({ id });
     // add status filter all the times
     // appQuery.append({ status: ReviewStatus.APPROVED });
-
-    const item = await this.repository.findOne(appQuery);
+    const item = await this.repository.findById(id);
     if (!item) throw AppError.NotFound();
 
     // get expansions
