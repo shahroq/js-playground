@@ -78,11 +78,10 @@ const parseSort = (query: QueryStringDto, policy: QueryObjectPolicy): Sort => {
 
   for (const item of raw) {
     const direction = item.startsWith("-") ? "desc" : "asc";
-    const field = item;
+    const field = item.replace(/^-/, "");
 
-    if (policy.sortableFields && !policy.sortableFields.includes(field)) {
+    if (policy.sortableFields && !policy.sortableFields.includes(field))
       continue;
-    }
 
     result.push({ field, direction });
   }
