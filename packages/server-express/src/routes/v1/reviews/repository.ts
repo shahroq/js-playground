@@ -2,40 +2,33 @@ import type { EntityId } from "@/common/types";
 import type { IReview, ReviewStatus } from "./types";
 import { BaseRepository } from "@/common/repository/base.repository";
 import type { IDbClient } from "@/common/db-client/db-client.interface";
-import {
-  AppQuery,
-  reviewsQueryPolicy as queryPolicy,
-} from "@/common/container";
+import type { QueryObject } from "@/common/query-object/types";
 
 export class ReviewRepository extends BaseRepository<IReview> {
   constructor(dbAdapter: IDbClient) {
-    super("reviews", queryPolicy, dbAdapter);
+    super("reviews", dbAdapter);
   }
 
   // used by service of product module
-  // TODO: should it be here? or at service layer
   async findAllByProductId(productId: EntityId) {
-    const appQuery = new AppQuery(
-      {
+    const queryObject: QueryObject = {
+      filter: {
         product_id: productId,
-        sort: "created_at",
-        direction: "desc",
       },
-      queryPolicy
-    );
+      sort: [{ field: "created_at", direction: "desc" }],
+    };
+    const items = await this.findAll(queryObject);
 
-    const items = await this.findAll(appQuery);
-
-    const review_count = await this.count(appQuery);
-    const average_rating = await this.average(appQuery);
+    const review_count = await this.count(queryObject);
+    const average_rating = await this.average(queryObject);
 
     return { reviews: items, review_count, average_rating };
   }
 
   // async findAllByUserId(userId: EntityId): Promise<Review[]> {}
 
-  async average(appQuery: AppQuery): Promise<number | null> {
-    return this.dbAdapter.avg<IReview>(this.collection, appQuery, "rating");
+  async average(queryObject: QueryObject): Promise<number | null> {
+    return this.dbAdapter.avg<IReview>(this.collection, queryObject, "rating");
   }
 
   async updateStatus(

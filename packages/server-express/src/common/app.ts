@@ -17,6 +17,9 @@ import {
 export const bootstrap = (): Application => {
   const app: Application = express();
 
+  // Enable extended query parsing
+  app.set("query parser", "extended");
+
   const beforeMWs = [express.json(), cors(), envelopResponseHandler];
   const afterMWs = [undefinedRoutesHandler, globalErrorHandler];
   config.logger.morgan_enabled && app.use(morgan(config.logger.morgan_format));

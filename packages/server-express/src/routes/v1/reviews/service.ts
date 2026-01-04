@@ -1,16 +1,16 @@
-import { ReviewStatus } from "./types";
 import {
   AppError,
-  AppQuery,
   config,
-  PaginationSummaryDto,
   ReviewDto,
   CreateReviewDto,
   UpdateReviewDto,
+  PaginationSummaryDto,
 } from "@/common/container";
 import type { EntityId } from "@/common/types";
+import { ReviewStatus } from "./types";
 import { ReviewRepository } from "./repository";
 import { ProductRepository } from "@products/repository";
+import type { QueryObject } from "@/common/query-object/types";
 
 export class ReviewService {
   constructor(
@@ -18,38 +18,30 @@ export class ReviewService {
     private readonly productRepository: ProductRepository
   ) {}
 
-  async getItems(appQuery: AppQuery) {
-    // add status filter all the times
-    appQuery.append({ status: ReviewStatus.APPROVED });
-
+  async getItems(queryObject: QueryObject) {
     let [items, total] = await Promise.all([
-      this.repository.findAll(appQuery),
-      this.repository.count(appQuery),
+      this.repository.findAll(queryObject),
+      this.repository.count(queryObject),
     ]);
 
-    // get expansions: products
-    // TODO: not performatnt, get'em with WHERE IN query
-    const expansionList = appQuery.normQuery?.expansion?.include ?? [];
-    if (expansionList.includes("products")) {
+    // get expansions
+    if (queryObject?.include?.includes("products")) {
       for (const item of items)
         item.product = await this.getReviewProduct(item.product_id);
     }
 
     return [
       ReviewDto.fromMany(items),
-      PaginationSummaryDto.from(appQuery, total),
+      PaginationSummaryDto.from(queryObject, total),
     ];
   }
 
-  async getItem(id: EntityId, appQuery: AppQuery) {
-    // add status filter all the times
-    // appQuery.append({ status: ReviewStatus.APPROVED });
+  async getItem(id: EntityId, queryObject: QueryObject) {
     const item = await this.repository.findById(id);
     if (!item) throw AppError.NotFound();
 
     // get expansions
-    const expansionList = appQuery.normQuery?.expansion?.include ?? [];
-    if (expansionList.includes("products")) {
+    if (queryObject?.include?.includes("products")) {
       item.product = await this.getReviewProduct(item.product_id);
     }
 
@@ -69,8 +61,7 @@ export class ReviewService {
 
   async updateItem(id: EntityId, updateItemDto: UpdateReviewDto) {
     // check if this is updatable
-    // const appQuery = new AppQuery({ id, status: ReviewStatus.PENDING });
-    // const existingReview = await this.repository.findOne(appQuery);
+    // const existingReview = await this.repository.findById({});
     //...
 
     const updatedItem = await this.repository.update(id, updateItemDto);

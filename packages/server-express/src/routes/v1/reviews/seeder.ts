@@ -1,5 +1,5 @@
 import dataSource from "@root/data/data-source.json";
-import { AppQuery, reviewRepository } from "@/common/container";
+import { reviewRepository } from "@/common/container";
 
 const data = dataSource.reviews.map((i) => ({
   product_id: +i.product_id,
@@ -13,7 +13,7 @@ const data = dataSource.reviews.map((i) => ({
 }));
 
 export async function seed(reset: boolean = true) {
-  if (reset) await reviewRepository.deleteMany(new AppQuery({}));
+  if (reset) await reviewRepository.deleteMany({});
 
   for (const item of data) await reviewRepository.create(item);
   console.log(`Seeded ${data.length} reviews.`);

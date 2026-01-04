@@ -45,8 +45,8 @@ const config = {
   // defaults
   default: {
     user_role: (process.env.DEFAULT_USER_ROLE as UserRole) || UserRole.USER,
-    user_id: <number>(process.env.DEFAULT_USER_ID || 1), // use it till auth is not implemented
-    pagination_limit: <number>(process.env.DEFAULT_PAGINATION_LIMIT || 10),
+    user_id: <number>+(process.env.DEFAULT_USER_ID || 1), // use it till auth is not implemented
+    pagination_limit: <number>+(process.env.DEFAULT_PAGINATION_LIMIT || 10),
     review_status:
       (process.env.DEFAULT_REVIEW_STATUS as ReviewStatus) ||
       ReviewStatus.PENDING,

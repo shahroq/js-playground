@@ -1,14 +1,14 @@
 import {
-  AppQuery,
   AppError,
-  PaginationSummaryDto,
-  CreateProductDto,
   ProductDto,
+  CreateProductDto,
   UpdateProductDto,
+  PaginationSummaryDto,
 } from "@/common/container";
 import type { EntityId } from "@/common/types";
 import { ProductRepository } from "./repository";
 import { ReviewRepository } from "@reviews/repository";
+import type { QueryObject } from "@/common/query-object/types";
 
 export class ProductService {
   constructor(
@@ -16,32 +16,42 @@ export class ProductService {
     private readonly reviewRepository: ReviewRepository
   ) {}
 
-  async getItems(appQuery: AppQuery) {
+  async getItems(queryObject: QueryObject) {
     let [items, total] = await Promise.all([
-      this.repository.findAll(appQuery),
-      this.repository.count(appQuery),
+      this.repository.findAll(queryObject),
+      this.repository.count(queryObject),
     ]);
 
     // get expansions
-    const expansionList = appQuery.normQuery?.expansion?.include ?? [];
-    if (expansionList.includes("reviews")) {
+    if (queryObject?.include?.includes("reviews")) {
       for (const item of items)
         Object.assign(item, await this.getProductReviews(item.id));
     }
 
     return [
       ProductDto.fromMany(items),
-      PaginationSummaryDto.from(appQuery, total),
+      PaginationSummaryDto.from(queryObject, total),
     ];
   }
 
-  async getItem(id: EntityId, appQuery: AppQuery) {
+  async getItem(id: EntityId, queryObject: QueryObject) {
     const item = await this.repository.findById(id);
+    /*
+    // test
+    // queryObject = { ...queryObject, filter: { id } };
+    // queryObject = { ...queryObject, filter: { price: 399 } };
+    // queryObject = { ...queryObject, filter: { price: 399, in_stock: true } };
+    queryObject = {
+      ...queryObject,
+      filter: { in_stock: true },
+      // sort: [{ field: "price", direction: "asc" }],
+    };
+    const item = await this.repository.findOne(appQuery, queryObject);
+    */
     if (!item) throw AppError.NotFound();
 
     // get expansions
-    const expansionList = appQuery.normQuery?.expansion?.include ?? [];
-    if (expansionList.includes("reviews")) {
+    if (queryObject?.include?.includes("reviews")) {
       Object.assign(item, await this.getProductReviews(item.id));
     }
 

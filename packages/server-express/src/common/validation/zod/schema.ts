@@ -8,10 +8,10 @@ import { ReviewStatus } from "@reviews/types";
 const sharedSchemas = {
   findAll: {
     query: z.object({
-      page: z.coerce.number().int().min(1).default(1),
-      per_page: z.coerce.number().int().min(1).max(100).default(10),
-      category: z.string().optional(),
-      in_stock: z.boolean().optional(),
+      // page: z.coerce.number().int().min(1).default(1),
+      // per_page: z.coerce.number().int().min(1).max(100).default(10),
+      // category: z.string().optional(),
+      // in_stock: z.boolean().optional(),
     }),
   },
   findOne: {

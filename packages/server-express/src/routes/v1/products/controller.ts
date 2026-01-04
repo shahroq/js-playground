@@ -1,7 +1,8 @@
 import type { Request, Response } from "express";
+import { normalizeQueryString } from "@/common/container";
 import type { ProductService } from "./service";
 import type { EntityId } from "@/common/types";
-import { AppQuery, productsQueryPolicy } from "@/common/container";
+import { policyList, policyShow } from "./policy/query-object.policy";
 
 export class ProductController {
   private collection = "product";
@@ -9,17 +10,19 @@ export class ProductController {
   constructor(private readonly service: ProductService) {}
 
   index = async (req: Request, res: Response) => {
-    const appQuery = new AppQuery(req.query, productsQueryPolicy);
-    const [items, meta] = await this.service.getItems(appQuery);
+    const queryObject = normalizeQueryString(req.query, policyList);
+
+    const [items, meta] = await this.service.getItems(queryObject);
 
     res.status(200).json({ [`${this.collection}s`]: items, meta });
   };
 
   show = async (req: Request, res: Response) => {
-    const appQuery = new AppQuery(req.query, productsQueryPolicy);
+    const queryObject = normalizeQueryString(req.query, policyShow);
+
     const item = await this.service.getItem(
       req.params.id as EntityId,
-      appQuery
+      queryObject
     );
 
     res.status(200).json({ [this.collection]: item });

@@ -1,30 +1,29 @@
-import { config, type AppQuery } from "@/common/container";
+import { config } from "@/common/container";
+import type { QueryObject } from "../query-object/types";
 
 // response dto
 export class PaginationSummaryDto {
   private constructor(
-    public readonly page: number,
-    public readonly per_page: number,
+    public readonly page_number: number,
+    public readonly page_size: number,
     public readonly total_pages: number,
     public readonly total_count: number,
     public readonly has_next_page: boolean,
     public readonly has_prev_page: boolean
   ) {}
 
-  static from(appQuery: AppQuery, total: number): PaginationSummaryDto {
-    const normQuery = appQuery.normQuery;
-
-    const page = normQuery?.pagination?.page || 1;
-    const per_page =
-      normQuery?.pagination?.per_page || config.default.pagination_limit;
-    const total_pages = Math.ceil(total / per_page);
+  static from(queryObject: QueryObject, total: number): PaginationSummaryDto {
+    const page_number = queryObject?.page?.number || 1;
+    const page_size =
+      queryObject?.page?.size || config.default.pagination_limit;
+    const total_pages = Math.ceil(total / page_size);
     const total_count = total;
-    const has_next_page = page * per_page < total;
-    const has_prev_page = page > 1;
+    const has_next_page = page_number * page_size < total;
+    const has_prev_page = page_number > 1;
 
     return new PaginationSummaryDto(
-      page,
-      per_page,
+      page_number,
+      page_size,
       total_pages,
       total_count,
       has_next_page,

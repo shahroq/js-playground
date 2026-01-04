@@ -1,5 +1,5 @@
 import type { Awaitable, CollectionName, EntityId } from "@/common/types";
-import type { AppQuery } from "../container";
+import type { QueryObject } from "../query-object/types";
 
 export type DBAdapterStrategy = "memory" | "file" | "lowdb" | "prisma";
 
@@ -20,11 +20,14 @@ export interface IDbClient {
 
   disconnect(): Awaitable<void>;
 
-  findAll<T>(collection: CollectionName, appQuery: AppQuery): Awaitable<T[]>;
+  findAll<T>(
+    collection: CollectionName,
+    queryObject: QueryObject
+  ): Awaitable<T[]>;
 
   findOne<T>(
     collection: CollectionName,
-    appQuery: AppQuery
+    queryObject: QueryObject
   ): Awaitable<T | null>;
 
   findById<T>(collection: CollectionName, id: EntityId): Awaitable<T | null>;
@@ -44,14 +47,17 @@ export interface IDbClient {
 
   deleteMany<T>(
     collection: CollectionName,
-    appQuery: AppQuery
+    queryObject: QueryObject
   ): Awaitable<number>;
 
-  count<T>(collection: CollectionName, appQuery: AppQuery): Awaitable<number>;
+  count<T>(
+    collection: CollectionName,
+    queryObject: QueryObject
+  ): Awaitable<number>;
 
   avg<T>(
     collection: CollectionName,
-    appQuery: AppQuery,
+    queryObject: QueryObject,
     field: keyof T & string
   ): Awaitable<number | null>;
 

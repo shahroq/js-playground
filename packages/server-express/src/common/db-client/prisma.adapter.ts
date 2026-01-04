@@ -4,15 +4,10 @@ import type {
   ReviewDelegate,
   UserDelegate,
 } from "@root/generated/prisma/models";
-import { AppQuery, config } from "@/common/container";
+import { config } from "@/common/container";
 import { buildAuditFields, type IDbClient } from "./db-client.interface";
 import type { EntityId, CollectionName } from "@/common/types";
-import type {
-  Pagination,
-  OrderBy,
-  Filter,
-  Selection,
-} from "@/common/query/types";
+import type { QueryObject } from "@/common/query-object/types";
 
 const collectionModelMap: Record<
   CollectionName,
@@ -43,7 +38,7 @@ export class PrismaAdapter implements IDbClient {
       options = { ...options, log: ["query", "info", "warn", "error"] };
 
     this.dbClient = new PrismaClient(options);
-    this.userId = +config.default.user_id;
+    this.userId = config.default.user_id;
   }
 
   async connect(): Promise<void> {
@@ -62,24 +57,28 @@ export class PrismaAdapter implements IDbClient {
     return this.dbClient[collectionModelMap[collection]];
   }
 
-  async findAll<T>(collection: CollectionName, appQuery: AppQuery) {
-    const q = this.query<T>(appQuery);
+  async findAll<T>(collection: CollectionName, queryObject: QueryObject) {
     const m = this.getModel(collection);
+    const q = this.query<T>(queryObject);
 
     // @ts-ignore
     return await m.findMany(q);
   }
 
-  async findOne<T>(collection: CollectionName, appQuery: AppQuery) {
-    const q = this.query<T>(appQuery);
+  async findOne<T>(collection: CollectionName, queryObject: QueryObject) {
     const m = this.getModel(collection);
+    const q = this.query<T>(queryObject);
 
     // @ts-ignore
     return await m.findFirst(q);
   }
 
   async findById<T>(collection: CollectionName, id: EntityId) {
-    return this.findOne<T>(collection, new AppQuery({ id }));
+    const m = this.getModel(collection);
+    const q = this.query<T>({ filter: { id } });
+
+    // @ts-ignore
+    return await m.findFirst(q);
   }
 
   async create<T>(collection: CollectionName, data: T) {
@@ -128,18 +127,19 @@ export class PrismaAdapter implements IDbClient {
     return !!result.count;
   }
 
-  async deleteMany<T>(collection: CollectionName, appQuery: AppQuery) {
+  async deleteMany<T>(collection: CollectionName, queryObject: QueryObject) {
     await this.dbClient.$executeRawUnsafe(`PRAGMA foreign_keys = OFF;`);
-    const q = this.query<T>(appQuery);
+    const q = this.query<T>(queryObject);
     const m = this.getModel(collection);
 
     // @ts-ignore
-    const result = await m.deleteMany();
+    const result = await m.deleteMany(q);
     return result.count;
   }
 
-  async count<T>(collection: CollectionName, appQuery: AppQuery) {
-    const q = this.query<T>(appQuery, false, false, false);
+  async count<T>(collection: CollectionName, queryObject: QueryObject) {
+    // const q = this.query<T>(appQuery, false, false, false);
+    const q = this.query<T>(queryObject, false, false, false);
     const m = this.getModel(collection);
 
     // @ts-ignore
@@ -148,10 +148,10 @@ export class PrismaAdapter implements IDbClient {
 
   async avg<T>(
     collection: CollectionName,
-    appQuery: AppQuery,
+    queryObject: QueryObject,
     field: keyof T & string
   ) {
-    const q = this.query<T>(appQuery, false, false, false);
+    const q = this.query<T>(queryObject, false, false, false);
     const m = this.getModel(collection);
 
     // @ts-ignore
@@ -174,64 +174,50 @@ export class PrismaAdapter implements IDbClient {
   }
 
   private query<T>(
-    appQuery: AppQuery,
-    includePagination: boolean = true,
-    includeSorting: boolean = true,
-    includeSelection: boolean = true
-  ) {
-    const { pagination, orderBy, filter, selection } = appQuery.normQuery;
-    return {
-      ...(includePagination ? this.buildPagination(pagination) : {}),
-      ...(includeSorting ? this.buildSorting(orderBy) : {}),
-      ...this.buildFilter(filter),
-      ...(includeSelection ? this.buildSelection(selection) : {}),
-    };
-  }
+    queryObject: QueryObject,
+    includeFields: boolean = true,
+    includePage: boolean = true,
+    includeSort: boolean = true
+  ): Prisma.SelectSubset<Prisma.PostFindManyArgs, Prisma.PostFindManyArgs> {
+    // const { include, fields, page, sort, filter } = queryObject;
+    // build query
 
-  private buildPagination(pagination?: Pagination): {
-    take?: number;
-    skip?: number;
-  } {
-    if (!pagination) return {};
-    return {
-      take: pagination.per_page,
-      skip: pagination.offset,
-    };
-  }
+    const prismaQuery: Prisma.PostFindManyArgs = {};
 
-  private buildSorting(orderBy?: OrderBy): {
-    orderBy?: Record<string, "asc" | "desc">;
-  } {
-    if (!orderBy) return {};
-    return {
-      orderBy: { [orderBy.sort]: orderBy.direction },
-    };
-  }
-
-  private buildFilter(filter?: Filter): { where?: Record<string, any> } {
-    if (!filter) return {};
-
-    const where: Record<string, any> = {};
-
-    for (const [key, value] of Object.entries(filter)) {
-      where[key] = Array.isArray(value) ? { in: value } : value;
+    // Include: Join
+    /*
+    if (!queryObject.include && queryObject.include.length > 0) {
+      prismaQuery.include = Object.fromEntries(
+        queryObject.include.map((relation) => [relation, true])
+      );
     }
-    return { where };
-  }
+    */
 
-  private buildSelection(selection?: Selection): {
-    select?: Record<string, boolean>;
-  } {
-    if (!selection || !selection.fields || selection.fields.length === 0) {
-      return {};
+    // Fields: SELECT
+    if (includeFields && queryObject.fields && queryObject.fields.length > 0) {
+      prismaQuery.select = Object.fromEntries(
+        queryObject.fields.map((field) => [field, true])
+      );
     }
 
-    // Convert array of fields to Prisma select object
-    const select: Record<string, boolean> = {};
-    for (const field of selection.fields) {
-      select[field] = true;
+    // Page: Limit
+    if (includePage && queryObject.page) {
+      prismaQuery.skip = (queryObject.page.number - 1) * queryObject.page.size;
+      prismaQuery.take = queryObject.page.size;
     }
 
-    return { select };
+    // Sort: ORDER BY
+    if (includeSort && queryObject.sort && queryObject.sort.length > 0) {
+      prismaQuery.orderBy = queryObject.sort.map((s) => ({
+        [s.field]: s.direction,
+      }));
+    }
+
+    // Filter: WHERE
+    if (queryObject.filter && Object.keys(queryObject.filter).length > 0) {
+      prismaQuery.where = queryObject.filter;
+    }
+
+    return prismaQuery;
   }
 }

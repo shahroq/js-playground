@@ -1,7 +1,8 @@
 import data from "@root/data/memory-json/data.json";
-import { AppQuery, config } from "@/common/container";
+import { config } from "@/common/container";
 import { buildAuditFields, type IDbClient } from "./db-client.interface";
 import type { EntityId, CollectionName } from "@/common/types";
+import type { QueryObject } from "../query-object/types";
 
 export class MemoryAdapter implements IDbClient {
   private dbClient;
@@ -9,7 +10,7 @@ export class MemoryAdapter implements IDbClient {
 
   constructor() {
     this.dbClient = data;
-    this.userId = +config.default.user_id;
+    this.userId = config.default.user_id;
   }
 
   connect() {
@@ -24,7 +25,7 @@ export class MemoryAdapter implements IDbClient {
     return this.dbClient[collection];
   }
 
-  findAll<T>(collection: CollectionName, appQuery: AppQuery) {
+  findAll<T>(collection: CollectionName, queryObject: QueryObject) {
     const m = this.getModel(collection);
 
     const items = m;
@@ -32,17 +33,17 @@ export class MemoryAdapter implements IDbClient {
     return items;
   }
 
-  findOne<T>(collection: CollectionName, appQuery: AppQuery) {
+  findOne<T>(collection: CollectionName, queryObject: QueryObject) {
     const m = this.getModel(collection);
-    const id = appQuery.normQuery.filter?.id;
+    const id = queryObject.filter?.id;
 
-    const item = m.find((item) => item.id == id);
+    const item = m.find((i) => i.id == id);
 
     return item || null;
   }
 
   findById<T>(collection: CollectionName, id: EntityId) {
-    return this.findOne<T>(collection, new AppQuery({ id }));
+    return this.findOne<T>(collection, { filter: { id } });
   }
 
   create<T>(collection: CollectionName, data: T) {
@@ -94,7 +95,7 @@ export class MemoryAdapter implements IDbClient {
     return true;
   }
 
-  deleteMany<T>(collection: CollectionName, appQuery: AppQuery) {
+  deleteMany<T>(collection: CollectionName, queryObject: QueryObject) {
     const m = this.getModel(collection);
 
     const deletedCount = m.length;
@@ -102,14 +103,14 @@ export class MemoryAdapter implements IDbClient {
     return deletedCount;
   }
 
-  count<T>(collection: CollectionName, appQuery: AppQuery) {
+  count<T>(collection: CollectionName, queryObject: QueryObject) {
     const m = this.getModel(collection);
     return m.length;
   }
 
   avg<T>(
     collection: CollectionName,
-    appQuery: AppQuery,
+    queryObject: QueryObject,
     field: keyof T & string
   ) {
     const m = this.getModel(collection);

@@ -46,12 +46,8 @@ export * from "@/common/middlewares/undefined-routes.middleware";
 export * from "@/common/middlewares/coerce-id.middleware";
 export * from "@/common/envelope/attach-system-data.middleware";
 export * from "@/common/envelope/wrap-response.middleware";
-export * from "@/common/query/normalize-query.middleware";
-export * from "@/common/query/app-query";
-export { queryPolicy as defaultQueryPolicy } from "@/common/query/default.query-policy";
-export { queryPolicy as usersQueryPolicy } from "@users/query-policy";
-export { queryPolicy as productsQueryPolicy } from "@products/query-policy";
-export { queryPolicy as reviewsQueryPolicy } from "@reviews/query-policy";
+export * from "@/common/query-object/normalize-query-string";
+export * from "@/common/query-object/default.policy";
 
 /**
  *  Composition Root & Barrel Export

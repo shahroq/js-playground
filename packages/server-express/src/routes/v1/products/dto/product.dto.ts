@@ -28,7 +28,9 @@ export class ProductDto {
       entity.created_at,
       entity.reviews ? ReviewDto.fromMany(entity.reviews) : undefined,
       entity.review_count ?? undefined,
-      entity.average_rating ?? undefined
+      entity.average_rating
+        ? Number(entity.average_rating.toFixed(2))
+        : undefined
     );
   }
 

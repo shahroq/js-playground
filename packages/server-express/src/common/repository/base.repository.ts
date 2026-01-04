@@ -1,27 +1,23 @@
 import type { EntityId, CollectionName } from "@/common/types";
-import type { QueryPolicy } from "@/common/query/types";
 import type { IDbClient } from "@/common/db-client/db-client.interface";
-import { AppQuery } from "@/common/container";
+import type { QueryObject } from "../query-object/types";
 
 export abstract class BaseRepository<T> {
   constructor(
     protected readonly collection: CollectionName,
-    protected readonly queryPolicy: QueryPolicy,
     protected readonly dbAdapter: IDbClient
   ) {}
 
-  async findAll(appQuery: AppQuery): Promise<T[]> {
-    return this.dbAdapter.findAll<T>(this.collection, appQuery);
+  async findAll(queryObject: QueryObject): Promise<T[]> {
+    return this.dbAdapter.findAll<T>(this.collection, queryObject);
   }
 
-  async findOne(appQuery: AppQuery): Promise<T | null> {
-    // TODO: how to remove per_page? If set the it on default.option.ts, it will override the config.
-    appQuery.append({ per_page: 1 });
-    return this.dbAdapter.findOne<T>(this.collection, appQuery);
+  async findOne(queryObject: QueryObject): Promise<T | null> {
+    return this.dbAdapter.findOne<T>(this.collection, queryObject);
   }
 
   async findById(id: EntityId): Promise<T | null> {
-    return this.findOne(new AppQuery({ id }));
+    return this.dbAdapter.findById<T>(this.collection, id);
   }
 
   async create(payload: T): Promise<T> {
@@ -36,11 +32,11 @@ export abstract class BaseRepository<T> {
     return await this.dbAdapter.delete(this.collection, id);
   }
 
-  async deleteMany(appQuery: AppQuery): Promise<number> {
-    return await this.dbAdapter.deleteMany(this.collection, appQuery);
+  async deleteMany(queryObject: QueryObject): Promise<number> {
+    return await this.dbAdapter.deleteMany(this.collection, queryObject);
   }
 
-  async count(appQuery: AppQuery): Promise<number> {
-    return this.dbAdapter.count<T>(this.collection, appQuery);
+  async count(queryObject: QueryObject): Promise<number> {
+    return this.dbAdapter.count<T>(this.collection, queryObject);
   }
 }

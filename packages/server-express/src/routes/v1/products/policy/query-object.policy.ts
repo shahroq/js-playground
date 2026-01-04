@@ -1,5 +1,5 @@
-import type { QueryObjectPolicy } from "@/common/query-object/types";
 import { defaultPolicy } from "@/common/query-object/default.policy";
+import type { QueryObjectPolicy } from "@/common/query-object/types";
 
 export const policyShow: QueryObjectPolicy = {
   ...defaultPolicy,

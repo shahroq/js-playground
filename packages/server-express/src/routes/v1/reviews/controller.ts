@@ -1,7 +1,8 @@
 import type { Request, Response } from "express";
-import type { ReviewService } from "./service";
+import { normalizeQueryString } from "@/common/container";
 import type { EntityId } from "@/common/types";
-import { AppQuery, reviewsQueryPolicy } from "@/common/container";
+import type { ReviewService } from "./service";
+import { policyList, policyShow } from "./policy/query-object.policy";
 
 export class ReviewController {
   private collection = "review";
@@ -9,17 +10,18 @@ export class ReviewController {
   constructor(private readonly service: ReviewService) {}
 
   index = async (req: Request, res: Response) => {
-    const appQuery = new AppQuery(req.query, reviewsQueryPolicy);
-    const [items, meta] = await this.service.getItems(appQuery);
+    const queryObject = normalizeQueryString(req.query, policyList);
+
+    const [items, meta] = await this.service.getItems(queryObject);
 
     res.status(200).json({ [`${this.collection}s`]: items, meta });
   };
 
   show = async (req: Request, res: Response) => {
-    const appQuery = new AppQuery(req.query, reviewsQueryPolicy);
+    const queryObject = normalizeQueryString(req.query, policyShow);
     const item = await this.service.getItem(
       req.params.id as EntityId,
-      appQuery
+      queryObject
     );
 
     res.status(200).json({ [this.collection]: item });

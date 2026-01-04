@@ -1,11 +1,10 @@
 import type { IDbClient } from "@/common/db-client/db-client.interface";
 import type { IProduct } from "./types";
 import { BaseRepository } from "@/common/repository/base.repository";
-import { productsQueryPolicy as queryPolicy } from "@/common/container";
 
 export class ProductRepository extends BaseRepository<IProduct> {
   constructor(dbAdapter: IDbClient) {
-    super("products", queryPolicy, dbAdapter);
+    super("products", dbAdapter);
   }
 
   /*

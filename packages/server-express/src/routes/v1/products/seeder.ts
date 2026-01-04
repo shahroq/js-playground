@@ -1,5 +1,5 @@
 import dataSource from "@root/data/data-source.json";
-import { AppQuery, productRepository } from "@/common/container";
+import { productRepository } from "@/common/container";
 
 const data = dataSource.products.map((i) => ({
   name: i.name,
@@ -14,7 +14,7 @@ const data = dataSource.products.map((i) => ({
 }));
 
 export async function seed(reset: boolean = true) {
-  if (reset) await productRepository.deleteMany(new AppQuery({}));
+  if (reset) await productRepository.deleteMany({});
 
   for (const item of data) await productRepository.create(item);
   console.log(`Seeded ${data.length} products.`);

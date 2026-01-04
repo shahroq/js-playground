@@ -5,7 +5,7 @@ export const defaultPolicy: QueryObjectPolicy = {
   allowedKeys: ["include", "fields"],
   includableCollections: undefined,
   selectableFields: undefined,
-  defaultLimit: 10,
+  defaultLimit: 2,
   maxLimit: 20,
   defaultOrderBy: "-created_at, -id",
   sortableFields: ["created_at", "id"],

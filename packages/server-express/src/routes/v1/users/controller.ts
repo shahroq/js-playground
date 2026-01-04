@@ -2,7 +2,8 @@ import type { Request, Response } from "express";
 import type { UserService } from "./service";
 import type { AuthService } from "./auth.service";
 import type { EntityId } from "@/common/types";
-import { AppQuery, usersQueryPolicy } from "@/common/container";
+import { normalizeQueryString } from "@/common/container";
+import { policyList, policyShow } from "./policy/query-object.policy";
 
 export class UserController {
   private collection = "user";
@@ -13,17 +14,19 @@ export class UserController {
   ) {}
 
   index = async (req: Request, res: Response) => {
-    const appQuery = new AppQuery(req.query, usersQueryPolicy);
-    const [items, meta] = await this.service.getItems(appQuery);
+    const queryObject = normalizeQueryString(req.query, policyList);
+
+    const [items, meta] = await this.service.getItems(queryObject);
 
     res.status(200).json({ [`${this.collection}s`]: items, meta });
   };
 
   show = async (req: Request, res: Response) => {
-    const appQuery = new AppQuery(req.query, usersQueryPolicy);
+    const queryObject = normalizeQueryString(req.query, policyShow);
+
     const item = await this.service.getItem(
       req.params.id as EntityId,
-      appQuery
+      queryObject
     );
 
     res.status(200).json({ [this.collection]: item });

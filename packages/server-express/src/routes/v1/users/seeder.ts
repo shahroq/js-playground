@@ -1,5 +1,5 @@
 import dataSource from "@root/data/data-source.json";
-import { AppQuery, userRepository } from "@/common/container";
+import { userRepository } from "@/common/container";
 
 const data = dataSource.users.map((i) => ({
   name: i.name,
@@ -13,7 +13,7 @@ const data = dataSource.users.map((i) => ({
 }));
 
 export async function seed(reset: boolean = true) {
-  if (reset) await userRepository.deleteMany(new AppQuery({}));
+  if (reset) await userRepository.deleteMany({});
 
   for (const item of data) await userRepository.create(item);
   console.log(`Seeded ${data.length} users.`);

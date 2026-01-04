@@ -1,9 +1,8 @@
-import { AppError, AppQuery, config, UserDto } from "@/common/container";
+import { AppError, config, UserDto } from "@/common/container";
 import type { CreateUserDto } from "./dto/create.dto";
 import { UserRepository } from "./repository";
 import type { UserService } from "./service";
 import type { SignInDto } from "./dto/sign-in.dto";
-import { password } from "bun";
 
 export class AuthService {
   constructor(
@@ -27,9 +26,7 @@ export class AuthService {
 
   async signIn(signInDto: SignInDto) {
     const { email, password } = signInDto;
-    const appQuery = new AppQuery({ email, password });
-    console.log(appQuery.normQuery);
-    const item = await this.repository.findOne(appQuery);
+    const item = await this.repository.findOne({});
     console.log(new Date().toISOString());
     console.log(item);
     if (!item) throw AppError.NotFound(`Username or Password is not correct`);

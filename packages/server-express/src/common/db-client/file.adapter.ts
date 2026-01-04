@@ -1,8 +1,9 @@
 import fs from "fs-extra";
-import { AppQuery, config, utils } from "@/common/container";
+import { config, utils } from "@/common/container";
 import { defaultData, type DatabaseSchema } from "@root/data/file-json/schema";
 import { buildAuditFields, type IDbClient } from "./db-client.interface";
 import type { CollectionName, EntityId } from "../types";
+import type { QueryObject } from "../query-object/types";
 
 export class FileAdapter implements IDbClient {
   private db: DatabaseSchema = {};
@@ -35,18 +36,17 @@ export class FileAdapter implements IDbClient {
     return m;
   }
 
-  async findAll<T>(collection: CollectionName, appQuery: AppQuery) {
+  async findAll<T>(collection: CollectionName, queryObject: QueryObject) {
     const m = await this.getModel(collection);
-    console.log(m);
 
     const items = m;
 
     return items;
   }
 
-  async findOne<T>(collection: CollectionName, appQuery: AppQuery) {
+  async findOne<T>(collection: CollectionName, queryObject: QueryObject) {
     const m = await this.getModel(collection);
-    const id = appQuery.normQuery.filter?.id;
+    const id = queryObject.filter?.id;
 
     const item = m.find((i) => i.id == id);
 
@@ -54,7 +54,7 @@ export class FileAdapter implements IDbClient {
   }
 
   async findById<T>(collection: CollectionName, id: EntityId) {
-    return this.findOne<T>(collection, new AppQuery({ id }));
+    return this.findOne<T>(collection, { filter: { id } });
   }
 
   async create<T extends { id?: any }>(collection: CollectionName, data: T) {
@@ -109,18 +109,18 @@ export class FileAdapter implements IDbClient {
     return true;
   }
 
-  async deleteMany<T>(collection: CollectionName, appQuery: AppQuery) {
+  async deleteMany<T>(collection: CollectionName, queryObject: QueryObject) {
     //
   }
 
-  async count<T>(collection: CollectionName, appQuery: AppQuery) {
+  async count<T>(collection: CollectionName, queryObject: QueryObject) {
     const m = await this.getModel(collection);
     return m.length;
   }
 
   async avg<T>(
     collection: CollectionName,
-    appQuery: AppQuery,
+    queryObject: QueryObject,
     field: keyof T & string
   ): Promise<number | null> {
     const m = await this.getModel(collection);
