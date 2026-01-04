@@ -64,10 +64,13 @@ const parsePage = (query: QueryStringDto, policy: QueryObjectPolicy): Page => {
 
   const page = (query as any).page ?? {};
 
-  return {
-    number: Number(page.number ?? 1),
-    size: Number(page.size ?? policy.defaultLimit ?? 10),
-  };
+  const number = Number(page.number ?? 1);
+  const size = Math.min(
+    Number(page.size ?? policy.limit ?? 10),
+    policy.maxLimit
+  );
+
+  return { number, size };
 };
 
 const parseSort = (query: QueryStringDto, policy: QueryObjectPolicy): Sort => {

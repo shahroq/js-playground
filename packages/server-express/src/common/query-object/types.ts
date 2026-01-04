@@ -21,7 +21,7 @@ export type QueryObjectPolicy = {
   // SELECT
   selectableFields?: string[]; // whitelist
   // Limit
-  defaultLimit?: number;
+  limit?: number;
   maxLimit?: number;
   // Order By
   defaultOrderBy?: string;
