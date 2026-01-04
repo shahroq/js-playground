@@ -8,8 +8,8 @@ export interface IMeta {
   per_page?: number;
   total_pages?: number;
   total_count?: number;
-  has_next_page?: boolean;
   has_prev_page?: boolean;
+  has_next_page?: boolean;
 }
 
 /*
