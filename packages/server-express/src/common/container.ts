@@ -10,7 +10,7 @@ import { loggerAdapterFactory } from "./logger/factory";
 // routes
 import { UserRepository } from "@users/repository";
 import { UserService } from "@users/service";
-import { AuthService } from "@users/auth.service";
+import { AccountService } from "@/routes/v1/users/account.service";
 import { UserController } from "@users/controller";
 export * from "@users/dto/create.dto";
 export * from "@users/dto/update.dto";
@@ -36,6 +36,7 @@ export * from "@posts/dto/post-dto";
 
 import { HttpbinService } from "@httpbin/service";
 import { HttpbinController } from "@httpbin/controller";
+import { authServiceFactory } from "./auth/factory";
 
 // re-exports
 export * as utils from "./utils/utils";
@@ -48,6 +49,8 @@ export * from "@/common/envelope/attach-system-data.middleware";
 export * from "@/common/envelope/wrap-response.middleware";
 export * from "@/common/query-object/normalize-query-string";
 export * from "@/common/query-object/default.policy";
+export * from "@/common/auth/password.utils";
+export * from "@/common/auth/auth.middleware";
 
 /**
  *  Composition Root & Barrel Export
@@ -65,6 +68,9 @@ export const mailer = mailerAdapterFactory(config.mailer.strategy || "jsend");
 export const logger = loggerAdapterFactory(
   config.logger.strategy || "console-log"
 );
+export const authService = authServiceFactory(
+  config.auth.strategy || "anonymous"
+);
 
 // 1. Repositories
 export const userRepository = new UserRepository(dbAdapter);
@@ -73,7 +79,10 @@ export const reviewRepository = new ReviewRepository(dbAdapter);
 
 // 2. Services:
 export const userService = new UserService(userRepository);
-export const authService = new AuthService(userRepository, userService);
+export const authenticationService = new AccountService(
+  userRepository,
+  userService
+);
 export const productService = new ProductService(
   productRepository,
   reviewRepository
@@ -86,7 +95,10 @@ export const postService = new PostService(httpClient);
 export const httpbinService = new HttpbinService(httpClient);
 
 // 3. Controllers:
-export const userController = new UserController(userService, authService);
+export const userController = new UserController(
+  userService,
+  authenticationService
+);
 export const productController = new ProductController(productService);
 export const reviewController = new ReviewController(reviewService);
 export const postController = new PostController(postService);

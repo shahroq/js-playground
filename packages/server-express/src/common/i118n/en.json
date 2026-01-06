@@ -4,7 +4,10 @@
   "helloWorld": "Hello {{name}}!",
   "console": {
     "getAdapter": "⚙️  Getting `{{adapter}}` adapter with strategy: `{{strategy}}`",
-    "noAdapter": "❌ Unsupported `{{adapter}}` strategy: `{{strategy}}`"
+    "noAdapter": "❌ Unsupported `{{adapter}}` strategy: `{{strategy}}`",
+
+    "getProvider": "⚙️⚙️  Getting '{{module}}` service provider: `{{strategy}}`",
+    "noProvider": "❌ Unsupported `{{module}}` service provider: `{{strategy}}`"
   },
   "review": {},
   "product": {}

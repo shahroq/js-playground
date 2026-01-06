@@ -8,6 +8,7 @@ import type { HttpClientStrategy } from "./http-client/http-client.interface";
 import type { ValidationStrategy } from "./validation/types";
 import type { EnvelopeStrategy } from "./envelope/envelope.interface";
 import type { DBAdapterStrategy } from "./db-client/db-client.interface";
+import type { AuthStrategy } from "./auth/types";
 
 export type Env = "development" | "production" | "test";
 
@@ -23,6 +24,17 @@ const config = {
   port: <number>(process.env.PORT || 3000),
   app_name: <string>process.env.APP_NAME || "APP",
   version: <string>process.env.VERSION || "0.0.0",
+
+  // auth
+  auth: {
+    strategy: <AuthStrategy>process.env.AUTH_STRATEGY,
+    none: {},
+    jwt: {
+      secret: <string>(process.env.AUTH_JWT_SECRET || ""),
+      expire_in: <number>+(process.env.AUTH_JWT_EXPIRES_IN || 3600),
+    },
+    auth0: {},
+  },
 
   // debug
   debug: {
