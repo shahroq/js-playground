@@ -25,12 +25,14 @@
     "seed-test": "bun run ./src/common/seed/seeder-test.ts"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
     "@types/bun": "latest",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/fs-extra": "^11.0.4",
     "@types/http-errors": "^2.0.5",
     "@types/joi": "^17.2.3",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/lodash": "^4.17.20",
     "@types/morgan": "^1.9.10",
     "@types/nodemailer": "^7.0.4",
@@ -48,6 +50,7 @@
   "dependencies": {
     "@prisma/client": "^6.18.0",
     "axios": "^1.13.2",
+    "bcrypt": "^6.0.0",
     "class-transformer": "^0.5.1",
     "cors": "^2.8.5",
     "date-fns": "^4.1.0",
@@ -57,6 +60,7 @@
     "fs-extra": "^11.3.2",
     "http-errors": "^2.0.1",
     "joi": "^18.0.1",
+    "jsonwebtoken": "^9.0.3",
     "lodash": "^4.17.21",
     "lowdb": "^7.0.1",
     "morgan": "^1.10.1",
