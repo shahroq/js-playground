@@ -7,5 +7,5 @@ export function undefinedRoutesHandler(
   next: NextFunction
 ) {
   const msg = `Undefined Route: Can't find ${req.originalUrl} on this server.`;
-  next(AppError.NotFound(msg, { code: "ERR_NF" }));
+  return next(AppError.NotFound(msg, { code: "ERR_NF" }));
 }
