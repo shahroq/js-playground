@@ -28,12 +28,15 @@ const config = {
   // auth
   auth: {
     strategy: <AuthStrategy>process.env.AUTH_STRATEGY,
-    none: {},
+    anonymous: {},
     jwt: {
       secret: <string>(process.env.AUTH_JWT_SECRET || ""),
-      expire_in: <number>+(process.env.AUTH_JWT_EXPIRES_IN || 3600),
+      expires_in: <number>+(process.env.AUTH_JWT_EXPIRES_IN || 3600),
     },
-    auth0: {},
+    auth0: {
+      domain: <string>(process.env.AUTH_AUTH0_DOMAIN || ""),
+      audience: <number>+(process.env.AUTH_AUTH0_AUDIENCE || ""),
+    },
   },
 
   // debug

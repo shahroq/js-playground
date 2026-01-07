@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import type { UserService } from "./service";
-import type { AuthService } from "./auth.service";
+import type { AccountService } from "./account.service";
 import type { EntityId } from "@/common/types";
 import { normalizeQueryString } from "@/common/container";
 import { policyList, policyShow } from "./policy/query-object.policy";
@@ -10,7 +10,7 @@ export class UserController {
 
   constructor(
     private readonly service: UserService,
-    private readonly authService: AuthService
+    private readonly accountService: AccountService
   ) {}
 
   index = async (req: Request, res: Response) => {
@@ -54,17 +54,18 @@ export class UserController {
   };
 
   signUp = async (req: Request, res: Response) => {
-    const newItem = await this.authService.signUp(req.body);
+    const newUser = await this.accountService.signUp(req.body);
 
-    res.status(201).json({ [this.collection]: newItem });
+    res.status(201).json({ [this.collection]: newUser });
   };
 
   signIn = async (req: Request, res: Response) => {
-    await this.authService.signIn(req.body);
+    const token = await this.accountService.signIn(req.body);
+
+    res.json({ token });
   };
-  /*
+
   signOut = async (req: Request, res: Response) => {
-    await this.authService.signOut();
+    await this.accountService.signOut();
   };
-  */
 }

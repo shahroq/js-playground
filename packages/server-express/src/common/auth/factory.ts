@@ -17,6 +17,9 @@ export function authServiceFactory(strategy: AuthStrategy) {
     case "jwt":
       service = new JwtAuthService();
       break;
+    // case "auth0":
+    //   service = new Auth0AuthService();
+    //   break;
     default:
       throw new Error(t("console.noProvider", { module, strategy }));
   }

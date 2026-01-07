@@ -5,6 +5,7 @@ export enum UserRole {
   ADMIN = "ADMIN",
   EDITOR = "EDITOR",
   USER = "USER",
+  GUEST = "GUEST",
 }
 
 // raw use (from db)

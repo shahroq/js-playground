@@ -1,19 +1,16 @@
-import type { UserRole } from "@/routes/v1/users/types";
-import type { EntityId } from "../types";
+import type { IUser } from "@/routes/v1/users/types";
 
 export type AuthStrategy = "anonymous" | "jwt" | "auth0";
 
-// JWT Payload = claim
-export interface JwtPayload {
-  userId: EntityId;
-  role: UserRole;
-}
+// export type tokenUserInfo = Pick<IUser, "id" | "name" | "role">;
+
+// Token Payload = claim: info need fo rissue the token (ticket)
+export type TokenPayload = Pick<IUser, "id" | "name" | "role">;
 
 // AuthContext = decision
 // JWT payload → normalized → AuthContext
-export interface AuthContext {
-  isAuthenticated: boolean;
-  userId?: EntityId;
-  role?: UserRole;
+export type AuthContext = {
   provider: AuthStrategy;
-}
+  isAuthenticated: boolean;
+  user?: TokenPayload;
+};

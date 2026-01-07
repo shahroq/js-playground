@@ -1,14 +1,23 @@
-import type { Request } from "express";
 import type { IAuthService } from "../auth-service.interface";
-import type { AuthContext } from "../types";
+import type { AuthStrategy, TokenPayload } from "../types";
 import { UserRole } from "@/routes/v1/users/types";
 
 export class AnonymousAuthService implements IAuthService {
-  async authenticate(req: Request): Promise<AuthContext> {
+  readonly _provider = "anonymous";
+
+  issueToken(_payload: TokenPayload): string {
+    return "[Golden Ticket]";
+  }
+
+  verifyToken(_token: string): TokenPayload {
     return {
-      isAuthenticated: true,
-      provider: "anonymous",
+      id: 0,
+      name: `Bubble Boy`,
       role: UserRole.ADMIN,
     };
+  }
+
+  get provider(): AuthStrategy {
+    return this._provider;
   }
 }

@@ -1,15 +1,14 @@
-import { signToken } from "@/common/auth/jwt/jwt.utils";
-import { authService } from "./../../../common/container";
 import {
   AppError,
   config,
   UserDto,
   comparePassword,
   hashPassword,
+  authService,
 } from "@/common/container";
 import type { CreateUserDto } from "./dto/create.dto";
-import { UserRepository } from "./repository";
 import type { UserService } from "./service";
+import { UserRepository } from "./repository";
 import type { SignInDto } from "./dto/sign-in.dto";
 
 export class AccountService {
@@ -42,15 +41,15 @@ export class AccountService {
     const isValid = await comparePassword(password, user.password);
     if (!isValid) throw AppError.Unauthorized(`Invalid credentials`);
 
-    // create token
-    const token = {
-      userId: user.id,
+    // create payload
+    const payload = {
+      id: user.id,
+      name: user.name,
       role: user.role,
     };
 
-    const signedToken = authService.signToken(token);
-
-    return signedToken;
+    const accessToken = authService.issueToken(payload);
+    return accessToken;
   }
 
   async signOut() {}

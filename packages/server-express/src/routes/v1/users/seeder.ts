@@ -1,10 +1,13 @@
 import dataSource from "@root/data/data-source.json";
 import { userRepository } from "@/common/container";
+import { hashPassword } from "@/common/auth/password.utils";
+
+const password = await hashPassword(`12345`);
 
 const data = dataSource.users.map((i) => ({
   name: i.name,
   email: i.email,
-  password: "12345",
+  password,
   role: i.role.toUpperCase(),
   created_at: new Date(),
   updated_at: new Date(),

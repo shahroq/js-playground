@@ -50,7 +50,7 @@ export * from "@/common/envelope/wrap-response.middleware";
 export * from "@/common/query-object/normalize-query-string";
 export * from "@/common/query-object/default.policy";
 export * from "@/common/auth/password.utils";
-export * from "@/common/auth/auth.middleware";
+export * from "@/common/auth/middleware";
 
 /**
  *  Composition Root & Barrel Export
@@ -79,10 +79,7 @@ export const reviewRepository = new ReviewRepository(dbAdapter);
 
 // 2. Services:
 export const userService = new UserService(userRepository);
-export const authenticationService = new AccountService(
-  userRepository,
-  userService
-);
+export const accountService = new AccountService(userRepository, userService);
 export const productService = new ProductService(
   productRepository,
   reviewRepository
@@ -95,10 +92,7 @@ export const postService = new PostService(httpClient);
 export const httpbinService = new HttpbinService(httpClient);
 
 // 3. Controllers:
-export const userController = new UserController(
-  userService,
-  authenticationService
-);
+export const userController = new UserController(userService, accountService);
 export const productController = new ProductController(productService);
 export const reviewController = new ReviewController(reviewService);
 export const postController = new PostController(postService);

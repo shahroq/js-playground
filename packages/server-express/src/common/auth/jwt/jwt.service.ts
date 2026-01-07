@@ -1,46 +1,22 @@
-import type { Request } from "express";
 import jwt from "jsonwebtoken";
 import { config } from "@/common/container";
 import type { IAuthService } from "../auth-service.interface";
-import type { AuthContext, JwtPayload } from "../types";
+import type { AuthStrategy, TokenPayload } from "../types";
 
 export class JwtAuthService implements IAuthService {
-  async authenticate(req: Request): Promise<AuthContext> {
-    const authHeader = req.headers?.authorization;
+  readonly _provider = "jwt";
+  private readonly _expiresIn = config.auth.jwt.expires_in;
+  private readonly _secret = config.auth.jwt.secret;
 
-    if (!authHeader?.startsWith("Bearer "))
-      return {
-        isAuthenticated: false,
-        provider: "jwt",
-      };
-
-    const token = authHeader.split(" ")[1]!;
-
-    try {
-      const payload = this.verifyToken(token);
-
-      return {
-        isAuthenticated: true,
-        userId: payload.userId,
-        role: payload.role,
-        provider: "jwt",
-      };
-    } catch (e) {
-      return {
-        isAuthenticated: false,
-        provider: "jwt",
-      };
-    }
+  issueToken(payload: TokenPayload) {
+    return jwt.sign(payload, this._secret, { expiresIn: this._expiresIn });
   }
 
-  verifyToken(token: string): JwtPayload {
-    return jwt.verify(token, config.auth.jwt.secret) as JwtPayload;
+  verifyToken(token: string): TokenPayload {
+    return jwt.verify(token, this._secret) as TokenPayload;
   }
 
-  signToken(payload: JwtPayload) {
-    const expiresIn = config.auth.jwt.expire_in;
-    const secret = config.auth.jwt.secret;
-
-    return jwt.sign(payload, secret, { expiresIn });
+  get provider(): AuthStrategy {
+    return this._provider;
   }
 }

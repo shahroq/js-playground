@@ -12,7 +12,6 @@ import {
   AppError,
   envelopResponseHandler,
   attachSystemInfoHandler,
-  auth,
 } from "@/common/container";
 
 export const bootstrap = (): Application => {
@@ -21,7 +20,7 @@ export const bootstrap = (): Application => {
   // Enable extended query parsing
   app.set("query parser", "extended");
 
-  const beforeMWs = [express.json(), cors(), envelopResponseHandler, auth];
+  const beforeMWs = [express.json(), cors(), envelopResponseHandler];
   const afterMWs = [undefinedRoutesHandler, globalErrorHandler];
   config.logger.morgan_enabled && app.use(morgan(config.logger.morgan_format));
   config.env === "development" &&

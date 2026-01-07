@@ -8,7 +8,7 @@ Content-Type: application/json
 
 {
     "name": "Jane Doe",
-    "email": "admin09@email.com",
+    "email": "admin11@email.com",
     "password": "12345",
     "role": "USER"
 }
@@ -19,12 +19,13 @@ Content-Type: application/json
 
 {
     "email": "admin@email.com",
-    "password": "123453"
+    "password": "12345"
 }
 
 
 ### get items
 GET {{baseUrlModule}} HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkFsaWNlIEpvaG5zb24iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3Njc3ODA4OTAsImV4cCI6MTc2Nzc4NDQ5MH0.5bCVfmgNon2h0aGXiVlPwlICA3NMQcvZZR8EWaQz8Yw
 
 ### get item
 GET {{baseUrlModule}}/{{ id }} HTTP/1.1
@@ -50,3 +51,4 @@ Content-Type: application/json
 
 ### delete item
 DELETE {{baseUrlModule}}/{{ id }} HTTP/1.1
+
