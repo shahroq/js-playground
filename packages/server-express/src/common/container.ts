@@ -2,12 +2,10 @@
 import config from "./config";
 export * from "@/common/i118n/t";
 
-import { validatorHandlerFactory } from "./validation/factory";
-
 // routes
 import { UserRepository } from "@users/repository";
 import { UserService } from "@users/service";
-import { AccountService } from "@/routes/v1/users/account.service";
+import { AccountService } from "@users/account.service";
 import { UserController } from "@users/controller";
 export * from "@users/dto/create.dto";
 export * from "@users/dto/update.dto";
@@ -16,15 +14,15 @@ export * from "@users/dto/user.dto";
 import { ProductRepository } from "@products/repository";
 import { ProductService } from "@products/service";
 import { ProductController } from "@products/controller";
-export * from "@/routes/v1/products/dto/create.dto";
-export * from "@/routes/v1/products/dto/update.dto";
+export * from "@products/dto/create.dto";
+export * from "@products/dto/update.dto";
 export * from "@products/dto/product.dto";
 
 import { ReviewRepository } from "@reviews/repository";
 import { ReviewService } from "@reviews/service";
 import { ReviewController } from "@reviews/controller";
-export * from "@/routes/v1/reviews/dto/create.dto";
-export * from "@/routes/v1/reviews/dto/update.dto";
+export * from "@reviews/dto/create.dto";
+export * from "@reviews/dto/update.dto";
 export * from "@reviews/dto/review.dto";
 
 import { PostService } from "@posts/service";
@@ -54,8 +52,7 @@ export * from "@/common/auth/auth.middleware";
  */
 
 // 0. Common Services
-
-export const validate = validatorHandlerFactory(config.validation.strategy);
+export * from "@/common/validation";
 export * from "@/common/db-client";
 export * from "@/common/http-client";
 export * from "@/common/logger";
