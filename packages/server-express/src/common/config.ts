@@ -3,7 +3,7 @@ import { utils } from "./container";
 import { UserRole } from "@users/types";
 import { ReviewStatus } from "@reviews/types";
 import { LogLevel, type LoggerStrategy } from "./logger/logger.interface";
-import type { MailerStrategy } from "./mailer/mailer.interface";
+import type { MailerStrategy } from "./mailer/mailer-service.interface";
 import type { HttpClientStrategy } from "./http-client/http-client.interface";
 import type { ValidationStrategy } from "./validation/types";
 import type { EnvelopeStrategy } from "./envelope/envelope-service.interface";

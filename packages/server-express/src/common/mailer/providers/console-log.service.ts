@@ -1,7 +1,7 @@
 import { config } from "@/common/container";
-import type { IMail, IMailer } from "./mailer.interface";
+import type { IMail, IMailerService } from "../mailer-service.interface";
 
-export class ConsoleLogAdapter implements IMailer {
+export class ConsoleLogService implements IMailerService {
   constructor() {}
 
   async send(mail: IMail) {

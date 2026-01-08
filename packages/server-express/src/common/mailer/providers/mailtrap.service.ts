@@ -1,10 +1,9 @@
 import nodemailer from "nodemailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
 import { config } from "@/common/container";
+import type { IMail, IMailerService } from "../mailer-service.interface";
 
-import type { IMail, IMailer } from "./mailer.interface";
-
-export class MailtrapAdapter implements IMailer {
+export class MailtrapService implements IMailerService {
   private transporter;
 
   constructor() {

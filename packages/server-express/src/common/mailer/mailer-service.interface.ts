@@ -7,6 +7,6 @@ export interface IMail {
   html?: string;
 }
 
-export interface IMailer {
+export interface IMailerService {
   send(mail: IMail): Promise<void>;
 }

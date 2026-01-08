@@ -3,7 +3,6 @@ import config from "./config";
 import { validatorHandlerFactory } from "./validation/factory";
 import { DbClientAdapterFactory } from "./db-client/factory";
 import { createHttpClient } from "./http-client/factory";
-import { mailerAdapterFactory } from "./mailer/factory";
 import { loggerAdapterFactory } from "./logger/factory";
 
 // routes
@@ -60,11 +59,12 @@ export const dbAdapter = DbClientAdapterFactory(
   config.database.client_strategy
 );
 export const httpClient = createHttpClient(config.http_client.strategy);
-export const mailer = mailerAdapterFactory(config.mailer.strategy || "jsend");
+
 export const logger = loggerAdapterFactory(
   config.logger.strategy || "console-log"
 );
 
+export * from "@/common/mailer";
 export * from "@/common/envelope";
 export * from "@/common/hashing";
 export * from "@/common/auth";
