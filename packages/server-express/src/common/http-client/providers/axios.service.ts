@@ -1,15 +1,16 @@
 import axios, { type AxiosInstance } from "axios";
 import type {
-  IHttpClient,
+  IHttpClientService,
   HttpClientConfig,
   RequestConfig,
-} from "./http-client.interface";
+} from "../http-client-service.interface";
 
-export class AxiosAdapter implements IHttpClient {
+export class AxiosService implements IHttpClientService {
   private httpClient: AxiosInstance;
 
   constructor(baseConfig: HttpClientConfig) {
     this.httpClient = axios.create(baseConfig);
+    // this.__instanceId = crypto.randomUUID();
   }
 
   getHttpClient<T = AxiosInstance>(): T {

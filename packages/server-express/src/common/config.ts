@@ -7,7 +7,7 @@ import {
   type LoggerStrategy,
 } from "./logger/logger-service.interface";
 import type { MailerStrategy } from "./mailer/mailer-service.interface";
-import type { HttpClientStrategy } from "./http-client/http-client.interface";
+import type { HttpClientStrategy } from "./http-client/http-client-service.interface";
 import type { ValidationStrategy } from "./validation/types";
 import type { EnvelopeStrategy } from "./envelope/envelope-service.interface";
 import type { DBAdapterStrategy } from "./db-client/db-client.interface";

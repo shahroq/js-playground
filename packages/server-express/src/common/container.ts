@@ -2,7 +2,6 @@
 import config from "./config";
 import { validatorHandlerFactory } from "./validation/factory";
 import { DbClientAdapterFactory } from "./db-client/factory";
-import { createHttpClient } from "./http-client/factory";
 
 // routes
 import { UserRepository } from "@users/repository";
@@ -33,6 +32,7 @@ export * from "@posts/dto/post-dto";
 
 import { HttpbinService } from "@httpbin/service";
 import { HttpbinController } from "@httpbin/controller";
+import { httpClientService } from "./container";
 
 // re-exports
 export * as utils from "./utils/utils";
@@ -57,8 +57,8 @@ export const validate = validatorHandlerFactory(config.validation.strategy);
 export const dbAdapter = DbClientAdapterFactory(
   config.database.client_strategy
 );
-export const httpClient = createHttpClient(config.http_client.strategy);
 
+export * from "@/common/http-client";
 export * from "@/common/logger";
 export * from "@/common/mailer";
 export * from "@/common/envelope";
@@ -81,8 +81,8 @@ export const reviewService = new ReviewService(
   reviewRepository,
   productRepository
 );
-export const postService = new PostService(httpClient);
-export const httpbinService = new HttpbinService(httpClient);
+export const postService = new PostService(httpClientService);
+export const httpbinService = new HttpbinService(httpClientService);
 
 // 3. Controllers:
 export const userController = new UserController(userService, accountService);

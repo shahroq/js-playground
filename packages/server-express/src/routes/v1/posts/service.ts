@@ -1,18 +1,18 @@
 import { AppError, config, PostDto } from "@/common/container";
 import type { IPost } from "./types";
-import type { IHttpClient } from "@/common/http-client/http-client.interface";
+import type { IHttpClientService } from "@/common/http-client/http-client-service.interface";
 
 export class PostService {
   private readonly baseUrl: string;
 
-  constructor(private readonly httpClient: IHttpClient) {
+  constructor(private readonly httpClientService: IHttpClientService) {
     this.baseUrl = config.api.jsonplaceholder.url;
   }
 
   async getItems() {
     const url = `${this.baseUrl}/posts`;
 
-    const items = await this.httpClient.get<IPost[]>(url);
+    const items = await this.httpClientService.get<IPost[]>(url);
 
     return PostDto.fromMany(items);
 
@@ -26,7 +26,7 @@ export class PostService {
   async getItem(id: number) {
     const url = `${this.baseUrl}/posts/${id}`;
 
-    const item = await this.httpClient.get<IPost>(url);
+    const item = await this.httpClientService.get<IPost>(url);
     if (!item) throw AppError.NotFound();
 
     return PostDto.from(item);

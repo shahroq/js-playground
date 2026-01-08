@@ -13,7 +13,7 @@ export interface HttpClientConfig {
   headers?: Record<string, string>;
 }
 
-export interface IHttpClient {
+export interface IHttpClientService {
   getHttpClient<T = any>(): T;
   get<T = any>(url: string, config?: RequestConfig): Promise<T>;
   post<T = any>(url: string, data?: any, config?: RequestConfig): Promise<T>;
