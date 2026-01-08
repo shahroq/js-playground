@@ -1,7 +1,7 @@
 import type { Awaitable, CollectionName, EntityId } from "@/common/types";
 import type { QueryObject } from "../query-object/types";
 
-export type DBAdapterStrategy = "memory" | "file" | "lowdb" | "prisma";
+export type DbClientStrategy = "memory" | "file" | "lowdb" | "prisma";
 
 export type AuditField =
   | "created_at"
@@ -15,7 +15,7 @@ export interface CurrentContext {
   now?: () => Date; // optional for testability
 }
 
-export interface IDbClient {
+export interface IDbClientService {
   connect(): Awaitable<void>;
 
   disconnect(): Awaitable<void>;

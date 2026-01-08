@@ -1,9 +1,9 @@
-import type { IDbClient } from "@/common/db-client/db-client.interface";
+import type { IDbClientService } from "@/common/db-client/db-client-service.interface";
 import type { IProduct } from "./types";
 import { BaseRepository } from "@/common/repository/base.repository";
 
 export class ProductRepository extends BaseRepository<IProduct> {
-  constructor(dbAdapter: IDbClient) {
+  constructor(dbAdapter: IDbClientService) {
     super("products", dbAdapter);
   }
 

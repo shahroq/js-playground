@@ -1,7 +1,8 @@
 // common
 import config from "./config";
+export * from "@/common/i118n/t";
+
 import { validatorHandlerFactory } from "./validation/factory";
-import { DbClientAdapterFactory } from "./db-client/factory";
 
 // routes
 import { UserRepository } from "@users/repository";
@@ -33,6 +34,7 @@ export * from "@posts/dto/post-dto";
 import { HttpbinService } from "@httpbin/service";
 import { HttpbinController } from "@httpbin/controller";
 import { httpClientService } from "./container";
+import { dbCientService } from "@/common/db-client/index";
 
 // re-exports
 export * as utils from "./utils/utils";
@@ -52,12 +54,9 @@ export * from "@/common/auth/auth.middleware";
  */
 
 // 0. Common Services
-export * from "@/common/i118n/t";
-export const validate = validatorHandlerFactory(config.validation.strategy);
-export const dbAdapter = DbClientAdapterFactory(
-  config.database.client_strategy
-);
 
+export const validate = validatorHandlerFactory(config.validation.strategy);
+export * from "@/common/db-client";
 export * from "@/common/http-client";
 export * from "@/common/logger";
 export * from "@/common/mailer";
@@ -66,9 +65,9 @@ export * from "@/common/hashing";
 export * from "@/common/auth";
 
 // 1. Repositories
-export const userRepository = new UserRepository(dbAdapter);
-export const productRepository = new ProductRepository(dbAdapter);
-export const reviewRepository = new ReviewRepository(dbAdapter);
+export const userRepository = new UserRepository(dbCientService);
+export const productRepository = new ProductRepository(dbCientService);
+export const reviewRepository = new ReviewRepository(dbCientService);
 
 // 2. Services:
 export const userService = new UserService(userRepository);

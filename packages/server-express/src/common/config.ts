@@ -10,7 +10,7 @@ import type { MailerStrategy } from "./mailer/mailer-service.interface";
 import type { HttpClientStrategy } from "./http-client/http-client-service.interface";
 import type { ValidationStrategy } from "./validation/types";
 import type { EnvelopeStrategy } from "./envelope/envelope-service.interface";
-import type { DBAdapterStrategy } from "./db-client/db-client.interface";
+import type { DbClientStrategy } from "./db-client/db-client-service.interface";
 import type { AuthStrategy } from "./auth/types";
 import type { HashingStrategy } from "./hashing/hashing-service.interface";
 
@@ -94,7 +94,7 @@ const config = {
 
   // database
   database: {
-    client_strategy: <DBAdapterStrategy>process.env.DATABASE_CLIENT_STRATEGY,
+    client_strategy: <DbClientStrategy>process.env.DATABASE_CLIENT_STRATEGY,
     url: <string | null>process.env.DATABASE_URL,
 
     type: <string | null>null,

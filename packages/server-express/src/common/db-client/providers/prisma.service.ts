@@ -5,7 +5,10 @@ import type {
   UserDelegate,
 } from "@root/generated/prisma/models";
 import { config } from "@/common/container";
-import { buildAuditFields, type IDbClient } from "./db-client.interface";
+import {
+  buildAuditFields,
+  type IDbClientService,
+} from "../db-client-service.interface";
 import type { EntityId, CollectionName } from "@/common/types";
 import type { QueryObject } from "@/common/query-object/types";
 
@@ -22,7 +25,7 @@ type ModelName = (typeof collectionModelMap)[CollectionName];
 // type ModelName = Uncapitalize<Prisma.ModelName>;
 type ModelDelegate = ProductDelegate | ReviewDelegate | UserDelegate;
 
-export class PrismaAdapter implements IDbClient {
+export class PrismaService implements IDbClientService {
   private dbClient: PrismaClient;
   private userId: number;
 

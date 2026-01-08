@@ -1,11 +1,14 @@
 import fs from "fs-extra";
 import { config, utils } from "@/common/container";
 import { defaultData, type DatabaseSchema } from "@root/data/file-json/schema";
-import { buildAuditFields, type IDbClient } from "./db-client.interface";
-import type { CollectionName, EntityId } from "../types";
-import type { QueryObject } from "../query-object/types";
+import {
+  buildAuditFields,
+  type IDbClientService,
+} from "../db-client-service.interface";
+import type { QueryObject } from "@/common/query-object/types";
+import type { CollectionName, EntityId } from "@/common/types";
 
-export class FileAdapter implements IDbClient {
+export class FileService implements IDbClientService {
   private db: DatabaseSchema = {};
   private filePath = config.database.path ?? "";
   private defaultData: DatabaseSchema = defaultData;
