@@ -12,7 +12,7 @@ export enum LogLevel {
   DEBUG = "debug",
 }
 
-export interface ILogger {
+export interface ILoggerService {
   debug(message: string, meta?: unknown): void;
   info(message: string, meta?: unknown): void;
   warn(message: string, meta?: unknown): void;

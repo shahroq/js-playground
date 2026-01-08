@@ -1,8 +1,8 @@
 import winston from "winston";
 import { config } from "@/common/container";
-import { type ILogger } from "./logger.interface";
+import type { ILoggerService } from "../logger-service.interface";
 
-export class WinstonAdapter implements ILogger {
+export class WinstonService implements ILoggerService {
   private logger: winston.Logger;
 
   constructor() {

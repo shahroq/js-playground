@@ -6,7 +6,7 @@ import v1Router from "@/routes/v1";
 import {
   config,
   utils,
-  logger,
+  loggerService,
   globalErrorHandler,
   undefinedRoutesHandler,
   AppError,
@@ -32,7 +32,7 @@ export const bootstrap = (): Application => {
 
   // home
   app.get("/", (_: any, res: Response) => {
-    logger.info(`Here at home!`);
+    loggerService.info(`Here at home!`);
     res.send(`API Sandbox Home: Hello World [${utils.formatISO()}]`);
   });
 

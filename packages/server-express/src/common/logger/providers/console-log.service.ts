@@ -1,6 +1,6 @@
-import type { ILogger } from "./logger.interface";
+import type { ILoggerService } from "../logger-service.interface";
 
-export class ConsoleLogAdapter implements ILogger {
+export class ConsoleLogService implements ILoggerService {
   debug(message: string, meta?: unknown): void {
     console.debug(this.format("DEBUG", message, meta));
   }

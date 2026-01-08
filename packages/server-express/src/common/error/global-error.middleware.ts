@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
-import { config, logger } from "@/common/container";
+import { config, loggerService } from "@/common/container";
 import type { E } from "./types";
 
 export function globalErrorHandler(
@@ -20,7 +20,7 @@ export function globalErrorHandler(
   if (publicMessage) error.publicMessage = publicMessage;
 
   // logger
-  logger.error(publicMessage || error.message, {
+  loggerService.error(publicMessage || error.message, {
     stack: error.stack,
     path: req.originalUrl,
   });

@@ -3,7 +3,6 @@ import config from "./config";
 import { validatorHandlerFactory } from "./validation/factory";
 import { DbClientAdapterFactory } from "./db-client/factory";
 import { createHttpClient } from "./http-client/factory";
-import { loggerAdapterFactory } from "./logger/factory";
 
 // routes
 import { UserRepository } from "@users/repository";
@@ -60,10 +59,7 @@ export const dbAdapter = DbClientAdapterFactory(
 );
 export const httpClient = createHttpClient(config.http_client.strategy);
 
-export const logger = loggerAdapterFactory(
-  config.logger.strategy || "console-log"
-);
-
+export * from "@/common/logger";
 export * from "@/common/mailer";
 export * from "@/common/envelope";
 export * from "@/common/hashing";
