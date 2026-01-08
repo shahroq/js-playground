@@ -1,6 +1,7 @@
-import type { E } from "../error/types";
-import { AppError } from "../container";
-import type { IEnvelope } from "./envelope.interface";
+import type { E } from "@/common/error/types";
+
+import type { IEnvelopeService } from "../envelope-service.interface";
+import { AppError } from "@/common/container";
 
 type JsonApiStatus = "success" | "fail" | "error";
 
@@ -14,7 +15,7 @@ type JsonApiFormat =
   | { data: any } // success
   | { errors: JsonApiErrorObject[] }; // fail or error
 
-export class JsonApiAdapter implements IEnvelope {
+export class JsonApiService implements IEnvelopeService {
   constructor(
     private readonly _error?: E | null,
     private readonly _data?: any

@@ -6,7 +6,7 @@ import { LogLevel, type LoggerStrategy } from "./logger/logger.interface";
 import type { MailerStrategy } from "./mailer/mailer.interface";
 import type { HttpClientStrategy } from "./http-client/http-client.interface";
 import type { ValidationStrategy } from "./validation/types";
-import type { EnvelopeStrategy } from "./envelope/envelope.interface";
+import type { EnvelopeStrategy } from "./envelope/envelope-service.interface";
 import type { DBAdapterStrategy } from "./db-client/db-client.interface";
 import type { AuthStrategy } from "./auth/types";
 import type { HashingStrategy } from "./hashing/hashing-service.interface";

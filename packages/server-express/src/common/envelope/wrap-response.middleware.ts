@@ -1,5 +1,5 @@
 import type { Response, NextFunction } from "express";
-import { Envelope, AppError } from "@/common/container";
+import { EnvelopeService, AppError } from "@/common/container";
 import type { E } from "@/common/error/types";
 
 /**
@@ -14,9 +14,9 @@ export function envelopResponseHandler(
 
   res.json = function (body) {
     const { error, data } = extractResponse(body);
-    const envelope = new Envelope(error, data);
+    const envelopeService = new EnvelopeService(error, data);
 
-    return originalJson.call(this, envelope);
+    return originalJson.call(this, envelopeService);
   };
 
   next();

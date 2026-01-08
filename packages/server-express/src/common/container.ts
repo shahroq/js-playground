@@ -1,6 +1,5 @@
 // common
 import config from "./config";
-import { envelopeAdapterFactory } from "./envelope/factory";
 import { validatorHandlerFactory } from "./validation/factory";
 import { DbClientAdapterFactory } from "./db-client/factory";
 import { createHttpClient } from "./http-client/factory";
@@ -56,7 +55,6 @@ export * from "@/common/auth/auth.middleware";
 
 // 0. Common Services
 export * from "@/common/i118n/t";
-export const Envelope = envelopeAdapterFactory(config.envelope.strategy);
 export const validate = validatorHandlerFactory(config.validation.strategy);
 export const dbAdapter = DbClientAdapterFactory(
   config.database.client_strategy
@@ -67,8 +65,9 @@ export const logger = loggerAdapterFactory(
   config.logger.strategy || "console-log"
 );
 
-export * from "@/common/hashing/index";
-export * from "@/common/auth/index";
+export * from "@/common/envelope";
+export * from "@/common/hashing";
+export * from "@/common/auth";
 
 // 1. Repositories
 export const userRepository = new UserRepository(dbAdapter);
