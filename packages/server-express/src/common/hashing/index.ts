@@ -1,6 +1,6 @@
 import { config, t } from "@/common/container";
-import { BcryptService } from "./bcrypt.service";
 import type { IHashingService } from "./hashing-service.interface";
+import { BcryptService } from "./providers/bcrypt.service";
 
 const module = "hashing service";
 const strategy = config.hashing.strategy;

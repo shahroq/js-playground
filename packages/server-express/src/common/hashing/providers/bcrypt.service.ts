@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import type { IHashingService } from "./hashing-service.interface";
+import type { IHashingService } from "../hashing-service.interface";
 
 const SALT_ROUNDS = 10;
 

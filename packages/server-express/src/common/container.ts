@@ -36,7 +36,6 @@ export * from "@posts/dto/post-dto";
 
 import { HttpbinService } from "@httpbin/service";
 import { HttpbinController } from "@httpbin/controller";
-import { authServiceFactory } from "./auth/factory";
 
 // re-exports
 export * as utils from "./utils/utils";
@@ -49,7 +48,7 @@ export * from "@/common/envelope/attach-system-data.middleware";
 export * from "@/common/envelope/wrap-response.middleware";
 export * from "@/common/query-object/normalize-query-string";
 export * from "@/common/query-object/default.policy";
-export * from "@/common/auth/middleware";
+export * from "@/common/auth/auth.middleware";
 
 /**
  *  Composition Root & Barrel Export
@@ -67,10 +66,9 @@ export const mailer = mailerAdapterFactory(config.mailer.strategy || "jsend");
 export const logger = loggerAdapterFactory(
   config.logger.strategy || "console-log"
 );
-export const authService = authServiceFactory(
-  config.auth.strategy || "anonymous"
-);
+
 export * from "@/common/hashing/index";
+export * from "@/common/auth/index";
 
 // 1. Repositories
 export const userRepository = new UserRepository(dbAdapter);
