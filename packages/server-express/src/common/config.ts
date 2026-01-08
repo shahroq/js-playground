@@ -9,6 +9,7 @@ import type { ValidationStrategy } from "./validation/types";
 import type { EnvelopeStrategy } from "./envelope/envelope.interface";
 import type { DBAdapterStrategy } from "./db-client/db-client.interface";
 import type { AuthStrategy } from "./auth/types";
+import type { HashingStrategy } from "./hashing/hashing-service.interface";
 
 export type Env = "development" | "production" | "test";
 
@@ -24,6 +25,11 @@ const config = {
   port: <number>(process.env.PORT || 3000),
   app_name: <string>process.env.APP_NAME || "APP",
   version: <string>process.env.VERSION || "0.0.0",
+
+  // hashing
+  hashing: {
+    strategy: <HashingStrategy>process.env.HASHING_STRATEGY,
+  },
 
   // auth
   auth: {

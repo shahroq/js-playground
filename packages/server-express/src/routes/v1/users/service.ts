@@ -5,6 +5,7 @@ import {
   CreateUserDto,
   UpdateUserDto,
   PaginationSummaryDto,
+  hashingService,
 } from "@/common/container";
 import type { EntityId } from "@/common/types";
 import { UserRepository } from "./repository";
@@ -36,6 +37,7 @@ export class UserService {
     if (!createItemDto?.role)
       createItemDto = {
         ...createItemDto,
+        password: await hashingService.hash(createItemDto.password),
         role: config.default.user_role,
       };
 

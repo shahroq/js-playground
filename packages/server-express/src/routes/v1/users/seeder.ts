@@ -1,8 +1,7 @@
 import dataSource from "@root/data/data-source.json";
-import { userRepository } from "@/common/container";
-import { hashPassword } from "@/common/auth/password.utils";
+import { hashingService, userRepository } from "@/common/container";
 
-const password = await hashPassword(`12345`);
+const password = await hashingService.hash(`12345`);
 
 const data = dataSource.users.map((i) => ({
   name: i.name,

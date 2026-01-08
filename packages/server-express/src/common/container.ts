@@ -49,7 +49,6 @@ export * from "@/common/envelope/attach-system-data.middleware";
 export * from "@/common/envelope/wrap-response.middleware";
 export * from "@/common/query-object/normalize-query-string";
 export * from "@/common/query-object/default.policy";
-export * from "@/common/auth/password.utils";
 export * from "@/common/auth/middleware";
 
 /**
@@ -71,6 +70,7 @@ export const logger = loggerAdapterFactory(
 export const authService = authServiceFactory(
   config.auth.strategy || "anonymous"
 );
+export * from "@/common/hashing/index";
 
 // 1. Repositories
 export const userRepository = new UserRepository(dbAdapter);

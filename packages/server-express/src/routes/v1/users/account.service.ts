@@ -2,8 +2,7 @@ import {
   AppError,
   config,
   UserDto,
-  comparePassword,
-  hashPassword,
+  hashingService,
   authService,
 } from "@/common/container";
 import type { CreateUserDto } from "./dto/create.dto";
@@ -21,7 +20,7 @@ export class AccountService {
     // force user role as USER
     signUpDto = {
       ...signUpDto,
-      password: await hashPassword(signUpDto.password),
+      password: await hashingService.hash(signUpDto.password),
       role: config.default.user_role,
     };
     const newItem = await this.userService.createItem(signUpDto);
@@ -38,7 +37,7 @@ export class AccountService {
     const user = await this.repository.findOne({ filter: { email } });
     if (!user) throw AppError.Unauthorized(`Invalid credentials`);
 
-    const isValid = await comparePassword(password, user.password);
+    const isValid = await hashingService.compare(password, user.password);
     if (!isValid) throw AppError.Unauthorized(`Invalid credentials`);
 
     // create payload

@@ -6,8 +6,8 @@
     "getAdapter": "⚙️  Getting `{{adapter}}` adapter with strategy: `{{strategy}}`",
     "noAdapter": "❌ Unsupported `{{adapter}}` strategy: `{{strategy}}`",
 
-    "getProvider": "⚙️⚙️  Getting '{{module}}` service provider: `{{strategy}}`",
-    "noProvider": "❌ Unsupported `{{module}}` service provider: `{{strategy}}`"
+    "getProvider": "⚙️⚙️  Getting {{module}} provider: `{{strategy}}`",
+    "noProvider": "❌ Unsupported {{module}} provider: `{{strategy}}`"
   },
   "review": {},
   "product": {}
