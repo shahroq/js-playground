@@ -1,4 +1,3 @@
-import type { NormQuery } from "@/common/query/types";
 import type { EntityId } from "@/common/types";
 
 export enum UserRole {
@@ -21,4 +20,4 @@ export interface IUser {
   updated_by: number;
 }
 
-export interface IUserQuery extends NormQuery {}
+// export interface IUserQuery extends NormQuery {}
