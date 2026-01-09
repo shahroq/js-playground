@@ -1,8 +1,9 @@
 // common
 import config from "./config";
+export { config };
 export * from "@/common/i118n/t";
 
-// routes
+// routes: users/products/reviews
 import { UserRepository } from "@users/repository";
 import { UserService } from "@users/service";
 import { AccountService } from "@users/account.service";
@@ -51,14 +52,13 @@ export * from "@/common/validation/validate.middleware";
 /**
  *  Composition Root & Barrel Export
  */
-
 // 0. Common Services
-export * from "@/common/validation";
 export * from "@/common/db-client";
 export * from "@/common/http-client";
+export * from "@/common/validation";
+export * from "@/common/envelope";
 export * from "@/common/logger";
 export * from "@/common/mailer";
-export * from "@/common/envelope";
 export * from "@/common/hashing";
 export * from "@/common/auth";
 
@@ -87,6 +87,3 @@ export const productController = new ProductController(productService);
 export const reviewController = new ReviewController(reviewService);
 export const postController = new PostController(postService);
 export const httpbinController = new HttpbinController(httpbinService);
-
-// Export all dependencies as a single container object
-export { config };

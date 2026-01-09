@@ -2,6 +2,7 @@
   "lang": "en",
   "locale": "en-US",
   "helloWorld": "Hello {{name}}!",
+
   "console": {
     "getProvider": "⚙️  Getting {{module}} provider: `{{strategy}}`",
     "noProvider": "❌ Unsupported {{module}} provider: `{{strategy}}`"
