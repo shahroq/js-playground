@@ -7,14 +7,14 @@ const strategy = config.http_client.strategy;
 
 let provider: IHttpClientService;
 
-console.log(t("console.getProvider", { module, strategy }));
+console.log(t("CONSOLE.GET_PROVIDER", { module, strategy }));
 
 switch (strategy) {
   case "axios":
     provider = new AxiosService({ timeout: 3000 });
     break;
   default:
-    throw new Error(t("console.noProvider", { module, strategy }));
+    throw new Error(t("CONSOLE.NO_PROVIDER", { module, strategy }));
 }
 
 export { provider as httpClientService };

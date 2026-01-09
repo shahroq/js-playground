@@ -6,7 +6,7 @@ import { WinstonService } from "./providers/winston.service";
 const module = "logger service";
 const strategy = config.logger.strategy;
 
-console.log(t("console.getProvider", { module, strategy }));
+console.log(t("CONSOLE.GET_PROVIDER", { module, strategy }));
 
 let provider: ILoggerService;
 switch (strategy) {
@@ -17,7 +17,7 @@ switch (strategy) {
     provider = new WinstonService();
     break;
   default:
-    throw new Error(t("console.noProvider", { module, strategy }));
+    throw new Error(t("CONSOLE.NO_PROVIDER", { module, strategy }));
 }
 
 export { provider as loggerService };

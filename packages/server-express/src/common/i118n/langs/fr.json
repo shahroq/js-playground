@@ -1,0 +1,13 @@
+{
+  "LANG": "fr",
+  "LOCALE": "fr-FR",
+  "HELLO": "Bonjour {name}!",
+
+  "CONSOLE": {
+    "GET_PROVIDER": "⚙️  Getting {module} provider: `{strategy}`",
+    "NO_PROVIDER": "❌ Unsupported {module} provider: `{strategy}`"
+  },
+
+  "REVIEW": {},
+  "PRODUCT": {}
+}

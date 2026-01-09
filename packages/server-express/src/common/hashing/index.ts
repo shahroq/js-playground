@@ -5,7 +5,7 @@ import { BcryptService } from "./providers/bcrypt.service";
 const module = "hashing service";
 const strategy = config.hashing.strategy;
 
-console.log(t("console.getProvider", { module, strategy }));
+console.log(t("CONSOLE.GET_PROVIDER", { module, strategy }));
 
 let provider: IHashingService;
 switch (strategy) {
@@ -13,7 +13,7 @@ switch (strategy) {
     provider = new BcryptService();
     break;
   default:
-    throw new Error(t("console.noProvider", { module, strategy }));
+    throw new Error(t("CONSOLE.NO_PROVIDER", { module, strategy }));
 }
 
 export { provider as hashingService };

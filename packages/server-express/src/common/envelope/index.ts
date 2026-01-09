@@ -8,7 +8,7 @@ type EnvelopeServiceProvider = new (...args: any[]) => IEnvelopeService;
 const module = "envelope service";
 const strategy = config.envelope.strategy;
 
-console.log(t("console.getProvider", { module, strategy }));
+console.log(t("CONSOLE.GET_PROVIDER", { module, strategy }));
 
 let provider: EnvelopeServiceProvider;
 switch (strategy) {
@@ -19,7 +19,7 @@ switch (strategy) {
     provider = JsonApiService;
     break;
   default:
-    throw new Error(t("console.noProvider", { module, strategy }));
+    throw new Error(t("CONSOLE.NO_PROVIDER", { module, strategy }));
 }
 
 export { provider as EnvelopeService };

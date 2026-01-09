@@ -8,7 +8,7 @@ import { PrismaService } from "./providers/prisma.service";
 const module = "db client service";
 const strategy = config.database.client_strategy;
 
-console.log(t("console.getProvider", { module, strategy }));
+console.log(t("CONSOLE.GET_PROVIDER", { module, strategy }));
 
 // add identifier here (filepath, or db engine name)?
 let provider: IDbClientService;
@@ -29,7 +29,7 @@ switch (strategy) {
     provider = new PrismaService();
     break;
   default:
-    throw new Error(t("console.noProvider", { module, strategy }));
+    throw new Error(t("CONSOLE.NO_PROVIDER", { module, strategy }));
 }
 provider.connect();
 

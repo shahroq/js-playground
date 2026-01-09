@@ -6,7 +6,7 @@ import { MailtrapService } from "./providers/mailtrap.service";
 const module = "mailer service";
 const strategy = config.mailer.strategy;
 
-console.log(t("console.getProvider", { module, strategy }));
+console.log(t("CONSOLE.GET_PROVIDER", { module, strategy }));
 
 let provider: IMailerService;
 switch (strategy) {
@@ -17,7 +17,7 @@ switch (strategy) {
     provider = new MailtrapService();
     break;
   default:
-    throw new Error(t("console.noProvider", { module, strategy }));
+    throw new Error(t("CONSOLE.NO_PROVIDER", { module, strategy }));
 }
 
 export { provider as mailerService };

@@ -7,7 +7,7 @@ import { ZodService } from "./zod/zod.service.ts";
 const module = "validation service";
 const strategy = config.validation.strategy;
 
-console.log(t("console.getProvider", { module, strategy }));
+console.log(t("CONSOLE.GET_PROVIDER", { module, strategy }));
 
 let provider: IValidationService;
 switch (strategy) {
@@ -21,7 +21,7 @@ switch (strategy) {
     provider = new ZodService();
     break;
   default:
-    throw new Error(t("console.noProvider", { module, strategy }));
+    throw new Error(t("CONSOLE.NO_PROVIDER", { module, strategy }));
 }
 
 export { provider as validationService };
