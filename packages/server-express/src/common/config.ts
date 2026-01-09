@@ -201,34 +201,4 @@ export function getSystemInfo() {
   return system.join(":");
 }
 
-/*
-{
-  root_path: "/Users/shahroq/code/sandbox/ts-projects/sandbox-api-design-2025/packages/server",
-  data_path: "/Users/shahroq/code/sandbox/ts-projects/sandbox-api-design-2025/packages/server/data",
-  version: "1.0.0",
-  env: "development",
-  base_url: "http://localhost",
-  port: 3000,
-  debug: true,
-  app_response_strategy: "jsend",
-  validation_strategy: "zod",
-  database.type: "sqlite",
-  database.url: "file:./database.db",
-  database.name: "database",
-  database.path: "/Users/shahroq/code/sandbox/ts-projects/sandbox-api-design-2025/packages/server/data/prisma-sqlite/database.db",
-  database.adapter_strategy: "prisma",
-  http_client_strategy: "axios",
-  api_url_jsonplaceholder: "https://jsonplaceholder.typicode.com",
-}
-*/
-// set test env
-/*
-dotenv.config({ path: ".env.test.local" });
-console.log(process.env);
-config.test = {
-  database.filname: process.env.Db_FILENAME || undefined, // only for file-based strategies
-  database.url: process.env.Db_URL, // only for db engines
-};
-*/
-
 export default config;

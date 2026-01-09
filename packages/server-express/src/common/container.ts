@@ -83,10 +83,7 @@ export const httpbinService = new HttpbinService(httpClientService);
 
 // 3. Controllers:
 export const userController = new UserController(userService);
-export const accountController = new AccountController(
-  accountService,
-  userService
-);
+export const accountController = new AccountController(accountService);
 export const productController = new ProductController(productService);
 export const reviewController = new ReviewController(reviewService);
 export const postController = new PostController(postService);

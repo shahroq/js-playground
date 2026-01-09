@@ -28,14 +28,18 @@ export class ReviewRepository extends BaseRepository<IReview> {
   // async findAllByUserId(userId: EntityId): Promise<Review[]> {}
 
   async average(queryObject: QueryObject): Promise<number | null> {
-    return this.dbAdapter.avg<IReview>(this.collection, queryObject, "rating");
+    return this.dbClientService.avg<IReview>(
+      this.collection,
+      queryObject,
+      "rating"
+    );
   }
 
   async updateStatus(
     id: EntityId,
     status: ReviewStatus
   ): Promise<IReview | null> {
-    return await this.dbAdapter.update<IReview>(this.collection, id, {
+    return await this.dbClientService.update<IReview>(this.collection, id, {
       status,
     });
   }

@@ -3,8 +3,8 @@ import type { IProduct } from "./types";
 import { BaseRepository } from "@/common/repository/base.repository";
 
 export class ProductRepository extends BaseRepository<IProduct> {
-  constructor(dbAdapter: IDbClientService) {
-    super("products", dbAdapter);
+  constructor(dbClientService: IDbClientService) {
+    super("products", dbClientService);
   }
 
   /*

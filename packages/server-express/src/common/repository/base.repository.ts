@@ -5,38 +5,38 @@ import type { QueryObject } from "../query-object/types";
 export abstract class BaseRepository<T> {
   constructor(
     protected readonly collection: CollectionName,
-    protected readonly dbAdapter: IDbClientService
+    protected readonly dbClientService: IDbClientService
   ) {}
 
   async findAll(queryObject: QueryObject): Promise<T[]> {
-    return this.dbAdapter.findAll<T>(this.collection, queryObject);
+    return this.dbClientService.findAll<T>(this.collection, queryObject);
   }
 
   async findOne(queryObject: QueryObject): Promise<T | null> {
-    return this.dbAdapter.findOne<T>(this.collection, queryObject);
+    return this.dbClientService.findOne<T>(this.collection, queryObject);
   }
 
   async findById(id: EntityId): Promise<T | null> {
-    return this.dbAdapter.findById<T>(this.collection, id);
+    return this.dbClientService.findById<T>(this.collection, id);
   }
 
   async create(payload: T): Promise<T> {
-    return await this.dbAdapter.create<T>(this.collection, payload);
+    return await this.dbClientService.create<T>(this.collection, payload);
   }
 
   async update(id: EntityId, payload: Partial<T>): Promise<T | null> {
-    return await this.dbAdapter.update<T>(this.collection, id, payload);
+    return await this.dbClientService.update<T>(this.collection, id, payload);
   }
 
   async delete(id: EntityId): Promise<boolean> {
-    return await this.dbAdapter.delete(this.collection, id);
+    return await this.dbClientService.delete(this.collection, id);
   }
 
   async deleteMany(queryObject: QueryObject): Promise<number> {
-    return await this.dbAdapter.deleteMany(this.collection, queryObject);
+    return await this.dbClientService.deleteMany(this.collection, queryObject);
   }
 
   async count(queryObject: QueryObject): Promise<number> {
-    return this.dbAdapter.count<T>(this.collection, queryObject);
+    return this.dbClientService.count<T>(this.collection, queryObject);
   }
 }

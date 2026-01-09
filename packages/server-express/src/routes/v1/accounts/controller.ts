@@ -5,10 +5,7 @@ import type { AccountService } from "./service";
 export class AccountController {
   private collection = "user";
 
-  constructor(
-    private readonly service: AccountService,
-    private readonly userService: UserService
-  ) {}
+  constructor(private readonly service: AccountService) {}
 
   signUp = async (req: Request, res: Response) => {
     const newUser = await this.service.signUp(req.body);
