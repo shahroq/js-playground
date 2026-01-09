@@ -5,10 +5,10 @@ import {
   hashingService,
   authService,
 } from "@/common/container";
-import type { CreateUserDto } from "./dto/create.dto";
-import type { UserService } from "./service";
-import { UserRepository } from "./repository";
-import type { SignInDto } from "./dto/sign-in.dto";
+import type { CreateUserDto } from "../users/dto/create.dto";
+import type { UserService } from "../users/service";
+import { UserRepository } from "../users/repository";
+import type { SignInDto } from "../users/dto/sign-in.dto";
 
 export class AccountService {
   constructor(

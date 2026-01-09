@@ -1,6 +1,5 @@
 import type { Request, Response } from "express";
 import type { UserService } from "./service";
-import type { AccountService } from "./account.service";
 import type { EntityId } from "@/common/types";
 import { normalizeQueryString } from "@/common/container";
 import { policyList, policyShow } from "./policy/query-object.policy";
@@ -8,10 +7,7 @@ import { policyList, policyShow } from "./policy/query-object.policy";
 export class UserController {
   private collection = "user";
 
-  constructor(
-    private readonly service: UserService,
-    private readonly accountService: AccountService
-  ) {}
+  constructor(private readonly service: UserService) {}
 
   index = async (req: Request, res: Response) => {
     const queryObject = normalizeQueryString(req.query, policyList);
@@ -51,21 +47,5 @@ export class UserController {
     await this.service.deleteItem(req.params.id as EntityId);
 
     res.status(200).json({ message: `${this.collection} deleted.` });
-  };
-
-  signUp = async (req: Request, res: Response) => {
-    const newUser = await this.accountService.signUp(req.body);
-
-    res.status(201).json({ [this.collection]: newUser });
-  };
-
-  signIn = async (req: Request, res: Response) => {
-    const token = await this.accountService.signIn(req.body);
-
-    res.json({ token });
-  };
-
-  signOut = async (req: Request, res: Response) => {
-    await this.accountService.signOut();
   };
 }

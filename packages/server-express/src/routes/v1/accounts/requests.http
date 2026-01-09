@@ -1,0 +1,23 @@
+@baseUrl = http://localhost:3001
+@baseUrlModule = {{baseUrl}}
+
+### login
+POST {{baseUrlModule}}/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "admin@email.com",
+    "password": "12345"
+}
+
+### register
+POST {{baseUrlModule}}/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Jane Doe",
+    "email": "admin@email.com",
+    "password": "12345",
+    "role": "USER"
+}
+

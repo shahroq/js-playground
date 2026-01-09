@@ -1,6 +1,6 @@
 import express, { Router } from "express";
-
 import root from "./root";
+import account from "./accounts";
 import users from "./users";
 import products from "./products";
 import reviews from "./reviews";
@@ -10,6 +10,7 @@ import httpbin from "./httpbin";
 const v1Router: Router = express.Router();
 
 v1Router.use("/", root);
+v1Router.use("/", account);
 // TODO: factor /api/v1 in
 v1Router.use("/api/v1/users", users);
 v1Router.use("/api/v1/products", products);

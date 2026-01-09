@@ -31,6 +31,7 @@
       "@/*": ["./src/*"],
       "@root/*": ["./*"],
       "@users/*": ["./src/routes/v1/users/*"],
+      "@accounts/*": ["./src/routes/v1/accounts/*"],
       "@products/*": ["./src/routes/v1/products/*"],
       "@reviews/*": ["./src/routes/v1/reviews/*"],
       "@posts/*": ["./src/routes/v1/posts/*"],
