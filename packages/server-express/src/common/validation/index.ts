@@ -1,27 +1,27 @@
 import { config, t } from "@/common/container.ts";
-import type { ValidatorHandler } from "./types.ts";
-import { joiValidatorHandler } from "./joi/joi-validator.middleware.ts";
-import { zodValidatorHandler } from "./zod/zod-validator.middleware.ts";
-import { expressValidatorHandler } from "./express-validator/express-validator.middleware.ts";
+import type { IValidationService } from "./validation-service.interface.ts";
+import { ExpressValidatorService } from "./express-validator/express-validator.service.ts";
+import { JoiService } from "./joi/joi.service.ts";
+import { ZodService } from "./zod/zod.service.ts";
 
 const module = "validation service";
 const strategy = config.validation.strategy;
 
 console.log(t("console.getProvider", { module, strategy }));
 
-let provider: ValidatorHandler;
+let provider: IValidationService;
 switch (strategy) {
   case "express-validator":
-    provider = expressValidatorHandler;
+    provider = new ExpressValidatorService();
     break;
   case "joi":
-    provider = joiValidatorHandler;
+    provider = new JoiService();
     break;
   case "zod":
-    provider = zodValidatorHandler;
+    provider = new ZodService();
     break;
   default:
     throw new Error(t("console.noProvider", { module, strategy }));
 }
 
-export { provider as validate };
+export { provider as validationService };

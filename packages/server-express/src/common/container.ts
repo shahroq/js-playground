@@ -46,6 +46,7 @@ export * from "@/common/envelope/wrap-response.middleware";
 export * from "@/common/query-object/normalize-query-string";
 export * from "@/common/query-object/default.policy";
 export * from "@/common/auth/auth.middleware";
+export * from "@/common/validation/validate.middleware";
 
 /**
  *  Composition Root & Barrel Export

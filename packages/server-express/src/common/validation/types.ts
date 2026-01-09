@@ -31,11 +31,3 @@ export interface ValidationSchema/Payload {
 export type ValidatorHandler = (
   action: ValidationAction
 ) => (req: Request, res: Response, next: NextFunction) => void | Promise<void>;
-
-/*
-export interface IValidatorMiddleware {
-  validate(
-    action: Action
-  ): (req: Request, res: Response, next: NextFunction) => void | Promise<void>;
-}
-*/

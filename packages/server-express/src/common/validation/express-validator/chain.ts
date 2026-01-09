@@ -44,6 +44,14 @@ export const updateUser = {
   ],
 };
 
+export const loginUser = {
+  params: sharedChains.findOne, // assuming express-validator params
+  body: [
+    body("email").optional().isEmail().normalizeEmail(),
+    body("password").optional().isString().isLength({ min: 5, max: 128 }),
+  ],
+};
+
 /**
  * Product Validation Chains
  */
@@ -100,6 +108,13 @@ const updateReview = [
  * Export Combined Chains
  */
 export const chains = {
+  users: {
+    ...sharedChains,
+    create: createUser,
+    update: updateUser,
+    delete: sharedChains.findOne,
+    login: loginUser,
+  },
   products: {
     ...sharedChains,
     create: createProduct,
