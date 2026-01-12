@@ -22,7 +22,7 @@ export class ZodService implements IValidationService {
     }
   }
 
-  private getErrorDetails(error: any): ErrorDetail[] {
+  private getErrorDetails(error: ZodError): ErrorDetail[] {
     const details = error.issues.map((issue) => ({
       path: issue.path.map((p) => String(p)).join("."),
       message: issue.message,

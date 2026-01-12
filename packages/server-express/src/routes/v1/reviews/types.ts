@@ -7,7 +7,7 @@ export enum ReviewStatus {
   REJECTED = "REJECTED",
 }
 
-// raw review (from db)
+// raw review (from db): entity(?)
 export interface IReview {
   id: EntityId;
   product_id: number;

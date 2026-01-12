@@ -29,7 +29,7 @@ export class ExpressValidatorService implements IValidationService {
     }
   }
 
-  private getErrorDetails(error: Result): ErrorDetail[] {
+  private getErrorDetails(errors: Result): ErrorDetail[] {
     const details = errors.array().map((error) => ({
       path: "path" in error ? error.path : "",
       message: error.msg,
