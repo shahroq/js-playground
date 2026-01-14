@@ -1,12 +1,12 @@
 import fs from "fs-extra";
 import { config, utils } from "@/common/container";
+import type { QueryObject } from "@/common/query-object/types";
+import type { CollectionName, EntityId, hasId } from "@/common/types";
 import { defaultData, type DatabaseSchema } from "@root/data/file-json/schema";
 import {
   buildAuditFields,
   type IDbClientService,
 } from "../db-client-service.interface";
-import type { QueryObject } from "@/common/query-object/types";
-import type { CollectionName, EntityId } from "@/common/types";
 
 export class FileService implements IDbClientService {
   private db: DatabaseSchema = {};
@@ -60,7 +60,7 @@ export class FileService implements IDbClientService {
     return this.findOne<T>(collection, { filter: { id } });
   }
 
-  async create<T extends { id?: any }>(collection: CollectionName, data: T) {
+  async create<T extends hasId>(collection: CollectionName, data: T) {
     const m = await this.getModel(collection);
 
     const newItem = {

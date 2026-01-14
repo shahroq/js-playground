@@ -24,10 +24,10 @@ const config = {
 
   // basics
   env: <Env>process.env.NODE_ENV || "development",
-  base_url: <string>process.env.BASE_URL,
-  port: <number>(process.env.PORT || 3000),
-  app_name: <string>process.env.APP_NAME || "APP",
-  version: <string>process.env.VERSION || "0.0.0",
+  base_url: process.env.BASE_URL,
+  port: +(process.env.PORT || 3000),
+  app_name: process.env.APP_NAME || "APP",
+  version: process.env.VERSION || "0.0.0",
 
   // hashing
   hashing: {
@@ -39,41 +39,35 @@ const config = {
     strategy: <AuthStrategy>process.env.AUTH_STRATEGY,
     anonymous: {},
     jwt: {
-      secret: <string>(process.env.AUTH_JWT_SECRET || ""),
-      expires_in: <number>+(process.env.AUTH_JWT_EXPIRES_IN || 3600),
+      secret: process.env.AUTH_JWT_SECRET || "",
+      expires_in: +(process.env.AUTH_JWT_EXPIRES_IN || 3600),
     },
     auth0: {
       domain: <string>(process.env.AUTH_AUTH0_DOMAIN || ""),
-      audience: <number>+(process.env.AUTH_AUTH0_AUDIENCE || ""),
+      audience: <string>(process.env.AUTH_AUTH0_AUDIENCE || ""),
     },
   },
 
   // debug
   debug: {
-    show_thrown_errors: <boolean>(
-      !!(process.env.DEBUG_SHOW_THROWN_ERROR === "true")
-    ),
-    show_executed_sql: <boolean>(
-      !!(process.env.DEBUG_SHOW_EXECUTED_SQL === "true")
-    ),
+    show_thrown_errors: !!(process.env.DEBUG_SHOW_THROWN_ERROR === "true"),
+    show_executed_sql: !!(process.env.DEBUG_SHOW_EXECUTED_SQL === "true"),
   },
 
   // logger
   logger: {
     strategy: <LoggerStrategy>process.env.LOGGER_strategy || "console-log",
     level: <LogLevel>process.env.LOGGER_LEVEL || LogLevel.INFO,
-    morgan_enabled: <boolean>!!(process.env.LOGGER_MORGAN_ENABLED === "true"),
-    morgan_format: <string>process.env.LOGGER_MORAGN_FORMAT || "tiny",
+    morgan_enabled: !!(process.env.LOGGER_MORGAN_ENABLED === "true"),
+    morgan_format: process.env.LOGGER_MORAGN_FORMAT || "tiny",
   },
 
   // defaults
   default: {
     user_role: (process.env.DEFAULT_USER_ROLE as UserRole) || UserRole.USER,
-    user_id: <number>+(process.env.DEFAULT_USER_ID || 1), // use it till auth is not implemented
-    pagination_limit: <number>+(process.env.DEFAULT_PAGINATION_LIMIT || 10),
-    pagination_max_limit: <number>(
-      +(process.env.DEFAULT_PAGINATION_MAX_LIMIT || 20)
-    ),
+    user_id: +(process.env.DEFAULT_USER_ID || 1), // use it till auth is not implemented
+    pagination_limit: +(process.env.DEFAULT_PAGINATION_LIMIT || 10),
+    pagination_max_limit: +(process.env.DEFAULT_PAGINATION_MAX_LIMIT || 20),
     review_status:
       (process.env.DEFAULT_REVIEW_STATUS as ReviewStatus) ||
       ReviewStatus.PENDING,
@@ -82,8 +76,8 @@ const config = {
   // app-envelope (response)
   envelope: {
     strategy: <EnvelopeStrategy>process.env.ENVELOPE_STRATEGY || "jsend",
-    include_system_info: <boolean>(
-      !!(process.env.ENVELOPE_INCLUDE_SYSTEM_INFO === "true")
+    include_system_info: !!(
+      process.env.ENVELOPE_INCLUDE_SYSTEM_INFO === "true"
     ),
   },
 
@@ -95,7 +89,7 @@ const config = {
   // database
   database: {
     client_strategy: <DbClientStrategy>process.env.DATABASE_CLIENT_STRATEGY,
-    url: <string | null>process.env.DATABASE_URL,
+    url: process.env.DATABASE_URL || "",
 
     type: <string | null>null,
     name: <string | null>null,
@@ -105,36 +99,34 @@ const config = {
   // http-client
   http_client: {
     strategy: <HttpClientStrategy>process.env.HTTP_CLIENT_STRATEGY,
-    api_url_jsonplaceholder: <string>(
-      process.env.HTTP_CLIENT_API_URL_JSONPLACEHOLDER
-    ),
-    api_url_restfulapi: <string>process.env.HTTP_CLIENT_API_URL_RESTFULAPI,
+    api_url_jsonplaceholder: process.env.HTTP_CLIENT_API_URL_JSONPLACEHOLDER,
+    api_url_restfulapi: process.env.HTTP_CLIENT_API_URL_RESTFULAPI,
   },
 
   // api infos
   api: {
     jsonplaceholder: {
-      url: <string>process.env.API_JSONPLACEHOLDER_URL,
+      url: process.env.API_JSONPLACEHOLDER_URL,
     },
     httpbin: {
-      url: <string>process.env.API_HTTPBIN_URL,
+      url: process.env.API_HTTPBIN_URL,
     },
     restfulapi: {
-      url: <string>process.env.API_RESTFULAPI_URL,
+      url: process.env.API_RESTFULAPI_URL,
     },
   },
 
   // mailer
   mailer: {
     strategy: <MailerStrategy>process.env.MAILER_STRATEGY || "console-log",
-    protocol: <string>process.env.MAILER_PROTOCOL || "smpt",
-    host: <string>process.env.MAILER_HOST || "",
-    port: <number>(process.env.MAILER_PORT || 0),
-    username: <string>process.env.MAILER_USERNAME || "",
-    password: <string>process.env.MAILER_PASSWORD || "",
-    admin_email: <string>process.env.MAILER_ADMIN_EMAIL || "",
+    protocol: process.env.MAILER_PROTOCOL || "smpt",
+    host: process.env.MAILER_HOST || "",
+    port: +(process.env.MAILER_PORT || 0),
+    username: process.env.MAILER_USERNAME || "",
+    password: process.env.MAILER_PASSWORD || "",
+    admin_email: process.env.MAILER_ADMIN_EMAIL || "",
 
-    mailtrap_api_token: <string>process.env.MAILTRAP_API_TOKEN || "",
+    mailtrap_api_token: process.env.MAILTRAP_API_TOKEN || "",
   },
 
   // overall system info, to display on envelop if needed (dev env)

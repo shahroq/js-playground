@@ -9,7 +9,10 @@ export function add(a: number, b: number) {
 /**
  * Coerce a value to the target type
  */
-export function coerce(value: any, targetType: string): any {
+export function coerce(
+  value: string | number | boolean,
+  targetType: string
+): any {
   switch (targetType) {
     case "number":
       const num = Number(value);

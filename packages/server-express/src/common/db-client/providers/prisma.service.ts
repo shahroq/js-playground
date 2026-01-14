@@ -1,16 +1,16 @@
 import { PrismaClient, Prisma } from "@root/generated/prisma/client";
+import { config } from "@/common/container";
+import type { EntityId, CollectionName } from "@/common/types";
+import type { QueryObject } from "@/common/query-object/types";
 import type {
   ProductDelegate,
   ReviewDelegate,
   UserDelegate,
 } from "@root/generated/prisma/models";
-import { config } from "@/common/container";
 import {
   buildAuditFields,
   type IDbClientService,
 } from "../db-client-service.interface";
-import type { EntityId, CollectionName } from "@/common/types";
-import type { QueryObject } from "@/common/query-object/types";
 
 const collectionModelMap: Record<
   CollectionName,

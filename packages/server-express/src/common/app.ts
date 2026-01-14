@@ -1,7 +1,6 @@
-import express from "express";
+import express, { type Application } from "express";
 import cors from "cors";
 import morgan from "morgan";
-import type { Application } from "express";
 import v1Router from "@/routes/v1";
 import {
   config,

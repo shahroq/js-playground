@@ -1,4 +1,9 @@
 export type EntityId = number | string;
+
+export interface hasId {
+  id?: EntityId;
+}
+
 export type CollectionName = "users" | "products" | "reviews";
 
 export type Awaitable<T> = T | Promise<T>;

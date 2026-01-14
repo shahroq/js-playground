@@ -1,11 +1,11 @@
 import data from "@root/data/memory-json/data.json";
 import { config } from "@/common/container";
+import type { EntityId, CollectionName } from "@/common/types";
+import type { QueryObject } from "@/common/query-object/types";
 import {
   buildAuditFields,
   type IDbClientService,
 } from "../db-client-service.interface";
-import type { EntityId, CollectionName } from "@/common/types";
-import type { QueryObject } from "../../query-object/types";
 
 export class MemoryService implements IDbClientService {
   private dbClient;

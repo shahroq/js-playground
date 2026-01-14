@@ -2,13 +2,13 @@ import { Low } from "lowdb";
 import { JSONFile } from "lowdb/node";
 import fs from "fs-extra";
 import { config, utils } from "@/common/container";
+import type { QueryObject } from "@/common/query-object/types";
+import type { CollectionName, EntityId, hasId } from "@/common/types";
 import { defaultData, type DatabaseSchema } from "@root/data/lowdb-json/schema";
 import {
   buildAuditFields,
   type IDbClientService,
 } from "../db-client-service.interface";
-import type { CollectionName, EntityId } from "../../types";
-import type { QueryObject } from "../../query-object/types";
 
 export class LowDbService implements IDbClientService {
   private dbClient: Low<DatabaseSchema>;
@@ -68,7 +68,7 @@ export class LowDbService implements IDbClientService {
     return this.findOne<T>(collection, { filter: { id } });
   }
 
-  async create<T extends { id?: any }>(collection: CollectionName, data: T) {
+  async create<T extends hasId>(collection: CollectionName, data: T) {
     const m = await this.getModel(collection);
 
     const newItem = {
