@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import type { UserService } from "./service";
 import type { EntityId } from "@/common/types";
-import { normalizeQueryString } from "@/common/container";
+import { queryParser } from "@/common/container";
 import { policyList, policyShow } from "./policy/query-object.policy";
 
 export class UserController {
@@ -10,7 +10,7 @@ export class UserController {
   constructor(private readonly service: UserService) {}
 
   index = async (req: Request, res: Response) => {
-    const queryObject = normalizeQueryString(req.query, policyList);
+    const queryObject = queryParser(req.query, policyList);
 
     const [items, meta] = await this.service.getItems(queryObject);
 
@@ -18,7 +18,7 @@ export class UserController {
   };
 
   show = async (req: Request, res: Response) => {
-    const queryObject = normalizeQueryString(req.query, policyShow);
+    const queryObject = queryParser(req.query, policyShow);
 
     const item = await this.service.getItem(
       req.params.id as EntityId,

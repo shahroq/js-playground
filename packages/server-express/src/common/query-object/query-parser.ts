@@ -13,7 +13,7 @@ import type {
 /**
  * Parse Query String to internal QueryObject (JSON:API–like)
  */
-export const normalizeQueryString = (
+export const queryParser = (
   querystring: QueryStringDto,
   policy: QueryObjectPolicy
 ): QueryObject => {

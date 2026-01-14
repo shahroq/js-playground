@@ -13,7 +13,7 @@ export * from "@/common/middlewares/undefined-routes.middleware";
 export * from "@/common/middlewares/coerce-id.middleware";
 export * from "@/common/envelope/attach-system-data.middleware";
 export * from "@/common/envelope/wrap-response.middleware";
-export * from "@/common/query-object/normalize-query-string";
+export * from "@/common/query-object/query-parser";
 export * from "@/common/query-object/default.policy";
 export * from "@/common/auth/auth.middleware";
 export * from "@/common/validation/validate.middleware";
