@@ -1,4 +1,5 @@
 import express from "express";
+import { UserRole } from "../users/types";
 import {
   reviewController as ctrl,
   validate,
@@ -6,26 +7,25 @@ import {
   requireAuth,
   requireRole,
 } from "@/common/container";
-import { UserRole } from "../users/types";
 
-const router = express.Router();
+const appRouter = express.Router();
 
-router.use(requireAuth(), requireRole(UserRole.ADMIN));
+appRouter.use(requireAuth(), requireRole(UserRole.ADMIN));
 
-router.get("/", [validate("reviews.findAll")], ctrl.index);
-router.get("/:id", [validate("reviews.findOne"), coerceId], ctrl.show);
-router.post("/", [validate("reviews.create")], ctrl.store);
-router.patch("/:id", [validate("reviews.update"), coerceId], ctrl.update);
-router.delete("/:id", [validate("reviews.delete"), coerceId], ctrl.destroy);
-router.patch(
+appRouter.get("/", [validate("reviews.findAll")], ctrl.index);
+appRouter.get("/:id", [validate("reviews.findOne"), coerceId], ctrl.show);
+appRouter.post("/", [validate("reviews.create")], ctrl.store);
+appRouter.patch("/:id", [validate("reviews.update"), coerceId], ctrl.update);
+appRouter.delete("/:id", [validate("reviews.delete"), coerceId], ctrl.destroy);
+appRouter.patch(
   "/:id/approve",
   [validate("reviews.update"), coerceId],
   ctrl.approve
 );
-router.patch(
+appRouter.patch(
   "/:id/reject",
   [validate("reviews.update"), coerceId],
   ctrl.reject
 );
 
-export default router;
+export default appRouter;

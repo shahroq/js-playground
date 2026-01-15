@@ -1,7 +1,7 @@
 import express, { type Application } from "express";
 import cors from "cors";
 import morgan from "morgan";
-import v1Router from "@/routes/v1";
+import appRouter from "@/routes/v1";
 import {
   config,
   globalErrorHandler,
@@ -26,8 +26,8 @@ export const bootstrap = (): Application => {
 
   app.get("/favicon.ico", (_, res) => res.status(204).end());
 
-  // app.use("/api/v1", v1Router);
-  app.use("/", v1Router);
+  // app.use("/api/v1", appRouter);
+  app.use("/", appRouter);
 
   app.use(afterMWs);
 

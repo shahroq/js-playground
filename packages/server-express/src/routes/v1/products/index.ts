@@ -1,4 +1,5 @@
 import express from "express";
+import { UserRole } from "../users/types";
 import {
   productController as ctrl,
   validate,
@@ -6,16 +7,15 @@ import {
   requireAuth,
   requireRole,
 } from "@/common/container";
-import { UserRole } from "../users/types";
 
-const router = express.Router();
+const appRouter = express.Router();
 
-router.use(requireAuth(), requireRole(UserRole.ADMIN));
+appRouter.use(requireAuth(), requireRole(UserRole.ADMIN));
 
-router.get("/", [validate("products.findAll")], ctrl.index);
-router.get("/:id", [validate("products.findOne"), coerceId], ctrl.show);
-router.post("/", [validate("products.create")], ctrl.store);
-router.patch("/:id", [validate("products.update"), coerceId], ctrl.update);
-router.delete("/:id", [validate("products.delete"), coerceId], ctrl.destroy);
+appRouter.get("/", [validate("products.findAll")], ctrl.index);
+appRouter.get("/:id", [validate("products.findOne"), coerceId], ctrl.show);
+appRouter.post("/", [validate("products.create")], ctrl.store);
+appRouter.patch("/:id", [validate("products.update"), coerceId], ctrl.update);
+appRouter.delete("/:id", [validate("products.delete"), coerceId], ctrl.destroy);
 
-export default router;
+export default appRouter;

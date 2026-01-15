@@ -1,22 +1,22 @@
 import express from "express";
-import type { NextFunction, Request, Response } from "express";
+import type { NextFunction, Response } from "express";
 import { config, loggerService, utils } from "@/common/container";
 
-const router = express.Router();
+const appRouter = express.Router();
 
 // home
-router.get("/", (_: any, res: Response) => {
+appRouter.get("/", (_: any, res: Response) => {
   loggerService.info(`Here at home!`);
   res.send(`API Sandbox Home: Hello World [${utils.formatISO()}]`);
 });
 
 // health
-router.get("/health", (req: any, res: Response) => {
+appRouter.get("/health", (req: any, res: Response) => {
   res.json({ ok: true, environment: config.env });
 });
 
 // sandbox
-router.get("/sandbox", async (_: any, res: Response, next: NextFunction) => {
+appRouter.get("/sandbox", async (_: any, res: Response, next: NextFunction) => {
   let data = null;
 
   /*
@@ -49,4 +49,4 @@ router.get("/sandbox", async (_: any, res: Response, next: NextFunction) => {
   res.json(data);
 });
 
-export default router;
+export default appRouter;

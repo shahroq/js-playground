@@ -1,15 +1,15 @@
 import express from "express";
+import { UserRole } from "../users/types";
 import {
   httpbinController as ctrl,
   requireAuth,
   requireRole,
 } from "@/common/container";
-import { UserRole } from "../users/types";
 
-const router = express.Router();
+const appRouter = express.Router();
 
-router.use(requireAuth(), requireRole(UserRole.ADMIN));
+appRouter.use(requireAuth(), requireRole(UserRole.ADMIN));
 
-router.get("/json", ctrl.json);
+appRouter.get("/json", ctrl.json);
 
-export default router;
+export default appRouter;

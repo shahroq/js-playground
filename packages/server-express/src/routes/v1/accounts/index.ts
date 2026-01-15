@@ -1,10 +1,10 @@
 import express from "express";
 import { accountController as ctrl, validate } from "@/common/container";
 
-const router = express.Router();
+const appRouter = express.Router();
 
-router.post("/register", [validate("users.create")], ctrl.signUp);
-router.post("/login", [validate("users.login")], ctrl.signIn);
-router.post("/logout", ctrl.signOut);
+appRouter.post("/register", [validate("users.create")], ctrl.signUp);
+appRouter.post("/login", [validate("users.login")], ctrl.signIn);
+appRouter.post("/logout", ctrl.signOut);
 
-export default router;
+export default appRouter;

@@ -1,16 +1,16 @@
 import express from "express";
+import { UserRole } from "../users/types";
 import {
   postController as ctrl,
   requireAuth,
   requireRole,
 } from "@/common/container";
-import { UserRole } from "../users/types";
 
-const router = express.Router();
+const appRouter = express.Router();
 
-router.use(requireAuth(), requireRole(UserRole.ADMIN));
+appRouter.use(requireAuth(), requireRole(UserRole.ADMIN));
 
-router.get("/", ctrl.index);
-router.get("/:id", ctrl.show);
+appRouter.get("/", ctrl.index);
+appRouter.get("/:id", ctrl.show);
 
-export default router;
+export default appRouter;

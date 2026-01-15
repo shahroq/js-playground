@@ -7,15 +7,15 @@ import reviews from "./reviews";
 import posts from "./posts";
 import httpbin from "./httpbin";
 
-const v1Router: Router = express.Router();
+const appRouter: Router = express.Router();
 
-v1Router.use("/", root);
-v1Router.use("/", account);
+appRouter.use("/", root);
+appRouter.use("/", account);
 // TODO: factor /api/v1 in
-v1Router.use("/api/v1/users", users);
-v1Router.use("/api/v1/products", products);
-v1Router.use("/api/v1/reviews", reviews);
-v1Router.use("/api/v1/posts", posts);
-v1Router.use("/api/v1/httpbin", httpbin);
+appRouter.use("/api/v1/users", users);
+appRouter.use("/api/v1/products", products);
+appRouter.use("/api/v1/reviews", reviews);
+appRouter.use("/api/v1/posts", posts);
+appRouter.use("/api/v1/httpbin", httpbin);
 
-export default v1Router;
+export default appRouter;
