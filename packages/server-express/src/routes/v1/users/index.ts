@@ -10,7 +10,7 @@ import { UserRole } from "./types";
 
 const router = express.Router();
 
-// router.use(requireAuth(), requireRole(UserRole.ADMIN));
+router.use(requireAuth(), requireRole(UserRole.ADMIN));
 
 router.get("/", [validate("users.findAll")], ctrl.index);
 router.get("/:id", [validate("users.findOne"), coerceId], ctrl.show);

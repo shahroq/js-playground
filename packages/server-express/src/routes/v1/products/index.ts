@@ -3,9 +3,14 @@ import {
   productController as ctrl,
   validate,
   coerceId,
+  requireAuth,
+  requireRole,
 } from "@/common/container";
+import { UserRole } from "../users/types";
 
 const router = express.Router();
+
+router.use(requireAuth(), requireRole(UserRole.ADMIN));
 
 router.get("/", [validate("products.findAll")], ctrl.index);
 router.get("/:id", [validate("products.findOne"), coerceId], ctrl.show);
