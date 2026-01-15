@@ -7,9 +7,9 @@ import {
 
 const router = express.Router();
 
-router.get("/", validate("reviews.findAll"), ctrl.index);
+router.get("/", [validate("reviews.findAll")], ctrl.index);
 router.get("/:id", [validate("reviews.findOne"), coerceId], ctrl.show);
-router.post("/", validate("reviews.create"), ctrl.store);
+router.post("/", [validate("reviews.create")], ctrl.store);
 router.patch("/:id", [validate("reviews.update"), coerceId], ctrl.update);
 router.delete("/:id", [validate("reviews.delete"), coerceId], ctrl.destroy);
 router.patch(
