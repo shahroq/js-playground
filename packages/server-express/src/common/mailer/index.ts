@@ -23,6 +23,21 @@ switch (strategy) {
 export { provider as mailerService };
 
 /*
+// alternative implmnt:
+// ask: explain token-base DI in nest? maybe you can use one factory method for all providers
+// providers are categorized based on token(APP_MAILER, APP_LOGGER, APP_VALIDATOR, etc?)
+const mapper = new map(); // list of stragey to classes
+function factory(startegy: MailerStrategy) {
+  try {
+    return new mapper[startegy]();
+  } catch (error) {
+    throw new Error(t("CONSOLE.NO_PROVIDER", { module, strategy }));
+  }
+}
+const provider = factory(strategy);
+*/
+
+/*
 // sample usage
 const mail = {
   to: config.mailer.admin_email,

@@ -1,3 +1,4 @@
+// import { type Request } from "export";
 import { AuthContext } from "@/common/auth/types";
 
 declare global {
@@ -7,3 +8,11 @@ declare global {
     }
   }
 }
+/**
+ * force devs to use type guards whenever needed[st crs: ep14-09]
+ * const {email, password} = req.body
+ * if (email) {...}
+ */
+// interface RequestWithBody extends Request {
+//   body: { [key: string]: string | undefined };
+// }

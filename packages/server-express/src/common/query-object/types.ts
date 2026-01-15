@@ -1,7 +1,8 @@
 import type { CollectionName } from "../types";
 
 export type Include = string[];
-export type Fields = Record<string, string[]>;
+// export type Fields = Record<string, string[]>;
+export type Fields = string[];
 export type Page = { number?: number; size?: number };
 export type Sort = { field: string; direction: "asc" | "desc" }[];
 export type Filter = Record<string, any>;

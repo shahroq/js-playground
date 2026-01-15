@@ -67,7 +67,7 @@ const parsePage = (query: QueryStringDto, policy: QueryObjectPolicy): Page => {
   const number = Number(page.number ?? 1);
   const size = Math.min(
     Number(page.size ?? policy.limit ?? 10),
-    policy.maxLimit
+    policy.maxLimit ?? 20
   );
 
   return { number, size };
