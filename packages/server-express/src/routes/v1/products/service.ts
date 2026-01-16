@@ -77,7 +77,12 @@ export class ProductService {
     return deleted;
   }
 
-  private async getProductReviews(id: EntityId) {
+  /**
+   *
+   * @param id
+   * @returns product reviews with review_count & average_rating
+   */
+  async getProductReviews(id: EntityId) {
     const reviews = await this.reviewRepository.findAllByProductId(id);
     return reviews ?? {};
   }

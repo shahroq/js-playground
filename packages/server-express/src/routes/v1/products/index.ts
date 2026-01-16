@@ -17,5 +17,6 @@ appRouter.get("/:id", [validate("products.findOne"), coerceId], ctrl.show);
 appRouter.post("/", [validate("products.create")], ctrl.store);
 appRouter.patch("/:id", [validate("products.update"), coerceId], ctrl.update);
 appRouter.delete("/:id", [validate("products.delete"), coerceId], ctrl.destroy);
+appRouter.get("/:id/reviews", [coerceId], ctrl.productReviews);
 
 export default appRouter;
