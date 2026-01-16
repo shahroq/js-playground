@@ -27,7 +27,7 @@ export class ReviewRepository extends BaseRepository<IReview> {
 
   // async findAllByUserId(userId: EntityId): Promise<Review[]> {}
 
-  async average(queryObject: QueryObject): Promise<number | null> {
+  async average(queryObject: QueryObject): Promise<number | undefined> {
     return this.dbClientService.avg<IReview>(
       this.collection,
       queryObject,

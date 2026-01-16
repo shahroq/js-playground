@@ -3,6 +3,12 @@ import type { IReview } from "../types";
 import type { ReviewStatus } from "@root/generated/prisma/enums";
 import { ProductDto } from "@/common/container";
 
+export type ReviewAggregateDto = {
+  reviews: ReviewDto[];
+  review_count: number;
+  average_rating: number;
+};
+
 // Response DTO
 export class ReviewDto {
   private constructor(
@@ -27,7 +33,19 @@ export class ReviewDto {
     );
   }
 
-  static fromMany(entities: IReview[]): ReviewDto[] {
+  static fromMany(entities: IReview[] = []): ReviewDto[] {
     return entities.map((entity) => ReviewDto.from(entity));
+  }
+
+  static fromManyWithAggregate(
+    entities: IReview[] = [],
+    review_count: number = 0,
+    average_rating: number = 0
+  ): ReviewAggregateDto {
+    return {
+      reviews: entities.map((entity) => ReviewDto.from(entity)),
+      review_count: review_count ?? 0,
+      average_rating: average_rating ? Number(average_rating.toFixed(2)) : 0,
+    };
   }
 }

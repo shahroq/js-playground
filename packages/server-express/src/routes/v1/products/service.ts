@@ -4,6 +4,7 @@ import {
   CreateProductDto,
   UpdateProductDto,
   PaginationSummaryDto,
+  ReviewDto,
 } from "@/common/container";
 import type { EntityId } from "@/common/types";
 import { ProductRepository } from "./repository";
@@ -83,7 +84,11 @@ export class ProductService {
    * @returns product reviews with review_count & average_rating
    */
   async getProductReviews(id: EntityId) {
-    const reviews = await this.reviewRepository.findAllByProductId(id);
-    return reviews ?? {};
+    const { reviews, review_count, average_rating } =
+      await this.reviewRepository.findAllByProductId(id);
+
+    return reviews
+      ? ReviewDto.fromManyWithAggregate(reviews, review_count, average_rating)
+      : undefined;
   }
 }
