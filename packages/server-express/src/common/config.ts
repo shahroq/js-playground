@@ -13,6 +13,7 @@ import type { EnvelopeStrategy } from "./envelope/envelope-service.interface";
 import type { DbClientStrategy } from "./db-client/db-client-service.interface";
 import type { AuthStrategy } from "./auth/types";
 import type { HashingStrategy } from "./hashing/hashing-service.interface";
+import type { LlmClientStrategy } from "./llm-client/llm-client-service.interface";
 
 export type Env = "development" | "production" | "test";
 
@@ -99,8 +100,13 @@ const config = {
   // http-client
   http_client: {
     strategy: <HttpClientStrategy>process.env.HTTP_CLIENT_STRATEGY,
-    api_url_jsonplaceholder: process.env.HTTP_CLIENT_API_URL_JSONPLACEHOLDER,
-    api_url_restfulapi: process.env.HTTP_CLIENT_API_URL_RESTFULAPI,
+    // api_url_jsonplaceholder: process.env.HTTP_CLIENT_API_URL_JSONPLACEHOLDER,
+    // api_url_restfulapi: process.env.HTTP_CLIENT_API_URL_RESTFULAPI,
+  },
+
+  // llm-client
+  llm_client: {
+    strategy: <LlmClientStrategy>process.env.LLM_CLIENT_STRATEGY,
   },
 
   // api infos

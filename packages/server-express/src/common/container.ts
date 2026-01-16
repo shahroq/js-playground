@@ -23,6 +23,7 @@ import { dbCientService } from "@/common/db-client";
 export * from "@/common/db-client";
 import { httpClientService } from "@/common/http-client";
 export * from "@/common/http-client";
+export * from "@/common/llm-client";
 export * from "@/common/validation";
 export * from "@/common/envelope";
 export * from "@/common/logger";
