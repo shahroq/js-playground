@@ -2,7 +2,7 @@
   "version": "1.1",
   "users": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Alice Johnson",
       "email": "admin@email.com",
       "role": "ADMIN",
@@ -12,7 +12,7 @@
       "updated_by": 1
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Brian Lee",
       "email": "editor@email.com",
       "role": "EDITOR",
@@ -22,7 +22,7 @@
       "updated_by": 1
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "Catherine Park",
       "email": "user@email.com",
       "role": "USER",
@@ -34,7 +34,7 @@
   ],
   "products": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Smartphone",
       "description": "Latest smartphone with advanced camera and fast processor.",
       "price": 999,
@@ -46,7 +46,7 @@
       "updated_by": 2
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Wireless Earbuds",
       "description": "Noise-cancelling earbuds with clear sound quality.",
       "price": 249,
@@ -58,7 +58,7 @@
       "updated_by": 2
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "Gaming Console",
       "description": "Next-gen gaming console with ultra-fast load times.",
       "price": 499,
@@ -70,7 +70,7 @@
       "updated_by": 2
     },
     {
-      "id": "4",
+      "id": 4,
       "name": "Smart Speaker",
       "description": "Voice-controlled speaker for music and smart home commands.",
       "price": 199,
@@ -82,7 +82,7 @@
       "updated_by": 2
     },
     {
-      "id": "5",
+      "id": 5,
       "name": "Tablet",
       "description": "Lightweight tablet perfect for browsing and streaming.",
       "price": 399,
@@ -97,7 +97,7 @@
   "reviews": [
     {
       "id": 1,
-      "product_id": "1",
+      "product_id": 1,
       "content": "Camera quality is amazing.",
       "rating": 5,
       "status": "approved",
@@ -108,7 +108,7 @@
     },
     {
       "id": 2,
-      "product_id": "1",
+      "product_id": 1,
       "content": "Battery lasts long but heats up sometimes.",
       "rating": 4,
       "status": "pending",
@@ -119,7 +119,7 @@
     },
     {
       "id": 3,
-      "product_id": "2",
+      "product_id": 2,
       "content": "Noise cancelling works great.",
       "rating": 5,
       "status": "approved",
@@ -130,7 +130,7 @@
     },
     {
       "id": 4,
-      "product_id": "2",
+      "product_id": 2,
       "content": "Sometimes one earbud loses connection.",
       "rating": 3,
       "status": "rejected",
@@ -141,7 +141,7 @@
     },
     {
       "id": 5,
-      "product_id": "3",
+      "product_id": 3,
       "content": "Loads games super fast.",
       "rating": 5,
       "status": "approved",
@@ -152,7 +152,7 @@
     },
     {
       "id": 6,
-      "product_id": "3",
+      "product_id": 3,
       "content": "Controller feels a bit cheap.",
       "rating": 3,
       "status": "pending",
@@ -163,7 +163,7 @@
     },
     {
       "id": 7,
-      "product_id": "5",
+      "product_id": 5,
       "content": "Perfect size for reading and streaming.",
       "rating": 5,
       "status": "approved",
@@ -174,7 +174,7 @@
     },
     {
       "id": 8,
-      "product_id": "5",
+      "product_id": 5,
       "content": "Battery drains faster than expected.",
       "rating": 4,
       "status": "pending",
@@ -185,7 +185,7 @@
     },
     {
       "id": 9,
-      "product_id": "1",
+      "product_id": 1,
       "content": "Sleek design, feels premium in hand.",
       "rating": 5,
       "status": "approved",
@@ -196,7 +196,7 @@
     },
     {
       "id": 10,
-      "product_id": "2",
+      "product_id": 2,
       "content": "Comfortable fit but loses sound occasionally.",
       "rating": 4,
       "status": "pending",
