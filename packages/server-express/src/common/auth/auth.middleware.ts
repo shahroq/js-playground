@@ -6,7 +6,7 @@ import type { UserRole } from "@/routes/v1/users/types";
 export function requireAuth() {
   return (req: Request, _res: Response, next: NextFunction) => {
     const authHeader =
-      config.env === `development` && authService.provider === `anonymous`
+      config.env === `development` && authService.provider === `mock`
         ? "Bearer [Golden Ticket]"
         : req.headers?.authorization;
 

@@ -37,7 +37,7 @@ const config = {
   // auth
   auth: {
     strategy: <AuthStrategy>process.env.AUTH_STRATEGY,
-    anonymous: {},
+    mock: {},
     jwt: {
       secret: process.env.AUTH_JWT_SECRET || "",
       expires_in: +(process.env.AUTH_JWT_EXPIRES_IN || 3600),

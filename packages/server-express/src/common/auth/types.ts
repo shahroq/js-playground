@@ -1,6 +1,6 @@
 import type { IUser } from "@/routes/v1/users/types";
 
-export type AuthStrategy = "anonymous" | "jwt" | "auth0";
+export type AuthStrategy = "mock" | "jwt" | "auth0";
 
 // export type tokenUserInfo = Pick<IUser, "id" | "name" | "role">;
 
