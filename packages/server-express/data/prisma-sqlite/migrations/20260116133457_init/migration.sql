@@ -50,6 +50,19 @@ CREATE TABLE "reviews" (
 );
 
 -- CreateTable
+CREATE TABLE "review_summary" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "product_id" INTEGER NOT NULL,
+    "content" TEXT NOT NULL,
+    "expires_at" DATETIME NOT NULL,
+    "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" DATETIME NOT NULL,
+    "created_by" INTEGER NOT NULL,
+    "updated_by" INTEGER NOT NULL,
+    CONSTRAINT "review_summary_product_id_fkey" FOREIGN KEY ("product_id") REFERENCES "products" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- CreateTable
 CREATE TABLE "caregories" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "name" TEXT NOT NULL
@@ -71,6 +84,12 @@ CREATE UNIQUE INDEX "profiles_userId_key" ON "profiles"("userId");
 
 -- CreateIndex
 CREATE INDEX "reviews_product_id_idx" ON "reviews"("product_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "review_summary_product_id_key" ON "review_summary"("product_id");
+
+-- CreateIndex
+CREATE INDEX "review_summary_product_id_idx" ON "review_summary"("product_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "_CategoryToProduct_AB_unique" ON "_CategoryToProduct"("A", "B");

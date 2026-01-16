@@ -120,6 +120,14 @@ const config = {
     restfulapi: {
       url: process.env.API_RESTFULAPI_URL,
     },
+    chatgpt: {
+      url: process.env.API_CHATGPT_URL,
+      key: process.env.API_CHATGPT_KEY,
+    },
+    gemini: {
+      url: process.env.API_GEMINI_URL,
+      key: process.env.API_GEMINI_KEY,
+    },
   },
 
   // mailer

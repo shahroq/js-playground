@@ -58,19 +58,20 @@ model Profile {
 }
 
 model Product {
-  id          Int        @id @default(autoincrement())
+  id          Int             @id @default(autoincrement())
   name        String
   description String?
   price       Float?
   category    String
   in_stock    Boolean
-  created_at  DateTime   @default(now())
-  updated_at  DateTime   @updatedAt
-  user        User       @relation(fields: [created_by], references: [id])
+  created_at  DateTime        @default(now())
+  updated_at  DateTime        @updatedAt
+  user        User            @relation(fields: [created_by], references: [id])
   created_by  Int
   updated_by  Int
   reviews     Review[]
   categories  Category[]
+  summart     ReviewSummary[]
 
   @@map("products")
 }
@@ -90,6 +91,21 @@ model Review {
 
   @@index([product_id])
   @@map("reviews")
+}
+
+model ReviewSummary {
+  id         Int      @id @default(autoincrement())
+  product_id Int      @unique
+  product    Product  @relation(fields: [product_id], references: [id])
+  content    String
+  expires_at DateTime
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  created_by Int
+  updated_by Int
+
+  @@index([product_id])
+  @@map("review_summary")
 }
 
 model Category {
