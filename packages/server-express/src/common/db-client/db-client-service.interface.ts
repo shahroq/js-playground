@@ -28,9 +28,9 @@ export interface IDbClientService {
   findOne<T>(
     collection: CollectionName,
     queryObject: QueryObject
-  ): Awaitable<T | null>;
+  ): Awaitable<T>;
 
-  findById<T>(collection: CollectionName, id: EntityId): Awaitable<T | null>;
+  findById<T>(collection: CollectionName, id: EntityId): Awaitable<T>;
 
   create<T>(collection: CollectionName, data: Partial<T>): Awaitable<T>;
 
@@ -38,7 +38,7 @@ export interface IDbClientService {
     collection: CollectionName,
     id: EntityId,
     data: Partial<T>
-  ): Awaitable<T | null>;
+  ): Awaitable<T>;
 
   delete<T>(collection: CollectionName, id: EntityId): Awaitable<boolean>;
 
@@ -56,7 +56,7 @@ export interface IDbClientService {
     collection: CollectionName,
     queryObject: QueryObject,
     field: keyof T & string
-  ): Awaitable<number | null>;
+  ): Awaitable<number | undefined>;
 
   /** identifier is:
    * filePath for filebase dbs (json, sqlite)

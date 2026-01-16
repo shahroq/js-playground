@@ -24,12 +24,12 @@ export class MemoryService implements IDbClientService {
     //
   }
 
-  private getModel(collection: CollectionName) {
-    return this.dbClient[collection];
+  private getModel<T>(collection: CollectionName) {
+    return this.dbClient[collection] as T[];
   }
 
   findAll<T>(collection: CollectionName, queryObject: QueryObject) {
-    const m = this.getModel(collection);
+    const m = this.getModel<T>(collection);
 
     const items = m;
 
@@ -37,10 +37,10 @@ export class MemoryService implements IDbClientService {
   }
 
   findOne<T>(collection: CollectionName, queryObject: QueryObject) {
-    const m = this.getModel(collection);
+    const m = this.getModel<T>(collection);
     const id = queryObject.filter?.id;
 
-    const item = m.find((i) => i.id == id);
+    const item = m.find((i) => i.id === id);
 
     return item || null;
   }

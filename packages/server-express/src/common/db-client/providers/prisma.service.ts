@@ -57,6 +57,7 @@ export class PrismaService implements IDbClientService {
   }
 
   private getModel(collection: CollectionName): ModelDelegate {
+    // @ts-ignore
     return this.dbClient[collectionModelMap[collection]];
   }
 

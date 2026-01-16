@@ -12,11 +12,11 @@ export abstract class BaseRepository<T> {
     return this.dbClientService.findAll<T>(this.collection, queryObject);
   }
 
-  async findOne(queryObject: QueryObject): Promise<T | null> {
+  async findOne(queryObject: QueryObject): Promise<T> {
     return this.dbClientService.findOne<T>(this.collection, queryObject);
   }
 
-  async findById(id: EntityId): Promise<T | null> {
+  async findById(id: EntityId): Promise<T> {
     return this.dbClientService.findById<T>(this.collection, id);
   }
 
@@ -24,7 +24,7 @@ export abstract class BaseRepository<T> {
     return await this.dbClientService.create<T>(this.collection, payload);
   }
 
-  async update(id: EntityId, payload: Partial<T>): Promise<T | null> {
+  async update(id: EntityId, payload: Partial<T>): Promise<T> {
     return await this.dbClientService.update<T>(this.collection, id, payload);
   }
 
