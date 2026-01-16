@@ -6,7 +6,7 @@ export class HttpbinService {
   private readonly baseUrl: string;
 
   constructor(private readonly httpClientService: IHttpClientService) {
-    this.baseUrl = config.api.httpbin.url;
+    this.baseUrl = config.api.httpbin.url ?? "";
   }
 
   async json(): Promise<IHttbin> {

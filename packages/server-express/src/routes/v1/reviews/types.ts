@@ -10,7 +10,7 @@ export enum ReviewStatus {
 // raw review (from db): entity(?)
 export interface IReview {
   id: EntityId;
-  product_id: number;
+  product_id: EntityId;
   content: string;
   rating: number;
   status: ReviewStatus;

@@ -121,7 +121,7 @@ export class PrismaService implements IDbClientService {
     });
   }
 
-  async delete<T>(collection: CollectionName, id: EntityId) {
+  async delete(collection: CollectionName, id: EntityId) {
     const m = this.getModel(collection);
 
     // @ts-ignore

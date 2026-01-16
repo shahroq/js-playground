@@ -17,9 +17,11 @@ switch (strategy) {
   case "jwt":
     provider = new JwtAuthService();
     break;
+  /*  
   case "auth0":
     provider = new Auth0AuthService();
     break;
+  */
   default:
     throw new Error(t("CONSOLE.NO_PROVIDER", { module, strategy }));
 }

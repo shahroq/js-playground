@@ -32,7 +32,7 @@ export interface IDbClientService {
 
   findById<T>(collection: CollectionName, id: EntityId): Awaitable<T | null>;
 
-  create<T>(collection: CollectionName, data: T): Awaitable<T>;
+  create<T>(collection: CollectionName, data: Partial<T>): Awaitable<T>;
 
   update<T>(
     collection: CollectionName,
@@ -40,10 +40,7 @@ export interface IDbClientService {
     data: Partial<T>
   ): Awaitable<T | null>;
 
-  delete<T>(
-    collection: CollectionName,
-    id: EntityId
-  ): Awaitable<boolean | null>;
+  delete<T>(collection: CollectionName, id: EntityId): Awaitable<boolean>;
 
   deleteMany<T>(
     collection: CollectionName,

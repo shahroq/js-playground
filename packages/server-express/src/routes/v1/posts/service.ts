@@ -6,7 +6,7 @@ export class PostService {
   private readonly baseUrl: string;
 
   constructor(private readonly httpClientService: IHttpClientService) {
-    this.baseUrl = config.api.jsonplaceholder.url;
+    this.baseUrl = config.api.jsonplaceholder.url ?? "";
   }
 
   async getItems() {

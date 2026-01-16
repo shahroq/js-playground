@@ -49,12 +49,14 @@ export class ReviewService {
   }
 
   async createItem(createItemDto: CreateReviewDto) {
+    // add default status
     if (!createItemDto?.status)
       createItemDto = {
         ...createItemDto,
         status: config.default.review_status,
       };
 
+    // TODO: seems correct?! both same type?
     const newItem = await this.repository.create(createItemDto);
     return ReviewDto.from(newItem);
   }
@@ -120,6 +122,6 @@ export class ReviewService {
 
   private async getReviewProduct(id: EntityId) {
     const product = await this.productRepository.findById(id);
-    return product ?? {};
+    return product ?? undefined;
   }
 }

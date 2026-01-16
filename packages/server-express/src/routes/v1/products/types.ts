@@ -32,4 +32,4 @@ export interface IProductQuery extends NormQuery {
   search?: string;
   categoryId?: number;
 }
-  */
+*/

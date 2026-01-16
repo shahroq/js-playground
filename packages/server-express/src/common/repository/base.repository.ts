@@ -20,7 +20,7 @@ export abstract class BaseRepository<T> {
     return this.dbClientService.findById<T>(this.collection, id);
   }
 
-  async create(payload: T): Promise<T> {
+  async create(payload: Partial<T>): Promise<T> {
     return await this.dbClientService.create<T>(this.collection, payload);
   }
 
