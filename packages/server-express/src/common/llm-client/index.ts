@@ -1,4 +1,4 @@
-import { config, t } from "@/common/container";
+import { config, t, httpClientService } from "@/common/container";
 import type { ILlmClientService } from "./llm-client-service.interface";
 import { MockLlmService } from "./providers/mock.service";
 import { ChatgptLlmService } from "./providers/chatgpt.service";
@@ -16,10 +16,10 @@ switch (strategy) {
     provider = new MockLlmService();
     break;
   case "chatgpt":
-    provider = new ChatgptLlmService();
+    provider = new ChatgptLlmService(httpClientService);
     break;
   case "mock":
-    provider = new GeminiLlmService();
+    provider = new GeminiLlmService(httpClientService);
     break;
   default:
     throw new Error(t("CONSOLE.NO_PROVIDER", { module, strategy }));

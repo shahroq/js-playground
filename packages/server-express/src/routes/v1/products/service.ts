@@ -5,16 +5,20 @@ import {
   UpdateProductDto,
   PaginationSummaryDto,
   ReviewDto,
+  t,
 } from "@/common/container";
 import type { EntityId } from "@/common/types";
 import { ProductRepository } from "./repository";
 import { ReviewRepository } from "@reviews/repository";
 import type { QueryObject } from "@/common/query-object/types";
+import type { IReview } from "../reviews/types";
+import type { ILlmClientService } from "@/common/llm-client/llm-client-service.interface";
 
 export class ProductService {
   constructor(
     private readonly repository: ProductRepository,
-    private readonly reviewRepository: ReviewRepository
+    private readonly reviewRepository: ReviewRepository,
+    private readonly llmClientService: ILlmClientService
   ) {}
 
   async getItems(queryObject: QueryObject) {
@@ -87,8 +91,27 @@ export class ProductService {
     const { reviews, review_count, average_rating } =
       await this.reviewRepository.findAllByProductId(id);
 
-    return reviews
-      ? ReviewDto.fromManyWithAggregate(reviews, review_count, average_rating)
+    const summary = reviews
+      ? await this.getProductReviewsSummary(reviews)
       : undefined;
+
+    return reviews
+      ? ReviewDto.fromManyWithAggregate(
+          reviews,
+          review_count,
+          average_rating,
+          summary
+        )
+      : undefined;
+  }
+
+  // TODO: better place for this? review service?
+  async getProductReviewsSummary(reviews: IReview[]) {
+    const joinedReviews = reviews.map((r) => r.content).join("\n\n");
+    const prompt = t("PROMPT.SUMMARIZE_PRODUCT_REVIEWS", { joinedReviews });
+
+    const summary = await this.llmClientService.generateText({ prompt });
+
+    return summary;
   }
 }

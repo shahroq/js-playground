@@ -9,5 +9,9 @@
   },
 
   "REVIEW": {},
-  "PRODUCT": {}
+  "PRODUCT": {},
+  "USER": {},
+  "PROMPT": {
+    "SUMMARIZE_PRODUCT_REVIEWS": "Please summarize the provided product reviews into a plain english paragraph, highlighting key themes, both positive and negative: \n\nThese are latest reviews: \n\n{joinedReviews}"
+  }
 }

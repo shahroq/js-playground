@@ -7,6 +7,7 @@ export type ReviewAggregateDto = {
   reviews: ReviewDto[];
   review_count: number;
   average_rating: number;
+  summary?: string;
 };
 
 // Response DTO
@@ -40,12 +41,14 @@ export class ReviewDto {
   static fromManyWithAggregate(
     entities: IReview[] = [],
     review_count: number = 0,
-    average_rating: number = 0
+    average_rating: number = 0,
+    summary: string = ""
   ): ReviewAggregateDto {
     return {
       reviews: entities.map((entity) => ReviewDto.from(entity)),
       review_count: review_count ?? 0,
       average_rating: average_rating ? Number(average_rating.toFixed(2)) : 0,
+      summary,
     };
   }
 }

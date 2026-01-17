@@ -56,4 +56,12 @@ export class ProductController {
 
     res.status(200).json(reviews);
   };
+
+  productReviewsSummary = async (req: Request, res: Response) => {
+    const reviews = await this.service.getProductReviews(
+      req.params.id as EntityId
+    );
+
+    res.status(200).json(reviews);
+  };
 }

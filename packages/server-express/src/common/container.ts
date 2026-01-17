@@ -23,6 +23,7 @@ import { dbCientService } from "@/common/db-client";
 export * from "@/common/db-client";
 import { httpClientService } from "@/common/http-client";
 export * from "@/common/http-client";
+import { llmClientService } from "@/common/llm-client";
 export * from "@/common/llm-client";
 export * from "@/common/validation";
 export * from "@/common/envelope";
@@ -73,7 +74,8 @@ export const userService = new UserService(userRepository);
 export const accountService = new AccountService(userRepository, userService);
 export const productService = new ProductService(
   productRepository,
-  reviewRepository
+  reviewRepository,
+  llmClientService
 );
 export const reviewService = new ReviewService(
   reviewRepository,
