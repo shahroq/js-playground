@@ -3,7 +3,7 @@ import { EnvelopeService, AppError } from "@/common/container";
 import type { E } from "@/common/error/types";
 
 /**
- * envelop the response in a specified format
+ * envelop the response in a format
  */
 export function envelopResponseHandler(
   _: any,
@@ -14,9 +14,11 @@ export function envelopResponseHandler(
 
   res.json = function (body) {
     const { error, data } = extractResponse(body);
-    const envelopeService = new EnvelopeService(error, data);
 
-    return originalJson.call(this, envelopeService);
+    // create an envelope
+    const envelope = new EnvelopeService(error, data).toJSON();
+
+    return originalJson.call(this, envelope);
   };
 
   next();
