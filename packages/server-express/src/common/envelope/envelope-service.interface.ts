@@ -1,6 +1,6 @@
 import type { E } from "../error/types";
 
-export type EnvelopeStrategy = "jsend" | "json-api";
+export type EnvelopeStrategy = "plain" | "jsend" | "json-api";
 
 /**
  * Represents a service responsible solely for packaging data into a specific format.

@@ -1,4 +1,5 @@
 import { config, t } from "@/common/container.ts";
+import { PlainService } from "./providers/plain.service.ts";
 import { JSendService } from "./providers/jsend.service.ts";
 import { JsonApiService } from "./providers/json-api.service.ts";
 import type { IEnvelopeService } from "./envelope-service.interface.ts";
@@ -12,6 +13,9 @@ console.log(t("CONSOLE.GET_PROVIDER", { module, strategy }));
 
 let provider: EnvelopeServiceProvider;
 switch (strategy) {
+  case "plain":
+    provider = PlainService;
+    break;
   case "jsend":
     provider = JSendService;
     break;
