@@ -6,7 +6,7 @@ import {
   config,
   globalErrorHandler,
   undefinedRoutesHandler,
-  envelopResponseHandler,
+  wrapResponseHandler,
   attachSystemInfoHandler,
 } from "@/common/container";
 
@@ -16,7 +16,7 @@ export const bootstrap = (): Application => {
   // Enable extended query parsing
   app.set("query parser", "extended");
 
-  const beforeMWs = [express.json(), cors(), envelopResponseHandler];
+  const beforeMWs = [express.json(), cors(), wrapResponseHandler];
   const afterMWs = [undefinedRoutesHandler, globalErrorHandler];
   if (config.logger.morgan_enabled)
     app.use(morgan(config.logger.morgan_format));

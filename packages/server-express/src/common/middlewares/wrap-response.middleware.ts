@@ -5,11 +5,7 @@ import type { E } from "@/common/error/types";
 /**
  * envelop the response in a format
  */
-export function envelopResponseHandler(
-  _: any,
-  res: Response,
-  next: NextFunction
-) {
+export function wrapResponseHandler(_: any, res: Response, next: NextFunction) {
   const originalJson = res.json;
 
   res.json = function (body) {

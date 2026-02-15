@@ -12,7 +12,7 @@ export * from "@/common/error/global-error.middleware";
 export * from "@/common/middlewares/undefined-routes.middleware";
 export * from "@/common/middlewares/coerce-id.middleware";
 export * from "@/common/envelope/attach-system-data.middleware";
-export * from "@/common/middlewares/envelop-response.middleware";
+export * from "@/common/middlewares/wrap-response.middleware";
 export * from "@/common/query-object/query-parser";
 export * from "@/common/query-object/default.policy";
 export * from "@/common/auth/auth.middleware";
