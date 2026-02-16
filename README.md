@@ -1,19 +1,18 @@
-# Catalog App Playground
+# Catalog App
 
-## Server: Express, Nest, Laravel
+A sample Catalog API with frontend, built as a playground for experimenting with different frameworks, API design approaches, architectural patterns, and libraries.
 
-## Client: Angular, React
+- **Runtime**: Bun
+- **Server**: Express.js, NestJS
+- **Client**: Angular, React, Next.js
 
-To install dependencies:
+### 📦 Overview
 
-```bash
-bun install
-```
+This project implements a simple catalog domain with a few core entities:
 
-To run:
+- Products
+- Reviews
+- Tags
+- & related relationships
 
-```bash
-bun run index.ts
-```
-
-This project was created using `bun init` in bun v1.3.0. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+It provides standard CRUD operations along with filtering, includes, pagination, and structured responses.
