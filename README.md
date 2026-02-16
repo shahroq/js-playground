@@ -2,18 +2,17 @@
 
 ## Server: Express, Nest, Laravel
 
-## Client: Angular, React
+## Client: Angular, React, Next.js
 
-To install dependencies:
+A sample Catalog API with frontend, built as a playground for experimenting with different API design approaches, architectural patterns, and libraries.
 
-```bash
-bun install
-```
+### 📦 Overview
 
-To run:
+This project implements a simple catalog domain with a few core entities:
 
-```bash
-bun run index.ts
-```
+- Products
+- Reviews
+- Tags
+- and related relationships between them
 
-This project was created using `bun init` in bun v1.3.0. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+The API supports common CRUD operations and demonstrates structured query handling, filtering, includes, pagination, and response formatting.
