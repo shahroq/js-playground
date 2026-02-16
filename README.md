@@ -1,6 +1,6 @@
 # Catalog App Playground
 
-## Server: Express, Nest, Laravel
+## Server: Express.js, NestJS, Laravel
 
 ## Client: Angular, React, Next.js
 

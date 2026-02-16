@@ -1,4 +1,4 @@
-# Catalog API w/ Express
+# Catalog API w/ Express.js
 
 A sample Catalog API built as a playground for experimenting with API design patterns, abstractions, and architectural approaches.
 
@@ -44,5 +44,5 @@ This project is useful if you want to:
 ### 🛠 Tech Stack
 
 - TypeScript
-- Express
+- Express.js
 - SQLite
