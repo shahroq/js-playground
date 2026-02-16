@@ -2,6 +2,12 @@
 
 A sample Catalog API built as a playground for experimenting with API design patterns, abstractions, and architectural approaches.
 
+### 🛠 Tech Stack
+
+- TypeScript
+- Express.js
+- SQLite
+
 ### 📦 Overview
 
 This project models a simple catalog domain with:
@@ -12,12 +18,6 @@ This project models a simple catalog domain with:
 - & related relationships
 
 It provides standard CRUD operations along with filtering, includes, pagination, and structured responses.
-
-### 🛠 Tech Stack
-
-- TypeScript
-- Express.js
-- SQLite
 
 ### 🏗 Architecture
 

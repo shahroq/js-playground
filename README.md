@@ -1,9 +1,9 @@
-# Catalog App Playground
+# Catalog App
 
 A sample Catalog API with frontend, built as a playground for experimenting with different frameworks, API design approaches, architectural patterns, and libraries.
 
 - **Runtime**: Bun
-- **Server**: Express.js, NestJS, Laravel
+- **Server**: Express.js, NestJS
 - **Client**: Angular, React, Next.js
 
 ### 📦 Overview
@@ -13,6 +13,6 @@ This project implements a simple catalog domain with a few core entities:
 - Products
 - Reviews
 - Tags
-- and related relationships between them
+- & related relationships
 
-The API supports common CRUD operations and demonstrates structured query handling, filtering, includes, pagination, and response formatting.
+It provides standard CRUD operations along with filtering, includes, pagination, and structured responses.
