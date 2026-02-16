@@ -1,10 +1,10 @@
 # Catalog App Playground
 
-## Server: Express.js, NestJS, Laravel
+A sample Catalog API with frontend, built as a playground for experimenting with different frameworks, API design approaches, architectural patterns, and libraries.
 
-## Client: Angular, React, Next.js
-
-A sample Catalog API with frontend, built as a playground for experimenting with different API design approaches, architectural patterns, and libraries.
+- **Runtime**: Bun
+- **Server**: Express.js, NestJS, Laravel
+- **Client**: Angular, React, Next.js
 
 ### 📦 Overview
 
