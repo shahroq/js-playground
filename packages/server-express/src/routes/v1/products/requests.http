@@ -4,9 +4,25 @@
 
 ### get items
 GET {{baseUrlModule}} HTTP/1.1
+### get items [with include]
+GET {{baseUrlModule}}/?include=reviews HTTP/1.1
+### get items [with fields]
+GET {{baseUrlModule}}/?fields=id,name HTTP/1.1
+### get items [with pagination]
+GET {{baseUrlModule}}/?page[number]=1&page[size]=3 HTTP/1.1
+### get items [with sort]
+GET {{baseUrlModule}}/?sort=-price,-inStock HTTP/1.1
+### get items [with filter]
+GET {{baseUrlModule}}/?filter[in_stock]=true HTTP/1.1
+
 
 ### get item
 GET {{baseUrlModule}}/{{ id }} HTTP/1.1
+### get item [with include]
+GET {{baseUrlModule}}/{{ id }}/?include=reviews HTTP/1.1
+### get item [with fields]
+GET {{baseUrlModule}}/{{ id }}/?fields=id,name HTTP/1.1
+
 
 ### create item
 POST {{baseUrlModule}} HTTP/1.1
