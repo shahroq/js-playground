@@ -1,9 +1,7 @@
 <h1>My App</h1>
 
 <main>
-    @for (product of data.products; track $index) {
-    <app-card [name]="product.name" [description]="product.description" [id]="product.id" />
-    }
+    <app-material-sandbox />
 </main>
 
 <router-outlet />
