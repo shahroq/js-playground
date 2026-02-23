@@ -1,11 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import data from './../../data/data-source.json';
-import { Container } from './components/material-sandbox/container';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Container],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
