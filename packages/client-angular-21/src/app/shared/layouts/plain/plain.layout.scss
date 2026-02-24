@@ -30,14 +30,17 @@ mat-card {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
 }
 
+mat-divider {
+  margin: 1rem 0;
+}
+
 mat-card-header,
 mat-card-content {
-  padding: 0;
+  padding: 0 !important;
 }
 
 mat-card-header {
   align-items: center;
-  padding-bottom: 1rem;
 }
 
 /* Optional – logo/title area above form */
