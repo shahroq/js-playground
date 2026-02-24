@@ -1,0 +1,24 @@
+<div class="random-image-container">
+    <p>photo: {{ photo() | json }}</p>
+
+    <!-- <img [width]="p.width" [height]="p.height" [src]="p.url" /> -->
+
+    <mat-card appearance="outlined">
+        <mat-card-header>
+            <mat-card-title>Random Image Works!</mat-card-title>
+        </mat-card-header>
+        @if (photo(); as p) {
+        <img mat-card-image [src]="p.url" alt="Random Image">
+        }
+        @else {
+        <p>No image available</p>
+        }
+
+        <mat-card-actions>
+            <button matButton="filled" (click)="getRandomImage()">Get Random Image</button>
+        </mat-card-actions>
+    </mat-card>
+
+
+
+</div>
