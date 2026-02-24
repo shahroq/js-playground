@@ -1,0 +1,22 @@
+$dummy-color-1: #f5f5f5;
+$dummy-color-2: #efefef;
+
+.dummy {
+  background-color: $dummy-color-1;
+  background-image: repeating-linear-gradient(
+    135deg,
+    $dummy-color-1,
+    $dummy-color-1 30px,
+    $dummy-color-2 30px,
+    $dummy-color-2 60px
+  );
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .content {
+    font-size: large;
+    font-weight: 700;
+  }
+}
