@@ -1,10 +1,14 @@
-export type ImageJsonPlaceHolder = {
+// jsonplaceholder
+/*
+export type JPResponse = {
   albumId: number;
   title: string;
   url: string;
 };
+*/
 
-export type ImageCatApi = {
+// cat api
+export type CatApiResponse = {
   id: string;
   height: number;
   width: number;

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ImageFetcherService } from './image-fetcher.service';
+import { PhotoService } from './photo.service';
 
-describe('ImageFetcherService', () => {
-  let service: ImageFetcherService;
+describe('PhotoService', () => {
+  let service: PhotoService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ImageFetcherService);
+    service = TestBed.inject(PhotoService);
   });
 
   it('should be created', () => {

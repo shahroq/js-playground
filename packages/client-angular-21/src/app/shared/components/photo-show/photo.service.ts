@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ImageCatApi } from './types';
+import { CatApiResponse } from './types';
 
 /*
 const API_URL = 'https://jsonplaceholder.typicode.com/photos/1';
@@ -12,22 +12,22 @@ const API_URL = 'https://api.thecatapi.com/v1/images/search';
 @Injectable({
   providedIn: 'root',
 })
-export class ImageFetcher {
+export class PhotoService {
   private http = inject(HttpClient);
 
-  get(): Observable<ImageCatApi[]> {
-    return this.http.get<ImageCatApi[]>(API_URL, {
+  getPhoto(): Observable<CatApiResponse[]> {
+    return this.http.get<CatApiResponse[]>(API_URL, {
       headers: {},
     });
     /*
-      .subscribe(
-        (data) => {
-          console.log(data);
-        },
-        (err) => {
-          console.log(err);
-        },
-      );
-      */
+        .subscribe(
+          (data) => {
+            console.log(data);
+          },
+          (err) => {
+            console.log(err);
+          },
+        );
+        */
   }
 }

@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RandomImage } from './random-image';
+import { PhotoShow } from './photo-show';
 
-describe('RandomImage', () => {
-  let component: RandomImage;
-  let fixture: ComponentFixture<RandomImage>;
+describe('PhotoShow', () => {
+  let component: PhotoShow;
+  let fixture: ComponentFixture<PhotoShow>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RandomImage],
+      imports: [PhotoShow],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(RandomImage);
+    fixture = TestBed.createComponent(PhotoShow);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
