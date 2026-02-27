@@ -1,0 +1,19 @@
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+
+  .logo {
+    background-image: url(/logo.png);
+    background-size: cover;
+
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+  }
+
+  .title {
+    font-size: 1.4rem;
+    margin: 0;
+  }
+}

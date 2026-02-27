@@ -4,9 +4,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 
+import { Brand } from '../brand/brand';
+
 @Component({
   selector: 'app-not-found',
-  imports: [MatCardModule, MatDividerModule, MatIconModule, MatButtonModule],
+  imports: [MatCardModule, MatDividerModule, MatIconModule, MatButtonModule, Brand],
   templateUrl: './not-found.html',
   styleUrl: './not-found.scss',
 })
