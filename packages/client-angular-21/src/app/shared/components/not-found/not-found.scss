@@ -1,0 +1,60 @@
+:host {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+}
+
+[mat-card-avatar] {
+  background-image: url('/logo.png');
+  background-size: cover;
+  margin-bottom: 0;
+}
+
+mat-card {
+  width: 100%;
+  z-index: 1;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+mat-divider {
+  margin: 1rem 0;
+}
+
+mat-card-header,
+mat-card-content,
+mat-card-actions {
+  padding: 0 !important;
+}
+
+mat-card-header {
+  align-items: center;
+}
+//////
+.title {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+  h1,
+  h2 {
+    margin: 0.5rem 0;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+$icon-size: 60px;
+.big-icon {
+  width: $icon-size;
+  height: $icon-size;
+
+  &::before {
+    font-size: $icon-size;
+  }
+}

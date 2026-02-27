@@ -4,9 +4,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
-  selector: 'app-plain-layout',
-  imports: [MatCardModule, MatDividerModule, RouterOutlet],
-  templateUrl: './plain-layout.html',
-  styleUrl: './plain-layout.scss',
+  selector: 'app-blank-layout',
+  imports: [RouterOutlet, MatCardModule, MatDividerModule],
+  templateUrl: './blank-layout.html',
+  styleUrl: './blank-layout.scss',
 })
-export class PlainLayout {}
+export class BlankLayout {}

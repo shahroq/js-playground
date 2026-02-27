@@ -1,0 +1,37 @@
+<mat-card appearance="outlined">
+    <mat-card-header>
+        <div mat-card-avatar></div>
+        <mat-card-title>Catalog App</mat-card-title>
+    </mat-card-header>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-content>
+        <div class="title">
+            <mat-icon fontIcon="sentiment_very_dissatisfied" class="big-icon" />
+            <div>
+                <h1>404</h1>
+                <h2>Page not found</h2>
+            </div>
+        </div>
+
+
+        <p>
+            The page you are looking for might have been removed,<br>
+            had its name changed, or is temporarily unavailable.
+        </p>
+
+        <div class="actions">
+            <button mat-raised-button color="primary" routerLink="/" class="home-btn">
+                <mat-icon fontIcon="home" />
+                Back to Home
+            </button>
+
+            <button mat-stroked-button routerLink="/contact">
+                <mat-icon fontIcon="bug_report" />
+                Report this issue
+            </button>
+        </div>
+    </mat-card-content>
+    <mat-card-actions></mat-card-actions>
+</mat-card>

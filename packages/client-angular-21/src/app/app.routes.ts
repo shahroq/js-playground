@@ -1,44 +1,36 @@
 import { Routes } from '@angular/router';
-import { PlainLayout } from './shared/layouts/plain/plain.layout';
-import { AdminLayout } from './shared/layouts/admin/admin.layout';
-import { LoginPage } from './features/auth/pages/login/login.page';
-import { RegisterPage } from './features/auth/pages/register/register.page';
-import { NotFoundPage } from './shared/pages/not-found/not-found.page';
+
+import { BlankLayout } from './shared/components/blank-layout/blank-layout';
+import { AdminLayout } from './shared/components/admin-layout/admin-layout';
+import { Dummy } from './shared/components/dummy/dummy';
+import { NotFound } from './shared/components/not-found/not-found';
+import { SignInForm } from './features/auth/sign-in-form/sign-in-form';
 
 export const routes: Routes = [
-  // { path: '', redirectTo: '/dashboard', pathMatch: 'full', title: 'Home' },
-  //   { path: 'admin', component: Admin, title: 'Dashboard' },
+  { path: '', redirectTo: '/admin', pathMatch: 'full', title: 'Home' },
   {
     path: 'not-found',
-    component: PlainLayout,
-    children: [{ path: '', component: NotFoundPage, title: 'Not Found' }],
+    component: BlankLayout,
+    children: [{ path: '', component: NotFound, title: 'Not Found' }],
   },
   {
     path: 'sign-in',
-    component: PlainLayout,
-    children: [{ path: '', component: LoginPage, title: 'Sign In' }],
+    component: BlankLayout,
+    children: [{ path: '', component: SignInForm, title: 'Sign In' }],
   },
-  {
-    path: 'sign-up',
-    component: PlainLayout,
-    children: [{ path: '', component: RegisterPage, title: 'Sign Up' }],
-  },
-  /*
-  {
-    path: 'sign-out',
-    component: PlainLayout,
-    children: [{ path: '', component: Logout, title: 'Sign Out' }],
-  },
-  */
   {
     path: 'admin',
     component: AdminLayout,
-    title: 'Dashboard',
+    children: [
+      { path: '', component: Dummy, title: 'Dashboard' },
+      { path: 'settings', component: Dummy, title: 'Settings' },
+      { path: 'products', component: Dummy, title: 'Products' },
+    ],
   },
   // { path: '**', redirectTo: '/not-found', pathMatch: 'full' },
   {
     path: '**',
-    component: PlainLayout,
-    children: [{ path: '', component: NotFoundPage, title: 'Not Found' }],
+    component: BlankLayout,
+    children: [{ path: '', component: NotFound, title: 'Not Found' }],
   },
 ];
