@@ -1,0 +1,30 @@
+<mat-card appearance="outlined">
+    <mat-card-header><app-brand /></mat-card-header>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-content>
+        <mat-card-title-group>
+            @if(icon()) {
+            <mat-icon [fontIcon]="icon()" class="big-icon" />
+            }
+
+            <mat-card-title>{{title()}}</mat-card-title>
+
+            @if(subtitle()) {
+            <mat-card-subtitle>{{subtitle()}}</mat-card-subtitle>
+            }
+        </mat-card-title-group>
+
+        <ng-content />
+    </mat-card-content>
+
+    <mat-card-actions>
+        <ng-content select="[actions]" />
+    </mat-card-actions>
+
+    <mat-card-footer>
+        <ng-content select="[footer]" />
+    </mat-card-footer>
+
+</mat-card>

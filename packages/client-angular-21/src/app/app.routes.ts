@@ -5,6 +5,7 @@ import { AdminLayout } from './shared/components/admin-layout/admin-layout';
 import { Dummy } from './shared/components/dummy/dummy';
 import { NotFound } from './shared/components/not-found/not-found';
 import { SignInForm } from './features/auth/sign-in-form/sign-in-form';
+import { SignUpForm } from './features/auth/sign-up-form/sign-up-form';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/admin', pathMatch: 'full', title: 'Home' },
@@ -17,6 +18,11 @@ export const routes: Routes = [
     path: 'sign-in',
     component: BlankLayout,
     children: [{ path: '', component: SignInForm, title: 'Sign In' }],
+  },
+  {
+    path: 'sign-up',
+    component: BlankLayout,
+    children: [{ path: '', component: SignUpForm, title: 'Sign Up' }],
   },
   {
     path: 'admin',

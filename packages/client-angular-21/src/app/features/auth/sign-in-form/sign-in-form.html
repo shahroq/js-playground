@@ -1,13 +1,10 @@
-<mat-card appearance="outlined">
-    <mat-card-header><app-brand /></mat-card-header>
-
-    <mat-divider></mat-divider>
-
-    <mat-card-content>
+<app-card-centered title="Sign In">
+    <p>
         sign-in-form works!
-    </mat-card-content>
+    </p>
 
-    <mat-card-actions></mat-card-actions>
-
-    <mat-card-footer></mat-card-footer>
-</mat-card>
+    <ng-container actions>
+        <button matButton="filled" routerLink="/...">Sign In</button>
+        <button matButton="outlined" routerLink="sign-up">Sign Up</button>
+    </ng-container>
+</app-card-centered>

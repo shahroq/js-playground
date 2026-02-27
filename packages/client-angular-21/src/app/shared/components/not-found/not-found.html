@@ -1,22 +1,10 @@
-<mat-card appearance="outlined">
-    <mat-card-header><app-brand /></mat-card-header>
+<app-card-centered title="404" subtitle="Page not found" icon="sentiment_very_dissatisfied">
+    <p>
+        The page you are looking for might have been removed,<br>
+        had its name changed, or is temporarily unavailable.
+    </p>
 
-    <mat-divider></mat-divider>
-
-    <mat-card-content>
-        <mat-card-title-group>
-            <mat-icon fontIcon="sentiment_very_dissatisfied" class="big-icon" />
-            <mat-card-title>404</mat-card-title>
-            <mat-card-subtitle>Page not found</mat-card-subtitle>
-        </mat-card-title-group>
-
-        <p>
-            The page you are looking for might have been removed,<br>
-            had its name changed, or is temporarily unavailable.
-        </p>
-    </mat-card-content>
-
-    <mat-card-actions>
+    <ng-container actions>
         <button matButton="outlined" routerLink="/">
             <mat-icon fontIcon="home" />Back to Home
         </button>
@@ -24,8 +12,5 @@
         <button matButton="outlined" routerLink="/contact">
             <mat-icon fontIcon="bug_report" />Report this issue
         </button>
-    </mat-card-actions>
-
-    <mat-card-footer></mat-card-footer>
-
-</mat-card>
+    </ng-container>
+</app-card-centered>

@@ -4,8 +4,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { CardCentered } from '../../../shared/components/card-centered/card-centered';
 
 @Component({
-  selector: 'app-sign-in-form',
+  selector: 'app-sign-up-form',
   imports: [MatButtonModule, CardCentered],
-  templateUrl: './sign-in-form.html',
+  templateUrl: './sign-up-form.html',
 })
-export class SignInForm {}
+export class SignUpForm {}
