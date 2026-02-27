@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 
-import { CardCentered } from '../../../shared/components/card-centered/card-centered';
+import { CardCentered } from '@shared/components/card-centered/card-centered';
 
 @Component({
   selector: 'app-sign-up-form',

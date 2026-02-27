@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import data from './../../data/data-source.json';
+
+import data from '@data/data-source.json';
 
 @Component({
   selector: 'app-root',
