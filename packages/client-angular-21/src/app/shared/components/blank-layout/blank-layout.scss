@@ -1,13 +1,7 @@
 .blank-layout {
   min-height: 100vh;
   // background: linear-gradient(135deg, #fff 0%, #eee 100%);
-  /*
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  padding: 1rem;
-  */
+
   &__background--0 {
     position: absolute;
     inset: 0;
@@ -17,8 +11,10 @@
   }
 }
 
-/* Optional – logo/title area above form */
-// :host ::ng-deep .blank-layout-header {
-//   text-align: center;
-//   margin-bottom: 2rem;
-// }
+/*
+// Optional – logo/title area above form 
+:host ::ng-deep .blank-layout-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+*/
