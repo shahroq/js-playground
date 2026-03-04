@@ -1,30 +1,16 @@
 import { Routes } from '@angular/router';
 
-import { BlankLayout } from './shared/components/blank-layout/blank-layout';
-import { AdminLayout } from './shared/components/admin-layout/admin-layout';
-import { Dummy } from './shared/components/dummy/dummy';
 import { NotFound } from './shared/components/not-found/not-found';
 import { SignInForm } from './features/auth/sign-in-form/sign-in-form';
 import { SignUpForm } from './features/auth/sign-up-form/sign-up-form';
+import { AdminLayout } from './shared/components/admin-layout/admin-layout';
+import { Dummy } from './shared/components/dummy/dummy';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/admin', pathMatch: 'full', title: 'Home' },
-  {
-    path: 'not-found',
-    component: NotFound,
-    title: 'Not Found',
-    // children: [{ path: '', component: NotFound, title: 'Not Found' }],
-  },
-  {
-    path: 'sign-in',
-    component: BlankLayout,
-    children: [{ path: '', component: SignInForm, title: 'Sign In' }],
-  },
-  {
-    path: 'sign-up',
-    component: BlankLayout,
-    children: [{ path: '', component: SignUpForm, title: 'Sign Up' }],
-  },
+  { path: 'not-found', component: NotFound, title: 'Not Found' },
+  { path: 'sign-in', component: SignInForm, title: 'Sign In' },
+  { path: 'sign-up', component: SignUpForm, title: 'Sign Up' },
   {
     path: 'admin',
     component: AdminLayout,
@@ -35,9 +21,5 @@ export const routes: Routes = [
     ],
   },
   // { path: '**', redirectTo: '/not-found', pathMatch: 'full' },
-  {
-    path: '**',
-    component: BlankLayout,
-    children: [{ path: '', component: NotFound, title: 'Not Found' }],
-  },
+  { path: '**', component: NotFound, title: 'Not Found' },
 ];
