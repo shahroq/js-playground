@@ -11,8 +11,9 @@ export const routes: Routes = [
   { path: '', redirectTo: '/admin', pathMatch: 'full', title: 'Home' },
   {
     path: 'not-found',
-    component: BlankLayout,
-    children: [{ path: '', component: NotFound, title: 'Not Found' }],
+    component: NotFound,
+    title: 'Not Found',
+    // children: [{ path: '', component: NotFound, title: 'Not Found' }],
   },
   {
     path: 'sign-in',
