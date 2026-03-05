@@ -1,10 +1,16 @@
 <ng-container>
-    <header>Header</header>
-    <aside>Aside</aside>
-    <main>
-        main: start
-        <router-outlet />
-        main: end
-    </main>
+    <header>
+        <app-brand />
+
+        <ul class="topbar-menu">Topbar Menu</ul>
+    </header>
+    <section>
+        <aside>
+            <ul class="sidebar-menu">Sidebar Menu</ul>
+        </aside>
+        <main>
+            <router-outlet />
+        </main>
+    </section>
     <footer>Footer</footer>
 </ng-container>

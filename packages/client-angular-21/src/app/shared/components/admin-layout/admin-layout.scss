@@ -1,3 +1,45 @@
-.admin-layout {
+$default-padding: 0.75rem;
+
+.wrapper {
   background-color: #ccc;
+}
+
+header,
+footer {
+  border: 2px solid black;
+  padding: $default-padding;
+  height: 75px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+section {
+  display: flex;
+
+  aside,
+  main {
+    padding: $default-padding;
+  }
+
+  aside {
+    width: 250px;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+  }
+
+  main {
+    flex: 1;
+  }
+}
+
+ul.topbar-menu {
+  display: flex;
+  padding: 0;
+}
+
+ul.sidebar-menu {
+  display: flex;
+  padding: 0;
 }
