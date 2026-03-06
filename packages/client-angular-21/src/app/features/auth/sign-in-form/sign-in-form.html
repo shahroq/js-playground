@@ -1,10 +1,29 @@
 <app-card-centered title="Sign In">
-    <p>
-        sign-in-form works!
-    </p>
+    <form [formGroup]="form" (ngSubmit)="signIn()">
+        <div class="control">
+            <label for="email">Email</label>
+            <input type="email" [formControl]="form.controls.email" />
+            @if(inputInvalid('email')){
+            <p class="control-error">Please enter valid value.</p>
+            }
+        </div>
+        <div class="control">
+            <label for="password">Password</label>
+            <input type="password" formControlName="password" />
+            @if(inputInvalid('password')){
+            <p class="control-error">Please enter valid value.</p>
+            }
+        </div>
+        <button matButton="filled">Sign In</button>
+    </form>
+    <div>Form Content: {{form.value | json }}</div>
+    <div>Form Validation: {{form.valid | json }}</div>
+    <div>Form Validation for email: {{form.controls.email.errors | json }}</div>
+    <div>Form Validation for password: {{form.controls.password.errors | json }}</div>
+
 
     <ng-container actions>
-        <button matButton="filled" routerLink="/...">Sign In</button>
+        <button matButton="filled">Sign In</button>
         <button matButton="outlined" routerLink="/sign-up">Sign Up</button>
     </ng-container>
 </app-card-centered>

@@ -1,0 +1,22 @@
+$default-margin: 0.5rem;
+.control {
+  margin-bottom: $default-margin;
+
+  label {
+    margin-right: $default-margin;
+  }
+
+  .ng-invalid.ng-dirty {
+    border-color: red;
+    background-color: rgb(255, 204, 204);
+  }
+
+  .control-error {
+    margin: 0 0 $default-margin;
+    color: red;
+    &::before {
+      content: '❌';
+      margin-right: $default-margin;
+    }
+  }
+}
