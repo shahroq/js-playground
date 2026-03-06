@@ -10,7 +10,7 @@ import data from '@data/data-source.json';
   styleUrl: './app.scss',
 })
 export class App {
-  protected readonly title = signal('client-angular-21');
+  protected readonly title = signal('Catalog App: Angular 21');
 
   protected data = data;
 }
