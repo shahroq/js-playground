@@ -6,10 +6,11 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatButtonModule } from '@angular/material/button';
 
 import { CardCentered } from '@shared/components/card-centered/card-centered';
+import { Input } from '../../../shared/components/input/input';
 
 @Component({
   selector: 'app-sign-in-form',
-  imports: [RouterLink, ReactiveFormsModule, JsonPipe, MatButtonModule, CardCentered],
+  imports: [RouterLink, ReactiveFormsModule, JsonPipe, MatButtonModule, CardCentered, Input],
   templateUrl: './sign-in-form.html',
   styleUrl: './sign-in-form.scss',
 })
@@ -19,6 +20,9 @@ export class SignInForm {
       validators: [Validators.required, Validators.email],
     }),
     password: new FormControl('', {
+      validators: [Validators.required, Validators.minLength(4)],
+    }),
+    title: new FormControl('Shm', {
       validators: [Validators.required, Validators.minLength(4)],
     }),
   });

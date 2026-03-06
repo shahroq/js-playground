@@ -14,6 +14,9 @@
             <p class="control-error">Please enter valid value.</p>
             }
         </div>
+
+        <app-input [control]="form.controls.title" />
+
         <button matButton="filled">Sign In</button>
     </form>
     <div>Form Content: {{form.value | json }}</div>
