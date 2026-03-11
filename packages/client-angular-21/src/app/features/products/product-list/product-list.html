@@ -1,0 +1,20 @@
+<table border="1">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Price</td>
+            <td>Show</td>
+        </tr>
+    </thead>
+    <tbody>
+        @for (product of products; track $index) {
+        <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.price }}</td>
+            <td><a routerLink="{{product.id}}">Show</a></td>
+        </tr>
+        }
+    </tbody>
+</table>

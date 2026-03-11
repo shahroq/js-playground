@@ -7,11 +7,15 @@ import { AdminLayout } from './shared/components/admin-layout/admin-layout';
 import { Dummy } from './shared/components/dummy/dummy';
 import { App } from './app';
 import { PhotoShow } from '@shared/components/photo-show/photo-show';
+import { ProductList } from '@features/products/product-list/product-list';
+import { ProductShow } from '@features/products/product-show/product-show';
 
 export const routes: Routes = [
   // { path: '', redirectTo: '/admin', pathMatch: 'full', title: 'Home' },
   { path: '', component: App },
   { path: 'photo-show', component: PhotoShow, title: 'Photo Show' },
+  { path: 'products', component: ProductList, title: 'Product List' },
+  { path: 'products/:id', component: ProductShow, title: 'Product Show' },
   { path: 'not-found', component: NotFound, title: 'Not Found' },
   { path: 'sign-in', component: SignInForm, title: 'Sign In' },
   { path: 'sign-up', component: SignUpForm, title: 'Sign Up' },

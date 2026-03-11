@@ -1,0 +1,35 @@
+<div>{{ product() | json}}</div>
+
+@if(product()) {
+<table border="1">
+    <tbody>
+        <tr>
+            <td>ID</td>
+
+            <td>{{product()?.id}}</td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>{{product()?.name}}</td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td>{{product()?.description}}</td>
+        </tr>
+        <tr>
+            <td>Price</td>
+            <td>{{product()?.price}}</td>
+        </tr>
+        <tr>
+            <td>In Stock</td>
+            <td>{{product()?.in_stock ? '✅': '❌'}}</td>
+        </tr>
+    </tbody>
+</table>
+}
+@else {
+<p class="error">Product does not exist.</p>
+}
+<div>X1: {{x1}}</div>
+<div>X2: {{x2()}}</div>
+<button type="button" (click)="onClick()">More..</button>
