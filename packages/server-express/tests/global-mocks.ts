@@ -1,5 +1,6 @@
 import { mock } from "bun:test";
 
+/*
 console.log(`here at global mocks`);
 
 // Mock environment variables
@@ -10,3 +11,4 @@ process.env.API_URL = "http://localhost:3001";
 mock.module("./external-api", () => ({
   fetchData: mock(() => Promise.resolve({ data: "test" })),
 }));
+*/
