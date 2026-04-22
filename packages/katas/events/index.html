@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="index.js"></script>
+    <title>Events</title>
+</head>
+
+<body>
+    <h2>Click the button</h2>
+    <button onClick="logger()">click me</button>
+</body>
+
+<script>
+    const but = document.querySelector("button");
+
+    const logger = () => console.log("Clicked on: " + Date());
+    const logger2 = () => console.log("Exited on: " + Date());
+
+    const exitEv = new Event("exit"); // console.log(exitEv.type);
+
+    but.addEventListener("exit", logger2);
+    but.addEventListener("click", logger);
+
+    but.dispatchEvent(exitEv);
+    but.click();
+
+
+</script>
+
+</html>
