@@ -1,0 +1,18 @@
+{
+  "name": "server-json-server",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "scripts": {
+    "start": "bunx json-server ./data/data.json"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "json-server": "^1.0.0-beta.15"
+  }
+}
