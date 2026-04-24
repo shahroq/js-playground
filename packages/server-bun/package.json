@@ -1,0 +1,16 @@
+{
+  "name": "server-bun",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "bun run ./src/main.ts",
+    "start:dev": "bun --watch run ./src/main.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
