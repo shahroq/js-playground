@@ -1,0 +1,40 @@
+---
+import Layout from "@/layouts/LayoutTW.astro";
+import PageTitle from "@/components-tw/PageTitle.astro";
+import FormControl from "@/components-tw/FormControl.astro";
+
+const page = {
+  title: "Form",
+  breadcrumb: [{ title: "Home", href: "/tw" }, { title: "Forms" }],
+};
+---
+
+<Layout>
+  <PageTitle page={page} />
+
+  <form class="needs-validation was-validated-">
+    <FormControl
+      type="input"
+      subtype="email"
+      id="email"
+      label="Email"
+      help="Enter your valid email address"
+      placeholder="Enter your valid email address"
+    />
+
+    <FormControl type="input" subtype="text" id="username" label="Username" />
+
+    <FormControl type="input" subtype="number" id="age" label="Age" />
+
+    <FormControl
+      type="input"
+      subtype="password"
+      id="password"
+      label="Password"
+    />
+
+    <FormControl type="select" id="role" label="Role" options="" />
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</Layout>

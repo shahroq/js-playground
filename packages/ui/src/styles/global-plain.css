@@ -1,0 +1,31 @@
+.container {
+  background-color: #ccc;
+  padding: 10px;
+  /* min-height: 70vw; */
+  height: 500px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.item {
+  background-color: #f1425d;
+  padding: 10px;
+  margin: 10px;
+  color: white;
+
+  flex-grow: 1;
+  /* flex: 1; */
+}
+
+.i1 {
+}
+.i2 {
+  height: 100px;
+
+  flex-grow: 2;
+  /* flex: 1; */
+}
+.i3 {
+}

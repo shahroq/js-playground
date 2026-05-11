@@ -1,0 +1,36 @@
+<header class="sticky top-0 z-50 bg-gray-800 text-white">
+  <nav class="container-fluid py-4 flex items-center gap-3">
+    <!-- Navbar Brand -->
+    <a href="#" class="navbar-brand">
+      <img src="/logo-dark.png" alt="Logo" />
+      <span>Pixel</span>
+    </a>
+
+    <!-- Navbar-->
+    <ul class="hidden md:flex flex-1 items-center gap-3"></ul>
+
+    <!-- HEADER Search-->
+    <form aria-role="search" class="hidden md:flex">
+      <input
+        placeholder="Search"
+        class="form-control form-control-dark text-bg-dark"
+      />
+    </form>
+
+    <!-- HEADER Auth-->
+    <form aria-role="auth" class="hidden md:flex items-center gap-3">
+      <a href="#" class="btn btn-outline"> Sign-in </a>
+      <a href="#" class="btn btn-warning"> Sign-up </a>
+    </form>
+
+    <!-- HEADER Burger-->
+    <button
+      type="button"
+      class="navbar-toggler ml-auto flex size-10 items-center justify-center rounded-md border border-white/20 lg:hidden"
+      data-toggle="offcanvas"
+      data-target="#sidebar"
+    >
+      ☰
+    </button>
+  </nav>
+</header>

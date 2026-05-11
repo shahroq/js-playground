@@ -1,0 +1,22 @@
+---
+import NavSidebar from "@/components-bs/NavSidebar.astro";
+import NavUser from "@/components-bs/NavUser.astro";
+---
+
+<div class="offcanvas-md offcanvas-end" tabindex="-1" id="sidebar-menu">
+  <div class="offcanvas-header">
+    <h4 class="offcanvas-title">Pixel</h4>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="offcanvas"
+      data-bs-target="#sidebar-menu"></button>
+  </div>
+  <div
+    class="offcanvas-body d-flex flex-column flex-shrink-0-- p-3 pt-lg-3 overflow-y-auto-"
+  >
+    <NavSidebar />
+    <hr />
+    <NavUser />
+  </div>
+</div>

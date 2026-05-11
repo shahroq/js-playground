@@ -1,0 +1,17 @@
+---
+import NavBreadcrumb from "@/components-tw/NavBreadcrumb.astro";
+
+const { page } = Astro.props;
+---
+
+<div class="page-title mb-5">
+  {page.title && <h1>{page.title}</h1>}
+
+  {
+    page.breadcrumb.length > 0 && (
+      <div class="mt-2">
+        <NavBreadcrumb breadcrumb={page.breadcrumb} />
+      </div>
+    )
+  }
+</div>

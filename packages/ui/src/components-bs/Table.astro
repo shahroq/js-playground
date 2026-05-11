@@ -1,0 +1,42 @@
+---
+import Filter from "@/components-bs/Filter.astro";
+import Pagination from "@/components-bs/Pagination.astro";
+
+const data = [];
+---
+
+<div class="d-flex justify-content-end gap-2 my-4">
+  <Filter />
+  <button type="button" class="btn btn-primary">Add</button>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-hover caption-top-">
+    <caption>List of records</caption>
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Operations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>
+          <button type="button" class="btn btn-sm btn-outline-primary"
+            >Edit</button
+          >
+          <button type="button" class="btn btn-sm btn-outline-danger"
+            >Delete</button
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<Pagination />

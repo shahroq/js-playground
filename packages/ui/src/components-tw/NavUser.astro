@@ -1,0 +1,30 @@
+---
+const user = {
+  id: 1,
+  name: "Jane Doe",
+  email: "jane@email.com",
+  avatar: "avatar.png",
+};
+---
+
+<div class="dropdown user-nav">
+  <a
+    href="#"
+    class="dropdown-toggle"
+    data-toggle="dropdown"
+    aria-expanded="false"
+  >
+    <img src={`/${user.avatar}`} alt={`/${user.name}`} width="32" height="32" />
+
+    <dl>
+      <dt>{user.name}</dt>
+      <dd>{user.email}</dd>
+    </dl>
+  </a>
+  <ul class="dropdown-menu">
+    <li><a href="#">Settings</a></li>
+    <li><a href="#">Profile</a></li>
+    <li><hr class="sm" /></li>
+    <li><a href="#">Sign out</a></li>
+  </ul>
+</div>

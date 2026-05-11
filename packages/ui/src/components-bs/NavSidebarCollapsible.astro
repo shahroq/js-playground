@@ -1,0 +1,45 @@
+---
+// unfinished
+const navItems = [
+  { title: "Home", href: "/" },
+  { title: "Components", href: "/components" },
+  { title: "Reports", chidlren: [{ title: "Overview" }, { title: "Monthly" }] },
+];
+
+const pathname = Astro.url.pathname;
+---
+
+<ul class="list-unstyled ps-0">
+  <li class="mb-1">
+    <button
+      class="btn btn-toggle collapsed"
+      data-bs-toggle="collapse"
+      data-bs-target="#item-1-collapse"
+      aria-expanded="true"
+    >
+      Item 1
+    </button>
+    <div class="collapse show" id="item-1-collapse">
+      <ul class="btn-toggle-nav">
+        <li>
+          <a
+            href="#"
+            class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+            >Overview</a>
+        </li>
+        <li>
+          <a
+            href="#"
+            class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+            >Updates</a>
+        </li>
+        <li>
+          <a
+            href="#"
+            class="link-body-emphasis d-inline-flex text-decoration-none rounded"
+            >Reports</a>
+        </li>
+      </ul>
+    </div>
+  </li>
+</ul>

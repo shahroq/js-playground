@@ -1,0 +1,15 @@
+---
+import Layout from "@/layouts/LayoutBS.astro";
+import PageTitle from "@/components-bs/PageTitle.astro";
+import Table from "@/components-bs/Table.astro";
+
+const page = {
+  title: "Components",
+  breadcrumb: [{ title: "Home", href: "/bs" }, { title: "Components" }],
+};
+---
+
+<Layout>
+  <PageTitle page={page} />
+  <Table data="[]/" />
+</Layout>

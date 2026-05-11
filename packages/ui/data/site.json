@@ -1,0 +1,16 @@
+{
+  "version": "1.1",
+  "navItems": [
+    { "title": "Home", "href": "" },
+    { "title": "Products" },
+    { "title": "Reviews" },
+    { "title": "Users" },
+    {
+      "title": "Components",
+      "children": [
+        { "title": "Data", "href": "/data" },
+        { "title": "Form", "href": "/form" }
+      ]
+    }
+  ]
+}

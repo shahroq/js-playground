@@ -1,0 +1,39 @@
+---
+// import db from "/data/catalog.json"
+import "bootstrap/dist/css/bootstrap.min.css";
+import "@/styles/global-bs.css";
+import Header from "@/components-bs/Header.astro";
+import Sidebar from "@/components-bs/Sidebar.astro";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>UI: w/ Bootstrap 5</title>
+  </head>
+  <body>
+    <Header />
+    <div class="container-fluid bg-body-tertiary h-container">
+      <div id="content" class="row">
+        <aside class="sidebar col-md-3 col-lg-2">
+          <Sidebar />
+        </aside>
+        <main class="col-md-9 ms-sm-auto col-lg-10">
+          <div class="my-3 p-3 border rounded bg-white shadow-sm">
+            <slot />
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../js/global-bs.js"></script>
+  </body>
+</html>
+
+<style>
+  body {
+  }
+</style>

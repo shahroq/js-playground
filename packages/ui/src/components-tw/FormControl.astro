@@ -1,0 +1,34 @@
+---
+const { props } = Astro;
+---
+
+<div class="mb-3">
+  <label for={props.id} class="form-label">{props.label}</label>
+
+  {
+    props.type === "input" && (
+      <input
+        type={props.subtype}
+        class="form-control"
+        id={props.id}
+        aria-describedby={`${props.id}-help`}
+        placeholder={props.placeholder}
+      />
+    )
+  }
+
+  {
+    props.type === "select" && (
+      <select class="form-select" aria-label="">
+        <option selected>Open this select menu</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    )
+  }
+
+  <div id={`${props.id}-help`} class="form-text">{props.help}</div>
+  <!-- <div class="valid-feedback">Looks good!</div>
+  <div class="invalid-feedback">Please choose a username.</div> -->
+</div>

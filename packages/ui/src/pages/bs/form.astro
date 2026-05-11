@@ -1,0 +1,39 @@
+---
+import Layout from "@/layouts/LayoutBS.astro";
+import PageTitle from "@/components-bs/PageTitle.astro";
+import FormControl from "@/components-bs/FormControl.astro";
+
+const page = {
+  title: "Form",
+  breadcrumb: [{ title: "Home", href: "/bs" }, { title: "Form" }],
+};
+---
+
+<Layout>
+  <PageTitle page={page} />
+  <form class="needs-validation was-validated-">
+    <FormControl
+      type="input"
+      subtype="email"
+      id="email"
+      label="Email"
+      help="Enter your valid email address"
+      placeholder="Enter your valid email address"
+    />
+
+    <FormControl type="input" subtype="text" id="username" label="Username" />
+
+    <FormControl type="input" subtype="number" id="age" label="Age" />
+
+    <FormControl
+      type="input"
+      subtype="password"
+      id="password"
+      label="Password"
+    />
+
+    <FormControl type="select" id="role" label="Role" options="" />
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</Layout>

@@ -1,0 +1,17 @@
+---
+import NavSidebar from "@/components-tw/NavSidebar.astro";
+import NavUser from "@/components-tw/NavUser.astro";
+---
+
+<div class="offcanvas offcanvas-start" id="sidebar">
+  <div class="offcanvas-header">
+    <h2>Pixel</h2>
+    <button type="button" data-dismiss="offcanvas">×</button>
+  </div>
+
+  <div class="offcanvas-body py-4">
+    <NavSidebar />
+    <hr />
+    <NavUser />
+  </div>
+</div>

@@ -1,0 +1,19 @@
+---
+const { breadcrumb } = Astro.props;
+---
+
+<nav aria-label="Breadcrumb">
+  <ol class="breadcrumb">
+    <!--
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Library</li>
+    -->
+    {
+      breadcrumb.map((item) => (
+        <li class={`breadcrumb-item {item.href ? "active": ""}`}>
+          {item.href ? <a href={item.href}>{item.title}</a> : item.title}
+        </li>
+      ))
+    }
+  </ol>
+</nav>
