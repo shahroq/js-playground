@@ -4,12 +4,14 @@ import PageTitle from "@/components-bs/PageTitle.astro";
 import Table from "@/components-bs/Table.astro";
 
 const page = {
-  title: "Components",
-  breadcrumb: [{ title: "Home", href: "/bs" }, { title: "Components" }],
+  title: "Data",
+  breadcrumb: [{ title: "Home", href: "/bs" }, { title: "Data" }],
 };
 ---
 
 <Layout>
-  <PageTitle page={page} />
-  <Table data="[]/" />
+  <section>
+    <PageTitle page={page} />
+    <Table data="[]/" />
+  </section>
 </Layout>

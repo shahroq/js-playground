@@ -10,31 +10,33 @@ const page = {
 ---
 
 <Layout>
-  <PageTitle page={page} />
+  <section>
+    <PageTitle page={page} />
 
-  <form class="needs-validation was-validated-">
-    <FormControl
-      type="input"
-      subtype="email"
-      id="email"
-      label="Email"
-      help="Enter your valid email address"
-      placeholder="Enter your valid email address"
-    />
+    <form class="space-y-2 needs-validation was-validated-">
+      <FormControl
+        type="input"
+        subtype="email"
+        id="email"
+        label="Email"
+        help="Enter your valid email address"
+        placeholder="Enter your valid email address"
+      />
 
-    <FormControl type="input" subtype="text" id="username" label="Username" />
+      <FormControl type="input" subtype="text" id="username" label="Username" />
 
-    <FormControl type="input" subtype="number" id="age" label="Age" />
+      <FormControl type="input" subtype="number" id="age" label="Age" />
 
-    <FormControl
-      type="input"
-      subtype="password"
-      id="password"
-      label="Password"
-    />
+      <FormControl
+        type="input"
+        subtype="password"
+        id="password"
+        label="Password"
+      />
 
-    <FormControl type="select" id="role" label="Role" options="" />
+      <FormControl type="select" id="role" label="Role" options="" />
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </section>
 </Layout>

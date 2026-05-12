@@ -1,3 +1,5 @@
+- improvemmets
+    - remove .wrapper-main? with ::after maybe? ask gpt
 - Setup
     X install
     - 2 theme setup (bs/tw)

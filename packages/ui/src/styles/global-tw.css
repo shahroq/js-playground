@@ -16,27 +16,40 @@ hr {
   }
 }
 
+@layer base {
+  :root {
+    @apply antialiased bg-slate-50;
+  }
+
+  body {
+    > div.layout {
+      @apply container-fluid flex lg:gap-4 h-full;
+    }
+  }
+
+  header {
+    @apply sticky top-0 z-50 bg-gray-800 text-white;
+  }
+
+  aside {
+    @apply w-auto shrink-0;
+  }
+
+  main {
+    @apply flex-1 py-6 space-y-6;
+
+    > section {
+      @apply space-y-6 p-6 rounded bg-white shadow-sm;
+    }
+  }
+}
+
 /* to control the width and horizontal alignment of your content */
 @utility container-fluid {
   @apply w-full px-6;
 }
 
 @layer components {
-  /*
-  |--------------------------------------------------------------------------
-  | Header
-  |--------------------------------------------------------------------------
-  */
-  .header {
-    @apply sticky;
-    &.header-sticky {
-      @apply top-0 z-50;
-    }
-    &.header-dark {
-      @apply bg-gray-800 text-white;
-    }
-  }
-
   /*
   |--------------------------------------------------------------------------
   | Navbar
@@ -100,7 +113,7 @@ hr {
   |--------------------------------------------------------------------------
   */
   .form-label {
-    @apply mb-1 block text-base text-slate-900;
+    @apply block text-base text-slate-900;
   }
 
   .form-control {
@@ -112,20 +125,20 @@ hr {
   }
 
   .form-text {
-    @apply mt-1 text-sm text-gray-500;
+    @apply text-sm text-gray-500;
   }
 
   .valid-feedback {
-    @apply mt-1 text-sm text-green-600;
+    @apply text-sm text-green-600;
   }
 
   .invalid-feedback {
-    @apply mt-1 text-sm text-red-600;
+    @apply text-sm text-red-600;
   }
 
   /* form controls */
   .form-control {
-    @apply rounded-md border  px-3 py-2 text-sm outline-none;
+    @apply rounded-md border px-3 py-2 text-sm outline-none;
   }
   .form-control-dark {
     @apply border-white/10 bg-gray-800;
@@ -420,7 +433,7 @@ hr {
     }
 
     .offcanvas-body {
-      @apply space-y-2;
+      @apply space-y-6;
     }
 
     .offcanvas-backdrop {

@@ -6,11 +6,11 @@ const { page } = Astro.props;
 
 {
   (page.title || page.breadcrumb) && (
-    <div class="page-title mb-5">
+    <div class="page-title space-y-2">
       {page.title && <h1>{page.title}</h1>}
 
       {page.breadcrumb && page.breadcrumb.length > 0 && (
-        <div class="mt-2">
+        <div>
           <NavBreadcrumb breadcrumb={page.breadcrumb} />
         </div>
       )}

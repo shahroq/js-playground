@@ -12,27 +12,15 @@ import Sidebar from "@/components-tw/Sidebar.astro";
     <meta name="generator" content={Astro.generator} />
     <title>UI: w/ Tailwind 4</title>
   </head>
-  <body class="antialiased bg-slate-50">
-    {/* HEADER */}
-    <header class="header header-sticky- header-dark">
-      <Header />
-    </header>
+  <body>
+    <header><Header /></header>
 
-    <div class="container-fluid flex lg:gap-4 h-full">
-      {/* SIDEBAR */}
-      <aside class="w-auto shrink-0">
-        <Sidebar />
-      </aside>
-
-      {/* MAIN */}
-      <main class="flex-1 py-6">
-        <div class="wrapper p-6 rounded bg-white shadow-sm">
-          <slot />
-        </div>
-      </main>
+    <div class="layout">
+      <aside><Sidebar /></aside>
+      <main><slot /></main>
     </div>
-    <script src="../js/global-tw.js"></script>
   </body>
+  <script src="../js/global-tw.js"></script>
 </html>
 
 <style>

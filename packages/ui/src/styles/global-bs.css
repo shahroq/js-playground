@@ -8,6 +8,19 @@
   min-height: calc(100vh - var(--header-height));
 }
 
+main {
+  > section {
+    padding: 1rem !important;
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+
+    background-color: white;
+    border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+    border-radius: var(--bs-border-radius) !important;
+    box-shadow: var(--bs-box-shadow-sm) !important;
+  }
+}
+
 /* dropdown: user nav */
 .user-nav {
   .dropdown-toggle {
