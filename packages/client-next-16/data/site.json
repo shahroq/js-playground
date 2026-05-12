@@ -1,0 +1,23 @@
+{
+  "version": "1.1",
+  "navItems": [
+    { "title": "Home", "href": "" },
+    { "title": "Dashboard", "href": "/dashboard" },
+    { "title": "Products" },
+    { "title": "Reviews" },
+    { "title": "Users" },
+    {
+      "title": "Components",
+      "children": [
+        { "title": "Data", "href": "/data" },
+        { "title": "Form", "href": "/form" }
+      ]
+    }
+  ],
+  "user": {
+    "id": 1,
+    "name": "John Doe",
+    "email": "jd@mail.com",
+    "avatar": "avatar.png"
+  }
+}
