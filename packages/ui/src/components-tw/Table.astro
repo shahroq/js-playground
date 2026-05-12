@@ -5,14 +5,14 @@ import Pagination from "@/components-tw/Pagination.astro";
 const data = [];
 ---
 
-<!-- Toolbar -->
+{/* Toolbar */}
 <div class="my-4 flex flex-wrap items-center justify-end gap-2">
   <Filter />
 
   <button type="button" class="btn btn-primary">Add</button>
 </div>
 
-<!-- Table -->
+{/* Table */}
 <div class="overflow-x-auto">
   <table class="table table-hover caption-bottom">
     <caption>List of records</caption>
@@ -57,7 +57,7 @@ const data = [];
   </table>
 </div>
 
-<!-- Pagination -->
+{/* PAgination */}
 <div class="mt-4">
   <Pagination />
 </div>
