@@ -1,0 +1,35 @@
+{
+  "version": "1.1",
+  "app": {
+    "name": "Pixel Global",
+    "logo": "logo-dark.png"
+  },
+  "navTop": [],
+  "navSide": [
+    { "title": "Home", "href": "" },
+    { "title": "Dashboard", "href": "/dashboard" },
+    { "title": "Users" },
+    {
+      "title": "Components",
+      "children": [
+        { "title": "Data", "href": "/data" },
+        { "title": "Form", "href": "/form" },
+        { "title": "Modal" }
+      ]
+    },
+    {
+      "title": "Catalog",
+      "children": [
+        { "title": "Plain" },
+        { "title": "w/ Context" },
+        { "title": "w/ Zustand" }
+      ]
+    }
+  ],
+  "user": {
+    "id": 1,
+    "name": "John Doe",
+    "email": "jd@mail.com",
+    "avatar": "avatar.png"
+  }
+}
