@@ -1,5 +1,5 @@
 ---
-import site from "/data/site.json";
+import site from "@gpublic/json/site.json";
 const user = site.user;
 ---
 
@@ -10,7 +10,12 @@ const user = site.user;
     data-toggle="dropdown"
     aria-expanded="false"
   >
-    <img src={`/${user.avatar}`} alt={`/${user.name}`} width="32" height="32" />
+    <img
+      src={`/gpublic/img/${user.avatar}`}
+      alt={`/${user.name}`}
+      width="32"
+      height="32"
+    />
 
     <dl>
       <dt>{user.name}</dt>

@@ -26,7 +26,8 @@
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@gpublic/*": ["./gpublic/*"]
     }
   },
   "extends": "astro/tsconfigs/strict",

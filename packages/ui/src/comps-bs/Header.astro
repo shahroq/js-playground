@@ -1,12 +1,18 @@
+---
+import site from "@gpublic/json/site.json";
+
+const app = site.app;
+---
+
 <nav class="navbar container-fluid gap-2">
-  <a class="navbar-brand d-flex align-items-center" href="#">
+  <a class="navbar-brand d-flex align-items-center gap-2" href="#">
     <img
-      src="/logo-dark.png"
+      src={`/gpublic/img/${app.logo}`}
       alt="Logo"
       width="35"
       class="d-inline-block align-text-top"
     />
-    Pixel
+    {app.name}
   </a>
 
   <ul class="nav me-lg-auto"></ul>

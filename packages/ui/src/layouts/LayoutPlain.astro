@@ -1,17 +1,18 @@
 ---
-import "@/styles/global-plain.css";
+import "/public/css/plain.css";
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="favicon.ico" />
+    <link rel="icon" href="/gpublic/img/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>UI: w/ Plain CSS</title>
   </head>
   <body>
     <slot />
+    <script src="../../public/js/plain.js"></script>
   </body>
 </html>
 

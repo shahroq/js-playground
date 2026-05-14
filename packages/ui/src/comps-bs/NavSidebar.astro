@@ -1,28 +1,31 @@
 ---
-import site from "/data/site.json";
-import { prefixNavItems } from "@/helpers";
+import site from "@gpublic/json/site.json";
+import { prefixNavItems } from "@gpublic/js/utils";
 
-const pathPrefix = "/tw";
-const navItems = prefixNavItems(site.navItems, pathPrefix);
-
+const pathPrefix = "/bs";
+const navSide = prefixNavItems(site.navSide, pathPrefix);
 const pathname = Astro.url.pathname;
+// const { url: { pathname } } = Astro;
+
+// const renderMenuItem = (item, pathPrefix = "", curPathname = "") => {
+//   if (!item || !item.title) return null;
+// };
 ---
 
-<ul class="nav nav-vertical">
+<ul class="nav nav-pills- flex-column mb-auto">
   {
-    navItems.map((item) => (
-      <li>
+    navSide.map((item) => (
+      <li class="nav-item">
         <a
           href={item.href}
           class={`nav-link ${item.href === pathname ? "active" : ""}	${"href" in item ? "" : "disabled"}`}
         >
           {item.title}
         </a>
-
         {item.children && (
           <ul>
             {item.children.map((child) => (
-              <li>
+              <li class="nav-item">
                 <a
                   href={child.href}
                   class={`nav-link ${child.href === pathname ? "active" : ""}	${"href" in child ? "" : "disabled"}`}

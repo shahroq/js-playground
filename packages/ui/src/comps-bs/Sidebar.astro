@@ -1,6 +1,6 @@
 ---
-import NavSidebar from "@/components-bs/NavSidebar.astro";
-import NavUser from "@/components-bs/NavUser.astro";
+import NavSidebar from "@/comps-bs/NavSidebar.astro";
+import NavUser from "@/comps-bs/NavUser.astro";
 ---
 
 <div class="offcanvas-md offcanvas-end" tabindex="-1" id="sidebar-menu">
@@ -12,9 +12,7 @@ import NavUser from "@/components-bs/NavUser.astro";
       data-bs-dismiss="offcanvas"
       data-bs-target="#sidebar-menu"></button>
   </div>
-  <div
-    class="offcanvas-body d-flex flex-column flex-shrink-0-- p-3 pt-lg-3 overflow-y-auto-"
-  >
+  <div class="offcanvas-body d-flex flex-column pt-lg-3">
     <NavSidebar />
     <hr />
     <NavUser />

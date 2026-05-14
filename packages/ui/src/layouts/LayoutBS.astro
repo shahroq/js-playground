@@ -1,20 +1,19 @@
 ---
-// import db from "/data/catalog.json"
 import "bootstrap/dist/css/bootstrap.min.css";
-import "@/styles/global-bs.css";
-import Header from "@/components-bs/Header.astro";
-import Sidebar from "@/components-bs/Sidebar.astro";
+import "/public/css/bs.css";
+import Header from "@/comps-bs/Header.astro";
+import Sidebar from "@/comps-bs/Sidebar.astro";
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="favicon.ico" />
+    <link rel="icon" href="/gpublic/img/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>UI: w/ Bootstrap 5</title>
   </head>
-  <body>
+  <body class="root">
     <header class="sticky-top text-bg-dark px-4 py-1" data-bs-theme="dark">
       <Header />
     </header>
@@ -25,7 +24,7 @@ import Sidebar from "@/components-bs/Sidebar.astro";
       </div>
     </div>
     <script src="bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="../js/global-bs.js"></script>
+    <script src="../../public/js/bs.js"></script>
   </body>
 </html>
 

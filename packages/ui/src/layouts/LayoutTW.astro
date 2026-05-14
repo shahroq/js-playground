@@ -1,18 +1,18 @@
 ---
-import "@/styles/global-tw.css";
-import Header from "@/components-tw/Header.astro";
-import Sidebar from "@/components-tw/Sidebar.astro";
+import "/public/css/tw.css";
+import Header from "@/comps-tw/Header.astro";
+import Sidebar from "@/comps-tw/Sidebar.astro";
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="favicon.ico" />
+    <link rel="icon" href="/gpublic/img/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>UI: w/ Tailwind 4</title>
   </head>
-  <body>
+  <body id="root">
     <header><Header /></header>
 
     <div class="layout">
@@ -20,7 +20,7 @@ import Sidebar from "@/components-tw/Sidebar.astro";
       <main><slot /></main>
     </div>
   </body>
-  <script src="../js/global-tw.js"></script>
+  <script src="../../public/js/tw.js"></script>
 </html>
 
 <style>

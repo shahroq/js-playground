@@ -1,8 +1,14 @@
+---
+import site from "@gpublic/json/site.json";
+
+const app = site.app;
+---
+
 <nav class="container-fluid py-4 flex items-center gap-3">
   {/* Navbar Brand */}
   <a href="#" class="navbar-brand">
-    <img src="/logo-dark.png" alt="Logo" />
-    <span>Pixel</span>
+    <img src={`/gpublic/img/${app.logo}`} alt="Logo" />
+    <span>{app.name}</span>
   </a>
 
   {/* Navbar */}
@@ -25,7 +31,7 @@
   {/* HEADER Burger */}
   <button
     type="button"
-    class="navbar-toggler ml-auto flex size-10 items-center justify-center rounded-md border border-white/20 lg:hidden"
+    class="navbar-toggler btn-burger ml-auto lg:hidden"
     data-toggle="offcanvas"
     data-target="#sidebar"
   >
