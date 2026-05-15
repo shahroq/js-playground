@@ -1,6 +1,7 @@
 import { Header } from "./comps/Header";
 import { Sidebar } from "./comps/Sidebar";
 import "./index.css";
+import { Home } from "./pages/home";
 import { Dashboard } from "./pages/dashboard/Dashboard";
 
 export function App() {
@@ -14,7 +15,7 @@ export function App() {
           <Sidebar />
         </aside>
         <main>
-          <Dashboard />
+          <Home />
         </main>
       </div>
     </>

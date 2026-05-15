@@ -9,10 +9,10 @@ export function NavSidebar() {
       {navSide.map((item, i) => (
         <li key={`main-${i}`}>
           <a
-            href={item.href}
-            className={`nav-link ${item.href === pathname ? "active" : ""}	${"href" in item ? "" : "disabled"}`}
+            href={item.path}
+            className={`nav-link ${item.path === pathname ? "active" : ""}	${"path" in item ? "" : "disabled"}`}
           >
-            {item.title}
+            {item.label}
           </a>
 
           {item.children && (
@@ -20,10 +20,10 @@ export function NavSidebar() {
               {item.children.map((child, j) => (
                 <li key={`sub-${j}`}>
                   <a
-                    href={child.href}
-                    className={`nav-link ${child.href === pathname ? "active" : ""}	${"href" in child ? "" : "disabled"}`}
+                    href={child.path}
+                    className={`nav-link ${child.path === pathname ? "active" : ""}	${"path" in child ? "" : "disabled"}`}
                   >
-                    {child.title}
+                    {child.label}
                   </a>
                 </li>
               ))}

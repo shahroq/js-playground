@@ -1,17 +1,17 @@
 /**
  * prefix href attrs with provided string (bs/tw, etc)
  */
-export const prefixNavItems = (navItems: unknown[], pathPrefix: string) => {
+export const prefixNavPaths = (navItems: unknown[], pathPrefix: string) => {
   const prefixedNavItemsString = JSON.stringify(navItems).replace(
-    /"href":\s*"(.*?)"/g,
-    (match, hrefValue) => {
+    /"path":\s*"(.*?)"/g,
+    (match, pathValue) => {
       // Check if hrefValue is an empty string OR starts with "/"
-      if (hrefValue === "" || hrefValue.startsWith("/")) {
+      if (pathValue === "" || pathValue.startsWith("/")) {
         // Only add prefix if it's not already there (avoids double prefixing if run multiple times)
         // This check assumes there's no prefix already. If there might be, it needs more complex logic.
-        if (!hrefValue.startsWith(pathPrefix)) {
+        if (!pathValue.startsWith(pathPrefix)) {
           // Basic check to avoid double prefixing
-          return `"href": "${pathPrefix}${hrefValue}"`;
+          return `"path": "${pathPrefix}${pathValue}"`;
         }
       }
       // If the condition is not met, return the original match to leave it unchanged

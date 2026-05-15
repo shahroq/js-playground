@@ -6,23 +6,23 @@
   },
   "navTop": [],
   "navSide": [
-    { "title": "Home", "href": "" },
-    { "title": "Dashboard", "href": "/dashboard" },
-    { "title": "Users" },
+    { "label": "Home", "path": "" },
+    { "label": "Dashboard", "path": "/dashboard" },
+    { "label": "Users" },
     {
-      "title": "Components",
+      "label": "Components",
       "children": [
-        { "title": "Data", "href": "/data" },
-        { "title": "Form", "href": "/form" },
-        { "title": "Modal" }
+        { "label": "Data", "path": "/data" },
+        { "label": "Form", "path": "/form" },
+        { "label": "Modal" }
       ]
     },
     {
-      "title": "Catalog",
+      "label": "Catalog",
       "children": [
-        { "title": "Plain" },
-        { "title": "w/ Context" },
-        { "title": "w/ Zustand" }
+        { "label": "Plain" },
+        { "label": "w/ Context" },
+        { "label": "w/ Zustand" }
       ]
     }
   ],

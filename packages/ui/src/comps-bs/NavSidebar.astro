@@ -1,14 +1,14 @@
 ---
 import site from "@gpublic/json/site.json";
-import { prefixNavItems } from "@gpublic/js/utils";
+import { prefixNavPaths } from "@gpublic/js/utils";
 
 const pathPrefix = "/bs";
-const navSide = prefixNavItems(site.navSide, pathPrefix);
+const navSide = prefixNavPaths(site.navSide, pathPrefix);
 const pathname = Astro.url.pathname;
 // const { url: { pathname } } = Astro;
 
 // const renderMenuItem = (item, pathPrefix = "", curPathname = "") => {
-//   if (!item || !item.title) return null;
+//   if (!item || !item.label) return null;
 // };
 ---
 
@@ -17,10 +17,10 @@ const pathname = Astro.url.pathname;
     navSide.map((item) => (
       <li class="nav-item">
         <a
-          href={item.href}
-          class={`nav-link ${item.href === pathname ? "active" : ""}	${"href" in item ? "" : "disabled"}`}
+          href={item.path}
+          class={`nav-link ${item.path === pathname ? "active" : ""}	${"path" in item ? "" : "disabled"}`}
         >
-          {item.title}
+          {item.label}
         </a>
         {item.children && (
           <ul>
@@ -28,9 +28,9 @@ const pathname = Astro.url.pathname;
               <li class="nav-item">
                 <a
                   href={child.href}
-                  class={`nav-link ${child.href === pathname ? "active" : ""}	${"href" in child ? "" : "disabled"}`}
+                  class={`nav-link ${child.path === pathname ? "active" : ""}	${"path" in child ? "" : "disabled"}`}
                 >
-                  {child.title}
+                  {child.label}
                 </a>
               </li>
             ))}

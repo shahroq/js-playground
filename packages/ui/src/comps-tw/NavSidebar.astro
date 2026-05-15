@@ -1,9 +1,9 @@
 ---
 import site from "@gpublic/json/site.json";
-import { prefixNavItems } from "@gpublic/js/utils";
+import { prefixNavPaths } from "@gpublic/js/utils";
 
 const pathPrefix = "/tw";
-const navSide = prefixNavItems(site.navSide, pathPrefix);
+const navSide = prefixNavPaths(site.navSide, pathPrefix);
 
 const pathname = Astro.url.pathname;
 ---
@@ -13,10 +13,10 @@ const pathname = Astro.url.pathname;
     navSide.map((item) => (
       <li>
         <a
-          href={item.href}
-          class={`nav-link ${item.href === pathname ? "active" : ""}	${"href" in item ? "" : "disabled"}`}
+          href={item.path}
+          class={`nav-link ${item.path === pathname ? "active" : ""}	${"path" in item ? "" : "disabled"}`}
         >
-          {item.title}
+          {item.label}
         </a>
 
         {item.children && (
@@ -24,10 +24,10 @@ const pathname = Astro.url.pathname;
             {item.children.map((child) => (
               <li>
                 <a
-                  href={child.href}
-                  class={`nav-link ${child.href === pathname ? "active" : ""}	${"href" in child ? "" : "disabled"}`}
+                  href={child.path}
+                  class={`nav-link ${child.path === pathname ? "active" : ""}	${"path" in child ? "" : "disabled"}`}
                 >
-                  {child.title}
+                  {child.label}
                 </a>
               </li>
             ))}
