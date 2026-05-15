@@ -1,10 +1,13 @@
-export const Header = () => {
+import site from "@gpublic/json/site.json";
+import logo from "@gpublic/img/logo-dark.png";
+
+export function Header() {
   return (
     <nav className="container-fluid py-4 flex items-center gap-3">
       {/* Navbar Brand */}
       <a href="#" className="navbar-brand">
-        <img src="/logo-dark.png" alt="Logo" />
-        <span>Pixel</span>
+        <img src={logo.src} alt="Logo" />
+        <span>{site.app.name}</span>
       </a>
 
       {/* Navbar */}
@@ -41,4 +44,4 @@ export const Header = () => {
       </button>
     </nav>
   );
-};
+}

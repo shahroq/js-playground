@@ -1,4 +1,7 @@
-export const Sidebar = () => {
+import { NavSidebar } from "./NavSidebar";
+import { NavUser } from "./NavUser";
+
+export function Sidebar() {
   return (
     <div className="offcanvas offcanvas-start" id="sidebar">
       <div className="offcanvas-header">
@@ -9,10 +12,10 @@ export const Sidebar = () => {
       </div>
 
       <div className="offcanvas-body py-4">
-        [NavSidebar]
+        <NavSidebar />
         <hr />
-        [NavUser]
+        <NavUser />
       </div>
     </div>
   );
-};
+}
