@@ -3,7 +3,10 @@ import { Jumbotron } from "@/comps/Jumbotron";
 export function Dashboard() {
   return (
     <section>
-      <Jumbotron />
+      <Jumbotron title="Dashboard">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos blanditiis
+        numquam accusantium aliquid esse.
+      </Jumbotron>
     </section>
   );
 }

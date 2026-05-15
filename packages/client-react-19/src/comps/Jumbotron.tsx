@@ -1,18 +1,19 @@
-export function Jumbotron() {
-  return (
-    <div className="jumbotron">
-      <h2 className="title">Custom jumbotron</h2>
+import { Button } from "./Button";
 
-      <p className="content">
-        Using a series of utilities, you can create this jumbotron, just like
-        the one in previous versions of Bootstrap. Check out the examples below
-        for how you can remix and restyle it to your liking.
-      </p>
+type Props = {
+  children?: React.ReactNode;
+  className?: string;
+  title: React.ReactNode;
+};
+
+export function Jumbotron({ children, className, title }: Props) {
+  return (
+    <div className={`jumbotron ${className}`}>
+      {title && <h2 className="title">{title}</h2>}
+      {children && <div className="content">{children}</div>}
 
       <div className="action">
-        <button type="button" className="action btn btn-primary btn-lg">
-          Example button
-        </button>
+        <Button className="btn btn-primary btn-lg">Example button</Button>
       </div>
     </div>
   );

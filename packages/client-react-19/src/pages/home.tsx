@@ -1,9 +1,11 @@
 import { Jumbotron } from "@/comps/Jumbotron";
 
-export function Dashboard() {
+export function Home() {
   return (
     <section>
-      <Jumbotron />
+      <Jumbotron title="Home">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      </Jumbotron>
     </section>
   );
 }
