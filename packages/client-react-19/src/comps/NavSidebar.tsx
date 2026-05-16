@@ -1,36 +1,41 @@
 import site from "@gpublic/json/site.json";
+import { Link } from "@/modules/router";
 
 const navSide = site.navSide;
 const pathname = "";
 
 export function NavSidebar() {
   return (
-    <ul className="nav nav-vertical">
-      {navSide.map((item, i) => (
-        <li key={`main-${i}`}>
-          <a
-            href={item.path}
-            className={`nav-link ${item.path === pathname ? "active" : ""}	${"path" in item ? "" : "disabled"}`}
-          >
-            {item.label}
-          </a>
+    <>
+      <ul className="nav nav-vertical">
+        {navSide.map((item, i) => (
+          <li key={`main-${i}`}>
+            <Link
+              href={item.path}
+              to={item.path}
+              className={`nav-link	${"path" in item ? "" : "disabled"}`}
+            >
+              {item.label}
+            </Link>
 
-          {item.children && (
-            <ul>
-              {item.children.map((child, j) => (
-                <li key={`sub-${j}`}>
-                  <a
-                    href={child.path}
-                    className={`nav-link ${child.path === pathname ? "active" : ""}	${"path" in child ? "" : "disabled"}`}
-                  >
-                    {child.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          )}
-        </li>
-      ))}
-    </ul>
+            {item.children && (
+              <ul>
+                {item.children.map((child, j) => (
+                  <li key={`sub-${j}`}>
+                    <Link
+                      href={child.path}
+                      to={child.path}
+                      className={`nav-link ${child.path === pathname ? "active" : ""}	${"path" in child ? "" : "disabled"}`}
+                    >
+                      {child.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }

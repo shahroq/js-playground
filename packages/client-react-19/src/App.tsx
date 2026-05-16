@@ -1,8 +1,7 @@
 import { Header } from "./comps/Header";
 import { Sidebar } from "./comps/Sidebar";
 import "./index.css";
-import { Home } from "./pages/home";
-import { Dashboard } from "./pages/dashboard/Dashboard";
+import { Routes } from "./modules/router/Routes";
 
 export function App() {
   return (
@@ -15,7 +14,7 @@ export function App() {
           <Sidebar />
         </aside>
         <main>
-          <Home />
+          <Routes />
         </main>
       </div>
     </>
