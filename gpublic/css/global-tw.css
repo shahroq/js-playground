@@ -41,6 +41,23 @@
   @apply w-full px-6;
 }
 
+@utility dummy-area {
+  @apply bg-white border border-slate-200 rounded text-slate-500 flex items-center justify-center h-50 w-full font-semibold;
+
+  background-image:
+    linear-gradient(-45deg, #e5e7eb 25%, transparent 25%),
+    linear-gradient(-45deg, transparent 75%, #e5e7eb 75%),
+    linear-gradient(-45deg, #e5e7eb 25%, transparent 25%),
+    linear-gradient(-45deg, transparent 75%, #e5e7eb 7%);
+
+  background-size: 60px 60px;
+  background-position:
+    0 0,
+    0 30px,
+    30px -30px,
+    -30px 0;
+}
+
 @layer components {
   /*
   |--------------------------------------------------------------------------
@@ -178,7 +195,7 @@
     }
 
     .nav-link {
-      @apply block m-0 py-1 px-3 text-base font-medium transition-colors text-slate-600 hover:text-slate-900 hover:font-bold;
+      @apply block m-0 py-1 px-1 text-base font-medium transition-colors text-slate-600 hover:text-slate-900 hover:font-bold;
 
       &.active {
         @apply font-bold text-slate-900;
@@ -195,7 +212,7 @@
         @apply ml-3;
       }
       a {
-        @apply border-l border-slate-400 hover:border-slate-900 !text-[15px] hover:!text-[15px];
+        @apply !px-2 border-l border-slate-400 hover:border-slate-900 !text-[14px] !leading-[1em] hover:!text-[14px] hover:!leading-[1em];
       }
     }
   }
