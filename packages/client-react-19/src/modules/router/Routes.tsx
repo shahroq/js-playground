@@ -1,7 +1,7 @@
 import { Route } from "./Route";
 import { HomePage } from "@/pages/HomePage";
 import { DashboardPage } from "@/pages/DashboardPage";
-import { CounterPage } from "@/pages/counter/CounterPage";
+import { CounterPage } from "@/pages/counter/plain/CounterPage";
 
 type Props = {};
 

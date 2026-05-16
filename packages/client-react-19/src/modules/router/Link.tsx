@@ -1,4 +1,4 @@
-import { useNavContext } from "./use-nav-context";
+import { useNavContext } from "./nav-context";
 
 type Props = {
   to?: string;

@@ -303,7 +303,7 @@
     @apply flex flex-wrap items-center gap-2 text-sm text-gray-500;
 
     li.breadcrumb-item {
-      @apply flex items-center gap-2 relative after:content-['/'] after:select-none after:text-gray-400;
+      @apply flex items-center gap-2 relative after:content-['>'] after:select-none after:text-gray-400;
 
       &.last {
         @apply after:hidden;

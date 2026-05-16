@@ -1,5 +1,5 @@
 import { type ReactNode } from "react";
-import { useNavContext } from "./use-nav-context";
+import { useNavContext } from "./nav-context";
 
 type Props = {
   path: string;

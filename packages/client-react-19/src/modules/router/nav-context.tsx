@@ -1,4 +1,10 @@
-import { createContext, useState, useEffect, type ReactNode } from "react";
+import {
+  createContext,
+  useState,
+  useEffect,
+  useContext,
+  type ReactNode,
+} from "react";
 
 type NavContextType = {
   curPath: string;
@@ -38,4 +44,11 @@ function NavProvider({ children }: Props) {
   );
 }
 
-export { NavProvider, NavContext };
+function useNavContext() {
+  const context = useContext(NavContext);
+  if (!context)
+    throw new Error("useNavContext must be used inside NavProvider");
+  return context;
+}
+
+export { NavProvider, NavContext, useNavContext };
