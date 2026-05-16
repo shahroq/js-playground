@@ -1,12 +1,14 @@
 import { Route } from "./Route";
-import { Dashboard } from "@/pages/Dashboard";
-import { Home } from "@/pages/Home";
+import { HomePage } from "@/pages/HomePage";
+import { DashboardPage } from "@/pages/DashboardPage";
+import { CounterPage } from "@/pages/counter/CounterPage";
 
 type Props = {};
 
 const routes = [
-  { path: "/", element: <Home /> },
-  { path: "/dashboard", element: <Dashboard /> },
+  { path: "/", element: <HomePage /> },
+  { path: "/dashboard", element: <DashboardPage /> },
+  { path: "/counter/plain", element: <CounterPage /> },
   // { path: "*", element: <NotFound /> },
 ] as const;
 

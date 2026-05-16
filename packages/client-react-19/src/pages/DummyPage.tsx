@@ -1,4 +1,4 @@
-export function Dummy({ title = "" }) {
+export function DummyPage({ title = "" }) {
   return (
     <section>
       <div className="dummy-area">{title}</div>

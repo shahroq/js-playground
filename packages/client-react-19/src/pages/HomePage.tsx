@@ -1,6 +1,6 @@
 import { Jumbotron } from "@/comps/Jumbotron";
 
-export function Home() {
+export function HomePage() {
   return (
     <section>
       <Jumbotron title="Home">
