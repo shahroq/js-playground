@@ -1,0 +1,25 @@
+immediate
+============
+= dropdown: wrap all in dom loaded, then copy to react project
+- react 19: 
+	- images-> with path, no import
+		- check react sandbox: /Users/shahroq/code/sandbox/_react/react-sandbox/public/portfolio
+	- create public in root of bun and use in all packages
+- public/data folder at the root for logos, etc
+	- all packages use the same
+- react: in chrome js (offcanvas/dropdown not working)
+	- not loaded? test with not-react comps
+- ui:tw/bs: add some links at the header
+- ui components 
+	- Value
+	- Modal
+	- login/register page	
+- react raw router implement: stephan course	
+*- create gpublic/comps	
+	- copy react/next common comps into it, no duplicate
+- convention react/nextjs
+	- both use `function` syntax : export default function Home() {
+- improvements
+	- NavSidebar: make it dry
+	- investigate why in react dev tools: all have -2 (App2, etc)		
+	- routes children: mak it with children attr

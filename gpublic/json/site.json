@@ -6,24 +6,30 @@
   },
   "navTop": [],
   "navSide": [
-    { "label": "Home", "path": "" },
-    { "label": "Dashboard", "path": "/dashboard" },
+    { "label": "Home", "path": "/" },
+    { "label": "Dashboard", "path": "/dashboard", "Page": "Dashboard" },
     { "label": "Users" },
     {
       "label": "Components",
       "children": [
         { "label": "Data", "path": "/data" },
         { "label": "Form", "path": "/form" },
+        { "label": "Misc", "path": "/misc" },
         { "label": "Modal" }
       ]
     },
     {
-      "label": "Catalog",
+      "label": "Counter",
       "children": [
-        { "label": "Plain" },
-        { "label": "w/ Context" },
-        { "label": "w/ Zustand" }
+        { "label": "Plain", "path": "/counter/plain" },
+        { "label": "w/ Context", "path": "/counter/w-context" },
+        { "label": "w/ Reducer", "path": "/counter/w-reducer" },
+        { "label": "w/ Redux" },
+        { "label": "w/ Zustand", "path": "/counter/w-zustand" }
       ]
+    },
+    {
+      "label": "Catalog"
     }
   ],
   "user": {

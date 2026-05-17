@@ -6,7 +6,7 @@ import {
   type ReactNode,
 } from "react";
 
-type NavContextType = {
+type ContextType = {
   curPath: string;
   navigate: (path: string) => void;
 };
@@ -15,7 +15,7 @@ type Props = {
   children: ReactNode;
 };
 
-const NavContext = createContext<NavContextType | null>(null);
+const NavContext = createContext<ContextType | null>(null);
 
 function NavProvider({ children }: Props) {
   const [curPath, setCurPath] = useState(window.location.pathname);
