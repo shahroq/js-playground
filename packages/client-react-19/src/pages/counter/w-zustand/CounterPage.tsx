@@ -2,10 +2,11 @@ import { Button } from "@/comps/Button";
 import { PageTitle } from "@/comps/PageTitle";
 import { useCounterStore } from "./store";
 import { useShallow } from "zustand/shallow";
+import type { Page } from "@gpublic/types/types";
 
-const page = {
+const page: Page = {
   title: "Counter w/ Zustand",
-  breadcrumb: [{ title: "Counter", href: "/counter" }, { title: "w/ Zustand" }],
+  breadcrumb: [{ label: "Counter", path: "/counter" }, { label: "w/ Zustand" }],
 };
 
 export function CounterPage() {

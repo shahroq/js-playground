@@ -1,10 +1,11 @@
 import { Button } from "@/comps/Button";
 import { PageTitle } from "@/comps/PageTitle";
+import type { Page } from "@gpublic/types/types";
 import { useState } from "react";
 
-const page = {
+const page: Page = {
   title: "Counter",
-  breadcrumb: [{ title: "Counter", href: "/counter" }, { title: "Plain" }],
+  breadcrumb: [{ label: "Counter", path: "/counter" }, { label: "Plain" }],
 };
 
 export function CounterPage() {

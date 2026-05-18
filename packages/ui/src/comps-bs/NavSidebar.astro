@@ -27,7 +27,7 @@ const pathname = Astro.url.pathname;
             {item.children.map((child) => (
               <li class="nav-item">
                 <a
-                  href={child.href}
+                  href={child.path}
                   class={`nav-link ${child.path === pathname ? "active" : ""}	${"path" in child ? "" : "disabled"}`}
                 >
                   {child.label}

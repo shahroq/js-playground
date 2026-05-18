@@ -2,10 +2,11 @@ import { Button } from "@/comps/Button";
 import { PageTitle } from "@/comps/PageTitle";
 import { useReducer } from "react";
 import { counterReducer, INITIAL_STATE } from "./counter-reducer";
+import type { Page } from "@gpublic/types/types";
 
-const page = {
+const page: Page = {
   title: "Counter w/ Reducer",
-  breadcrumb: [{ title: "Counter", href: "/counter" }, { title: "w/ Reducer" }],
+  breadcrumb: [{ label: "Counter", path: "/counter" }, { label: "w/ Reducer" }],
 };
 
 export function CounterPage() {

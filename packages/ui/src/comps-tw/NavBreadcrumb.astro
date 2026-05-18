@@ -9,10 +9,10 @@ const { breadcrumb } = Astro.props;
         <li
           class={`breadcrumb-item ${index + 1 >= breadcrumb.length ? "last" : ""}`}
         >
-          {item.href ? (
-            <a href={item.href}>{item.title} </a>
+          {item.path ? (
+            <a href={item.path}>{item.label} </a>
           ) : (
-            <span aria-current="page">{item.title}</span>
+            <span aria-current="page">{item.label}</span>
           )}
         </li>
       ))

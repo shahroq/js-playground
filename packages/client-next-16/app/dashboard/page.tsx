@@ -1,9 +1,10 @@
 import { Hero } from "@/comps/Hero";
 import { PageTitle } from "@/comps/PageTitle";
+import { Page } from "@/gpublic/types/types";
 
-const page = {
+const page: Page = {
   title: "Dashboard",
-  breadcrumb: [{ title: "Dashboard" }],
+  breadcrumb: [{ label: "Dashboard" }],
 };
 
 export default function Dashboard() {

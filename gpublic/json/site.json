@@ -29,6 +29,10 @@
       ]
     },
     {
+      "label": "Task",
+      "children": [{ "label": "w/ Prisma", "path": "/tasks/w-prisma" }]
+    },
+    {
       "label": "Catalog"
     }
   ],

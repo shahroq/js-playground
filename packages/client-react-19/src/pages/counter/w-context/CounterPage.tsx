@@ -1,10 +1,11 @@
 import { Button } from "@/comps/Button";
 import { PageTitle } from "@/comps/PageTitle";
 import { CounterProvider, useCounterContext } from "./counter-context";
+import type { Page } from "@gpublic/types/types";
 
-const page = {
+const page: Page = {
   title: "Counter w/ Context",
-  breadcrumb: [{ title: "Counter", href: "/counter" }, { title: "w/ Context" }],
+  breadcrumb: [{ label: "Counter", path: "/counter" }, { label: "w/ Context" }],
 };
 
 export function CounterPage() {

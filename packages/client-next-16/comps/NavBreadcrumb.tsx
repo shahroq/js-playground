@@ -1,5 +1,8 @@
+import { Crumb } from "@/gpublic/types/types";
+import Link from "next/link";
+
 type Props = {
-  breadcrumb: unknown;
+  breadcrumb: Crumb[];
 };
 
 export function NavBreadcrumb({ breadcrumb }: Props) {
@@ -11,10 +14,10 @@ export function NavBreadcrumb({ breadcrumb }: Props) {
             className={`breadcrumb-item ${index + 1 >= breadcrumb.length ? "last" : ""}`}
             key={index}
           >
-            {item.href ? (
-              <a href={item.href}>{item.title} </a>
+            {item.path ? (
+              <Link href={item.path}>{item.label} </Link>
             ) : (
-              <span aria-current="page">{item.title}</span>
+              <span aria-current="page">{item.label}</span>
             )}
           </li>
         ))}

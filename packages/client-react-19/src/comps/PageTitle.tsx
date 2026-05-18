@@ -1,7 +1,8 @@
+import type { Page } from "@gpublic/types/types";
 import { NavBreadcrumb } from "./NavBreadcrumb";
 
 type Props = {
-  page: unknown;
+  page: Page;
 };
 
 export function PageTitle({ page }: Props) {
