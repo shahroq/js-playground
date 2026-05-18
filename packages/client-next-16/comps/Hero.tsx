@@ -6,9 +6,9 @@ type Props = {
   title: React.ReactNode;
 };
 
-export function Jumbotron({ children, className, title }: Props) {
+export function Hero({ children, className, title }: Props) {
   return (
-    <div className={`jumbotron ${className}`}>
+    <div className={`hero ${className}`}>
       {title && <h2 className="title">{title}</h2>}
       {children && <div className="content">{children}</div>}
 

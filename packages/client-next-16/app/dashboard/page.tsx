@@ -1,4 +1,4 @@
-import { Jumbotron } from "@/comps/Jumbotron";
+import { Hero } from "@/comps/Hero";
 import { PageTitle } from "@/comps/PageTitle";
 
 const page = {
@@ -10,10 +10,10 @@ export default function Dashboard() {
   return (
     <section>
       <PageTitle page={page} />
-      <Jumbotron title="Dashboard">
+      <Hero title="Dashboard">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos blanditiis
         numquam accusantium aliquid esse.
-      </Jumbotron>
+      </Hero>
     </section>
   );
 }

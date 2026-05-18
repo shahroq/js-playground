@@ -1,11 +1,11 @@
-import { Jumbotron } from "@/comps/Jumbotron";
+import { Hero } from "@/comps/Hero";
 
 export function HomePage() {
   return (
     <section>
-      <Jumbotron title="Home">
+      <Hero title="Home">
         Lorem ipsum dolor sit amet consectetur adipisicing elit.
-      </Jumbotron>
+      </Hero>
     </section>
   );
 }
