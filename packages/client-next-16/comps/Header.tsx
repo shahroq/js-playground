@@ -10,29 +10,6 @@ export function Header() {
         <span>{site.app.name}</span>
       </a>
 
-      {/* Navbar */}
-      <ul className="hidden md:flex flex-1 items-center gap-3"></ul>
-
-      {/* HEADER Search */}
-      <form className="hidden md:flex">
-        <input
-          placeholder="Search"
-          className="form-control form-control-dark text-bg-dark"
-        />
-      </form>
-
-      {/* HEADER Auth */}
-      <form className="hidden md:flex items-center gap-3">
-        <a href="#" className="btn btn-outline">
-          {" "}
-          Sign-in{" "}
-        </a>
-        <a href="#" className="btn btn-warning">
-          {" "}
-          Sign-up{" "}
-        </a>
-      </form>
-
       {/* HEADER Burger */}
       <button
         type="button"
