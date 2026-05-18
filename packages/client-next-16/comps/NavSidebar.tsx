@@ -23,7 +23,7 @@ export function NavSidebar() {
                 {item.children.map((child, j) => (
                   <li key={`sub-${j}`}>
                     <Link
-                      href={"child.path"}
+                      href={"path" in child ? child.path : ""}
                       to={child.path}
                       className={`nav-link ${child.path === pathname ? "active" : ""}	${"path" in child ? "" : "disabled"}`}
                     >

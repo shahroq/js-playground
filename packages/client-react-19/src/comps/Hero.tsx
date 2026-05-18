@@ -13,7 +13,7 @@ export function Hero({ children, className, title }: Props) {
       {children && <div className="content">{children}</div>}
 
       <div className="action">
-        <Button className="btn btn-primary btn-lg">Example button</Button>
+        <Button className="btn btn-primary btn-lg">Button</Button>
       </div>
     </div>
   );
