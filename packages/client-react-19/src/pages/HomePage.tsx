@@ -1,4 +1,4 @@
-import { Hero } from "@/comps/Hero";
+import { Hero } from "@gpublic/comps";
 
 export function HomePage() {
   return (

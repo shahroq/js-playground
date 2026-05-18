@@ -1,4 +1,4 @@
-import { Button } from "@/comps/Button";
+import { Button } from "@gpublic/comps";
 import { PageTitle } from "@/comps/PageTitle";
 import type { Page } from "@gpublic/types/types";
 import { useState } from "react";

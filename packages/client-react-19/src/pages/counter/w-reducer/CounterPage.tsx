@@ -1,4 +1,4 @@
-import { Button } from "@/comps/Button";
+import { Button } from "@gpublic/comps";
 import { PageTitle } from "@/comps/PageTitle";
 import { useReducer } from "react";
 import { counterReducer, INITIAL_STATE } from "./counter-reducer";

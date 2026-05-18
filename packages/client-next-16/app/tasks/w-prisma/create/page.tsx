@@ -1,4 +1,4 @@
-import { Hero } from "@/comps/Hero";
+import { Hero } from "@gpublic/comps";
 import { PageTitle } from "@/comps/PageTitle";
 import { Page } from "@/gpublic/types/types";
 

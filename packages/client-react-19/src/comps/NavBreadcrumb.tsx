@@ -1,4 +1,5 @@
 import type { Crumb } from "@gpublic/types/types";
+import { Link } from "@/modules/router";
 
 type Props = {
   breadcrumb: Crumb[];
@@ -14,7 +15,7 @@ export function NavBreadcrumb({ breadcrumb }: Props) {
             key={index}
           >
             {item.path ? (
-              <a href={item.path}>{item.label} </a>
+              <Link href={item.path}>{item.label} </Link>
             ) : (
               <span aria-current="page">{item.label}</span>
             )}
