@@ -1,7 +1,8 @@
-import site from "@gpublic/json/site.json";
 import Link from "next/link";
+import site from "@gpublic/json/site.json";
+import { filterNavItems } from "@/gpublic/js/utils";
 
-const navSide = site.navSide;
+const navSide = filterNavItems(site.navSide, "client-nextjs-16");
 const pathname = "";
 
 export function NavSidebar() {

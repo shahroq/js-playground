@@ -7,10 +7,11 @@
   "navTop": [],
   "navSide": [
     { "label": "Home", "path": "/" },
-    { "label": "Dashboard", "path": "/dashboard", "Page": "Dashboard" },
+    { "label": "Dashboard", "path": "/dashboard" },
     { "label": "Users" },
     {
       "label": "Components",
+      "targets": ["ui"],
       "children": [
         { "label": "Data", "path": "/data" },
         { "label": "Form", "path": "/form" },
@@ -20,6 +21,7 @@
     },
     {
       "label": "Counter",
+      "targets": ["client-react-19"],
       "children": [
         { "label": "Plain", "path": "/counter/plain" },
         { "label": "w/ Context", "path": "/counter/w-context" },
@@ -30,10 +32,12 @@
     },
     {
       "label": "Task",
+      "targets": ["client-nextjs-16"],
       "children": [{ "label": "w/ Prisma", "path": "/tasks/w-prisma" }]
     },
     {
-      "label": "Catalog"
+      "label": "Catalog",
+      "targets": ["client-react-19", "client-nextjs-16"]
     }
   ],
   "user": {

@@ -1,9 +1,10 @@
 ---
 import site from "@gpublic/json/site.json";
-import { prefixNavPaths } from "@gpublic/js/utils";
+import { prefixNavPaths, filterNavItems } from "@gpublic/js/utils";
 
 const pathPrefix = "/bs";
-const navSide = prefixNavPaths(site.navSide, pathPrefix);
+const navSide = prefixNavPaths(filterNavItems(site.navSide, "ui"), pathPrefix);
+
 const pathname = Astro.url.pathname;
 // const { url: { pathname } } = Astro;
 

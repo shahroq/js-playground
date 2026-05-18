@@ -1,7 +1,8 @@
 import site from "@gpublic/json/site.json";
 import { Link } from "@/modules/router";
+import { filterNavItems } from "@gpublic/js/utils";
 
-const navSide = site.navSide;
+const navSide = filterNavItems(site.navSide, "client-react-19");
 const pathname = "";
 
 export function NavSidebar() {
