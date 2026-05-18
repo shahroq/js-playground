@@ -1,4 +1,4 @@
-import { ProductRepository } from "@/routes/v1/products/repository";
+import { ProductRepository } from "@/features/v1/products/repository";
 
 // let dbAdapter = getDBAdapter(); // used for migration directly
 

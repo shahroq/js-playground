@@ -1,5 +1,5 @@
 import type { EntityId, IMeta } from "@/common/types";
-import type { IReview } from "@/routes/v1/reviews/types";
+import type { IReview } from "@/features/v1/reviews/types";
 
 // raw product (from db/entity?)
 export interface IProduct {

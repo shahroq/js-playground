@@ -1,6 +1,6 @@
 import type { IAuthService } from "../auth-service.interface";
 import type { AuthStrategy, TokenPayload } from "../types";
-import { UserRole } from "@/routes/v1/users/types";
+import { UserRole } from "@/features/v1/users/types";
 
 export class MockAuthService implements IAuthService {
   readonly _provider = "mock";

@@ -1,7 +1,7 @@
 import { dbCientService } from "@/common/container";
-import { seed as seedUsers } from "@/routes/v1/users/seeder";
-import { seed as seedReviews } from "@/routes/v1/reviews/seeder";
-import { seed as seedProducts } from "@/routes/v1/products/seeder";
+import { seed as seedUsers } from "@/features/v1/users/seeder";
+import { seed as seedReviews } from "@/features/v1/reviews/seeder";
+import { seed as seedProducts } from "@/features/v1/products/seeder";
 
 // run seeder
 export const main = async () => {

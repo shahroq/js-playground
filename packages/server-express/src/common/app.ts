@@ -1,7 +1,7 @@
 import express, { type Application } from "express";
 import cors from "cors";
 import morgan from "morgan";
-import appRouter from "@/routes/v1";
+import appRouter from "@/features/v1/routes";
 import {
   config,
   globalErrorHandler,

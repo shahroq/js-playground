@@ -33,36 +33,36 @@ export * from "@/common/hashing";
 export * from "@/common/auth";
 
 // routes: users
-import { UserRepository } from "@users/repository";
-import { UserService } from "@users/service";
-import { UserController } from "@users/controller";
-export * from "@users/dto/create.dto";
-export * from "@users/dto/update.dto";
-export * from "@users/dto/user.dto";
+import { UserRepository } from "@/features/v1/users/repository";
+import { UserService } from "@/features/v1/users/service";
+import { UserController } from "@/features/v1/users/controller";
+export * from "@/features/v1/users/dto/create.dto";
+export * from "@/features/v1/users/dto/update.dto";
+export * from "@/features/v1/users/dto/user.dto";
 // routes: accounts
-import { AccountService } from "@accounts/service";
-import { AccountController } from "@accounts/controller";
+import { AccountService } from "@/features/v1/accounts/service";
+import { AccountController } from "@/features/v1/accounts/controller";
 // routes: products
-import { ProductRepository } from "@products/repository";
-import { ProductService } from "@products/service";
-import { ProductController } from "@products/controller";
-export * from "@products/dto/create.dto";
-export * from "@products/dto/update.dto";
-export * from "@products/dto/product.dto";
+import { ProductRepository } from "@/features/v1/products/repository";
+import { ProductService } from "@/features/v1/products/service";
+import { ProductController } from "@/features/v1/products/controller";
+export * from "@/features/v1/products/dto/create.dto";
+export * from "@/features/v1/products/dto/update.dto";
+export * from "@/features/v1/products/dto/product.dto";
 // routes: reviews
-import { ReviewRepository } from "@reviews/repository";
-import { ReviewService } from "@reviews/service";
-import { ReviewController } from "@reviews/controller";
-export * from "@reviews/dto/create.dto";
-export * from "@reviews/dto/update.dto";
-export * from "@reviews/dto/review.dto";
+import { ReviewRepository } from "@/features/v1/reviews/repository";
+import { ReviewService } from "@/features/v1/reviews/service";
+import { ReviewController } from "@/features/v1/reviews/controller";
+export * from "@/features/v1/reviews/dto/create.dto";
+export * from "@/features/v1/reviews/dto/update.dto";
+export * from "@/features/v1/reviews/dto/review.dto";
 // routes: posts
-import { PostService } from "@posts/service";
-import { PostController } from "@posts/controller";
-export * from "@posts/dto/post-dto";
+import { PostService } from "@/features/v1/posts/service";
+import { PostController } from "@/features/v1/posts/controller";
+export * from "@/features/v1/posts/dto/post-dto";
 // routes: httpbin
-import { HttpbinService } from "@httpbin/service";
-import { HttpbinController } from "@httpbin/controller";
+import { HttpbinService } from "@/features/v1/httpbin/service";
+import { HttpbinController } from "@/features/v1/httpbin/controller";
 
 // 1. Repositories
 export const userRepository = new UserRepository(dbCientService);

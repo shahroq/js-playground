@@ -30,12 +30,12 @@
     "paths": {
       "@/*": ["./src/*"],
       "@root/*": ["./*"],
-      "@users/*": ["./src/routes/v1/users/*"],
-      "@accounts/*": ["./src/routes/v1/accounts/*"],
-      "@products/*": ["./src/routes/v1/products/*"],
-      "@reviews/*": ["./src/routes/v1/reviews/*"],
-      "@posts/*": ["./src/routes/v1/posts/*"],
-      "@httpbin/*": ["./src/routes/v1/httpbin/*"]
+      "@users/*": ["./src/features/v1/users/*"],
+      "@accounts/*": ["./src/features/v1/accounts/*"],
+      "@products/*": ["./src/features/v1/products/*"],
+      "@reviews/*": ["./src/features/v1/reviews/*"],
+      "@posts/*": ["./src/features/v1/posts/*"],
+      "@httpbin/*": ["./src/features/v1/httpbin/*"]
     }
   },
 

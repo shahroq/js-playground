@@ -1,11 +1,11 @@
 import express, { Router } from "express";
-import root from "./root";
-import account from "./accounts";
-import users from "./users";
-import products from "./products";
-import reviews from "./reviews";
-import posts from "./posts";
-import httpbin from "./httpbin";
+import root from "./root/routes";
+import account from "./accounts/routes";
+import users from "./users/routes";
+import products from "./products/routes";
+import reviews from "./reviews/routes";
+import posts from "./posts/routes";
+import httpbin from "./httpbin/routes";
 
 const appRouter: Router = express.Router();
 

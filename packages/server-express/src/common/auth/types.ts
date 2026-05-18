@@ -1,4 +1,4 @@
-import type { IUser } from "@/routes/v1/users/types";
+import type { IUser } from "@/features/v1/users/types";
 
 export type AuthStrategy = "mock" | "jwt" | "auth0";
 

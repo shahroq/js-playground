@@ -9,7 +9,7 @@ import {
 } from "@/common/container";
 import type { EntityId } from "@/common/types";
 import { ProductRepository } from "./repository";
-import { ReviewRepository } from "@reviews/repository";
+import { ReviewRepository } from "@/features/v1/reviews/repository";
 import type { QueryObject } from "@/common/query-object/types";
 import type { IReview } from "../reviews/types";
 import type { ILlmClientService } from "@/common/llm-client/llm-client-service.interface";

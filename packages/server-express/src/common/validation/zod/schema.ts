@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { UserRole } from "@users/types";
-import { ReviewStatus } from "@reviews/types";
+import { UserRole } from "@/features/v1/users/types";
+import { ReviewStatus } from "@/features/v1/reviews/types";
 
 /**
  * Shared Schemas

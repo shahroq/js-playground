@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import type { UserService } from "@users/service";
+import type { UserService } from "@/features/v1/users/service";
 import type { AccountService } from "./service";
 
 export class AccountController {

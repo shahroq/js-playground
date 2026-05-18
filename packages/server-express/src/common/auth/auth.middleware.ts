@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 import { AppError, authService, config } from "@/common/container";
-import type { UserRole } from "@/routes/v1/users/types";
+import type { UserRole } from "@/features/v1/users/types";
 
 // here: maybe name it guard, and make it similar to nestjs guard api? make a package out of it?
 export function requireAuth() {

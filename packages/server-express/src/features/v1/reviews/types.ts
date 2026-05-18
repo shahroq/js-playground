@@ -1,5 +1,5 @@
 import type { EntityId } from "@/common/types";
-import type { IProduct } from "@/routes/v1/products/types";
+import type { IProduct } from "@/features/v1/products/types";
 
 export enum ReviewStatus {
   APPROVED = "APPROVED",

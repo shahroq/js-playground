@@ -9,7 +9,7 @@ import {
 import type { EntityId } from "@/common/types";
 import { ReviewStatus } from "./types";
 import { ReviewRepository } from "./repository";
-import { ProductRepository } from "@products/repository";
+import { ProductRepository } from "@/features/v1/products/repository";
 import type { QueryObject } from "@/common/query-object/types";
 
 export class ReviewService {
