@@ -45,10 +45,10 @@
   @apply bg-white border border-slate-200 rounded text-slate-500 flex items-center justify-center h-50 w-full font-semibold;
 
   background-image:
-    linear-gradient(-45deg, #e5e7eb 25%, transparent 25%),
-    linear-gradient(-45deg, transparent 75%, #e5e7eb 75%),
-    linear-gradient(-45deg, #e5e7eb 25%, transparent 25%),
-    linear-gradient(-45deg, transparent 75%, #e5e7eb 7%);
+    linear-gradient(-45deg, #efefef 25%, transparent 25%),
+    linear-gradient(-45deg, transparent 75%, #efefef 75%),
+    linear-gradient(-45deg, #efefef 25%, transparent 25%),
+    linear-gradient(-45deg, transparent 75%, #efefef 7%);
 
   background-size: 60px 60px;
   background-position:
@@ -96,7 +96,7 @@
       @apply bg-amber-400 hover:bg-amber-300 text-black;
     }
     &.btn-danger {
-      @apply bg-red-400 hover:bg-red-500 text-black;
+      @apply bg-red-400 hover:bg-red-500 text-white;
     }
 
     &.btn-outline {
@@ -125,59 +125,66 @@
   | FORMS
   |--------------------------------------------------------------------------
   */
-  .form-label {
-    @apply block text-base text-slate-900;
-  }
+  .form {
+    @apply space-y-2;
 
-  .form-control {
-    @apply w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200;
-  }
-
-  .form-select {
-    @apply w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200;
-  }
-
-  .form-text {
-    @apply text-sm text-gray-500;
-  }
-
-  .valid-feedback {
-    @apply text-sm text-green-600;
-  }
-
-  .invalid-feedback {
-    @apply text-sm text-red-600;
-  }
-
-  /* form controls */
-  .form-control {
-    @apply rounded-md border px-3 py-2 text-sm outline-none;
-  }
-  .form-control-dark {
-    @apply border-white/10 bg-gray-800;
-  }
-  .text-bg-dark {
-    @apply placeholder:text-gray-400 focus:border-yellow-400;
-  }
-
-  /* input group */
-  .input-group {
-    @apply flex items-stretch rounded-lg border border-gray-300 bg-white shadow-sm divide-x;
-
-    label {
-      @apply flex items-center border-b border-gray-300 bg-gray-100 px-4 text-sm font-medium text-gray-700 sm:border-b-0 sm:border-r;
+    .form-control-wrapper {
+      @apply space-y-1;
     }
 
-    input {
-      @apply inline border-0 rounded-none focus:ring-0 border-r relative w-1/100 min-w-0 flex-1;
+    .form-label {
+      @apply block text-base text-slate-900;
     }
 
-    select {
-      @apply inline border-0 rounded-none border-e-2 focus:border-0 focus:ring-0 relative w-1/100 min-w-0 flex-1;
-      /* @apply min-w-[160px] flex-1 border-b border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition focus:z-10 focus:border-blue-500 sm:border-b-0 sm:border-r */
+    .form-control {
+      @apply w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200;
+    }
+
+    .form-select {
+      @apply w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200;
+    }
+
+    .form-text {
+      @apply text-sm text-gray-500;
+    }
+
+    .valid-feedback {
+      @apply text-sm text-green-600;
+    }
+
+    .invalid-feedback {
+      @apply text-sm text-red-600;
+    }
+
+    /* form controls */
+    .form-control {
+      @apply rounded-md border px-3 py-2 text-sm outline-none;
+    }
+    .form-control-dark {
+      @apply border-white/10 bg-gray-800;
+    }
+    .text-bg-dark {
+      @apply placeholder:text-gray-400 focus:border-yellow-400;
+    }
+
+    /* input group */
+    .input-group {
+      @apply flex items-stretch rounded-lg border border-gray-300 bg-white shadow-sm divide-x;
+
+      label {
+        @apply flex items-center border-b border-gray-300 bg-gray-100 px-4 text-sm font-medium text-gray-700 sm:border-b-0 sm:border-r;
+      }
+
+      input {
+        @apply inline border-0 rounded-none focus:ring-0 border-r relative w-1/100 min-w-0 flex-1;
+      }
+
+      select {
+        @apply inline border-0 rounded-none border-e-2 focus:border-0 focus:ring-0 relative w-1/100 min-w-0 flex-1;
+        /* @apply min-w-[160px] flex-1 border-b border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition focus:z-10 focus:border-blue-500 sm:border-b-0 sm:border-r */
+      }
     }
   }
-
   /*
   |--------------------------------------------------------------------------
   | NAV

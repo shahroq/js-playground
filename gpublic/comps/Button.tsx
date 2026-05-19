@@ -8,11 +8,11 @@ type Props = {
 export function Button({
   as: Component = "button",
   children,
-  className = "btn btn-primary",
+  className,
   ...rest
 }: Props) {
   return (
-    <Component className={className} {...rest}>
+    <Component className={`btn ${className || "btn-primary"} `} {...rest}>
       {children}
     </Component>
   );

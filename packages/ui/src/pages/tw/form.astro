@@ -13,7 +13,7 @@ const page = {
   <section>
     <PageTitle page={page} />
 
-    <form class="space-y-2 needs-validation was-validated-">
+    <form class="form needs-validation was-validated-">
       <FormControl
         type="input"
         subtype="email"
@@ -33,6 +33,8 @@ const page = {
         id="password"
         label="Password"
       />
+
+      <FormControl type="input" subtype="textarea" id="about" label="About" />
 
       <FormControl type="select" id="role" label="Role" options="" />
 

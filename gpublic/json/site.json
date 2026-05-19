@@ -11,8 +11,9 @@
     { "label": "Users" },
     {
       "label": "Components",
-      "targets": ["ui"],
+      "targets": ["ui", "client-react-19"],
       "children": [
+        { "label": "Dummy", "path": "/dummy" },
         { "label": "Data", "path": "/data" },
         { "label": "Form", "path": "/form" },
         { "label": "Misc", "path": "/misc" },

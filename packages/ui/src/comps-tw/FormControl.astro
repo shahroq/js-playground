@@ -2,11 +2,22 @@
 const { props } = Astro;
 ---
 
-<div class="space-y-1">
+<div class="form-control-wrapper">
   <label for={props.id} class="form-label">{props.label}</label>
 
   {
-    props.type === "input" && (
+    props.type === "input" && props.subtype === "textarea" && (
+      <textarea
+        class="form-control"
+        id={props.id}
+        aria-describedby={`${props.id}-help`}
+        placeholder={props.placeholder}
+      />
+    )
+  }
+
+  {
+    props.type === "input" && props.subtype !== "textarea" && (
       <input
         type={props.subtype}
         class="form-control"
