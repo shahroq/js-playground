@@ -2,10 +2,11 @@
 import Layout from "@/layouts/LayoutTW.astro";
 import PageTitle from "@/comps-tw/PageTitle.astro";
 import DummyBox from "@/comps-tw/DummyBox.astro";
+import Alert from "@/comps-tw/Alert.astro";
 
 const page = {
-  title: "Dummy",
-  breadcrumb: [{ label: "Home", path: "/tw" }, { label: "Dummy" }],
+  title: "Misc",
+  breadcrumb: [{ label: "Home", path: "/tw" }, { label: "Misc" }],
 };
 ---
 
@@ -13,5 +14,6 @@ const page = {
   <section>
     <PageTitle page={page} />
     <DummyBox title="Dummy Box" />
+    <Alert title="Alert Box" />
   </section>
 </Layout>

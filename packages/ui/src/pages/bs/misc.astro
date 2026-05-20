@@ -1,0 +1,19 @@
+---
+import Layout from "@/layouts/LayoutBS.astro";
+import PageTitle from "@/comps-bs/PageTitle.astro";
+import DummyBox from "@/comps-bs/DummyBox.astro";
+import Alert from "@/comps-bs/Alert.astro";
+
+const page = {
+  title: "Misc",
+  breadcrumb: [{ label: "Home", path: "/tw" }, { label: "Misc" }],
+};
+---
+
+<Layout>
+  <section>
+    <PageTitle page={page} />
+    <DummyBox title="Dummy Box" />
+    <Alert title="Alert Box!" />
+  </section>
+</Layout>

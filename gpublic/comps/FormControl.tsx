@@ -1,5 +1,6 @@
 type Props = {
-  id: string;
+  name: string;
+  id?: string;
   label: string;
   placeholder?: string;
   help?: string;
@@ -16,6 +17,7 @@ type SelectOption = {
 
 export function FormControl(props: Props) {
   const {
+    name,
     id,
     label,
     placeholder,
@@ -30,13 +32,14 @@ export function FormControl(props: Props) {
 
   return (
     <div className="form-control-wrapper">
-      <label htmlFor={id} className="form-label">
+      <label htmlFor={id || name} className="form-label">
         {label}
       </label>
 
       {type === "input" && subtype === "textarea" && (
         <textarea
-          id={id}
+          name={name}
+          id={id || name}
           className="form-control"
           placeholder={placeholder}
           value={value}
@@ -46,7 +49,8 @@ export function FormControl(props: Props) {
 
       {type === "input" && subtype !== "textarea" && (
         <input
-          id={id}
+          name={name}
+          id={id || name}
           type={subtype || "text"}
           className="form-control"
           placeholder={placeholder}
@@ -57,7 +61,8 @@ export function FormControl(props: Props) {
 
       {type === "select" && (
         <select
-          id={id}
+          name={name}
+          id={id || name}
           className="form-select"
           value={value}
           // onChange={(e) => onChange?.(e.target.value)}

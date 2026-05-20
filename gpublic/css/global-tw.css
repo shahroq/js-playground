@@ -41,6 +41,7 @@
   @apply w-full px-6;
 }
 
+/* dummy area */
 @utility dummy-area {
   @apply bg-white border border-slate-200 rounded text-slate-500 flex items-center justify-center h-50 w-full font-semibold;
 
@@ -481,6 +482,25 @@
 
     .action {
       @apply z-0;
+    }
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | ALERT
+  |--------------------------------------------------------------------------
+  */
+  .alert {
+    @apply border border-1 rounded px-5 py-1.5;
+
+    &.alert-info {
+      @apply bg-sky-200;
+    }
+    &.alert-warning {
+      @apply bg-amber-200;
+    }
+    &.alert-danger {
+      @apply bg-red-200;
     }
   }
 

@@ -77,3 +77,31 @@ main {
     }
   }
 }
+
+/* dummy area */
+.dummy-area {
+  background-color: white;
+  border: 1px solid oklch(0.929 0.013 255.508);
+  border-radius: 0.5rem;
+  color: oklch(0.554 0.046 257.417);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  height: 200px;
+  font-weight: 400;
+  margin-bottom: 1rem;
+
+  background-image:
+    linear-gradient(-45deg, #efefef 25%, transparent 25%),
+    linear-gradient(-45deg, transparent 75%, #efefef 75%),
+    linear-gradient(-45deg, #efefef 25%, transparent 25%),
+    linear-gradient(-45deg, transparent 75%, #efefef 7%);
+
+  background-size: 60px 60px;
+  background-position:
+    0 0,
+    0 30px,
+    30px -30px,
+    -30px 0;
+}
