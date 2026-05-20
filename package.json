@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "@types/bun": "latest",
+    "drizzle-kit": "^0.31.10",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "prettier": "^3.6.2",
@@ -21,6 +22,8 @@
     "packages/*"
   ],
   "dependencies": {
+    "@libsql/client": "^0.17.3",
+    "drizzle-orm": "^0.45.2",
     "zod": "^4.4.3",
     "zustand": "^5.0.13"
   }
