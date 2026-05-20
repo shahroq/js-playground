@@ -1,5 +1,39 @@
 ---
-const { title } = Astro.props;
+interface Props {
+  variant?:
+    | "primary"
+    | "secondary"
+    | "success"
+    | "danger"
+    | "warning"
+    | "info"
+    | "light"
+    | "dark";
+  dismissible?: boolean;
+  // icon?: string;
+}
+
+const { variant = "primary", dismissible = false } = Astro.props;
 ---
 
-<div class="alert alert-danger">{title || ""}</div>
+<div
+  class=`alert alert-${variant} ${dismissible ? 'alert-dismissible fade show' : ''}`
+  role="alert"
+>
+  <div class="flex-1">
+    <slot />
+  </div>
+
+  {
+    dismissible && (
+      <button
+        type="button"
+        class="btn-close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        X
+      </button>
+    )
+  }
+</div>

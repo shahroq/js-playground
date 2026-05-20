@@ -1,5 +1,7 @@
 ---
-const { title } = Astro.props;
+
 ---
 
-<div class="dummy-area">{title || ""}</div>
+<div class="dummy-area">
+  <slot />
+</div>

@@ -1,7 +1,7 @@
 type Props = {
-  title?: React.ReactNode;
+  children?: React.ReactNode;
 };
 
-export function DummyBox({ title }: Props) {
-  return <div className="dummy-area">{title || ""}</div>;
+export function DummyBox({ children }: Props) {
+  return <div className="dummy-area">{children || ""}</div>;
 }

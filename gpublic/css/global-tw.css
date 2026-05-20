@@ -81,7 +81,7 @@
     @apply px-5 py-1.5 font-semibold rounded-md transition cursor-pointer;
 
     &.btn-sm {
-      @apply px-2.5 py-1 font-normal text-sm;
+      @apply px-2.5 py-1 text-sm;
     }
     &.btn-lg {
       @apply py-2.5 font-bold;
@@ -491,18 +491,56 @@
   |--------------------------------------------------------------------------
   */
   .alert {
-    @apply border border-1 rounded px-5 py-1.5;
+    @apply flex items-center gap-3 px-4 py-3 rounded-lg border text-sm
+         transition-all duration-300;
+
+    @apply bg-white border-gray-200 text-gray-800 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-200;
+
+    > div {
+      @apply flex-1;
+    }
+
+    > button.btn-close {
+      @apply cursor-pointer transition-colors;
+    }
+
+    /* &.alert-dismissible {
+      @apply ...;
+    } */
+
+    &.alert-primary {
+      @apply bg-blue-50 text-blue-600 border-blue-200 
+           dark:bg-blue-950 dark:text-blue-200 dark:border-blue-800;
+    }
+
+    &.alert-secondary {
+      @apply bg-gray-50 text-gray-700 border-gray-200 
+           dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700;
+    }
+
+    &.alert-success {
+      @apply bg-green-50 text-green-800 border-green-200 
+           dark:bg-green-950 dark:text-green-200 dark:border-green-800;
+    }
+
+    &.alert-danger {
+      @apply bg-red-50 text-red-800 border-red-200 
+           dark:bg-red-950 dark:text-red-200 dark:border-red-800;
+    }
+
+    &.alert-warning {
+      @apply bg-yellow-50 text-yellow-800 border-yellow-200 
+           dark:bg-yellow-950 dark:text-yellow-200 dark:border-yellow-800;
+    }
 
     &.alert-info {
-      @apply bg-sky-200;
+      @apply bg-cyan-50 text-cyan-800 border-cyan-200 
+           dark:bg-cyan-950 dark:text-cyan-200 dark:border-cyan-800;
     }
-    &.alert-warning {
-      @apply bg-amber-200;
-    }
-    &.alert-danger {
-      @apply bg-red-200;
+
+    &.alert-dark {
+      @apply bg-gray-900 text-white border-gray-700 dark:border-gray-600;
     }
   }
-
   /* component closing bracket */
 }

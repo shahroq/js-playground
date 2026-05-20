@@ -5,9 +5,9 @@ import { CounterPage } from "@/pages/counter/plain/CounterPage";
 import { CounterPage as CounterPageWContext } from "@/pages/counter/w-context/CounterPage";
 import { CounterPage as CounterPageWReducer } from "@/pages/counter/w-reducer/CounterPage";
 import { CounterPage as CounterPageWZustand } from "@/pages/counter/w-zustand/CounterPage";
-import { DummyPage } from "@/pages/comps/DummyPage";
 import { DataPage } from "@/pages/comps/DataPage";
 import { FormPage } from "@/pages/comps/FormPage";
+import { MiscPage } from "@/pages/comps/MiscPage";
 
 type Props = {};
 
@@ -15,9 +15,9 @@ const routes = [
   { path: "/", element: <HomePage /> },
   { path: "/dashboard", element: <DashboardPage /> },
   // comps
-  { path: "/dummy", element: <DummyPage /> },
   { path: "/data", element: <DataPage /> },
   { path: "/form", element: <FormPage /> },
+  { path: "/misc", element: <MiscPage /> },
   // counter
   { path: "/counter/plain", element: <CounterPage /> },
   { path: "/counter/w-context", element: <CounterPageWContext /> },
