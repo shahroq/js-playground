@@ -32,7 +32,7 @@
       ]
     },
     {
-      "label": "Task",
+      "label": "Tasks",
       "targets": ["client-nextjs-16"],
       "children": [{ "label": "w/ Prisma", "path": "/tasks/w-prisma" }]
     },
