@@ -33,7 +33,7 @@
     {
       "label": "Tasks",
       "targets": ["client-nextjs-16"],
-      "children": [{ "label": "w/ Prisma", "path": "/tasks/w-prisma" }]
+      "children": [{ "label": "w/ ORM", "path": "/tasks/w-orm" }]
     },
     {
       "label": "Catalog",

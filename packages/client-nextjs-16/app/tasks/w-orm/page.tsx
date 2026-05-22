@@ -1,33 +1,18 @@
-import { Table, Button, type TableData } from "@gpublic/comps";
+import Link from "next/link";
+import { Table, type TableData } from "@gpublic/comps";
 import { PageTitle } from "@/comps/PageTitle";
 import { Page } from "@/gpublic/types/types";
-import Link from "next/link";
+import { Task } from "./types";
+import { getTasks } from "./actions";
 
 const page: Page = {
   title: "Tasks",
   breadcrumb: [{ label: "Tasks" }, { label: "List" }],
 };
 
-type Task = {
-  id: number;
-  title: string;
-  description: string;
-};
+export default async function Tasks() {
+  const tasks = await getTasks();
 
-const tasks: Task[] = [
-  {
-    id: 1,
-    title: "Buy groceries",
-    description: "Milk, eggs, bread",
-  },
-  {
-    id: 2,
-    title: "Finish project",
-    description: "Complete reusable table component",
-  },
-];
-
-export default function Tasks() {
   const data: TableData<Task> = {
     title: "List of tasks",
     records: tasks,
@@ -41,16 +26,25 @@ export default function Tasks() {
       {
         key: "desc",
         renderTh: () => "Desc",
-        renderTd: (record: Task) => record.description,
+        renderTd: (record: Task) => record.desc,
       },
       {
         key: "action",
         renderTh: () => "Actions",
         renderTd: (record: Task) => (
           <div className="flex gap-2">
-            <Button className="btn-sm btn-primary">Edit</Button>
-
-            <Button className="btn-sm btn-danger">Delete</Button>
+            <Link
+              className="btn btn-sm btn-primary"
+              href={`w-orm/${record.id}/update`}
+            >
+              Edit
+            </Link>
+            <Link
+              className="btn btn-sm btn-danger"
+              href={`w-orm/${record.id}/delete`}
+            >
+              Delete
+            </Link>
           </div>
         ),
       },
@@ -61,7 +55,7 @@ export default function Tasks() {
     <section>
       <PageTitle page={page} />
       <div className="flex flex-row-reverse">
-        <Link href="w-prisma/create" className="btn btn-primary">
+        <Link href={`w-orm/create`} className="btn btn-primary">
           Add
         </Link>
       </div>
