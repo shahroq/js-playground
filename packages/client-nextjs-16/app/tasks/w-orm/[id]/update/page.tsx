@@ -4,7 +4,7 @@ import { db } from "@/lib/db";
 import { tasksTable } from "@/data/schema";
 import { PageTitle } from "@/comps";
 import { Page } from "@/gpublic/types/types";
-import Form from "./form";
+import Form from "../../Form";
 import { updateTask } from "../../actions";
 
 const page: Page = {

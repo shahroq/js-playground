@@ -9,30 +9,17 @@ type Props = {
   action: () => void;
 };
 
-export default function Form({ task, action }: Props) {
-  /*
-  // with state
-  const [formData, setFormData] = useState({
-    title: task.title,
-    desc: task.desc,
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(e.target);
-  };
-  */
-
-  const handleAction1 = (formData: FormData) => {
+export default function Form({ task = {}, action }: Props) {
+  const taskAction1 = (formData: FormData) => {
     // startTransition(() => {
-    action(task.id, formData);
+    task.id ? action(task.id, formData) : action(formData);
     // });
   };
 
-  const handleAction2 = action.bind(null, task.id);
+  const taskAction2 = action.bind(null, task.id);
 
   return (
-    <form className="form" action={handleAction1}>
+    <form className="form" action={taskAction1}>
       <FormControl
         type="input"
         subtype="text"
