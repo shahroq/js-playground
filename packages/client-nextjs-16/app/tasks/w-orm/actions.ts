@@ -2,10 +2,8 @@
 
 import { tasksTable } from "@/data/schema";
 import { db } from "@/lib/db";
-import { InferSelectModel, sql } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 import { redirect } from "next/navigation";
-
-type Task = InferSelectModel<typeof tasksTable>;
 
 export async function getTasks() {
   return await db.select().from(tasksTable);
