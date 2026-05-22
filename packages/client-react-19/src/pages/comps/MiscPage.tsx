@@ -2,6 +2,7 @@ import { PageTitle } from "@/comps/PageTitle";
 import type { Page } from "@gpublic/types/types";
 import { DummyBox } from "@gpublic/comps/DummyBox";
 import { Alert } from "@gpublic/comps/Alert";
+import { Button } from "@gpublic/comps";
 
 const page: Page = {
   title: "Misc",
@@ -12,6 +13,12 @@ export function MiscPage() {
   return (
     <section>
       <PageTitle page={page} />
+      <div className="flex gap-2">
+        <Button>Primary</Button>
+        <Button className="btn-secondary">Primary</Button>
+        <Button disabled>Primary w/ disabled</Button>
+        <Button loading>Primary w/ loading</Button>
+      </div>
       <DummyBox />
       <Alert dismissible={true}>Simple Alert</Alert>
     </section>
