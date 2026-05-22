@@ -1,5 +1,5 @@
 import { Button } from "@gpublic/comps";
-import { PageTitle } from "@/comps/PageTitle";
+import { PageTitle } from "@/comps";
 import { CounterProvider, useCounterContext } from "./counter-context";
 import type { Page } from "@gpublic/types/types";
 

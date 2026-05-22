@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PageTitle } from "@/comps/PageTitle";
+import { PageTitle } from "@/comps";
 import type { Page } from "@gpublic/types/types";
 import { Button, FormControl } from "@gpublic/comps";
 

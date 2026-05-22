@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Header } from "@/comps/Header";
-import { Sidebar } from "@/comps/Sidebar";
+import { Header, Sidebar } from "@/comps";
 // import Script from "next/script";
 
 export const metadata: Metadata = {

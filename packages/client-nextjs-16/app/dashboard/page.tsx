@@ -1,5 +1,5 @@
 import { Hero } from "@gpublic/comps";
-import { PageTitle } from "@/comps/PageTitle";
+import { PageTitle } from "@/comps";
 import { Page } from "@/gpublic/types/types";
 
 const page: Page = {

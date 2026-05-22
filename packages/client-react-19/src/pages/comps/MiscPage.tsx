@@ -1,8 +1,6 @@
-import { PageTitle } from "@/comps/PageTitle";
+import { PageTitle } from "@/comps";
 import type { Page } from "@gpublic/types/types";
-import { DummyBox } from "@gpublic/comps/DummyBox";
-import { Alert } from "@gpublic/comps/Alert";
-import { Button } from "@gpublic/comps";
+import { Alert, Button, DummyBox } from "@gpublic/comps";
 
 const page: Page = {
   title: "Misc",

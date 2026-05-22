@@ -1,4 +1,4 @@
-import { PageTitle } from "@/comps/PageTitle";
+import { PageTitle } from "@/comps";
 import type { Page } from "@gpublic/types/types";
 import { Button, Table, type TableData } from "@gpublic/comps";
 

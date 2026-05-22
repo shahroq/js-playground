@@ -1,5 +1,5 @@
 import { Button } from "@gpublic/comps";
-import { PageTitle } from "@/comps/PageTitle";
+import { PageTitle } from "@/comps";
 import { useReducer } from "react";
 import { counterReducer, INITIAL_STATE } from "./counter-reducer";
 import type { Page } from "@gpublic/types/types";

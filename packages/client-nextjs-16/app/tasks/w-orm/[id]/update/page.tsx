@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { sql } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { tasksTable } from "@/data/schema";
-import { PageTitle } from "@/comps/PageTitle";
+import { PageTitle } from "@/comps";
 import { Page } from "@/gpublic/types/types";
 import Form from "./form";
 import { updateTask } from "../../actions";

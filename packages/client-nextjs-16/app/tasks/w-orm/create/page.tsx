@@ -1,5 +1,5 @@
 import { Button, FormControl } from "@gpublic/comps";
-import { PageTitle } from "@/comps/PageTitle";
+import { PageTitle } from "@/comps";
 import { Page } from "@/gpublic/types/types";
 import { createTask } from "../actions";
 

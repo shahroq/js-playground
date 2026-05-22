@@ -1,5 +1,5 @@
 import { Button } from "@gpublic/comps";
-import { PageTitle } from "@/comps/PageTitle";
+import { PageTitle } from "@/comps";
 import { useCounterStore } from "./store";
 import { useShallow } from "zustand/shallow";
 import type { Page } from "@gpublic/types/types";

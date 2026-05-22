@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Table, type TableData } from "@gpublic/comps";
-import { PageTitle } from "@/comps/PageTitle";
+import { PageTitle } from "@/comps";
 import { Page } from "@/gpublic/types/types";
 import { Task } from "./types";
 import { getTasks } from "./actions";
