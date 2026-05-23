@@ -6,7 +6,7 @@ const { props } = Astro;
   <label for={props.id} class="form-label">{props.label}</label>
 
   {
-    props.type === "input" && props.subtype === "textarea" && (
+    props.type === "textarea" && (
       <textarea
         class="form-control"
         id={props.id}
@@ -17,7 +17,7 @@ const { props } = Astro;
   }
 
   {
-    props.type === "input" && props.subtype !== "textarea" && (
+    props.type === "input" && (
       <input
         type={props.subtype}
         class="form-control"

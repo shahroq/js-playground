@@ -34,6 +34,7 @@ export function FormPage() {
         <FormControl
           type="input"
           subtype="text"
+          name="title"
           id="title"
           label="Title"
           help="Enter valid title"
@@ -42,8 +43,8 @@ export function FormPage() {
         />
 
         <FormControl
-          type="input"
-          subtype="textarea"
+          type="textarea"
+          name="description"
           id="description"
           label="Description"
           help="Enter valid description"
@@ -53,6 +54,7 @@ export function FormPage() {
 
         <FormControl
           type="select"
+          name="category"
           id="category"
           label="Category"
           help="Select valid category"

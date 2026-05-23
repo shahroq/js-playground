@@ -50,8 +50,7 @@ export default function Form({ task, action }: Props) {
           defaultValue={formState?.values?.title || ""}
         />
         <FormControl
-          type="input"
-          subtype="textarea"
+          type="textarea"
           name="desc"
           id="desc"
           label="Description *"

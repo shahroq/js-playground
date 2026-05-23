@@ -4,18 +4,11 @@ type Props = {
   label?: string;
   placeholder?: string;
   help?: string;
-  type: "input";
-  subtype?:
-    | "text"
-    | "email"
-    | "password"
-    | "number"
-    | "hidden"
-    | "textarea"
-    | "select";
+  type: "input" | "textarea" | "select";
+  subtype?: "text" | "email" | "password" | "number" | "hidden";
   value?: string;
   options?: SelectOption[];
-} & React.InputHTMLAttributes<HTMLButtonElement>;
+} & React.HTMLAttributes<HTMLElement>;
 
 type SelectOption = {
   label: string;
@@ -45,7 +38,7 @@ export function FormControl(props: Props) {
         </label>
       )}
 
-      {type === "input" && subtype === "textarea" && (
+      {type === "textarea" && (
         <textarea
           name={name}
           id={id || name}
@@ -56,7 +49,7 @@ export function FormControl(props: Props) {
         />
       )}
 
-      {type === "input" && subtype !== "textarea" && (
+      {type === "input" && (
         <input
           name={name}
           id={id || name}
