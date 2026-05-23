@@ -1,8 +1,9 @@
 "use server";
-import { tasksTable } from "@/data/schema";
-import { db } from "@/lib/db";
-import { sql } from "drizzle-orm";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
+import { sql } from "drizzle-orm";
+import { db } from "@/lib/db";
+import { tasksTable } from "@/data/schema";
 import { FormState } from "./types";
 
 export async function getTasks() {
@@ -28,6 +29,7 @@ export async function createTaskReducer(
   // create a record in db
   try {
     const newTask = await db.insert(tasksTable).values({ title, desc });
+    revalidatePath("/tasks/w-orm");
     return { message: "Task created successfully" };
   } catch (e) {
     console.error(e);
@@ -62,6 +64,7 @@ export async function updateTaskReducer(
       .set({ title, desc })
       .where(sql`${tasksTable.id} = ${id}`)
       .returning();
+    revalidatePath("/tasks/w-orm");
     return { message: "Task updated successfully", values: updatedTask[0] };
   } catch (e) {
     console.error(e);
