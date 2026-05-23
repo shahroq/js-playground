@@ -1,47 +1,76 @@
 "use server";
-
 import { tasksTable } from "@/data/schema";
 import { db } from "@/lib/db";
 import { sql } from "drizzle-orm";
 import { redirect } from "next/navigation";
+import { FormState } from "./types";
 
 export async function getTasks() {
   return await db.select().from(tasksTable);
 }
 
-export async function createTask(task: FormData) {
-  const title = task.get("title") as string;
-  const desc = task.get("desc") as string;
+// TODO: use better validation (zod, etc.)/useContext for crud operation(?)
+export async function createTaskReducer(
+  prevFormState: FormState,
+  formData: FormData,
+) {
+  const title = String(formData.get("title") || "").trim();
+  const desc = String(formData.get("desc") || "").trim();
+  const errors: string[] = [];
 
   // validate user input
+  if (!title) errors.push("Title is required");
+  if (!desc) errors.push("Desc is required");
+  const values = { title, desc };
+
+  if (errors.length) return { values, message: "Error List:", errors };
 
   // create a record in db
-  const newTask = await db.insert(tasksTable).values({ title, desc });
-
-  // redirect to list
-  redirect("/tasks/w-orm");
+  try {
+    const newTask = await db.insert(tasksTable).values({ title, desc });
+    return { message: "Task created successfully" };
+  } catch (e) {
+    console.error(e);
+    return {
+      values,
+      message: "Failed to create task",
+      errors: ["Something went wrong"],
+    };
+  }
 }
 
-export async function updateTask(id: number, task: FormData) {
-  // console.log(`Here I am at actions with id=${id} & task=${task}`);
+export async function updateTaskReducer(
+  prevFormState: FormState,
+  formData: FormData,
+) {
+  const id = Number(formData.get("id") || 0);
+  const title = String(formData.get("title") || "").trim();
+  const desc = String(formData.get("desc") || "").trim();
+  const errors: string[] = [];
 
-  const title = task.get("title");
-  const desc = task.get("desc");
+  // validate user input
+  if (!title) errors.push("Title is required");
+  if (!desc) errors.push("Desc is required");
+  const values = { id, title, desc };
 
-  // TODO: use better validation (zod, etc.)
-  // Basic validation for user input
-  if (!title) throw new Error("Title is required");
+  if (errors.length) return { values, message: "Error List:", errors };
 
   // update a record in db
-  const updatedTask = await db
-    .update(tasksTable)
-    .set({ title, desc })
-    .where(sql`${tasksTable.id} = ${id}`);
-
-  console.log(`Task Updated...`);
-  console.log(updatedTask);
-
-  redirect(`/tasks/w-orm`);
+  try {
+    const updatedTask = await db
+      .update(tasksTable)
+      .set({ title, desc })
+      .where(sql`${tasksTable.id} = ${id}`)
+      .returning();
+    return { message: "Task updated successfully", values: updatedTask[0] };
+  } catch (e) {
+    console.error(e);
+    return {
+      values,
+      message: "Failed to update task",
+      errors: ["Something went wrong"],
+    };
+  }
 }
 
 export async function deleteTask(id: number) {

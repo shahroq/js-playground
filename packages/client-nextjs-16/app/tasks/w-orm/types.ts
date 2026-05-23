@@ -10,3 +10,9 @@ export type Task = {
 */
 
 export type Task = InferSelectModel<typeof tasksTable>;
+
+export type FormState = {
+  values?: Partial<Task>;
+  message?: string;
+  errors?: string[];
+};

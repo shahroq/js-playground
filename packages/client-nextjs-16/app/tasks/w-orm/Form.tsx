@@ -1,42 +1,66 @@
 "use client";
-import { InferSelectModel } from "drizzle-orm";
-import { tasksTable } from "@/data/schema";
-import { Button, FormControl } from "@gpublic/comps";
+import { Button, FormControl, Alert } from "@gpublic/comps";
+import { useActionState } from "react";
+import { FormState, Task } from "./types";
 
-type Task = InferSelectModel<typeof tasksTable>;
 type Props = {
-  task: Task;
-  action: () => void;
+  task?: Partial<Task>;
+  action: (
+    prevState: FormState,
+    formData: FormData,
+  ) => Promise<FormState> | FormState;
 };
 
-export default function Form({ task = {}, action }: Props) {
-  const taskAction1 = (formData: FormData) => {
-    // startTransition(() => {
-    task.id ? action(task.id, formData) : action(formData);
-    // });
-  };
+export default function Form({ task, action }: Props) {
+  const initialFormState: FormState = { values: task };
 
-  const taskAction2 = action.bind(null, task.id);
+  const [formState, formAction, isPending] = useActionState(
+    action,
+    initialFormState,
+  );
 
   return (
-    <form className="form" action={taskAction1}>
-      <FormControl
-        type="input"
-        subtype="text"
-        name="title"
-        id="title"
-        label="Title"
-        defaultValue={task.title || ""}
-      />
-      <FormControl
-        type="input"
-        subtype="textarea"
-        name="desc"
-        id="desc"
-        label="Description"
-        defaultValue={task.desc || ""}
-      />
-      <Button type="submit">Submit</Button>
-    </form>
+    <>
+      {formState?.message && (
+        <Alert variant={formState?.errors ? "danger" : "info"}>
+          {formState.message}
+          {formState?.errors && (
+            <ul>
+              {formState?.errors.map((error, i) => (
+                <li key={i}>{error}</li>
+              ))}
+            </ul>
+          )}
+        </Alert>
+      )}
+      <form className="form" action={formAction}>
+        <FormControl
+          type="input"
+          subtype="hidden"
+          name="id"
+          id="id"
+          defaultValue={formState?.values?.id || 0}
+        />
+        <FormControl
+          type="input"
+          subtype="text"
+          name="title"
+          id="title"
+          label="Title *"
+          defaultValue={formState?.values?.title || ""}
+        />
+        <FormControl
+          type="input"
+          subtype="textarea"
+          name="desc"
+          id="desc"
+          label="Description *"
+          defaultValue={formState?.values?.desc || ""}
+        />
+        <Button type="submit" loading={isPending}>
+          Submit
+        </Button>
+      </form>
+    </>
   );
 }

@@ -16,7 +16,7 @@ type Props = {
 export function Alert({
   children,
   variant = "primary",
-  dismissible = false,
+  dismissible = true,
 }: Props) {
   return (
     <div

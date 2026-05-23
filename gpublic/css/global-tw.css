@@ -503,6 +503,10 @@
       @apply flex-1;
     }
 
+    ul {
+      @apply list-disc pl-3;
+    }
+
     > button.btn-close {
       @apply cursor-pointer transition-colors;
     }

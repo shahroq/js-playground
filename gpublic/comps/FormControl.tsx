@@ -1,11 +1,18 @@
 type Props = {
   name: string;
   id?: string;
-  label: string;
+  label?: string;
   placeholder?: string;
   help?: string;
   type: "input";
-  subtype?: "text" | "email" | "password" | "number" | "textarea" | "select";
+  subtype?:
+    | "text"
+    | "email"
+    | "password"
+    | "number"
+    | "hidden"
+    | "textarea"
+    | "select";
   value?: string;
   options?: SelectOption[];
 } & React.InputHTMLAttributes<HTMLButtonElement>;
@@ -32,9 +39,11 @@ export function FormControl(props: Props) {
 
   return (
     <div className="form-control-wrapper">
-      <label htmlFor={id || name} className="form-label">
-        {label}
-      </label>
+      {label && (
+        <label htmlFor={id || name} className="form-label">
+          {label}
+        </label>
+      )}
 
       {type === "input" && subtype === "textarea" && (
         <textarea
