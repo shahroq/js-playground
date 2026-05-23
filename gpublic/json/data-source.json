@@ -205,5 +205,36 @@
       "created_by": 3,
       "updated_by": 3
     }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "title": "Electronics"
+    },
+    {
+      "id": 2,
+      "title": "Books"
+    },
+    {
+      "id": 3,
+      "title": "Clothing"
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Finalize Monthly Report",
+      "description": "Compile data, perform analysis, and write the final report for September sales."
+    },
+    {
+      "id": 2,
+      "title": "Review New Project Planning",
+      "description": "Go over the timeline and resource allocation for the new product launch project."
+    },
+    {
+      "id": 3,
+      "title": "Conduct Team Meeting",
+      "description": "Prepare the agenda, coordinate attendee availability, and lead the weekly progress review meeting."
+    }
   ]
 }

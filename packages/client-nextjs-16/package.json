@@ -6,7 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "drizzle:reset": "rm -rf ./data/*.db",
+    "drizzle:migrate": "drizzle-kit migrate",
+    "drizzle:push": "drizzle-kit push",
+    "drizzle:boot": "bun run drizzle:reset && bun run drizzle:push",
+    "drizzle:seed": "bun run ./data/seed.ts"
   },
   "dependencies": {
     "next": "16.2.6",
