@@ -2,8 +2,8 @@ import { PageTitle } from "@/comps";
 import { Page } from "@/gpublic/types/types";
 
 const page: Page = {
-  title: "Catalog",
-  breadcrumb: [{ label: "Catalog" }, { label: "List" }],
+  title: "Catalog w/ ORM",
+  breadcrumb: [{ label: "Catalog" }],
 };
 
 export default async function Catalog() {
