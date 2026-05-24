@@ -195,36 +195,38 @@
   |--------------------------------------------------------------------------
   */
   .nav {
-    @apply flex;
+    @apply flex ml-3 mt-1.5;
 
     &.nav-vertical {
       @apply flex-col space-y-1;
     }
 
     li {
-      @apply m-0;
-    }
-
-    .nav-link {
-      @apply block m-0 py-1 px-1 text-base font-medium transition-colors text-slate-600 hover:text-slate-900 hover:font-bold;
-
-      &.active {
-        @apply font-bold text-slate-900;
-      }
-      &.disabled {
-        @apply text-slate-400 pointer-events-none;
-      }
-    }
-
-    ul {
-      @apply mt-0 text-4xl;
-
-      li {
-        @apply ml-3;
-      }
+      @apply my-1 mx-0;
       a {
-        @apply !px-2 border-l border-slate-400 hover:border-slate-900 !text-[14px] !leading-[1em] hover:!text-[14px] hover:!leading-[1em];
+        @apply text-[15px] hover:text-[15px] font-medium leading-[1em] hover:leading-[1em] text-slate-600 hover:text-slate-900 transition-colors;
+        @apply block border-l border-slate-400 hover:border-slate-900 py-0 px-2;
+
+        &.active {
+          @apply text-slate-900;
+        }
+        &.disabled {
+          @apply text-slate-400 pointer-events-none;
+        }
       }
+    }
+
+    &.level-0 {
+      @apply ml-0 mt-0;
+      > li {
+        > a {
+          @apply !text-base;
+          @apply border-0 p-0;
+        }
+      }
+    }
+    &.level-1 {
+      @apply ml-0;
     }
   }
 

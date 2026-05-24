@@ -37,8 +37,17 @@
     },
     {
       "label": "Catalog",
-      "targets": ["client-react-19", "client-nextjs-16"],
-      "children": [{ "label": "w/ ORM", "path": "/catalog/w-orm" }]
+      "targets": ["client-nextjs-16"],
+      "children": [
+        {
+          "label": "w/ ORM",
+          "path": "/catalog/w-orm",
+          "children": [
+            { "label": "Products", "path": "/catalog/w-orm/products" },
+            { "label": "Reviews", "path": "/catalog/w-orm/reviews" }
+          ]
+        }
+      ]
     }
   ],
   "user": {
