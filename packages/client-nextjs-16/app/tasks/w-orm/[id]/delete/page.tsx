@@ -5,7 +5,7 @@ type Props = {
   params: Promise<{ id: string }>;
 };
 
-export default async function Update({ params }: Props) {
+export default async function Delete({ params }: Props) {
   const { id } = await params;
 
   await deleteTask(parseInt(id));
