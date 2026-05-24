@@ -37,7 +37,8 @@
     },
     {
       "label": "Catalog",
-      "targets": ["client-react-19", "client-nextjs-16"]
+      "targets": ["client-react-19", "client-nextjs-16"],
+      "children": [{ "label": "w/ ORM", "path": "/catalog/w-orm" }]
     }
   ],
   "user": {
