@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Header, Sidebar } from "@/comps";
+import { Providers } from "./providers";
 // import Script from "next/script";
 
 export const metadata: Metadata = {
@@ -16,15 +17,17 @@ export default async function RootLayout({ children }: Props) {
   return (
     <html lang="en">
       <body id="root">
-        <header>
-          <Header />
-        </header>
-        <div className="layout">
-          <aside>
-            <Sidebar />
-          </aside>
-          <main>{children}</main>
-        </div>
+        <Providers>
+          <header>
+            <Header />
+          </header>
+          <div className="layout">
+            <aside>
+              <Sidebar />
+            </aside>
+            <main>{children}</main>
+          </div>
+        </Providers>
       </body>
     </html>
   );
