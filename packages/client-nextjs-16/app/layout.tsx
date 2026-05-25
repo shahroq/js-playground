@@ -16,18 +16,20 @@ type Props = Readonly<{
 export default async function RootLayout({ children }: Props) {
   return (
     <html lang="en">
-      <body id="root">
-        <Providers>
-          <header>
-            <Header />
-          </header>
-          <div className="layout">
-            <aside>
-              <Sidebar />
-            </aside>
-            <main>{children}</main>
-          </div>
-        </Providers>
+      <body>
+        <div id="root">
+          <Providers>
+            <header>
+              <Header />
+            </header>
+            <div className="layout">
+              <aside>
+                <Sidebar />
+              </aside>
+              <main>{children}</main>
+            </div>
+          </Providers>
+        </div>
       </body>
     </html>
   );
