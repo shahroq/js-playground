@@ -7,3 +7,4 @@ export * from "./Hero";
 export * from "./Spinner";
 export * from "./Table";
 export * from "./Modal";
+export * from "./Skeleton";

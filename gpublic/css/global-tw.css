@@ -575,7 +575,7 @@
     }
 
     .modal-content {
-      @apply relative w-auto h-auto rounded-lg border border-zinc-200 bg-white shadow-2xl outline-none dark:border-zinc-800 dark:bg-zinc-900 duration-200;
+      @apply relative w-full h-auto rounded-lg border border-zinc-200 bg-white shadow-2xl outline-none dark:border-zinc-800 dark:bg-zinc-900 duration-200;
       @apply flex flex-col my-5;
 
       header,

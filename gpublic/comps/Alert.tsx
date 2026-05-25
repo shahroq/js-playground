@@ -1,14 +1,16 @@
+export type Variant =
+  | "primary"
+  | "secondary"
+  | "success"
+  | "danger"
+  | "warning"
+  | "info"
+  | "light"
+  | "dark";
+
 type Props = {
   children?: React.ReactNode;
-  variant?:
-    | "primary"
-    | "secondary"
-    | "success"
-    | "danger"
-    | "warning"
-    | "info"
-    | "light"
-    | "dark";
+  variant?: Variant;
   dismissible?: boolean;
   // icon?: string;
 };

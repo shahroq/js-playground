@@ -19,7 +19,9 @@ export function Button({
 }: Props) {
   return (
     <Component
-      className={`btn ${className || "btn-primary"} `}
+      className={[`btn`, className ? `${className}` : `btn-primary`]
+        .filter(Boolean)
+        .join(" ")}
       disabled={disabled || loading}
       {...rest}
     >

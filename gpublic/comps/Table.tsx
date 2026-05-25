@@ -20,6 +20,8 @@ export function Table<TRecord>({ data, className }: Props<TRecord>) {
 
   const { title, columns, records } = data;
 
+  if (!Array.isArray(records)) return <p>No records rovided</p>;
+
   const renderedHeader = columns.map((column, i) => (
     <th key={`${column.key}`}>{column.renderTh()}</th>
   ));
