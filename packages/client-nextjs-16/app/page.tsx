@@ -7,8 +7,11 @@ export default function Home() {
 
   return (
     <section>
-      <Hero title="Home">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      <Hero>
+        <Hero.Title>Home</Hero.Title>
+        <Hero.Content>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </Hero.Content>
       </Hero>
       <hr />
 

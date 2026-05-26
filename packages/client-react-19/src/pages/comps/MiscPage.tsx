@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Page } from "@gpublic/types/types";
-import { Alert, Button, DummyBox, Modal } from "@gpublic/comps";
+import { Alert, Button, DummyBox, Modal, Hero, Counter } from "@gpublic/comps";
 import { PageTitle } from "@/comps";
 
 const page: Page = {
@@ -15,6 +15,21 @@ export function MiscPage() {
     <section>
       <PageTitle page={page} />
 
+      {/* Hero */}
+      <Hero>
+        <Hero.Title>Hero V2</Hero.Title>
+        <Hero.Content>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </Hero.Content>
+        <div className="action">
+          <Hero.Button onClick={() => console.log("Primary Clicked")}>
+            Primary
+          </Hero.Button>
+          <Hero.Button className={"btn-secondary"}>Secondary</Hero.Button>
+        </div>
+      </Hero>
+
+      <hr />
       {/* Button */}
       <div className="flex gap-2">
         <Button>Primary</Button>
@@ -50,6 +65,15 @@ export function MiscPage() {
           </p>
         </>
       </Modal>
+      <hr />
+
+      {/* Counter */}
+      <Counter>
+        <Counter.Label>My Counter</Counter.Label>
+        <Counter.Decrease icon="-" />
+        <Counter.Count />
+        <Counter.Increase icon="+" />
+      </Counter>
     </section>
   );
 }

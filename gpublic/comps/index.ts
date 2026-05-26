@@ -8,3 +8,4 @@ export * from "./Spinner";
 export * from "./Table";
 export * from "./Modal";
 export * from "./Skeleton";
+export * from "./Counter";

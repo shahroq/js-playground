@@ -486,7 +486,7 @@
     }
 
     .action {
-      @apply z-0;
+      @apply flex gap-3;
     }
   }
 
