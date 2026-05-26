@@ -10,11 +10,10 @@ type Props = {
 type ContextValues = {};
 
 const HeroContext = createContext<ContextValues | null>(null);
-
 function useHero() {
   const context = useContext(HeroContext);
   if (context === null)
-    throw new Error("useHero must be used within a Hero provider");
+    throw new Error("useHero must be used within a provider");
 
   return context;
 }

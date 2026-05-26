@@ -59,9 +59,8 @@ export function Modal({
   if (!open) return null;
 
   // const domNode = document.querySelector(".modal-container") as HTMLDivElement;
-  const domNode = document.body;
 
-  const modal = (
+  return createPortal(
     <div
       className={[`modal`, sizeClasses[size]].filter(Boolean).join(" ")}
       aria-modal="true"
@@ -96,8 +95,7 @@ export function Modal({
           </>
         )}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
-
-  return createPortal(modal, domNode);
 }

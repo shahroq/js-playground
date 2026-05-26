@@ -12,14 +12,12 @@ type ContextValues = {
   decrease: () => void;
 };
 
-// 1. Create a context
+// 1. Create a context & its hook
 const CounterContext = createContext<ContextValues | null>(null);
-
-// 2. Custom hook to use the context safely
 function useCounter() {
   const context = useContext(CounterContext);
   if (context === null)
-    throw new Error("useCounter must be used within a Counter provider");
+    throw new Error("useCounter must be used within a provider");
 
   return context;
 }
