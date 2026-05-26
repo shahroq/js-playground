@@ -7,7 +7,7 @@
     "@types/bun": "latest"
   },
   "scripts": {
-    "start": "bunx json-server ../../gpublic/json/catalog.json"
+    "start": "bunx json-server ../../gpublic/json/catalog.json --port 3009"
   },
   "peerDependencies": {
     "typescript": "^5"
