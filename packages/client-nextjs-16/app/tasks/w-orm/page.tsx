@@ -43,7 +43,7 @@ export default async function Tasks() {
               className="btn btn-sm btn-danger"
               href={`w-orm/${record.id}/delete`}
             >
-              Delete
+              Delete w/ Page
             </Link>
           </div>
         ),

@@ -81,7 +81,7 @@
     @apply px-5 py-1.5 font-semibold rounded-md transition cursor-pointer flex justify-center items-center gap-1.5;
 
     &.btn-sm {
-      @apply px-2.5 py-1 text-sm;
+      @apply px-2.5 py-1 text-xs;
     }
     &.btn-lg {
       @apply py-2.5 font-bold;
