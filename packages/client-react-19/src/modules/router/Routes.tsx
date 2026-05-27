@@ -8,6 +8,7 @@ import { CounterPage as CounterPageWZustand } from "@/pages/counter/w-zustand/Co
 import { DataPage } from "@/pages/comps/DataPage";
 import { FormPage } from "@/pages/comps/FormPage";
 import { MiscPage } from "@/pages/comps/MiscPage";
+import { ProductsPage } from "@/pages/catalog/w-react-query/ProductsPage";
 
 type Props = {};
 
@@ -15,14 +16,18 @@ const routes = [
   { path: "/", element: <HomePage /> },
   { path: "/dashboard", element: <DashboardPage /> },
   // comps
-  { path: "/data", element: <DataPage /> },
-  { path: "/form", element: <FormPage /> },
-  { path: "/misc", element: <MiscPage /> },
+  { path: "/comps/data", element: <DataPage /> },
+  { path: "/comps/form", element: <FormPage /> },
+  { path: "/comps/misc", element: <MiscPage /> },
   // counter
   { path: "/counter/plain", element: <CounterPage /> },
   { path: "/counter/w-context", element: <CounterPageWContext /> },
   { path: "/counter/w-reducer", element: <CounterPageWReducer /> },
   { path: "/counter/w-zustand", element: <CounterPageWZustand /> },
+
+  // catalog
+  { path: "/catalog/w-react-query/products", element: <ProductsPage /> },
+
   // { path: "*", element: <NotFound /> },
 ] as const;
 

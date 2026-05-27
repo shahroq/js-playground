@@ -7,5 +7,6 @@ export * from "./Hero";
 export * from "./Spinner";
 export * from "./Table";
 export * from "./Modal";
+export * from "./ModalV2";
 export * from "./Skeleton";
 export * from "./Counter";

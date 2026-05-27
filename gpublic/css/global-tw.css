@@ -571,7 +571,7 @@
     @apply mx-auto;
 
     .modal-backdrop {
-      @apply fixed inset-0 bg-black/50 backdrop-blur-sm;
+      @apply fixed inset-0 bg-black/5 backdrop-blur-sm;
     }
 
     .modal-content {

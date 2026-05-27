@@ -1,6 +1,12 @@
-import { useState } from "react";
 import type { Page } from "@gpublic/types/types";
-import { Alert, Button, DummyBox, Modal, Hero, Counter } from "@gpublic/comps";
+import {
+  Alert,
+  Button,
+  DummyBox,
+  Hero,
+  Counter,
+  ModalV2,
+} from "@gpublic/comps";
 import { PageTitle } from "@/comps";
 
 const page: Page = {
@@ -9,11 +15,23 @@ const page: Page = {
 };
 
 export function MiscPage() {
-  const [showModal, setShowModal] = useState(false);
-
   return (
     <section>
       <PageTitle page={page} />
+
+      {/* Modal */}
+      <ModalV2 title="Dummy" size="sm" closeOnBackdrop>
+        <ModalV2.Trigger windowName="modal-content">
+          <Button>Open Modal</Button>
+        </ModalV2.Trigger>
+        <ModalV2.Window name="modal-content">
+          <ModalV2.Content>
+            <DummyBox />
+          </ModalV2.Content>
+          <ModalV2.Footer>Footer</ModalV2.Footer>
+        </ModalV2.Window>
+      </ModalV2>
+      <hr />
 
       {/* Hero */}
       <Hero>
@@ -45,26 +63,6 @@ export function MiscPage() {
 
       {/* Alert */}
       <Alert dismissible={true}>Simple Alert</Alert>
-      <hr />
-
-      {/* Modal */}
-      <Button onClick={() => setShowModal(!showModal)}>Open Modal</Button>
-      <Modal
-        open={showModal}
-        onClose={() => setShowModal(false)}
-        title={"Header"}
-        footer={<Button onClick={() => setShowModal(false)}>I Accept</Button>}
-      >
-        <>
-          <h2 className="title">Welcome to Modal!</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
-            obcaecati cupiditate a optio in magnam, earum vero rerum deleniti
-            cum totam eligendi sequi dolore. Alias perspiciatis tenetur
-            consequuntur reiciendis quod!
-          </p>
-        </>
-      </Modal>
       <hr />
 
       {/* Counter */}

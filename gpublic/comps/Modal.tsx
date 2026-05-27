@@ -75,7 +75,7 @@ export function Modal({
       <div className="modal-content" tabIndex={-1} ref={dialogRef}>
         {title && (
           <>
-            <header className="">
+            <header>
               <h2 id="modal-title">{title}</h2>
               <button
                 type="button"

@@ -11,12 +11,23 @@
     { "label": "Users" },
     {
       "label": "Components",
-      "targets": ["ui", "client-react-19"],
+
       "children": [
-        { "label": "Data", "path": "/data" },
-        { "label": "Form", "path": "/form" },
-        { "label": "Misc", "path": "/misc" },
-        { "label": "Modal" }
+        {
+          "label": "Data",
+          "path": "/comps/data",
+          "targets": ["ui", "client-react-19"]
+        },
+        {
+          "label": "Form",
+          "path": "/comps/form",
+          "targets": ["ui", "client-react-19"]
+        },
+        {
+          "label": "Misc",
+          "path": "/comps/misc",
+          "targets": ["ui", "client-react-19", "client-nextjs-16"]
+        }
       ]
     },
     {
@@ -37,14 +48,21 @@
     },
     {
       "label": "Catalog",
-      "targets": ["client-nextjs-16"],
+      "targets": ["client-react-19", "client-nextjs-16"],
       "children": [
         {
           "label": "w/ ORM",
+          "targets": ["client-nextjs-16"],
           "path": "/catalog/w-orm",
           "children": [
             { "label": "Products", "path": "/catalog/w-orm/products" },
             { "label": "Reviews", "path": "/catalog/w-orm/reviews" }
+          ]
+        },
+        {
+          "label": "w/ React Query",
+          "children": [
+            { "label": "Products", "path": "/catalog/w-react-query/products" }
           ]
         }
       ]
