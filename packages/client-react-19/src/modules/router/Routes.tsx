@@ -4,6 +4,7 @@ import { DashboardPage } from "@/pages/DashboardPage";
 import { CounterPage } from "@/pages/counter/plain/CounterPage";
 import { CounterPage as CounterPageWContext } from "@/pages/counter/w-context/CounterPage";
 import { CounterPage as CounterPageWReducer } from "@/pages/counter/w-reducer/CounterPage";
+import { CounterPage as CounterPageWReduxTK } from "@/pages/counter/w-reduxtk/CounterPage";
 import { CounterPage as CounterPageWZustand } from "@/pages/counter/w-zustand/CounterPage";
 import { DataPage } from "@/pages/comps/DataPage";
 import { FormPage } from "@/pages/comps/FormPage";
@@ -23,6 +24,7 @@ const routes = [
   { path: "/counter/plain", element: <CounterPage /> },
   { path: "/counter/w-context", element: <CounterPageWContext /> },
   { path: "/counter/w-reducer", element: <CounterPageWReducer /> },
+  { path: "/counter/w-reduxtk", element: <CounterPageWReduxTK /> },
   { path: "/counter/w-zustand", element: <CounterPageWZustand /> },
 
   // catalog

@@ -37,7 +37,7 @@
         { "label": "Plain", "path": "/counter/plain" },
         { "label": "w/ Context", "path": "/counter/w-context" },
         { "label": "w/ Reducer", "path": "/counter/w-reducer" },
-        { "label": "w/ Redux" },
+        { "label": "w/ ReduxTK", "path": "/counter/w-reduxtk" },
         { "label": "w/ Zustand", "path": "/counter/w-zustand" }
       ]
     },
