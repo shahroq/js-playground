@@ -115,7 +115,8 @@
     &.btn-outline-danger {
       @apply border border-red-500 text-red-500 hover:bg-red-500 hover:text-white;
     }
-    &[disabled] {
+    &[disabled],
+    &:disabled {
       @apply cursor-wait opacity-70;
     }
   }

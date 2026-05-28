@@ -43,7 +43,9 @@ export function MiscPage() {
           <Hero.Button onClick={() => console.log("Primary Clicked")}>
             Primary
           </Hero.Button>
-          <Hero.Button className={"btn-secondary"}>Secondary</Hero.Button>
+          <Hero.Button className={"btn-secondary"} onClick={console.log}>
+            Secondary
+          </Hero.Button>
         </div>
       </Hero>
 
