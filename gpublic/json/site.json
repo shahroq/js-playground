@@ -21,7 +21,44 @@
         {
           "label": "Form",
           "path": "/comps/form",
-          "targets": ["ui", "client-react-19"]
+          "targets": ["ui", "client-react-19"],
+          "children": [
+            {
+              "label": "Plain (Controlled) ",
+              "path": "/comps/form/plain-controlled",
+              "targets": ["client-react-19"]
+            },
+            {
+              "label": "Plain (Uncontrolled) ",
+              "path": "/comps/form/plain-uncontrolled",
+              "targets": ["client-react-19"]
+            },
+            {
+              "label": "w/ FormData API",
+              "path": "/comps/form/w-formdata-api",
+              "targets": ["client-react-19"]
+            },
+            {
+              "label": "w/ useActionState",
+              "path": "/comps/form/w-use-action-state",
+              "targets": ["client-react-19"]
+            },
+            {
+              "label": "w/ React Hook Form",
+              "path": "/comps/form/w-react-hook-form",
+              "targets": ["client-react-19"]
+            },
+            {
+              "label": "w/ TanStack Form",
+              "path": "/comps/form/w-tanstack-form",
+              "targets": ["client-react-19"]
+            },
+            {
+              "label": "w/ Redux Form",
+              "path": "/comps/form/w-redux-form",
+              "targets": ["client-react-19"]
+            }
+          ]
         },
         {
           "label": "Misc",
@@ -57,6 +94,12 @@
           "children": [
             { "label": "Products", "path": "/catalog/w-orm/products" },
             { "label": "Reviews", "path": "/catalog/w-orm/reviews" }
+          ]
+        },
+        {
+          "label": "w/ ReduxTK",
+          "children": [
+            { "label": "Products", "path": "/catalog/w-reduxtk/products" }
           ]
         },
         {

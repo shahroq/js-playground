@@ -4,8 +4,12 @@ import type { Page } from "@gpublic/types/types";
 import { Button, FormControl } from "@gpublic/comps";
 
 const page: Page = {
-  title: "Form",
-  breadcrumb: [{ label: "Components" }, { label: "Form" }],
+  title: "Plain",
+  breadcrumb: [
+    { label: "Components" },
+    { label: "Form" },
+    { label: "Plain (Controlled)" },
+  ],
 };
 
 export function FormPage() {
