@@ -25,7 +25,7 @@ const config = {
 
   // basics
   env: <Env>process.env.NODE_ENV || "development",
-  base_url: process.env.BASE_URL,
+  base_url: process.env.BASE_URL || "http://localhost",
   port: +(process.env.PORT || 3000),
   app_name: process.env.APP_NAME || "APP",
   version: process.env.VERSION || "0.0.0",
