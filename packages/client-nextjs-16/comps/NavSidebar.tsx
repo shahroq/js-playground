@@ -1,13 +1,7 @@
 import site from "@gpublic/json/site.json";
 import Link from "next/link";
 import { filterNavItems } from "@/gpublic/js/utils";
-
-type NavItem = {
-  label: string;
-  path?: string;
-  children?: NavItem[];
-  target?: string[];
-};
+import type { NavItem } from "@/gpublic/types/types";
 
 type PropsNavItem = {
   item: NavItem;
