@@ -1,9 +1,11 @@
 ---
 import site from "@gpublic/json/site.json";
+import type { NavItem } from "@gpublic/types/types";
 import { prefixNavPaths, filterNavItems } from "@gpublic/js/utils";
 
-const pathPrefix = "/tw";
-const navSide = prefixNavPaths(filterNavItems(site.navSide, "ui"), pathPrefix);
+let navSide: NavItem[] = site.navSide;
+navSide = filterNavItems(site.navSide, "ui");
+navSide = prefixNavPaths(navSide, "/tw");
 
 const pathname = Astro.url.pathname;
 ---

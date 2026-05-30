@@ -1,16 +1,13 @@
 ---
 import site from "@gpublic/json/site.json";
+import type { NavItem } from "@gpublic/types/types";
 import { prefixNavPaths, filterNavItems } from "@gpublic/js/utils";
 
-const pathPrefix = "/bs";
-const navSide = prefixNavPaths(filterNavItems(site.navSide, "ui"), pathPrefix);
+let navSide: NavItem[] = site.navSide;
+navSide = filterNavItems(site.navSide, "ui");
+navSide = prefixNavPaths(navSide, "/bs");
 
 const pathname = Astro.url.pathname;
-// const { url: { pathname } } = Astro;
-
-// const renderMenuItem = (item, pathPrefix = "", curPathname = "") => {
-//   if (!item || !item.label) return null;
-// };
 ---
 
 <ul class="nav nav-pills- flex-column mb-auto">
