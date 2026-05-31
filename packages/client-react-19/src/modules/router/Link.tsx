@@ -1,24 +1,33 @@
+import type { MouseEvent } from "react";
 import { useNavContext } from "./nav-context";
 
 type Props = {
-  to?: string;
   children: React.ReactNode;
   className?: string;
-  href?: string;
+  href: string;
 };
 
-export function Link({ to, children, className = "", ...rest }: Props) {
-  const { navigate, curPath } = useNavContext();
+export function Link({ href, children, className, ...rest }: Props) {
+  const { navigate } = useNavContext();
 
-  const handleClick = (e) => {
-    if (e.metaKey || e.ctrlKey) return;
+  const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    if (to) navigate(to);
+
+    if (
+      e.button !== 0 ||
+      e.metaKey ||
+      e.ctrlKey ||
+      e.shiftKey ||
+      e.altKey ||
+      !href
+    )
+      return;
+
+    navigate(href);
   };
 
-  if (curPath === to) className += " active";
   return (
-    <a href={to} onClick={handleClick} className={`${className}`} {...rest}>
+    <a href={href} onClick={handleClick} className={className} {...rest}>
       {children}
     </a>
   );

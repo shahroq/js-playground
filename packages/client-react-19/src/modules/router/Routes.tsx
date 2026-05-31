@@ -8,6 +8,11 @@ import { CounterPage as CounterPageWReduxTK } from "@/pages/counter/w-reduxtk/Co
 import { CounterPage as CounterPageWZustand } from "@/pages/counter/w-zustand/CounterPage";
 import { DataPage } from "@/pages/comps/DataPage";
 import { FormPage as FormPagePC } from "@/pages/comps/form/plain-controlled/FormPage";
+import { FormPage as FormPagePUC } from "@/pages/comps/form/plain-uncontrolled/FormPage";
+import { FormPage as FormPageWFDAPI } from "@/pages/comps/form/w-formdata-api/FormPage";
+import { FormPage as FormPageWUAS } from "@/pages/comps/form/w-useactionstate/FormPage";
+import { FormPage as FormPageWRHF } from "@/pages/comps/form/w-react-hook-form/FormPage";
+
 import { MiscPage } from "@/pages/comps/MiscPage";
 import { ProductsPage as ProductsPageWRTK } from "@/pages/catalog/w-reduxtk/ProductsPage";
 import { ProductsPage as ProductPageWRQ } from "@/pages/catalog/w-react-query/ProductsPage";
@@ -21,10 +26,10 @@ const routes = [
   { path: "/comps/data", element: <DataPage /> },
   { path: "/comps/form" },
   { path: "/comps/form/plain-controlled", element: <FormPagePC /> },
-  { path: "/comps/form/plain-uncontrolled" },
-  { path: "/comps/form/w-formdata-api" },
-  { path: "/comps/form/w-use-action-state" },
-  { path: "/comps/form/w-react-hook-form" },
+  { path: "/comps/form/plain-uncontrolled", element: <FormPagePUC /> },
+  { path: "/comps/form/w-formdata-api", element: <FormPageWFDAPI /> },
+  { path: "/comps/form/w-useactionstate", element: <FormPageWUAS /> },
+  { path: "/comps/form/w-react-hook-form", element: <FormPageWRHF /> },
   { path: "/comps/form/w-tanstack-form" },
   { path: "/comps/form/w-redux-form" },
   // counter
