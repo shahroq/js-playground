@@ -1,5 +1,6 @@
 import type { Page } from "@gpublic/types/types";
-import { NavBreadcrumb } from "./NavBreadcrumb";
+import { Nav } from "@gpublic/comps";
+import { Link } from "@/modules/router";
 
 type Props = {
   page: Page;
@@ -11,9 +12,12 @@ export function PageTitle({ page }: Props) {
       {page.title && <h1>{page.title}</h1>}
 
       {page.breadcrumb && page.breadcrumb.length > 0 && (
-        <div>
-          <NavBreadcrumb breadcrumb={page.breadcrumb} />
-        </div>
+        <Nav
+          navItems={page.breadcrumb}
+          Link={Link}
+          className="nav nav-breadcrumb"
+          aria-label="breadcrumb"
+        />
       )}
     </div>
   );

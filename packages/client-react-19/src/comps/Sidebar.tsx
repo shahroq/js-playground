@@ -1,9 +1,9 @@
 import type { NavItem } from "@gpublic/types/types";
-import { Nav } from "./Nav";
 import { NavUser } from "./NavUser";
 import site from "@gpublic/json/site.json";
 import { filterNavItems } from "@gpublic/utils/nav";
-import { useNavContext } from "@/modules/router";
+import { Link, useNavContext } from "@/modules/router";
+import { Nav } from "@gpublic/comps/Nav";
 
 let navItems: NavItem[] = site.navSide;
 navItems = filterNavItems(site.navSide, "client-react-19");
@@ -21,7 +21,12 @@ export function Sidebar() {
       </div>
 
       <div className="offcanvas-body py-4">
-        <Nav navItems={navItems} curPath={curPath} className={"nav-vertical"} />
+        <Nav
+          navItems={navItems}
+          curPath={curPath}
+          className={"nav nav-vertical"}
+          Link={Link}
+        />
         <hr />
         <NavUser />
       </div>

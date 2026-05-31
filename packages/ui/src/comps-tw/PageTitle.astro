@@ -1,5 +1,10 @@
 ---
-import NavBreadcrumb from "@/comps-tw/NavBreadcrumb.astro";
+import Nav from "./Nav.astro";
+import type { Page } from "@gpublic/types/types";
+
+type Props = {
+  page: Page;
+};
 
 const { page } = Astro.props;
 ---
@@ -10,9 +15,7 @@ const { page } = Astro.props;
       {page.title && <h1>{page.title}</h1>}
 
       {page.breadcrumb && page.breadcrumb.length > 0 && (
-        <div>
-          <NavBreadcrumb breadcrumb={page.breadcrumb} />
-        </div>
+        <Nav navItems={page.breadcrumb} className="nav nav-breadcrumb" />
       )}
     </div>
   )

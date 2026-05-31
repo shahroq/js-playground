@@ -10,3 +10,4 @@ export * from "./Modal";
 export * from "./ModalV2";
 export * from "./Skeleton";
 export * from "./Counter";
+export * from "./Nav";

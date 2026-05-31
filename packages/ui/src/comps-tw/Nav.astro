@@ -1,0 +1,21 @@
+---
+import type { NavItem } from "@gpublic/types/types";
+import NavItemView from "./NavItemView.astro";
+
+type Props = {
+  navItems: NavItem[];
+  curPath?: string;
+  className: string;
+  level?: number;
+};
+
+const { navItems, curPath, className, level = 0 } = Astro.props;
+---
+
+<ul class={[className].filter(Boolean).join(" ")} data-level={level}>
+  {
+    navItems.map((item, i) => (
+      <NavItemView item={item} curPath={curPath} level={level} />
+    ))
+  }
+</ul>

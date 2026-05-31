@@ -5,14 +5,9 @@ export type NavItem = {
   target?: string[];
 };
 
-export type Crumb = {
-  label: string;
-  path?: string;
-};
-
 export type Page = {
   title: string;
-  breadcrumb?: Crumb[];
+  breadcrumb?: NavItem[];
 };
 
 export type Product = {

@@ -3,7 +3,11 @@
   --bs-nav-link-opacity: 0.75;
 }
 
-/* container */
+/*
+|--------------------------------------------------------------------------
+| Container
+|--------------------------------------------------------------------------
+*/
 .h-container {
   min-height: calc(100vh - var(--header-height));
 }
@@ -21,7 +25,11 @@ main {
   }
 }
 
-/* dropdown: user nav */
+/*
+|--------------------------------------------------------------------------
+| Dropdown: User Nav
+|--------------------------------------------------------------------------
+*/
 .user-nav {
   .dropdown-toggle {
     display: flex;
@@ -40,45 +48,80 @@ main {
       transform: rotate(90deg);
     }
   }
-
-  .dropdown-menu {
-    /*  */
-  }
 }
 
-/* sidebar nav */
-.nav-link {
-  --bs-nav-link-padding-y: 0.3rem;
-  opacity: var(--bs-nav-link-opacity);
+/*
+|--------------------------------------------------------------------------
+| Nav
+|--------------------------------------------------------------------------
+*/
+.nav {
+  /* nav ver */
+  .nav-link {
+    --bs-nav-link-padding-y: 0.3rem;
+    opacity: var(--bs-nav-link-opacity);
 
-  &:hover,
-  &.active {
-    opacity: 1;
-    font-weight: 600;
+    &:hover,
+    &.active {
+      opacity: 1;
+      font-weight: 600;
+    }
   }
-}
-.nav-item {
-  &::marker {
-    content: "";
-    display: none;
-  }
+  .nav-item {
+    &::marker {
+      content: "";
+      display: none;
+    }
 
-  ul {
-    padding-left: 1rem;
+    ul {
+      padding-left: 1rem;
 
-    .nav-item a {
-      border-left: 0.125rem solid var(--bs-nav-link-color);
-      opacity: var(--bs-nav-link-opacity);
+      .nav-item a {
+        border-left: 0.125rem solid var(--bs-nav-link-color);
+        opacity: var(--bs-nav-link-opacity);
 
-      &:hover,
-      &.active {
-        opacity: 1;
+        &:hover,
+        &.active {
+          opacity: 1;
+        }
       }
     }
   }
 }
 
-/* dummy area */
+/*
+|--------------------------------------------------------------------------
+| Breadcrumb
+|--------------------------------------------------------------------------
+*/
+.breadcrumb {
+  .nav-item + .nav-item {
+    padding-left: var(--bs-breadcrumb-item-padding-x);
+  }
+  .nav-item + .nav-item::before {
+    float: left;
+    padding-right: var(--bs-breadcrumb-item-padding-x);
+    color: var(--bs-breadcrumb-divider-color);
+    content: var(--bs-breadcrumb-divider, "/");
+  }
+  .nav-item.active {
+    color: var(--bs-breadcrumb-item-active-color);
+  }
+
+  a.nav-link {
+    text-decoration: underline;
+  }
+
+  span {
+    display: inline-block;
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Dummy Area
+|--------------------------------------------------------------------------
+*/
 .dummy-area {
   background-color: white;
   border: 1px solid oklch(0.929 0.013 255.508);

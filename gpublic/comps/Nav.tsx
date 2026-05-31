@@ -1,35 +1,55 @@
-"use client";
-import Link from "next/link";
-import type { NavItem } from "@gpublic/types/types";
-import { isActivePath } from "@gpublic/utils/nav";
+import type { NavItem } from "../types/types";
+import { isActivePath } from "../utils/nav";
+
+type LinkComponentProps = {
+  href: string;
+  className?: string;
+  children: React.ReactNode;
+};
 
 type Props = {
   navItems: NavItem[];
-  curPath: string;
+  curPath?: string;
   className?: string;
   level?: number;
+  Link: React.ComponentType<LinkComponentProps>;
 };
 
 type PropsNavItem = {
   item: NavItem;
-  curPath: string;
+  curPath?: string;
   level?: number;
+  Link: React.ComponentType<LinkComponentProps>;
 };
 
-export function Nav({ navItems, curPath, className, level = 0 }: Props) {
+export function Nav({
+  navItems,
+  curPath,
+  className,
+  level = 0,
+  Link,
+  ...rest
+}: Props) {
   return (
     <ul
-      className={["nav", className].filter(Boolean).join(" ")}
+      className={[className].filter(Boolean).join(" ")}
       data-level={level}
+      {...rest}
     >
       {navItems.map((item, i) => (
-        <NavItemView key={i} item={item} curPath={curPath} level={level} />
+        <NavItemView
+          key={i}
+          item={item}
+          curPath={curPath}
+          level={level}
+          Link={Link}
+        />
       ))}
     </ul>
   );
 }
 
-function NavItemView({ item, curPath, level = 0 }: PropsNavItem) {
+function NavItemView({ item, curPath, level = 0, Link }: PropsNavItem) {
   const isActive = isActivePath(curPath, item?.path);
   const isDisabled = !item.path;
 
@@ -55,9 +75,10 @@ function NavItemView({ item, curPath, level = 0 }: PropsNavItem) {
       {item.children?.length && (
         <Nav
           navItems={item.children}
-          className="nav-vertical"
+          className="nav nav-vertical"
           level={level + 1}
           curPath={curPath}
+          Link={Link}
         />
       )}
     </li>

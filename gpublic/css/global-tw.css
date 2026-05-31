@@ -67,6 +67,7 @@
   */
   .navbar-brand {
     @apply flex items-center gap-2 text-lg font-semibold;
+
     img {
       @apply size-[35px];
     }
@@ -135,41 +136,35 @@
 
     .form-control-wrapper {
       @apply space-y-1;
-    }
 
-    .form-label {
-      @apply block text-base text-slate-900;
-    }
+      .form-label {
+        @apply block text-base text-slate-900;
+      }
 
-    .form-control {
-      @apply w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200;
-    }
+      .form-control {
+        @apply w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200;
+      }
 
-    .form-select {
-      @apply w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200;
-    }
+      .form-input {
+      }
 
-    .form-text {
-      @apply text-sm text-gray-500;
-    }
+      .form-textarea {
+      }
 
-    .valid-feedback {
-      @apply text-sm text-green-600;
-    }
+      .form-select {
+      }
 
-    .invalid-feedback {
-      @apply text-sm text-red-600;
-    }
+      .form-help {
+        @apply text-sm text-gray-500;
+      }
 
-    /* form controls */
-    .form-control {
-      @apply rounded-md border px-3 py-2 text-sm outline-none;
-    }
-    .form-control-dark {
-      @apply border-white/10 bg-gray-800;
-    }
-    .text-bg-dark {
-      @apply placeholder:text-gray-400 focus:border-yellow-400;
+      .valid-feedback {
+        @apply text-sm text-green-600;
+      }
+
+      .invalid-feedback {
+        @apply text-sm text-red-600;
+      }
     }
 
     /* input group */
@@ -196,38 +191,66 @@
   |--------------------------------------------------------------------------
   */
   .nav {
-    @apply flex ml-3 mt-1.5;
+    @apply flex;
 
+    /* ver nav */
     &.nav-vertical {
-      @apply flex-col space-y-1;
-    }
+      @apply flex-col space-y-1 ml-3 mt-1.5;
 
-    li {
-      @apply my-1 mx-0;
-      a {
-        @apply text-[15px] hover:text-[15px] font-medium leading-[1em] hover:leading-[1em] text-slate-600 hover:text-slate-900 transition-colors;
-        @apply block border-l border-slate-400 hover:border-slate-900 py-0 px-2;
+      li {
+        @apply my-1 mx-0;
+        .nav-link {
+          @apply text-[15px] hover:text-[15px] font-medium leading-[1em] hover:leading-[1em] text-slate-600 hover:text-slate-900 transition-colors;
+          @apply block border-l border-slate-400 hover:border-slate-900 py-0 px-2;
 
-        &.active {
-          @apply text-slate-900;
+          &.active {
+            @apply text-slate-900;
+          }
+          &.disabled {
+            @apply text-slate-400 pointer-events-none;
+          }
         }
-        &.disabled {
-          @apply text-slate-400 pointer-events-none;
+      }
+
+      &[data-level="0"] {
+        @apply ml-0 mt-0;
+        > li {
+          > .nav-link {
+            @apply !text-base;
+            @apply border-0 p-0;
+          }
         }
+      }
+
+      &[data-level="1"] {
+        @apply ml-0;
       }
     }
 
-    &.level-0 {
-      @apply ml-0 mt-0;
-      > li {
-        > a {
-          @apply !text-base;
-          @apply border-0 p-0;
+    /* hor nav */
+
+    /* breadcrumb nav */
+    &.nav-breadcrumb {
+      @apply flex-wrap items-center gap-2 text-sm text-gray-500;
+
+      li {
+        @apply flex items-center gap-2 relative after:content-['>'] after:select-none after:text-gray-400;
+
+        &:last-child {
+          @apply after:hidden text-gray-900;
+        }
+
+        a.nav-link {
+          @apply transition-colors hover:text-gray-900;
+
+          &.active {
+            @apply z-0;
+          }
+          &.disabled {
+            @apply z-0;
+          }
         }
       }
-    }
-    &.level-1 {
-      @apply ml-0;
     }
   }
 
@@ -305,34 +328,6 @@
     h1,
     h2 {
       @apply text-3xl font-semibold tracking-tight text-gray-900;
-    }
-  }
-
-  /*
-  |--------------------------------------------------------------------------
-  | BREADCRUMB
-  |--------------------------------------------------------------------------
-  */
-  .breadcrumb {
-    @apply flex flex-wrap items-center gap-2 text-sm text-gray-500;
-
-    li.breadcrumb-item {
-      @apply flex items-center gap-2 relative after:content-['>'] after:select-none after:text-gray-400;
-
-      &.last {
-        @apply after:hidden;
-      }
-
-      &.active {
-        @apply z-0;
-      }
-
-      a {
-        @apply transition-colors hover:text-gray-900;
-      }
-      span {
-        @apply font-medium text-gray-900;
-      }
     }
   }
 

@@ -1,6 +1,16 @@
 ---
-import NavSidebar from "@/comps-bs/NavSidebar.astro";
+import site from "@gpublic/json/site.json";
+import Nav from "./Nav.astro";
+import type { NavItem } from "@gpublic/types/types";
+import { filterNavItems, prefixNavPaths } from "@gpublic/utils/nav";
 import NavUser from "@/comps-bs/NavUser.astro";
+import NavSidebar from "./NavSidebar.astro";
+
+let navItems: NavItem[] = site.navSide;
+navItems = filterNavItems(navItems, "ui");
+navItems = prefixNavPaths(navItems, "/bs");
+
+const curPath = Astro.url.pathname;
 ---
 
 <div class="offcanvas-md offcanvas-end" tabindex="-1" id="sidebar-menu">
@@ -13,7 +23,11 @@ import NavUser from "@/comps-bs/NavUser.astro";
       data-bs-target="#sidebar-menu"></button>
   </div>
   <div class="offcanvas-body d-flex flex-column pt-lg-3">
-    <NavSidebar />
+    <Nav
+      navItems={navItems}
+      curPath={curPath}
+      className={"nav flex-column mb-auto"}
+    />
     <hr />
     <NavUser />
   </div>

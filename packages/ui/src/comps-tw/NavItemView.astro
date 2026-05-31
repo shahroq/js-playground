@@ -1,0 +1,43 @@
+---
+import type { NavItem } from "@gpublic/types/types";
+import { isActivePath } from "@gpublic/utils/nav";
+import Nav from "./Nav.astro";
+
+type Props = {
+  item: NavItem;
+  curPath?: string;
+  level?: number;
+};
+
+const { item, curPath, level = 0 } = Astro.props;
+const isActive = isActivePath(curPath, item?.path);
+const isDisabled = !item.path;
+---
+
+<li>
+  {
+    item.path ? (
+      <a
+        href={item.path}
+        class={["nav-link", isActive && "active", isDisabled && "disabled"]
+          .filter(Boolean)
+          .join(" ")}
+      >
+        {item.label}
+      </a>
+    ) : (
+      <span class="nav-link disabled">{item.label}</span>
+    )
+  }
+
+  {
+    item.children?.length && (
+      <Nav
+        navItems={item.children}
+        className="nav nav-vertical"
+        level={level + 1}
+        curPath={curPath}
+      />
+    )
+  }
+</li>

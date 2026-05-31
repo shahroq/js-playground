@@ -1,5 +1,5 @@
 ---
-import NavBreadcrumb from "@/comps-bs/NavBreadcrumb.astro";
+import Nav from "./Nav.astro";
 const { page } = Astro.props;
 ---
 
@@ -8,7 +8,7 @@ const { page } = Astro.props;
     <div class="d-flex flex-column py-0 mb-3 border-bottom">
       {page.title && <h1 class="h2">{page.title}</h1>}
       {page.breadcrumb.length > 0 && (
-        <NavBreadcrumb breadcrumb={page.breadcrumb} />
+        <Nav navItems={page.breadcrumb} className="breadcrumb" />
       )}
     </div>
   )
