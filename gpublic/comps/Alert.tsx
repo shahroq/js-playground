@@ -11,21 +11,41 @@ export type Variant =
 type Props = {
   children?: React.ReactNode;
   variant?: Variant;
+  className?: string;
   dismissible?: boolean;
+  messages?: string[] | null | undefined;
   // icon?: string;
 };
 
 export function Alert({
   children,
+  messages,
   variant = "primary",
+  className,
   dismissible = true,
 }: Props) {
   return (
     <div
-      className={`alert alert-${variant} ${dismissible ? "alert-dismissible fade show" : ""}`}
+      className={[
+        "alert",
+        `alert-${variant}`,
+        `${dismissible} || "alert-dismissible fade show"`,
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
       role="alert"
     >
-      <div className="flex-1">{children || ""}</div>
+      <div className="flex-1">
+        <span className="font-semibold">{children || ""}</span>
+        {messages && (
+          <ul>
+            {messages.map((msg, i) => (
+              <li key={i}>{msg}</li>
+            ))}
+          </ul>
+        )}
+      </div>
 
       {dismissible && (
         <button

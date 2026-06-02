@@ -1,7 +1,8 @@
 ---
 import Layout from "@/layouts/LayoutTW.astro";
 import PageTitle from "@/comps-tw/PageTitle.astro";
-import FormControl from "@/comps-tw/FormControl.astro";
+import Form from "@/comps-tw/Form.astro";
+import FormRow from "@/comps-tw/FormRow.astro";
 
 const page = {
   title: "Form",
@@ -13,8 +14,8 @@ const page = {
   <section>
     <PageTitle page={page} />
 
-    <form class="form needs-validation was-validated-">
-      <FormControl
+    <Form>
+      <FormRow
         type="input"
         subtype="email"
         id="email"
@@ -23,22 +24,17 @@ const page = {
         placeholder="Enter your valid email address"
       />
 
-      <FormControl type="input" subtype="text" id="username" label="Username" />
+      <FormRow type="input" subtype="text" id="username" label="Username" />
 
-      <FormControl type="input" subtype="number" id="age" label="Age" />
+      <FormRow type="input" subtype="number" id="age" label="Age" />
 
-      <FormControl
-        type="input"
-        subtype="password"
-        id="password"
-        label="Password"
-      />
+      <FormRow type="input" subtype="password" id="password" label="Password" />
 
-      <FormControl type="textarea" id="about" label="About" />
+      <FormRow type="textarea" id="about" label="About" />
 
-      <FormControl type="select" id="role" label="Role" options="" />
+      <FormRow type="select" id="role" label="Role" options="" />
 
       <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    </Form>
   </section>
 </Layout>

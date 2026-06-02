@@ -4,7 +4,7 @@ import { db } from "@/lib/db";
 import { tasksTable } from "@/data/schema";
 import { PageTitle } from "@/comps";
 import { Page } from "@/gpublic/types/types";
-import Form from "../../Form";
+import FormTask from "../../FormTask";
 import { updateTaskReducer } from "../../actions";
 
 const page: Page = {
@@ -35,7 +35,7 @@ export default async function Update({ params }: Props) {
   return (
     <section>
       <PageTitle page={page} />
-      <Form task={task} action={updateTaskReducer} />
+      <FormTask task={task} action={updateTaskReducer} />
     </section>
   );
 }

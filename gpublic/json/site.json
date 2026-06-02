@@ -11,7 +11,6 @@
     { "label": "Users" },
     {
       "label": "Components",
-
       "children": [
         {
           "label": "Data",
@@ -21,6 +20,10 @@
         {
           "label": "Form",
           "path": "/comps/form",
+          "targets": ["ui"]
+        },
+        {
+          "label": "Form",
           "targets": ["ui", "client-react-19"],
           "children": [
             {
@@ -34,13 +37,13 @@
               "targets": ["client-react-19"]
             },
             {
-              "label": "w/ FormData API",
+              "label": "w/ FormData API (*)",
               "path": "/comps/form/w-formdata-api",
               "targets": ["client-react-19"]
             },
             {
               "label": "w/ useActionState",
-              "path": "/comps/form/w-use-action-state",
+              "path": "/comps/form/w-useactionstate",
               "targets": ["client-react-19"]
             },
             {
@@ -50,12 +53,10 @@
             },
             {
               "label": "w/ TanStack Form",
-              "path": "/comps/form/w-tanstack-form",
               "targets": ["client-react-19"]
             },
             {
               "label": "w/ Redux Form",
-              "path": "/comps/form/w-redux-form",
               "targets": ["client-react-19"]
             }
           ]

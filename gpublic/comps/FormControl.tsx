@@ -42,7 +42,7 @@ export function FormControl(props: Props) {
         <textarea
           name={name}
           id={id || name}
-          className="form-control"
+          className="form-control form-textarea"
           placeholder={placeholder}
           value={value}
           {...rest}
@@ -54,7 +54,7 @@ export function FormControl(props: Props) {
           name={name}
           id={id || name}
           type={subtype || "text"}
-          className="form-control"
+          className="form-control form-input"
           placeholder={placeholder}
           value={value}
           {...rest}
@@ -65,9 +65,8 @@ export function FormControl(props: Props) {
         <select
           name={name}
           id={id || name}
-          className="form-select"
+          className="form-control form-select"
           value={value}
-          // onChange={(e) => onChange?.(e.target.value)}
           {...rest}
         >
           {placeholder && (
@@ -85,7 +84,7 @@ export function FormControl(props: Props) {
       )}
 
       {help && (
-        <div id={commonHelpId} className="form-text">
+        <div id={commonHelpId} className="form-help invalid-feedback">
           {help}
         </div>
       )}

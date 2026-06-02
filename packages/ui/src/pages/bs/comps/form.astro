@@ -1,7 +1,8 @@
 ---
 import Layout from "@/layouts/LayoutBS.astro";
 import PageTitle from "@/comps-bs/PageTitle.astro";
-import FormControl from "@/comps-bs/FormControl.astro";
+import Form from "@/comps-bs/Form.astro";
+import FormRow from "@/comps-bs/FormRow.astro";
 
 const page = {
   title: "Form",
@@ -12,8 +13,8 @@ const page = {
 <Layout>
   <section>
     <PageTitle page={page} />
-    <form class="needs-validation was-validated-">
-      <FormControl
+    <Form>
+      <FormRow
         type="input"
         subtype="email"
         id="email"
@@ -22,20 +23,15 @@ const page = {
         placeholder="Enter your valid email address"
       />
 
-      <FormControl type="input" subtype="text" id="username" label="Username" />
+      <FormRow type="input" subtype="text" id="username" label="Username" />
 
-      <FormControl type="input" subtype="number" id="age" label="Age" />
+      <FormRow type="input" subtype="number" id="age" label="Age" />
 
-      <FormControl
-        type="input"
-        subtype="password"
-        id="password"
-        label="Password"
-      />
+      <FormRow type="input" subtype="password" id="password" label="Password" />
 
-      <FormControl type="select" id="role" label="Role" options="" />
+      <FormRow type="select" id="role" label="Role" options="" />
 
       <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    </Form>
   </section>
 </Layout>

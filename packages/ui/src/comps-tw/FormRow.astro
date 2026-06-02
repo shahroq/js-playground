@@ -2,7 +2,7 @@
 const { props } = Astro;
 ---
 
-<div class="form-control-wrapper">
+<div class="form-row">
   <label for={props.id} class="form-label">{props.label}</label>
 
   {
@@ -20,7 +20,7 @@ const { props } = Astro;
     props.type === "input" && (
       <input
         type={props.subtype}
-        class="form-control"
+        class="form-control form-input"
         id={props.id}
         aria-describedby={`${props.id}-help`}
         placeholder={props.placeholder}
@@ -30,7 +30,7 @@ const { props } = Astro;
 
   {
     props.type === "select" && (
-      <select class="form-select" aria-label="">
+      <select class="form-control form-select" aria-label="">
         <option selected>Open this select menu</option>
         <option value="1">One</option>
         <option value="2">Two</option>
@@ -39,7 +39,5 @@ const { props } = Astro;
     )
   }
 
-  <div id={`${props.id}-help`} class="form-text">{props.help}</div>
-  <!-- <div class="valid-feedback">Looks good!</div>
-  <div class="invalid-feedback">Please choose a username.</div> -->
+  <div id={`${props.id}-help`} class="form-description">{props.help}</div>
 </div>

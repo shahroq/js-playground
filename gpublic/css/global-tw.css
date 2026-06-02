@@ -134,7 +134,7 @@
   .form {
     @apply space-y-2;
 
-    .form-control-wrapper {
+    .form-row {
       @apply space-y-1;
 
       .form-label {
@@ -143,6 +143,10 @@
 
       .form-control {
         @apply w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200;
+
+        &[aria-invalid="true"] {
+          @apply border-red-600;
+        }
       }
 
       .form-input {
@@ -154,16 +158,8 @@
       .form-select {
       }
 
-      .form-help {
+      .form-description {
         @apply text-sm text-gray-500;
-      }
-
-      .valid-feedback {
-        @apply text-sm text-green-600;
-      }
-
-      .invalid-feedback {
-        @apply text-sm text-red-600;
       }
     }
 
@@ -184,7 +180,21 @@
         /* @apply min-w-[160px] flex-1 border-b border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition focus:z-10 focus:border-blue-500 sm:border-b-0 sm:border-r */
       }
     }
+
+    &.valid,
+    &[aria-invalid="false"] {
+      .form-description {
+        @apply text-sm text-green-600;
+      }
+    }
+    &.invalid,
+    &[aria-invalid="true"] {
+      .form-description {
+        @apply text-sm text-red-600;
+      }
+    }
   }
+
   /*
   |--------------------------------------------------------------------------
   | NAV

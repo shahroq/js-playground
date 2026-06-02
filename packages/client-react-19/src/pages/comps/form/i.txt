@@ -1,0 +1,12 @@
+naming convention:
+- formValues: plain onject
+- formData: instance of FormData API
+
+- in the form `action` prop: 
+    - mx: 18-2
+    $ action={formAction} 
+        - it always get passed the formAction
+        - it always receives: formAction(formData: FormData){}
+        - also u can useOpt in the body
+        - from: https://react.dev/reference/react/useActionState#use-with-a-form
+    - if u need async operation, or `dispatchAction` (returned from useActionState), execute it in `formAction` body

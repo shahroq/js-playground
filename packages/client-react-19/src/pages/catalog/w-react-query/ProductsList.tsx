@@ -16,7 +16,7 @@ import {
 } from "@gpublic/comps";
 import type { Product } from "@gpublic/types/types";
 import { useState } from "react";
-import Form from "./Form";
+import FormProduct from "./FormProduct";
 
 export function ProductsList() {
   const [showModal, setShowModal] = useState(false);
@@ -101,17 +101,18 @@ export function ProductsList() {
 
       <div className="flex flex-row-reverse">
         <Button onClick={() => setShowModal(true)}>Add</Button>
-        <Modal
+
+        {/* <Modal
           open={showModal}
           onClose={() => setShowModal(false)}
           title={"Create Product"}
           size="2xl"
         >
-          <Form
+          <FormProduct
             action={createProductReducer}
             onCloseModal={() => setShowModal(false)}
           />
-        </Modal>
+        </Modal> */}
       </div>
 
       <Table data={data} />

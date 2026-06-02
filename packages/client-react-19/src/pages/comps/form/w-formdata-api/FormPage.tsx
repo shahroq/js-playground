@@ -1,15 +1,14 @@
-import { useState, type ChangeEvent, type SubmitEvent } from "react";
 import { PageTitle } from "@/comps";
 import { taskInitValues, type Page, type Task } from "@gpublic/types/types";
-import { options, type FormElement } from "../types";
+import { options } from "../types";
 import { Form, Button } from "@gpublic/comps";
 
 const page: Page = {
-  title: "Plain",
+  title: "w/ FormData API",
   breadcrumb: [
     { label: "Components" },
     { label: "Form" },
-    { label: "Plain (Controlled)" },
+    { label: "w/ FormData API" },
   ],
 };
 
@@ -23,39 +22,32 @@ export function FormPage() {
 }
 
 /**
- * CONTROLLED components → React state is the source of truth
- * use `value` attr
+ * Use FormData API
  */
 function TaskForm() {
-  const [formValues, setFormValues] = useState<Task>(taskInitValues);
+  // local operations: validation etc
+  function formAction(formData: FormData): any | Promise<any> {
+    const entries = Object.fromEntries(formData.entries());
 
-  // Generic handler for any field
-  const handleChange = (e: ChangeEvent<FormElement>) => {
-    // console.log(e.target);
-    const { name, value } = e.target;
-    console.log(name, value);
-    setFormValues((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // console.log(e.target);
+    const formValues: Task = {
+      title: entries.title ?? "",
+      description: entries.description ?? "",
+      category: entries.category ?? "",
+    };
     console.log("formValues:", formValues);
 
-    // reset form if needed
-    if (0) setFormValues(taskInitValues);
-  };
+    // BUT it reset the form!
+  }
 
   return (
-    <Form className="form" onSubmit={handleSubmit}>
+    <Form className="form " action={formAction}>
       <Form.Row>
         <Form.Label htmlFor="title">Title</Form.Label>
         <Form.Input
           type="text"
           name="title"
           id="title"
-          value={formValues.title}
-          onChange={handleChange}
+          defaultValue={taskInitValues.title}
         />
         <Form.Description>{"Enter valid title"}</Form.Description>
       </Form.Row>
@@ -65,8 +57,7 @@ function TaskForm() {
         <Form.Textarea
           name="description"
           id="description"
-          value={formValues.description}
-          onChange={handleChange}
+          defaultValue={taskInitValues.description}
         />
         <Form.Description>{"Enter valid description"}</Form.Description>
       </Form.Row>
@@ -77,8 +68,7 @@ function TaskForm() {
           name="category"
           id="category"
           options={options}
-          value={formValues.category}
-          onChange={handleChange}
+          defaultValue={taskInitValues.category}
         />
         <Form.Description>{"Enter valid description"}</Form.Description>
       </Form.Row>

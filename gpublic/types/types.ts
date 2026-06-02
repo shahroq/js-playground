@@ -10,6 +10,19 @@ export type Page = {
   breadcrumb?: NavItem[];
 };
 
+export type Task = {
+  id?: string | number;
+  title: string;
+  description: string;
+  category: string;
+};
+
+export const taskInitValues: Task = {
+  title: "",
+  description: "",
+  category: "work",
+};
+
 export type Product = {
   id: string | number;
   name: string;

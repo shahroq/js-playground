@@ -1,7 +1,7 @@
 import { PageTitle } from "@/comps";
 import { Page } from "@/gpublic/types/types";
 import { createTaskReducer } from "../actions";
-import Form from "../Form";
+import FormTask from "../FormTask";
 
 const page: Page = {
   title: "Create",
@@ -16,7 +16,7 @@ export default function Create() {
   return (
     <section>
       <PageTitle page={page} />
-      <Form action={createTaskReducer} />
+      <FormTask action={createTaskReducer} />
     </section>
   );
 }
