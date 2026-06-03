@@ -3,7 +3,7 @@ import {
   useState,
   useEffect,
   useContext,
-  type ReactNode,
+  type PropsWithChildren,
 } from "react";
 
 type ContextType = {
@@ -11,13 +11,9 @@ type ContextType = {
   navigate: (path: string) => void;
 };
 
-type Props = {
-  children: ReactNode;
-};
+const RouterContext = createContext<ContextType | null>(null);
 
-const NavContext = createContext<ContextType | null>(null);
-
-function NavProvider({ children }: Props) {
+function RouterProvider({ children }: PropsWithChildren) {
   const [curPath, setCurPath] = useState(window.location.pathname);
 
   useEffect(() => {
@@ -40,15 +36,17 @@ function NavProvider({ children }: Props) {
   };
 
   return (
-    <NavContext.Provider value={contextValue}>{children}</NavContext.Provider>
+    <RouterContext.Provider value={contextValue}>
+      {children}
+    </RouterContext.Provider>
   );
 }
 
-function useNavContext() {
-  const context = useContext(NavContext);
+function useRouterContext() {
+  const context = useContext(RouterContext);
   if (!context)
-    throw new Error("useNavContext must be used inside NavProvider");
+    throw new Error("useRouterContext must be used inside RouterProvider");
   return context;
 }
 
-export { NavProvider, NavContext, useNavContext };
+export { RouterProvider, RouterContext, useRouterContext };

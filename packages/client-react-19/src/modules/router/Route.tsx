@@ -1,5 +1,5 @@
 import { type ReactNode } from "react";
-import { useNavContext } from "./nav-context";
+import { useRouterContext } from "./router-context";
 
 type Props = {
   path: string;
@@ -7,6 +7,6 @@ type Props = {
 };
 
 export function Route({ path, children }: Props) {
-  const { curPath } = useNavContext();
+  const { curPath } = useRouterContext();
   return path === curPath ? children : null;
 }

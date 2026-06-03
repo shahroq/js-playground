@@ -1,5 +1,5 @@
 import type { MouseEvent } from "react";
-import { useNavContext } from "./nav-context";
+import { useRouterContext } from "./router-context";
 
 type Props = {
   children: React.ReactNode;
@@ -8,7 +8,7 @@ type Props = {
 };
 
 export function Link({ href, children, className, ...rest }: Props) {
-  const { navigate } = useNavContext();
+  const { navigate } = useRouterContext();
 
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();

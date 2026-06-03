@@ -2,14 +2,14 @@ import type { NavItem } from "@gpublic/types/types";
 import { NavUser } from "./NavUser";
 import site from "@gpublic/json/site.json";
 import { filterNavItems } from "@gpublic/utils/nav";
-import { Link, useNavContext } from "@/modules/router";
+import { Link, useRouterContext as useRouterContext } from "@/modules/router";
 import { Nav } from "@gpublic/comps/Nav";
 
 let navItems: NavItem[] = site.navSide;
 navItems = filterNavItems(site.navSide, "client-react-19");
 
 export function Sidebar() {
-  const { curPath } = useNavContext();
+  const { curPath } = useRouterContext();
 
   return (
     <div className="offcanvas offcanvas-start" id="sidebar">

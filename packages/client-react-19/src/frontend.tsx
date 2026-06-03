@@ -7,14 +7,14 @@
 
 import { createRoot } from "react-dom/client";
 import { App } from "./App";
-import { NavProvider } from "@/modules/router";
+import { RouterProvider } from "@/modules/router";
 
 function start() {
   const root = createRoot(document.getElementById("root")!);
   root.render(
-    <NavProvider>
+    <RouterProvider>
       <App />
-    </NavProvider>,
+    </RouterProvider>,
   );
 }
 
