@@ -10,6 +10,21 @@ export type Page = {
   breadcrumb?: NavItem[];
 };
 
+export type User = {
+  id?: string | number;
+  email: string;
+  password: string;
+  name?: string;
+  avatar?: string;
+};
+
+export const userInitValues: User = {
+  email: "",
+  password: "",
+  name: "",
+  avatar: "",
+};
+
 export type Task = {
   id?: string | number;
   title: string;

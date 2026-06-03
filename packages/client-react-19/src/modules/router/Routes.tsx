@@ -1,19 +1,23 @@
 import { Route } from "./Route";
 import { HomePage } from "@/pages/HomePage";
 import { DashboardPage } from "@/pages/DashboardPage";
+
+import { AuthPage } from "@/pages/auth/plain/AuthPage";
+
 import { CounterPage } from "@/pages/counter/plain/CounterPage";
 import { CounterPage as CounterPageWContext } from "@/pages/counter/w-context/CounterPage";
 import { CounterPage as CounterPageWReducer } from "@/pages/counter/w-reducer/CounterPage";
 import { CounterPage as CounterPageWReduxTK } from "@/pages/counter/w-reduxtk/CounterPage";
 import { CounterPage as CounterPageWZustand } from "@/pages/counter/w-zustand/CounterPage";
+
 import { DataPage } from "@/pages/comps/DataPage";
+
 import { FormPage as FormPagePC } from "@/pages/comps/form/plain-controlled/FormPage";
 import { FormPage as FormPagePUC } from "@/pages/comps/form/plain-uncontrolled/FormPage";
 import { FormPage as FormPageWFDAPI } from "@/pages/comps/form/w-formdata-api/FormPage";
 import { FormPage as FormPageWUAS } from "@/pages/comps/form/w-useactionstate/FormPage";
 import { FormPage as FormPageWRHF } from "@/pages/comps/form/w-react-hook-form/FormPage";
 
-import { MiscPage } from "@/pages/comps/MiscPage";
 import { ProductsPage as ProductsPageWRTK } from "@/pages/catalog/w-reduxtk/ProductsPage";
 import { ProductsPage as ProductPageWRQ } from "@/pages/catalog/w-react-query/ProductsPage";
 
@@ -22,6 +26,8 @@ type Props = {};
 const routes = [
   { path: "/", element: <HomePage /> },
   { path: "/dashboard", element: <DashboardPage /> },
+  // auth
+  { path: "/auth/plain", element: <AuthPage /> },
   // comps
   { path: "/comps/data", element: <DataPage /> },
   { path: "/comps/form" },

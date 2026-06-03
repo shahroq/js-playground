@@ -8,7 +8,20 @@
   "navSide": [
     { "label": "Home", "path": "/" },
     { "label": "Dashboard", "path": "/dashboard" },
-    { "label": "Users" },
+    {
+      "label": "Auth",
+      "children": [
+        {
+          "label": "Plain",
+          "path": "/auth/plain",
+          "targets": ["client-react-19"]
+        },
+        {
+          "label": "w/ Auth.js",
+          "targets": ["client-react-19"]
+        }
+      ]
+    },
     {
       "label": "Components",
       "children": [
