@@ -1,8 +1,10 @@
 import { useState, type ChangeEvent, type SubmitEvent } from "react";
 import { PageTitle } from "@/comps";
 import { taskInitValues, type Page, type Task } from "@gpublic/types/types";
-import { options, type FormElement } from "../types";
-import { Form, Button } from "@gpublic/comps";
+import { options, type FormElement, type FormFeedback } from "../types";
+import { Form, Button, Alert } from "@gpublic/comps";
+import { taskSchema, validateByZod as v } from "@gpublic/validation";
+import { INITIAL_STATE } from "@/pages/counter/w-reducer/counter-reducer";
 
 const page: Page = {
   title: "Plain",
@@ -28,26 +30,45 @@ export function FormPage() {
  */
 function TaskForm() {
   const [formValues, setFormValues] = useState<Task>(taskInitValues);
+  const [formFeedback, setFormFeedback] = useState<FormFeedback>();
 
   // Generic handler for any field
   const handleChange = (e: ChangeEvent<FormElement>) => {
     // console.log(e.target);
     const { name, value } = e.target;
-    console.log(name, value);
+    // console.log(name, value);
     setFormValues((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // console.log(e.target);
     console.log("formValues:", formValues);
 
+    // validation
+    const vResult = v<Task>(taskSchema, formValues);
+
+    if (!vResult.success) {
+      setFormFeedback({
+        title: "Errors:",
+        // messages: vResult.errors.map((error) => error.message),
+        messages: Object.values(vResult.errors).flat(),
+      });
+      return;
+    }
+
     // reset form if needed
-    if (0) setFormValues(taskInitValues);
+    setFormFeedback(undefined);
+    setFormValues(taskInitValues);
   };
 
   return (
     <Form className="form" onSubmit={handleSubmit}>
+      {formFeedback && (
+        <Alert variant="warning" messages={formFeedback.messages}>
+          {formFeedback.title}
+        </Alert>
+      )}
+
       <Form.Row>
         <Form.Label htmlFor="title">Title</Form.Label>
         <Form.Input

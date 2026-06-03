@@ -5,7 +5,7 @@ import { Form, Button, Alert } from "@gpublic/comps";
 import { taskInitValues, type Page, type Task } from "@gpublic/types/types";
 import { options, type FormFeedback } from "../types";
 // import { rhfTaskValidation as v } from "@gpublic/validation";
-import { zodTaskValidation as v } from "@gpublic/validation";
+import { taskSchema, zodTaskValidation as v } from "@gpublic/validation";
 
 const page: Page = {
   title: "w/ React Hook Form",
@@ -39,17 +39,17 @@ export function TaskForm() {
     defaultValues: taskInitValues,
     mode: "onChange",
     reValidateMode: "onChange",
-    resolver: v?.resolver,
+    resolver: v?.resolver(taskSchema),
   });
 
   const allFieldsTouched =
     touchedFields.title && touchedFields.description && touchedFields.category;
   const hasErrors = Object.keys(errors).length > 0;
-  const showFeedback = isSubmitted || (allFieldsTouched && hasErrors);
+  const showFeedback = hasErrors && (isSubmitted || allFieldsTouched);
 
   const formFeedback: FormFeedback | null = showFeedback
     ? {
-        title: "Fix these errors:",
+        title: "Errors:",
         messages: Object.values(errors)
           .map((err) => err?.message)
           .filter((msg): msg is string => Boolean(msg)),
