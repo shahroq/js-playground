@@ -134,6 +134,14 @@
   .form {
     @apply space-y-2;
 
+    fieldset {
+      @apply space-y-2 border border-gray-300 rounded-md p-4 bg-white shadow-sm;
+    }
+
+    legend {
+      @apply px-4 text-lg font-semibold text-gray-800;
+    }
+
     .form-row {
       @apply space-y-1;
 

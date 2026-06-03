@@ -1,7 +1,16 @@
 ---
-
+const { props } = Astro;
 ---
 
 <form class="form valid- invalid-">
-  <slot />
+  {
+    props.legend ? (
+      <fieldset>
+        <legend>{props.legend}</legend>
+        <slot />
+      </fieldset>
+    ) : (
+      <slot />
+    )
+  }
 </form>

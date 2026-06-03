@@ -2,7 +2,7 @@
 import type { PropsWithChildren, ComponentProps } from "react";
 
 type SelectOption = { label: string; value: string };
-type Props = ComponentProps<"form"> & PropsWithChildren;
+type Props = ComponentProps<"form"> & PropsWithChildren & { legend?: string };
 type PropsFormDescription = ComponentProps<"span">;
 type PropsLabel = ComponentProps<"label">;
 type PropsInput = ComponentProps<"input">;
@@ -11,10 +11,17 @@ type PropsSelect = ComponentProps<"select"> & {
   options?: SelectOption[];
 };
 
-function Form({ children, className, ...rest }: Props) {
+function Form({ children, className, legend, ...rest }: Props) {
   return (
     <form className={[className].filter(Boolean).join(" ")} {...rest}>
-      {children}
+      {legend ? (
+        <fieldset>
+          <legend>{legend}</legend>
+          {children}
+        </fieldset>
+      ) : (
+        children
+      )}
     </form>
   );
 }

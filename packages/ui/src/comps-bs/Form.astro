@@ -1,7 +1,18 @@
 ---
-
+const { props } = Astro;
 ---
 
 <form class="needs-validation was-validated-">
-  <slot />
+  {
+    props.legend ? (
+      <fieldset class="border rounded-3 p-4 shadow-sm">
+        <legend class="float-none w-auto px-3 text-muted fs-6 fw-medium">
+          {props.legend}
+        </legend>
+        <slot />
+      </fieldset>
+    ) : (
+      <slot />
+    )
+  }
 </form>
