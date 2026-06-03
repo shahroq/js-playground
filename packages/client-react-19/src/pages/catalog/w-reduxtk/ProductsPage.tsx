@@ -10,7 +10,7 @@ const page: Page = {
   ],
 };
 
-export function ProductsPage() {
+export default function ProductsPage() {
   return (
     <section>
       <PageTitle page={page} />

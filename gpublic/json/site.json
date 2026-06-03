@@ -31,6 +31,16 @@
           "targets": ["ui", "client-react-19"]
         },
         {
+          "label": "Misc",
+          "path": "/comps/misc",
+          "targets": ["ui", "client-react-19", "client-nextjs-16"]
+        },
+        {
+          "label": "Lazy",
+          "path": "/comps/lazy",
+          "targets": ["client-react-19", "client-nextjs-16"]
+        },
+        {
           "label": "Form",
           "path": "/comps/form",
           "targets": ["ui"]
@@ -73,11 +83,6 @@
               "targets": ["client-react-19"]
             }
           ]
-        },
-        {
-          "label": "Misc",
-          "path": "/comps/misc",
-          "targets": ["ui", "client-react-19", "client-nextjs-16"]
         }
       ]
     },

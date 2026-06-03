@@ -15,7 +15,7 @@ const page: Page = {
 /**
  * Use useActionState
  */
-export function FormPage() {
+export default function FormPage() {
   // local operations: validation etc
   function formAction(formData: FormData): any | Promise<any> {
     const entries = Object.fromEntries(formData.entries());

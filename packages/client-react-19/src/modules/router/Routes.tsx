@@ -1,27 +1,33 @@
+import { lazy, Suspense } from "react";
 import { Route } from "./Route";
-import { HomePage } from "@/pages/HomePage";
-import { DashboardPage } from "@/pages/DashboardPage";
-
-import { AuthPage } from "@/pages/auth/plain/AuthPage";
-
-import { CounterPage } from "@/pages/counter/plain/CounterPage";
-import { CounterPage as CounterPageWContext } from "@/pages/counter/w-context/CounterPage";
-import { CounterPage as CounterPageWReducer } from "@/pages/counter/w-reducer/CounterPage";
-import { CounterPage as CounterPageWReduxTK } from "@/pages/counter/w-reduxtk/CounterPage";
-import { CounterPage as CounterPageWZustand } from "@/pages/counter/w-zustand/CounterPage";
-
-import { DataPage } from "@/pages/comps/DataPage";
-
-import { FormPage as FormPagePC } from "@/pages/comps/form/plain-controlled/FormPage";
-import { FormPage as FormPagePUC } from "@/pages/comps/form/plain-uncontrolled/FormPage";
-import { FormPage as FormPageWFDAPI } from "@/pages/comps/form/w-formdata-api/FormPage";
-import { FormPage as FormPageWUAS } from "@/pages/comps/form/w-useactionstate/FormPage";
-import { FormPage as FormPageWRHF } from "@/pages/comps/form/w-react-hook-form/FormPage";
-
-import { ProductsPage as ProductsPageWRTK } from "@/pages/catalog/w-reduxtk/ProductsPage";
-import { ProductsPage as ProductPageWRQ } from "@/pages/catalog/w-react-query/ProductsPage";
-
-type Props = {};
+import { Spinner } from "@gpublic/comps";
+import { pause } from "@gpublic/utils/pause";
+// Pages
+import HomePage from "@/pages/HomePage";
+import DashboardPage from "@/pages/DashboardPage";
+// auth
+import AuthPage from "@/pages/auth/plain/AuthPage";
+// counter
+import CounterPage from "@/pages/counter/plain/CounterPage";
+import CounterPageWContext from "@/pages/counter/w-context/CounterPage";
+import CounterPageWReducer from "@/pages/counter/w-reducer/CounterPage";
+import CounterPageWReduxTK from "@/pages/counter/w-reduxtk/CounterPage";
+import CounterPageWZustand from "@/pages/counter/w-zustand/CounterPage";
+// comps
+import DataPage from "@/pages/comps/DataPage";
+import MiscPage from "@/pages/comps/MiscPage";
+const LazyPage = lazy(async () => {
+  await pause(2000);
+  return import("@/pages/comps/LazyPage");
+});
+import FormPagePC from "@/pages/comps/form/plain-controlled/FormPage";
+import FormPagePUC from "@/pages/comps/form/plain-uncontrolled/FormPage";
+import FormPageWFDAPI from "@/pages/comps/form/w-formdata-api/FormPage";
+import FormPageWUAS from "@/pages/comps/form/w-useactionstate/FormPage";
+import FormPageWRHF from "@/pages/comps/form/w-react-hook-form/FormPage";
+// catalog
+import ProductsPageWRTK from "@/pages/catalog/w-reduxtk/ProductsPage";
+import ProductPageWRQ from "@/pages/catalog/w-react-query/ProductsPage";
 
 const routes = [
   { path: "/", element: <HomePage /> },
@@ -30,6 +36,15 @@ const routes = [
   { path: "/auth/plain", element: <AuthPage /> },
   // comps
   { path: "/comps/data", element: <DataPage /> },
+  { path: "/comps/misc", element: <MiscPage /> },
+  {
+    path: "/comps/lazy",
+    element: (
+      <Suspense fallback={<Spinner className="spinner-lg" />}>
+        <LazyPage />
+      </Suspense>
+    ),
+  },
   { path: "/comps/form" },
   { path: "/comps/form/plain-controlled", element: <FormPagePC /> },
   { path: "/comps/form/plain-uncontrolled", element: <FormPagePUC /> },
@@ -51,7 +66,7 @@ const routes = [
   // { path: "*", element: <NotFound /> },
 ] as const;
 
-export function Routes({}: Props) {
+export function Routes() {
   return (
     <>
       {routes.map((route) => (

@@ -9,7 +9,7 @@ const page: Page = {
   breadcrumb: [{ label: "Counter", path: "/counter" }, { label: "w/ Reducer" }],
 };
 
-export function CounterPage() {
+export default function CounterPage() {
   return (
     <section>
       <PageTitle page={page} />

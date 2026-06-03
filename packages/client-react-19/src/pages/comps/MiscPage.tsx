@@ -14,7 +14,7 @@ const page: Page = {
   breadcrumb: [{ label: "Components", path: "/comps" }, { label: "Misc" }],
 };
 
-export function MiscPage() {
+export default function MiscPage() {
   return (
     <section>
       <PageTitle page={page} />

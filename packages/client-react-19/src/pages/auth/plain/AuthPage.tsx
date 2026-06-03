@@ -13,7 +13,7 @@ const page: Page = {
   breadcrumb: [{ label: "Auth" }, { label: "Plain" }],
 };
 
-export function AuthPage() {
+export default function AuthPage() {
   return (
     <AuthProvider>
       <section>

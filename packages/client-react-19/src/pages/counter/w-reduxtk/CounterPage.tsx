@@ -12,7 +12,7 @@ const page: Page = {
   breadcrumb: [{ label: "Counter", path: "/counter" }, { label: "w/ ReduxTK" }],
 };
 
-export function CounterPage() {
+export default function CounterPage() {
   return (
     <Provider store={store}>
       <section>

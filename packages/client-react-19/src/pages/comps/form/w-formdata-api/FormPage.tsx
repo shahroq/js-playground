@@ -12,7 +12,7 @@ const page: Page = {
   ],
 };
 
-export function FormPage() {
+export default function FormPage() {
   return (
     <section>
       <PageTitle page={page} />

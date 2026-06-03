@@ -26,7 +26,7 @@ const tasks: Task[] = [
   },
 ];
 
-export function DataPage() {
+export default function DataPage() {
   const data: TableData<Task> = {
     title: "List of tasks",
     records: tasks,

@@ -8,7 +8,7 @@ const page: Page = {
   breadcrumb: [{ label: "Counter", path: "/counter" }, { label: "w/ Context" }],
 };
 
-export function CounterPage() {
+export default function CounterPage() {
   return (
     <CounterProvider>
       <section>

@@ -1,6 +1,6 @@
 import { Hero } from "@gpublic/comps";
 
-export function HomePage() {
+export default function HomePage() {
   return (
     <section>
       <Hero>

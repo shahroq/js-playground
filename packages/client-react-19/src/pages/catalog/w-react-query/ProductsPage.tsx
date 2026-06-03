@@ -32,7 +32,7 @@ const queryClient = new QueryClient({
   },
 });
 
-export function ProductsPage() {
+export default function ProductsPage() {
   return (
     <QueryClientProvider client={queryClient}>
       <section>

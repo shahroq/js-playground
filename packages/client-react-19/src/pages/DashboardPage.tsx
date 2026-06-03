@@ -7,7 +7,7 @@ const page: Page = {
   breadcrumb: [{ label: "Dashboard" }],
 };
 
-export function DashboardPage() {
+export default function DashboardPage() {
   return (
     <section>
       <PageTitle page={page} />
