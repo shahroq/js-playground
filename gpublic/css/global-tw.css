@@ -302,6 +302,36 @@
 
   /*
   |--------------------------------------------------------------------------
+  | Stacked List
+  |--------------------------------------------------------------------------
+  */
+  .stacked-list {
+    @apply divide-y divide-gray-100;
+
+    li {
+      @apply flex justify-between gap-x-6 py-5;
+
+      img {
+        @apply size-12 flex-none rounded-full bg-gray-50;
+      }
+      div {
+        @apply: min-w-0 flex-auto;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5 {
+        @apply text-sm/6 font-semibold text-gray-900;
+      }
+      p {
+        @apply mt-1 truncate text-xs/5 text-gray-500;
+      }
+    }
+  }
+
+  /*
+  |--------------------------------------------------------------------------
   | PAGINATION
   |--------------------------------------------------------------------------
   */
