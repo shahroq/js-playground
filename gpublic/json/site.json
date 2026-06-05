@@ -41,6 +41,11 @@
           "targets": ["client-react-19", "client-nextjs-16"]
         },
         {
+          "label": "Audio",
+          "path": "/comps/audio",
+          "targets": ["client-react-19"]
+        },
+        {
           "label": "Form",
           "path": "/comps/form",
           "targets": ["ui"]

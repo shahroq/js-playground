@@ -20,6 +20,7 @@ const LazyPage = lazy(async () => {
   await pause(2000);
   return import("@/pages/comps/LazyPage");
 });
+import AudioPage from "@/pages/comps/AudioPage";
 import FormPagePC from "@/pages/comps/form/plain-controlled/FormPage";
 import FormPagePUC from "@/pages/comps/form/plain-uncontrolled/FormPage";
 import FormPageWFDAPI from "@/pages/comps/form/w-formdata-api/FormPage";
@@ -45,6 +46,7 @@ const routes = [
       </Suspense>
     ),
   },
+  { path: "/comps/audio", element: <AudioPage /> },
   { path: "/comps/form" },
   { path: "/comps/form/plain-controlled", element: <FormPagePC /> },
   { path: "/comps/form/plain-uncontrolled", element: <FormPagePUC /> },
