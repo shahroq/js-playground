@@ -98,7 +98,10 @@
         { "label": "Plain", "path": "/counter/plain" },
         { "label": "w/ Context", "path": "/counter/w-context" },
         { "label": "w/ Reducer", "path": "/counter/w-reducer" },
-        { "label": "w/ ReduxTK", "path": "/counter/w-reduxtk" },
+        {
+          "label": "w/ Redux Toolkit (RTK)",
+          "path": "/counter/w-redux-toolkit"
+        },
         { "label": "w/ Zustand", "path": "/counter/w-zustand" }
       ]
     },
@@ -108,7 +111,7 @@
       "children": [{ "label": "w/ ORM", "path": "/tasks/w-orm" }]
     },
     {
-      "label": "Catalog",
+      "label": "Catalog (Remote)",
       "targets": ["client-react-19", "client-nextjs-16"],
       "children": [
         {
@@ -121,9 +124,12 @@
           ]
         },
         {
-          "label": "w/ ReduxTK",
+          "label": "w/ Redux Toolkit Query",
           "children": [
-            { "label": "Products", "path": "/catalog/w-reduxtk/products" }
+            {
+              "label": "Products",
+              "path": "/catalog/w-redux-toolkit-query/products"
+            }
           ]
         },
         {

@@ -11,7 +11,7 @@ import AuthPage from "@/pages/auth/plain/AuthPage";
 import CounterPage from "@/pages/counter/plain/CounterPage";
 import CounterPageWContext from "@/pages/counter/w-context/CounterPage";
 import CounterPageWReducer from "@/pages/counter/w-reducer/CounterPage";
-import CounterPageWReduxTK from "@/pages/counter/w-reduxtk/CounterPage";
+import CounterPageWReduxToolkit from "@/pages/counter/w-redux-toolkit/CounterPage";
 import CounterPageWZustand from "@/pages/counter/w-zustand/CounterPage";
 // comps
 import DataPage from "@/pages/comps/DataPage";
@@ -27,7 +27,7 @@ import FormPageWFDAPI from "@/pages/comps/form/w-formdata-api/FormPage";
 import FormPageWUAS from "@/pages/comps/form/w-useactionstate/FormPage";
 import FormPageWRHF from "@/pages/comps/form/w-react-hook-form/FormPage";
 // catalog
-import ProductsPageWRTK from "@/pages/catalog/w-reduxtk/ProductsPage";
+import ProductsPageWRTK from "@/pages/catalog/w-redux-toolkit-query/ProductsPage";
 import ProductPageWRQ from "@/pages/catalog/w-react-query/ProductsPage";
 
 const routes = [
@@ -59,10 +59,13 @@ const routes = [
   { path: "/counter/plain", element: <CounterPage /> },
   { path: "/counter/w-context", element: <CounterPageWContext /> },
   { path: "/counter/w-reducer", element: <CounterPageWReducer /> },
-  { path: "/counter/w-reduxtk", element: <CounterPageWReduxTK /> },
+  { path: "/counter/w-redux-toolkit", element: <CounterPageWReduxToolkit /> },
   { path: "/counter/w-zustand", element: <CounterPageWZustand /> },
   // catalog
-  { path: "/catalog/w-reduxtk/products", element: <ProductsPageWRTK /> },
+  {
+    path: "/catalog/w-redux-toolkit-query/products",
+    element: <ProductsPageWRTK />,
+  },
   { path: "/catalog/w-react-query/products", element: <ProductPageWRQ /> },
 
   // { path: "*", element: <NotFound /> },
