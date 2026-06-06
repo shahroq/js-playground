@@ -15,6 +15,7 @@ import CounterPageWReduxToolkit from "@/pages/counter/w-redux-toolkit/CounterPag
 import CounterPageWZustand from "@/pages/counter/w-zustand/CounterPage";
 // comps
 import DataPage from "@/pages/comps/DataPage";
+import ModalPage from "@/pages/comps/ModalPage";
 import MiscPage from "@/pages/comps/MiscPage";
 const LazyPage = lazy(async () => {
   await pause(2000);
@@ -37,6 +38,7 @@ const routes = [
   { path: "/auth/plain", element: <AuthPage /> },
   // comps
   { path: "/comps/data", element: <DataPage /> },
+  { path: "/comps/modal", element: <ModalPage /> },
   { path: "/comps/misc", element: <MiscPage /> },
   {
     path: "/comps/lazy",

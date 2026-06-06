@@ -5,8 +5,10 @@ import {
   createContext,
   useContext,
   useState,
-  type ReactNode,
+  useMemo,
   cloneElement,
+  type ReactNode,
+  type ReactElement,
   type PropsWithChildren,
 } from "react";
 import { createPortal } from "react-dom";
@@ -17,18 +19,31 @@ type Size = "sm" | "md" | "lg" | "xl" | "2xl" | "4xl";
 type Props = PropsWithChildren<{
   title?: ReactNode;
   size?: Size;
+
   closeOnBackdrop?: boolean;
+  closeOnEscape?: boolean;
+
+  // controlled
+  openName?: string;
+
+  // uncontrolled support
+  defaultOpenName?: string;
+  onOpenChange?: (name: string) => void;
 }>;
 type PropsTrigger = PropsWithChildren<{ windowName: string }>;
 type PropsWindow = PropsWithChildren<{ name: string }>;
 
 type ContextValues = {
-  openName: string;
+  openedModalName: string;
+
   close: () => void;
   open: (name: string) => void;
+
   title?: ReactNode;
   size: Size;
+
   closeOnBackdrop?: boolean;
+  closeOnEscape: boolean;
 };
 
 const sizeClasses = {
@@ -57,20 +72,49 @@ function Modal({
   children,
   title,
   size = "2xl",
+
   closeOnBackdrop = true,
+  closeOnEscape = true,
+
+  defaultOpenName = "",
+  openName,
+  onOpenChange,
 }: Props) {
-  const [openName, setOpenName] = useState("");
-  const close = () => setOpenName("");
-  const open = setOpenName;
+  const isControlled = openName !== undefined;
+
+  const [internalOpenName, setInternalOpenName] = useState(defaultOpenName);
+  const openedModalName = isControlled ? openName : internalOpenName;
+
+  const open = useCallback(
+    (name: string) => {
+      if (!isControlled) {
+        setInternalOpenName(name);
+      }
+
+      onOpenChange?.(name);
+    },
+    [isControlled, onOpenChange],
+  );
+
+  const close = useCallback(() => {
+    if (!isControlled) setInternalOpenName("");
+
+    onOpenChange?.("");
+  }, [isControlled, onOpenChange]);
+
   const handleEscape = useCallback(
     (event: KeyboardEvent) => {
-      if (event.key === "Escape" && !event.defaultPrevented) close();
+      if (!closeOnEscape) return;
+
+      if (event.key === "Escape" && !event.defaultPrevented) {
+        close();
+      }
     },
-    [close],
+    [close, closeOnEscape],
   );
 
   useEffect(() => {
-    if (!openName) return;
+    if (!openedModalName) return;
 
     document.addEventListener("keydown", handleEscape);
     const originalOverflow = document.body.style.overflow;
@@ -80,16 +124,23 @@ function Modal({
       document.removeEventListener("keydown", handleEscape);
       document.body.style.overflow = originalOverflow;
     };
-  }, [open, handleEscape]);
+  }, [openedModalName, handleEscape]);
 
-  const contextValue: ContextValues = {
-    openName,
-    open,
-    close,
-    title,
-    size,
-    closeOnBackdrop,
-  };
+  const contextValue: ContextValues = useMemo<ContextValues>(
+    () => ({
+      openedModalName,
+
+      open,
+      close,
+
+      title,
+      size,
+
+      closeOnBackdrop,
+      closeOnEscape,
+    }),
+    [openedModalName, open, close, title, size, closeOnBackdrop, closeOnEscape],
+  );
 
   return (
     <ModalContext.Provider value={contextValue}>
@@ -102,32 +153,52 @@ function Modal({
 function Trigger({ children, windowName }: PropsTrigger) {
   const { open } = useModalContext();
 
-  return cloneElement(children, { onClick: () => open(windowName) });
+  const child = children as ReactElement<any>;
+
+  return cloneElement(child, {
+    ...child.props,
+    onClick: (e: React.MouseEvent) => {
+      child.props?.onClick?.(e);
+
+      if (!e.defaultPrevented) {
+        open(windowName);
+      }
+    },
+  });
 }
 function Window({ children, name }: PropsWindow) {
-  const { openName, close, size, title, closeOnBackdrop } = useModalContext();
+  const { openedModalName, close, title, size, closeOnBackdrop } =
+    useModalContext();
 
   // SSR safety for Next.js
   if (typeof document === "undefined") return null;
 
-  if (name !== openName) return null;
+  if (openedModalName !== name) return null;
 
   return createPortal(
     <div
       className={cn(`modal`, sizeClasses[size])}
-      aria-modal="true"
       role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
     >
       <div
         className="modal-backdrop"
         onClick={() => {
-          if (closeOnBackdrop) close();
+          if (!closeOnBackdrop) return;
+
+          close();
         }}
-      ></div>
+      />
       <div className="modal-content">
-        <header className="">
+        <header>
           <h2 id="modal-title">{title}</h2>
-          <button className="btn-close" onClick={close}>
+          <button
+            type="button"
+            className="btn-close"
+            onClick={close}
+            aria-label="Close modal"
+          >
             X
           </button>
         </header>
@@ -151,4 +222,4 @@ Modal.Window = Window;
 Modal.Content = Content;
 Modal.Footer = Footer;
 
-export { Modal as ModalV2 };
+export { Modal as ModalV2, useModalContext };
