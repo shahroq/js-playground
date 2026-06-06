@@ -1,38 +1,19 @@
 "use client";
-import { createContext, useContext, type ReactNode } from "react";
-import { Button } from "./Button";
+import { type PropsWithChildren } from "react";
 
-type Props = {
-  children: ReactNode;
-  className?: string;
-};
-
-type ContextValues = {};
-
-const HeroContext = createContext<ContextValues | null>(null);
-function useHero() {
-  const context = useContext(HeroContext);
-  if (context === null)
-    throw new Error("useHero must be used within a provider");
-
-  return context;
-}
+type Props = PropsWithChildren & { className?: string };
 
 // parent comp
 function Hero({ children, className }: Props) {
-  const contextValue: ContextValues = {};
-
   return (
-    <HeroContext.Provider value={contextValue}>
-      <div className={[`hero`, className].filter(Boolean).join(" ")}>
-        {children}
-      </div>
-    </HeroContext.Provider>
+    <div className={[`hero`, className].filter(Boolean).join(" ")}>
+      {children}
+    </div>
   );
 }
 
-// child comps
-function HeroTitle({ children, className }: Props) {
+// sub comps
+function Title({ children, className }: Props) {
   return (
     <h2 className={[`title`, className].filter(Boolean).join(" ")}>
       {children}
@@ -40,7 +21,7 @@ function HeroTitle({ children, className }: Props) {
   );
 }
 
-function HeroContent({ children, className }: Props) {
+function Content({ children, className }: Props) {
   return (
     <div className={[`content`, className].filter(Boolean).join(" ")}>
       {children}
@@ -48,20 +29,8 @@ function HeroContent({ children, className }: Props) {
   );
 }
 
-function HeroButton({ children, className, ...rest }: Props) {
-  return (
-    <Button
-      className={[`btn-primary`, className].filter(Boolean).join(" ")}
-      {...rest}
-    >
-      {children}
-    </Button>
-  );
-}
-
 // add child comps as props of parent comp
-Hero.Title = HeroTitle;
-Hero.Content = HeroContent;
-Hero.Button = HeroButton;
+Hero.Title = Title;
+Hero.Content = Content;
 
 export { Hero };

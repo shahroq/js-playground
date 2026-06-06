@@ -61,12 +61,12 @@ export default function MiscPage() {
           Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </Hero.Content>
         <div className="action">
-          <Hero.Button onClick={() => console.log("Primary Clicked")}>
+          <Button onClick={() => console.log("Primary Clicked")}>
             Primary
-          </Hero.Button>
-          <Hero.Button className={"btn-secondary"} onClick={console.log}>
+          </Button>
+          <Button className={"btn-secondary"} onClick={console.log}>
             Secondary
-          </Hero.Button>
+          </Button>
         </div>
       </Hero>
 
