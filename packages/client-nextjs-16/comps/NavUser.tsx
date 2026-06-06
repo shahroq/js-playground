@@ -1,38 +1,25 @@
+import Image from "next/image";
 import site from "@gpublic/json/site.json";
 import avatar from "@gpublic/img/avatar.png";
+import { Button, Item } from "@/gpublic/comps";
 
 const user = site.user;
 
 export function NavUser() {
   return (
-    <div className="dropdown user-nav">
-      <a
-        href="#"
-        className="dropdown-toggle"
-        data-toggle="dropdown"
-        aria-expanded="false"
-      >
-        <img src={avatar.src} alt={`/${user.name}`} className="avatar" />
-
-        <dl>
-          <dt>{user.name}</dt>
-          <dd>{user.email}</dd>
-        </dl>
-      </a>
-      <ul className="dropdown-menu">
-        <li>
-          <a href="#">Settings</a>
-        </li>
-        <li>
-          <a href="#">Profile</a>
-        </li>
-        <li>
-          <hr className="sm" />
-        </li>
-        <li>
-          <a href="#">Sign out</a>
-        </li>
-      </ul>
-    </div>
+    <Item className="px-0 user-nav">
+      <Item.Content className="flex-none ">
+        <Image src={avatar} className="avatar" alt="Avatar" />
+      </Item.Content>
+      <Item.Content>
+        <Item.Title>{user.name}</Item.Title>
+        <Item.Description>{user.email}</Item.Description>
+      </Item.Content>
+      <Item.Content className="flex-none">
+        <Button className="btn-icon" onClick={console.log}>
+          <i className="icon-kebab" />
+        </Button>
+      </Item.Content>
+    </Item>
   );
 }
