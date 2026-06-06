@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  type PropsWithChildren,
+  type ReactNode,
+} from "react";
 
 type ContextType = {
   count: number;
@@ -6,13 +12,9 @@ type ContextType = {
   inc: () => void;
 };
 
-type Props = {
-  children: ReactNode;
-};
-
 const CounterContext = createContext<ContextType | null>(null);
 
-function CounterProvider({ children }: Props) {
+function CounterProvider({ children }: PropsWithChildren) {
   const [count, setCount] = useState(0);
 
   const dec = () => setCount(count - 1);

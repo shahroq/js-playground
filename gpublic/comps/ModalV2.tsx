@@ -7,28 +7,20 @@ import {
   useState,
   type ReactNode,
   cloneElement,
+  type PropsWithChildren,
 } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "../utils";
 
 type Size = "sm" | "md" | "lg" | "xl" | "2xl" | "4xl";
 
-type Props = {
-  children: ReactNode;
+type Props = PropsWithChildren<{
   title?: ReactNode;
   size?: Size;
   closeOnBackdrop?: boolean;
-};
-type PropsTrigger = {
-  children: ReactNode;
-  windowName: string;
-};
-type PropsWindow = {
-  children: ReactNode;
-  name: string;
-};
-type PropsContent = { children: ReactNode };
-type PropsFooter = { children: ReactNode };
+}>;
+type PropsTrigger = PropsWithChildren<{ windowName: string }>;
+type PropsWindow = PropsWithChildren<{ name: string }>;
 
 type ContextValues = {
   openName: string;
@@ -48,9 +40,12 @@ const sizeClasses = {
   "4xl": "max-w-4xl",
 };
 
+// TODO:
+// add focus trapping
+
 // 1. Create a context & its hook
 const ModalContext = createContext<ContextValues | null>(null);
-function useModal() {
+function useModalContext() {
   const context = useContext(ModalContext);
   if (context === null)
     throw new Error("useDialog must be used within a provider");
@@ -58,7 +53,12 @@ function useModal() {
   return context;
 }
 
-function Modal({ children, title, size = "2xl", closeOnBackdrop }: Props) {
+function Modal({
+  children,
+  title,
+  size = "2xl",
+  closeOnBackdrop = true,
+}: Props) {
   const [openName, setOpenName] = useState("");
   const close = () => setOpenName("");
   const open = setOpenName;
@@ -98,14 +98,14 @@ function Modal({ children, title, size = "2xl", closeOnBackdrop }: Props) {
   );
 }
 
-// 3. Create child components to help implementing the common task
+// 3. Create sub components to help implementing the common task
 function Trigger({ children, windowName }: PropsTrigger) {
-  const { open } = useModal();
+  const { open } = useModalContext();
 
   return cloneElement(children, { onClick: () => open(windowName) });
 }
 function Window({ children, name }: PropsWindow) {
-  const { openName, close, size, title, closeOnBackdrop } = useModal();
+  const { openName, close, size, title, closeOnBackdrop } = useModalContext();
 
   // SSR safety for Next.js
   if (typeof document === "undefined") return null;
@@ -138,10 +138,10 @@ function Window({ children, name }: PropsWindow) {
   );
 }
 
-function Content({ children }: PropsContent) {
+function Content({ children }: PropsWithChildren) {
   return <section>{children}</section>;
 }
-function Footer({ children }: PropsFooter) {
+function Footer({ children }: PropsWithChildren) {
   return <footer>{children}</footer>;
 }
 
