@@ -84,6 +84,11 @@
     -30px 0;
 }
 
+/* avatar */
+@utility avatar {
+  @apply rounded-full size-10;
+}
+
 @layer components {
   /*
   |--------------------------------------------------------------------------

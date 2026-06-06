@@ -12,7 +12,7 @@ export function NavUser() {
         data-toggle="dropdown"
         aria-expanded="false"
       >
-        <img src={avatar} alt={`/${user.name}`} width="32" height="32" />
+        <img src={avatar} alt={`/${user.name}`} className="avatar" />
 
         <dl>
           <dt>{user.name}</dt>
