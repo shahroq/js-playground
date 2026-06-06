@@ -6,8 +6,10 @@ import {
   Hero,
   Counter,
   ModalV2,
+  Item,
 } from "@gpublic/comps";
 import { PageTitle } from "@/comps";
+import avatar2 from "@gpublic/img/avatar-2.png";
 
 const page: Page = {
   title: "Misc",
@@ -18,6 +20,25 @@ export default function MiscPage() {
   return (
     <section>
       <PageTitle page={page} />
+
+      {/* Item */}
+      <Item variant="muted">
+        <Item.Content className="flex-none ">
+          <img src={avatar2} className="avatar" />
+        </Item.Content>
+        <Item.Content>
+          <Item.Title>Default Variant</Item.Title>
+          <Item.Description>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+          </Item.Description>
+        </Item.Content>
+        <Item.Content className="flex-none">
+          <Button as="a" className="btn-icon" onClick={console.log}>
+            <i className="icon-kebab" />
+          </Button>
+        </Item.Content>
+      </Item>
+      <hr />
 
       {/* Modal */}
       <ModalV2 title="Dummy" size="sm" closeOnBackdrop>
