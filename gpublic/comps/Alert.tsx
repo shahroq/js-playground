@@ -1,3 +1,5 @@
+"use client";
+import { useState } from "react";
 import { cn } from "../utils";
 
 export type Variant =
@@ -26,6 +28,9 @@ export function Alert({
   className,
   dismissible = true,
 }: Props) {
+  const [visible, setVisible] = useState(true);
+  if (!visible) return null;
+
   return (
     <div
       className={cn(
@@ -53,6 +58,7 @@ export function Alert({
           className="btn-close"
           data-dismiss="alert"
           aria-label="Close"
+          onClick={() => setVisible(false)}
         >
           X
         </button>
