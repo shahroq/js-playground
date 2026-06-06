@@ -1,5 +1,5 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { pause } from "@gpublic/utils/pause";
+import { pause } from "@gpublic/utils";
 import { PageTitle } from "@/comps";
 import { Form, Button, Alert } from "@gpublic/comps";
 import { taskInitValues, type Page, type Task } from "@gpublic/types/types";

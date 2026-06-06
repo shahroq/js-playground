@@ -1,6 +1,7 @@
 "use client";
 import { useCallback, useEffect, useRef, type ReactNode } from "react";
 import { createPortal } from "react-dom";
+import { cn } from "../utils";
 
 type Props = {
   open: boolean;
@@ -62,7 +63,7 @@ export function Modal({
 
   return createPortal(
     <div
-      className={[`modal`, sizeClasses[size]].filter(Boolean).join(" ")}
+      className={cn(`modal`, sizeClasses[size])}
       aria-modal="true"
       role="dialog"
     >

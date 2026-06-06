@@ -1,3 +1,4 @@
+import { cn } from "../utils";
 import { Spinner } from "./Spinner";
 
 type Props = {
@@ -22,9 +23,7 @@ export function Button({
     <Component
       role={Component === "button" ? `button` : "link"}
       data-testid="btn"
-      className={[`btn`, className ? `${className}` : `btn-primary`]
-        .filter(Boolean)
-        .join(" ")}
+      className={cn(`btn`, className ? `${className}` : `btn-primary`)}
       disabled={disabled || loading}
       {...rest}
     >

@@ -1,7 +1,7 @@
 import type { NavItem } from "@gpublic/types/types";
 import { NavUser } from "./NavUser";
 import site from "@gpublic/json/site.json";
-import { filterNavItems } from "@gpublic/utils/nav";
+import { filterNavItems } from "@gpublic/utils";
 import { Link, useRouterContext as useRouterContext } from "@/modules/router";
 import { Nav } from "@gpublic/comps/Nav";
 

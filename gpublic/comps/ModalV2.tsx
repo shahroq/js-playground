@@ -9,6 +9,7 @@ import {
   cloneElement,
 } from "react";
 import { createPortal } from "react-dom";
+import { cn } from "../utils";
 
 type Size = "sm" | "md" | "lg" | "xl" | "2xl" | "4xl";
 
@@ -113,7 +114,7 @@ function Window({ children, name }: PropsWindow) {
 
   return createPortal(
     <div
-      className={[`modal`, sizeClasses[size]].filter(Boolean).join(" ")}
+      className={cn(`modal`, sizeClasses[size])}
       aria-modal="true"
       role="dialog"
     >

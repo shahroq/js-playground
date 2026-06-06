@@ -1,3 +1,5 @@
+import { cn } from "../utils";
+
 type Props = {
   children?: React.ReactNode;
   className?: string;
@@ -8,7 +10,7 @@ export function DummyBox({ children, className }: Props) {
     <div
       role="contentinfo"
       data-testid="dummy-area"
-      className={["dummy-area", className].filter(Boolean).join(" ")}
+      className={cn("dummy-area", className)}
     >
       {children || ""}
     </div>

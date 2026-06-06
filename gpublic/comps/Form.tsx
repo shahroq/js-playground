@@ -1,5 +1,6 @@
 "use client";
 import type { PropsWithChildren, ComponentProps } from "react";
+import { cn } from "../utils";
 
 type SelectOption = { label: string; value: string };
 type Props = ComponentProps<"form"> & PropsWithChildren & { legend?: string };
@@ -13,7 +14,7 @@ type PropsSelect = ComponentProps<"select"> & {
 
 function Form({ children, className, legend, ...rest }: Props) {
   return (
-    <form className={[className].filter(Boolean).join(" ")} {...rest}>
+    <form className={cn(className)} {...rest}>
       {legend ? (
         <fieldset>
           <legend>{legend}</legend>
@@ -31,19 +32,12 @@ function FormRow({ children }: PropsWithChildren) {
 }
 
 function FormDescription({ children, className }: PropsFormDescription) {
-  return (
-    <span className={["form-description", className].filter(Boolean).join(" ")}>
-      {children}
-    </span>
-  );
+  return <span className={cn("form-description", className)}>{children}</span>;
 }
 
 function Label({ children, className, ...rest }: PropsLabel) {
   return (
-    <label
-      className={["form-label", className].filter(Boolean).join(" ")}
-      {...rest}
-    >
+    <label className={cn("form-label", className)} {...rest}>
       {children}
     </label>
   );
@@ -53,9 +47,7 @@ function Input({ type = "text", className, ...rest }: PropsInput) {
   return (
     <input
       type={type}
-      className={["form-control form-input", className]
-        .filter(Boolean)
-        .join(" ")}
+      className={cn("form-control form-input", className)}
       {...rest}
     />
   );
@@ -64,9 +56,7 @@ function Input({ type = "text", className, ...rest }: PropsInput) {
 function Textarea({ className, ...rest }: PropsTextarea) {
   return (
     <textarea
-      className={["form-control form-textarea", className]
-        .filter(Boolean)
-        .join(" ")}
+      className={cn("form-control form-textarea", className)}
       {...rest}
     />
   );
@@ -74,12 +64,7 @@ function Textarea({ className, ...rest }: PropsTextarea) {
 
 function Select({ options, className, children, ...rest }: PropsSelect) {
   return (
-    <select
-      className={["form-control form-select", className]
-        .filter(Boolean)
-        .join(" ")}
-      {...rest}
-    >
+    <select className={cn("form-control form-select", className)} {...rest}>
       {options?.map((option) => (
         <option key={option.value} value={option.value}>
           {option.label}

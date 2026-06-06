@@ -1,3 +1,5 @@
+import { cn } from "../utils";
+
 export type Variant =
   | "primary"
   | "secondary"
@@ -26,14 +28,12 @@ export function Alert({
 }: Props) {
   return (
     <div
-      className={[
+      className={cn(
         "alert",
         `alert-${variant}`,
         `${dismissible} || "alert-dismissible fade show"`,
         className,
-      ]
-        .filter(Boolean)
-        .join(" ")}
+      )}
       role="alert"
     >
       <div className="flex-1">

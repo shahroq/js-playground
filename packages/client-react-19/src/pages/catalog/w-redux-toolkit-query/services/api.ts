@@ -5,11 +5,11 @@ import type {
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query";
 import type { RootState } from "../store";
-import { pause } from "@gpublic/utils/pause";
+import { pause } from "@gpublic/utils";
 
 const baseUrl = "http://localhost:3009";
 const maxRetries = 2;
-const delay = 1500;
+const delay = 500;
 
 // Create our baseQuery instance
 const baseQuery = fetchBaseQuery({

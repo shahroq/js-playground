@@ -1,5 +1,5 @@
 import type { NavItem } from "../types/types";
-import { isActivePath } from "../utils/nav";
+import { cn, isActivePath } from "../utils";
 
 type LinkComponentProps = {
   href: string;
@@ -31,11 +31,7 @@ export function Nav({
   ...rest
 }: Props) {
   return (
-    <ul
-      className={[className].filter(Boolean).join(" ")}
-      data-level={level}
-      {...rest}
-    >
+    <ul className={cn(className)} data-level={level} {...rest}>
       {navItems.map((item, i) => (
         <NavItemView
           key={i}
@@ -58,13 +54,11 @@ function NavItemView({ item, curPath, level = 0, Link }: PropsNavItem) {
       {item.path ? (
         <Link
           href={item.path}
-          className={[
+          className={cn(
             "nav-link",
             isActive && "active",
             isDisabled && "disabled",
-          ]
-            .filter(Boolean)
-            .join(" ")}
+          )}
         >
           {item.label}
         </Link>

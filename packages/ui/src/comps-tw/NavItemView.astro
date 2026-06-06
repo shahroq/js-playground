@@ -1,6 +1,6 @@
 ---
 import type { NavItem } from "@gpublic/types/types";
-import { isActivePath } from "@gpublic/utils/nav";
+import { isActivePath, cn } from "@gpublic/utils";
 import Nav from "./Nav.astro";
 
 type Props = {
@@ -19,9 +19,7 @@ const isDisabled = !item.path;
     item.path ? (
       <a
         href={item.path}
-        class={["nav-link", isActive && "active", isDisabled && "disabled"]
-          .filter(Boolean)
-          .join(" ")}
+        class={cn("nav-link", isActive && "active", isDisabled && "disabled")}
       >
         {item.label}
       </a>

@@ -1,9 +1,5 @@
 "use client";
-import {
-  type SoundSource,
-  type SoundOptions,
-  playSound,
-} from "../utils/play-sound";
+import { type SoundSource, type SoundOptions, playSound } from "../utils";
 import { useState, type PropsWithChildren } from "react";
 import { Button } from "./Button";
 

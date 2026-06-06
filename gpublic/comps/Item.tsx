@@ -1,5 +1,6 @@
 "use client";
 import { type PropsWithChildren } from "react";
+import { cn } from "../utils";
 
 type Props = PropsWithChildren<{
   as?: React.ElementType;
@@ -17,36 +18,20 @@ function Item({
   variant = "default",
 }: Props) {
   return (
-    <Component
-      className={[`item`, className, `item-${variant}`]
-        .filter(Boolean)
-        .join(" ")}
-    >
+    <Component className={cn(`item`, className, `item-${variant}`)}>
       {children}
     </Component>
   );
 }
 
 function Content({ children, className }: PropsWithClassName) {
-  return (
-    <div className={[`item-content`, className].filter(Boolean).join(" ")}>
-      {children}
-    </div>
-  );
+  return <div className={cn(`item-content`, className)}>{children}</div>;
 }
 function Title({ children, className }: PropsWithClassName) {
-  return (
-    <p className={[`item-title`, className].filter(Boolean).join(" ")}>
-      {children}
-    </p>
-  );
+  return <p className={cn(`item-title`, className)}>{children}</p>;
 }
 function Description({ children, className }: PropsWithClassName) {
-  return (
-    <p className={[`item-description`, className].filter(Boolean).join(" ")}>
-      {children}
-    </p>
-  );
+  return <p className={cn(`item-description`, className)}>{children}</p>;
 }
 
 // add sub comps as props of parent comp

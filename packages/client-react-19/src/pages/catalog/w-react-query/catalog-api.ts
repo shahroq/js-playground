@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import type { Product } from "@gpublic/types/types";
-import { pause } from "@gpublic/utils/pause";
+import { pause } from "@gpublic/utils";
 import type { FormState } from "./types";
 
 const pauseTime = process.env.NODE_ENV === "development" ? 500 : 0;
