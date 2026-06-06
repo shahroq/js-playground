@@ -1,14 +1,13 @@
 "use client";
 import { type PropsWithChildren } from "react";
 import { cn } from "../utils";
+import type { PropsWithChildrenAndCN } from "../types/types";
 
 type Props = PropsWithChildren<{
   as?: React.ElementType;
   className?: string;
   variant?: "default" | "outline" | "muted";
 }>;
-
-type PropsWithClassName = PropsWithChildren<{ className?: string }>;
 
 // parent comp
 function Item({
@@ -24,13 +23,13 @@ function Item({
   );
 }
 
-function Content({ children, className }: PropsWithClassName) {
+function Content({ children, className }: PropsWithChildrenAndCN) {
   return <div className={cn(`item-content`, className)}>{children}</div>;
 }
-function Title({ children, className }: PropsWithClassName) {
+function Title({ children, className }: PropsWithChildrenAndCN) {
   return <p className={cn(`item-title`, className)}>{children}</p>;
 }
-function Description({ children, className }: PropsWithClassName) {
+function Description({ children, className }: PropsWithChildrenAndCN) {
   return <p className={cn(`item-description`, className)}>{children}</p>;
 }
 

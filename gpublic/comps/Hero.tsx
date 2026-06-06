@@ -1,20 +1,18 @@
 "use client";
-import { type PropsWithChildren } from "react";
 import { cn } from "../utils";
-
-type Props = PropsWithChildren & { className?: string };
+import type { PropsWithChildrenAndCN } from "../types/types";
 
 // parent comp
-function Hero({ children, className }: Props) {
+function Hero({ children, className }: PropsWithChildrenAndCN) {
   return <div className={cn(`hero`, className)}>{children}</div>;
 }
 
 // sub comps
-function Title({ children, className }: Props) {
+function Title({ children, className }: PropsWithChildrenAndCN) {
   return <h2 className={cn(`title`, className)}>{children}</h2>;
 }
 
-function Content({ children, className }: Props) {
+function Content({ children, className }: PropsWithChildrenAndCN) {
   return <div className={cn(`content`, className)}>{children}</div>;
 }
 

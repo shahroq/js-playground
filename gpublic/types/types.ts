@@ -1,3 +1,8 @@
+import type { PropsWithChildren } from "react";
+
+export type PropsWithCN = { className?: string };
+export type PropsWithChildrenAndCN = PropsWithChildren & PropsWithCN;
+
 export type NavItem = {
   label: string;
   path?: string;

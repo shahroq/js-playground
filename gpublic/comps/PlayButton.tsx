@@ -3,11 +3,11 @@ import { type SoundSource, type SoundOptions, playSound } from "../utils";
 import { useState, type PropsWithChildren } from "react";
 import { Button } from "./Button";
 
-type Props = {
+type Props = PropsWithChildren<{
   src: SoundSource;
   className?: string;
   option?: SoundOptions;
-} & PropsWithChildren;
+}>;
 
 export function PlayButton({ src, children = "Play", className }: Props) {
   const [playing, setPlaying] = useState(false);
