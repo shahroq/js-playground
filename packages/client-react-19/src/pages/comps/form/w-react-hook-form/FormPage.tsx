@@ -94,7 +94,7 @@ export function TaskForm() {
           {...register("title", v.rules?.title)}
           aria-invalid={!!errors.title}
         />
-        {errors.title && (
+        {errors?.title && (
           <Form.Description>{errors.title.message}</Form.Description>
         )}
       </Form.Row>
@@ -106,7 +106,7 @@ export function TaskForm() {
           {...register("description", v.rules?.description)}
           aria-invalid={!!errors.description}
         />
-        {errors.description && (
+        {errors?.description && (
           <Form.Description>{errors.description.message}</Form.Description>
         )}
       </Form.Row>
@@ -119,7 +119,7 @@ export function TaskForm() {
           options={options}
           aria-invalid={!!errors.category}
         />
-        {errors.category && (
+        {errors?.category && (
           <Form.Description>{errors.category.message}</Form.Description>
         )}
       </Form.Row>
