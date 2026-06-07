@@ -7,13 +7,13 @@ import type {
 import type { RootState } from "../store";
 import { pause } from "@gpublic/utils";
 
-const baseUrl = "http://localhost:3009";
-const maxRetries = 2;
-const delay = 500;
+const API_URL = "http://localhost:3009";
+const MAX_RETRIES = 2;
+const DELAY = 500;
 
 // Create our baseQuery instance
 const baseQuery = fetchBaseQuery({
-  baseUrl,
+  baseUrl: API_URL,
   /*
   prepareHeaders: (headers, { getState }) => {
     // By default, if we have a token in the store, let's use that for authenticated requests
@@ -31,20 +31,20 @@ const delayedBaseQuery: BaseQueryFn<
   unknown,
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
-  await pause(delay);
+  await pause(DELAY);
 
   return baseQuery(args, api, extraOptions);
 };
 
 const retriableBaseQuery = retry(
   import.meta.env.DEV ? delayedBaseQuery : baseQuery,
-  { maxRetries },
+  { maxRetries: MAX_RETRIES },
 );
 
 export const api = createApi({
   baseQuery: retriableBaseQuery,
   // reducerPath: "splitApi",
-  tagTypes: ["products", "reviews"],
+  tagTypes: ["Products", "Reviews"],
   endpoints: () => ({}),
 });
 

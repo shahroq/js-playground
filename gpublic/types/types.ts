@@ -57,3 +57,9 @@ export type Product = {
   created_by: number;
   updated_by: number;
 };
+
+export const productInitValues: Partial<Product> = {
+  name: "",
+  description: "",
+  price: 0,
+};
