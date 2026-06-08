@@ -1,0 +1,13 @@
+{
+  "name": "@jps/shared",
+  "version": "1.0.0",
+  "main": "./index.ts",
+  "module": "./index.ts",
+  "exports": {
+    "./utils": "./utils/index.ts",
+    "./types": "./types/index.ts",
+    "./comps": "./comps/index.ts",
+    "./json": "./json/index.ts",
+    "./validation": "./validation/index.ts"
+  }
+}

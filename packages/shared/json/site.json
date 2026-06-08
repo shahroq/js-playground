@@ -1,0 +1,155 @@
+{
+  "version": "1.1",
+  "app": {
+    "name": "Pixel Global",
+    "logo": "logo-dark.png"
+  },
+  "navTop": [],
+  "navSide": [
+    { "label": "Home", "path": "/" },
+    { "label": "Dashboard", "path": "/dashboard" },
+    {
+      "label": "Auth",
+      "children": [
+        {
+          "label": "Plain",
+          "path": "/auth/plain",
+          "targets": ["client-react-19"]
+        },
+        {
+          "label": "w/ Auth.js",
+          "targets": ["client-react-19"]
+        }
+      ]
+    },
+    {
+      "label": "Components",
+      "children": [
+        {
+          "label": "Data",
+          "path": "/comps/data",
+          "targets": ["ui", "client-react-19"]
+        },
+        {
+          "label": "Modal",
+          "path": "/comps/modal",
+          "targets": ["client-react-19"]
+        },
+        {
+          "label": "Misc",
+          "path": "/comps/misc",
+          "targets": ["ui", "client-react-19", "client-nextjs-16"]
+        },
+        {
+          "label": "Lazy",
+          "path": "/comps/lazy",
+          "targets": ["client-react-19", "client-nextjs-16"]
+        },
+        {
+          "label": "Audio",
+          "path": "/comps/audio",
+          "targets": ["client-react-19"]
+        },
+        {
+          "label": "Form",
+          "path": "/comps/form",
+          "targets": ["ui"]
+        },
+        {
+          "label": "Form",
+          "targets": ["ui", "client-react-19"],
+          "children": [
+            {
+              "label": "Plain (Controlled) ",
+              "path": "/comps/form/plain-controlled",
+              "targets": ["client-react-19"]
+            },
+            {
+              "label": "Plain (Uncontrolled) ",
+              "path": "/comps/form/plain-uncontrolled",
+              "targets": ["client-react-19"]
+            },
+            {
+              "label": "w/ FormData API (*)",
+              "path": "/comps/form/w-formdata-api",
+              "targets": ["client-react-19"]
+            },
+            {
+              "label": "w/ useActionState",
+              "path": "/comps/form/w-useactionstate",
+              "targets": ["client-react-19"]
+            },
+            {
+              "label": "w/ React Hook Form",
+              "path": "/comps/form/w-react-hook-form",
+              "targets": ["client-react-19"]
+            },
+            {
+              "label": "w/ TanStack Form",
+              "targets": ["client-react-19"]
+            },
+            {
+              "label": "w/ Redux Form",
+              "targets": ["client-react-19"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Counter",
+      "targets": ["client-react-19"],
+      "children": [
+        { "label": "Plain", "path": "/counter/plain" },
+        { "label": "w/ Context", "path": "/counter/w-context" },
+        { "label": "w/ Reducer", "path": "/counter/w-reducer" },
+        {
+          "label": "w/ Redux Toolkit (RTK)",
+          "path": "/counter/w-redux-toolkit"
+        },
+        { "label": "w/ Zustand", "path": "/counter/w-zustand" }
+      ]
+    },
+    {
+      "label": "Tasks",
+      "targets": ["client-nextjs-16"],
+      "children": [{ "label": "w/ ORM", "path": "/tasks/w-orm" }]
+    },
+    {
+      "label": "Catalog (Remote)",
+      "targets": ["client-react-19", "client-nextjs-16"],
+      "children": [
+        {
+          "label": "w/ ORM",
+          "targets": ["client-nextjs-16"],
+          "path": "/catalog/w-orm",
+          "children": [
+            { "label": "Products", "path": "/catalog/w-orm/products" },
+            { "label": "Reviews", "path": "/catalog/w-orm/reviews" }
+          ]
+        },
+        {
+          "label": "w/ Redux Toolkit Query",
+          "children": [
+            {
+              "label": "Products",
+              "path": "/catalog/w-redux-toolkit-query/products"
+            }
+          ]
+        },
+        {
+          "label": "w/ React Query",
+          "children": [
+            { "label": "Products", "path": "/catalog/w-react-query/products" }
+          ]
+        }
+      ]
+    }
+  ],
+  "user": {
+    "id": 1,
+    "name": "John Doe",
+    "email": "jd@mail.com",
+    "avatar": "avatar.png"
+  }
+}

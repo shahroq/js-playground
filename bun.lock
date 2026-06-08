@@ -120,6 +120,7 @@
       "name": "bun-react-template",
       "version": "0.1.0",
       "dependencies": {
+        "@jps/shared": "workspace:*",
         "bun-plugin-tailwind": "^0.1.2",
       },
       "devDependencies": {
@@ -233,6 +234,10 @@
       "peerDependencies": {
         "typescript": "^5",
       },
+    },
+    "packages/shared": {
+      "name": "@jps/shared",
+      "version": "1.0.0",
     },
   },
   "trustedDependencies": [
@@ -675,6 +680,8 @@
     "@jest/transform": ["@jest/transform@30.4.1", "", { "dependencies": { "@babel/core": "^7.27.4", "@jest/types": "30.4.1", "@jridgewell/trace-mapping": "^0.3.25", "babel-plugin-istanbul": "^7.0.1", "chalk": "^4.1.2", "convert-source-map": "^2.0.0", "fast-json-stable-stringify": "^2.1.0", "graceful-fs": "^4.2.11", "jest-haste-map": "30.4.1", "jest-regex-util": "30.4.0", "jest-util": "30.4.1", "pirates": "^4.0.7", "slash": "^3.0.0", "write-file-atomic": "^5.0.1" } }, "sha512-Wz0LyktlTvRefoymh+n64hQ84KNXsRGcwdoZ8CSa0Ea+fgYcHZlnk+hDP7v2MS7il2bQ5uTEIxf4/NNfhMN4KQ=="],
 
     "@jest/types": ["@jest/types@30.4.1", "", { "dependencies": { "@jest/pattern": "30.4.0", "@jest/schemas": "30.4.1", "@types/istanbul-lib-coverage": "^2.0.6", "@types/istanbul-reports": "^3.0.4", "@types/node": "*", "@types/yargs": "^17.0.33", "chalk": "^4.1.2" } }, "sha512-f1x/vJXIfjOlEmejYpbkbgw1gOqpPECwMvMEtBqe47j7H2Hg8h8w3o3ikhSXq3MI15kg+oQ0exWO0uCtTNJLoQ=="],
+
+    "@jps/shared": ["@jps/shared@workspace:packages/shared"],
 
     "@jridgewell/gen-mapping": ["@jridgewell/gen-mapping@0.3.13", "", { "dependencies": { "@jridgewell/sourcemap-codec": "^1.5.0", "@jridgewell/trace-mapping": "^0.3.24" } }, "sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA=="],
 

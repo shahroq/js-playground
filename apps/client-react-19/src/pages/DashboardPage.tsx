@@ -1,6 +1,6 @@
-import { Hero } from "@packages/comps";
+import { Hero } from "@jps/shared/comps";
+import type { Page } from "@jps/shared/types";
 import { PageTitle } from "@/comps";
-import type { Page } from "@packages/types/types";
 
 const page: Page = {
   title: "Dashboard",
