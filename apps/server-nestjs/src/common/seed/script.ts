@@ -1,7 +1,7 @@
 // scripts/run-task.ts
-import { NestFactory } from "@nestjs/core";
-import { AppModule } from "./../../app.module";
-import { SeedService } from "./seed.service";
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './../../app.module';
+import { SeedService } from './seed.service';
 
 async function bootstrap() {
   const appContext = await NestFactory.createApplicationContext(AppModule);

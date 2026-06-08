@@ -69,7 +69,7 @@
         "typescript": "^5",
       },
     },
-    "packages/__server-maily": {
+    "apps/__server-maily": {
       "name": "server-maily",
       "devDependencies": {
         "@types/bun": "latest",
@@ -78,7 +78,7 @@
         "typescript": "^5",
       },
     },
-    "packages/client-angular-21": {
+    "apps/client-angular-21": {
       "name": "client-angular-21",
       "version": "0.0.0",
       "dependencies": {
@@ -102,7 +102,7 @@
         "vitest": "^4.0.8",
       },
     },
-    "packages/client-nextjs-16": {
+    "apps/client-nextjs-16": {
       "name": "client-nextjs-16",
       "version": "0.1.0",
       "dependencies": {
@@ -116,7 +116,7 @@
         "typescript": "^5",
       },
     },
-    "packages/client-react-19": {
+    "apps/client-react-19": {
       "name": "bun-react-template",
       "version": "0.1.0",
       "dependencies": {
@@ -126,7 +126,7 @@
         "@types/bun": "latest",
       },
     },
-    "packages/katas": {
+    "apps/katas": {
       "name": "katas",
       "devDependencies": {
         "@types/bun": "latest",
@@ -135,7 +135,7 @@
         "typescript": "^5",
       },
     },
-    "packages/server-bun": {
+    "apps/server-bun": {
       "name": "server-bun",
       "devDependencies": {
         "@types/bun": "latest",
@@ -144,7 +144,7 @@
         "typescript": "^5",
       },
     },
-    "packages/server-express": {
+    "apps/server-express": {
       "name": "server-express",
       "dependencies": {
         "lowdb": "^7.0.1",
@@ -164,7 +164,7 @@
         "typescript": "^5",
       },
     },
-    "packages/server-json-server": {
+    "apps/server-json-server": {
       "name": "server-json-server",
       "dependencies": {
         "json-server": "^1.0.0-beta.15",
@@ -176,7 +176,7 @@
         "typescript": "^5",
       },
     },
-    "packages/server-nestjs": {
+    "apps/server-nestjs": {
       "name": "server-nestjs",
       "version": "0.0.1",
       "dependencies": {
@@ -221,7 +221,7 @@
         "typescript-eslint": "^8.20.0",
       },
     },
-    "packages/ui": {
+    "apps/ui": {
       "name": "ui",
       "dependencies": {
         "@tailwindcss/vite": "^4.2.4",
@@ -1594,7 +1594,7 @@
 
     "bun-plugin-tailwind": ["bun-plugin-tailwind@0.1.2", "", { "peerDependencies": { "bun": ">=1.0.0" } }, "sha512-41jNC1tZRSK3s1o7pTNrLuQG8kL/0vR/JgiTmZAJ1eHwe0w5j6HFPKeqEk0WAD13jfrUC7+ULuewFBBCoADPpg=="],
 
-    "bun-react-template": ["bun-react-template@workspace:packages/client-react-19"],
+    "bun-react-template": ["bun-react-template@workspace:apps/client-react-19"],
 
     "bun-types": ["bun-types@1.3.14", "", { "dependencies": { "@types/node": "*" } }, "sha512-4N0ig0fEomHt5R0KCFWjovxow98rIoRwKolrYdCcknNwMekCXRnWEUvgu5soYV8QXtVsrUD8B95MBOZGPvr6KQ=="],
 
@@ -1662,9 +1662,9 @@
 
     "cli-width": ["cli-width@4.1.0", "", {}, "sha512-ouuZd4/dm2Sw5Gmqy6bGyNNNe1qt9RpmxveLSO7KcgsTnU7RXfsw+/bukWGo1abgBiMAic068rclZsO4IWmmxQ=="],
 
-    "client-angular-21": ["client-angular-21@workspace:packages/client-angular-21"],
+    "client-angular-21": ["client-angular-21@workspace:apps/client-angular-21"],
 
-    "client-nextjs-16": ["client-nextjs-16@workspace:packages/client-nextjs-16"],
+    "client-nextjs-16": ["client-nextjs-16@workspace:apps/client-nextjs-16"],
 
     "client-only": ["client-only@0.0.1", "", {}, "sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA=="],
 
@@ -2430,7 +2430,7 @@
 
     "jws": ["jws@4.0.1", "", { "dependencies": { "jwa": "^2.0.1", "safe-buffer": "^5.0.1" } }, "sha512-EKI/M/yqPncGUUh44xz0PxSidXFr/+r0pA70+gIYhjv+et7yxM+s29Y+VGDkovRofQem0fs7Uvf4+YmAdyRduA=="],
 
-    "katas": ["katas@workspace:packages/katas"],
+    "katas": ["katas@workspace:apps/katas"],
 
     "keyv": ["keyv@4.5.4", "", { "dependencies": { "json-buffer": "3.0.1" } }, "sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw=="],
 
@@ -3102,15 +3102,15 @@
 
     "serve-static": ["serve-static@2.2.1", "", { "dependencies": { "encodeurl": "^2.0.0", "escape-html": "^1.0.3", "parseurl": "^1.3.3", "send": "^1.2.0" } }, "sha512-xRXBn0pPqQTVQiC8wyQrKs2MOlX24zQ0POGaj0kultvoOCstBQM5yvOhAVSUwOMjQtTvsPWoNCHfPGwaaQJhTw=="],
 
-    "server-bun": ["server-bun@workspace:packages/server-bun"],
+    "server-bun": ["server-bun@workspace:apps/server-bun"],
 
-    "server-express": ["server-express@workspace:packages/server-express"],
+    "server-express": ["server-express@workspace:apps/server-express"],
 
-    "server-json-server": ["server-json-server@workspace:packages/server-json-server"],
+    "server-json-server": ["server-json-server@workspace:apps/server-json-server"],
 
-    "server-maily": ["server-maily@workspace:packages/__server-maily"],
+    "server-maily": ["server-maily@workspace:apps/__server-maily"],
 
-    "server-nestjs": ["server-nestjs@workspace:packages/server-nestjs"],
+    "server-nestjs": ["server-nestjs@workspace:apps/server-nestjs"],
 
     "set-blocking": ["set-blocking@2.0.0", "", {}, "sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw=="],
 
@@ -3380,7 +3380,7 @@
 
     "uglify-js": ["uglify-js@3.19.3", "", { "bin": { "uglifyjs": "bin/uglifyjs" } }, "sha512-v3Xu+yuwBXisp6QYTcH4UbH+xYJXqnq2m/LtQVWKWzYc1iehYnLixoQDN9FH6/j9/oybfd6W9Ghwkl8+UMKTKQ=="],
 
-    "ui": ["ui@workspace:packages/ui"],
+    "ui": ["ui@workspace:apps/ui"],
 
     "uid": ["uid@2.0.2", "", { "dependencies": { "@lukeed/csprng": "^1.0.0" } }, "sha512-u3xV3X7uzvi5b1MncmZo3i2Aw222Zk1keqLA1YkHldREkAhAqi65wuPfe7lHx8H/Wzy+8CE7S7uS3jekIM5s8g=="],
 

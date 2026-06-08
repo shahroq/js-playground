@@ -14,9 +14,9 @@ const isHttpException = (e: any) => e instanceof HttpException;
 
 // @Catch(HttpException) // catch JUST HttpException
 @Catch() // catch ALL HttpException
-export class EnvelopHttpExceptionFilter<T extends HttpException>
-  implements ExceptionFilter
-{
+export class EnvelopHttpExceptionFilter<
+  T extends HttpException,
+> implements ExceptionFilter {
   constructor(
     @Inject(APP_ENVELOPE)
     private readonly Envelope: EnvelopeConstructor,

@@ -168,7 +168,7 @@ export function truncateString(str: string, options: TruncateOptions): string {
 }
 // truncateString("This is a long string", { maxLength: 10 }); // → "This is..."
 // truncateString("This is a long string", { maxLength: 10, position: "start" }); // → "...g string"
-// truncateString("/packages/server/data/lowdb-json/database.json", { maxLength: 30, position: "middle" }); // → "/packages/ser...ase.json"
+// truncateString("/apps/server/data/lowdb-json/database.json", { maxLength: 30, position: "middle" }); // → "/apps/ser...ase.json"
 // truncateString("HelloWorld", { maxLength: 8, position: "end", ellipsis: "--" }); // → "Hello--"
 
 export async function getUserAsync(id: number) {

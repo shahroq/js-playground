@@ -1,5 +1,5 @@
 {
-  "name": "sandbox-4-bun",
+  "name": "js-playground",
   "module": "index.ts",
   "type": "module",
   "private": true,
@@ -72,6 +72,7 @@
     "typescript": "^5"
   },
   "workspaces": [
+    "apps/*",
     "packages/*"
   ]
 }
