@@ -1,13 +1,9 @@
-import { pause } from "@gpublic/utils";
+import { createHttpClient } from "@gpublic/utils";
 import { QueryClient } from "@tanstack/react-query";
-
-// TODO: abstract away: fetch, axios, etc
-// TODO: custom hook
 
 //TanStack Query is agnostic about how you actually fetch data. The queryFn (and mutationFn) is completely up to you — it can be fetch, Axios, your own wrapper, etc. It doesn't assume any particular HTTP client or URL structure.
 export const API_URL = "http://localhost:3009";
 export const MAX_RETRIES = 2;
-export const DELAY = process.env.NODE_ENV === "development" ? 500 : 0;
 
 // Create a client
 export const queryClient = new QueryClient({
@@ -27,23 +23,5 @@ export const queryClient = new QueryClient({
   },
 });
 
-export async function apiFetch<T>(
-  path: string,
-  options?: RequestInit,
-): Promise<T> {
-  await pause(DELAY);
-
-  const response = await fetch(`${API_URL}${path}`, {
-    headers: {
-      "Content-Type": "application/json",
-      ...(options?.headers ?? {}),
-    },
-    ...options,
-  });
-
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status}`);
-  }
-
-  return response.json();
-}
+// create httpClient and export
+export const httpClient = createHttpClient(API_URL, "fetch");
