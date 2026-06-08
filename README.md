@@ -1,18 +1,28 @@
-# Catalog App
+# JS/TS Playground
 
-A sample Catalog API with frontend, built as a playground for experimenting with different frameworks, API design approaches, architectural patterns, and libraries.
+A TypeScript/JavaScript playground for exploring frameworks, API design patterns, architectural styles, and frontend/backend libraries.
+
+This repo is intentionally experimental and is used to compare different stacks and approaches in a controlled, domain-driven setup.
+
+It also takes an educational, exploration-first approach, sometimes leading to over-engineered or exaggerated implementations in order to better understand trade-offs, scalability patterns, and framework-specific idioms.
 
 - **Runtime**: Bun
-- **Server**: Express.js, NestJS
-- **Client**: Angular, React, Next.js
+- **Server**: Express.js, NestJS, Bun (native server), etc.
+- **Client**: React, Next.js, Angular, Astro
 
-### 📦 Overview
+### 📦 Domain Overview
 
-This project implements a simple catalog domain with a few core entities:
+This project mostly implements a simple `Catalog` domain with a few core entities:
 
 - Products
 - Reviews
 - Tags
 - & related relationships
 
-It provides standard CRUD operations along with filtering, includes, pagination, and structured responses.
+The system supports common application concerns such as:
+
+- CRUD operations
+- Filtering and querying
+- Pagination
+- Relationship inclusion (e.g., nested/relational data)
+- Structured API responses
