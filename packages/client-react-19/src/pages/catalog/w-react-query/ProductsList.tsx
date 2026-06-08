@@ -1,11 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-import { getProducts, productKeys } from "./services/products-api";
 import { Skeleton, Alert, Button, Item, ModalV2 } from "@gpublic/comps";
 import type { EntityId } from "@gpublic/types/types";
 import { ProductDetails } from "./ProductDetails";
 import { useState } from "react";
 import { ProductDelete } from "./ProductDelete";
 import { ProductForm } from "./ProductForm";
+import { useProducts } from "./hooks";
 
 type ModalState =
   | { type: "details"; id: EntityId }
@@ -15,10 +14,7 @@ type ModalState =
 
 export function ProductsList() {
   // data
-  const { data, isPending, error, isError } = useQuery({
-    queryKey: productKeys.all,
-    queryFn: ({ signal }) => getProducts(signal),
-  });
+  const { data, isPending, error, isError } = useProducts();
 
   // modal
   const [modal, setModal] = useState<ModalState>(null);

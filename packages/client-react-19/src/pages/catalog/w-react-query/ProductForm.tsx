@@ -4,13 +4,7 @@ import type { EntityId } from "@reduxjs/toolkit";
 import { rules } from "./rules.ts";
 
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  productKeys,
-  getProduct,
-  createProduct,
-  updateProduct,
-} from "./services/products-api";
+import { useCreateProduct, useProduct, useUpdateProduct } from "./hooks.ts";
 
 type Props = {
   id?: EntityId;
@@ -19,38 +13,13 @@ type Props = {
 
 export function ProductForm({ id, onClose }: Props) {
   const isUpdateMode = !!id;
-  const queryClient = useQueryClient();
 
   // 1. Load product (update mode)
-  const { data, isPending, isError, error } = useQuery({
-    enabled: isUpdateMode,
-    queryKey: productKeys.detail(id!),
-    queryFn: ({ signal }) => getProduct(id!, signal),
-  });
+  const { data, isPending, isError, error } = useProduct(id);
 
   // 2. Mutations
-  const createMutation = useMutation({
-    mutationFn: createProduct,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: productKeys.all,
-      });
-    },
-  });
-  const updateMutation = useMutation({
-    mutationFn: ({ id, data }: { id: EntityId; data: Product }) =>
-      updateProduct(id, data),
-
-    onSuccess: (_, vars) => {
-      queryClient.invalidateQueries({
-        queryKey: productKeys.all,
-      });
-
-      queryClient.invalidateQueries({
-        queryKey: productKeys.detail(vars.id),
-      });
-    },
-  });
+  const createMutation = useCreateProduct();
+  const updateMutation = useUpdateProduct(id);
   const isSubmitting = createMutation.isPending || updateMutation.isPending;
 
   // 3. Form

@@ -1,8 +1,6 @@
 import { Alert, Button } from "@gpublic/comps";
 import type { EntityId } from "@reduxjs/toolkit";
-
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteProduct, productKeys } from "./services/products-api";
+import { useDeleteProduct } from "./hooks";
 
 type Props = {
   id?: EntityId;
@@ -10,31 +8,12 @@ type Props = {
 };
 
 export function ProductDelete({ id, onClose }: Props) {
-  const queryClient = useQueryClient();
-
-  const { mutate, isPending, isError, error } = useMutation({
-    mutationFn: (id: EntityId) => deleteProduct(id),
-
-    onSuccess: (_, deletedId) => {
-      // 1. update list cache immediately (optimistic feel)
-      queryClient.setQueryData(productKeys.all, (old: any[] = []) =>
-        old.filter((p) => p.id !== deletedId),
-      );
-
-      // 2. optionally remove detail cache
-      queryClient.removeQueries({
-        queryKey: productKeys.detail(deletedId),
-      });
-
-      // 3. close modal
-      onClose?.();
-    },
-  });
+  const { mutate, isPending, isError, error } = useDeleteProduct(id);
 
   if (!id) return null;
 
   const handleDelete = () => {
-    mutate(id);
+    mutate(id, { onSuccess: onClose });
   };
 
   return (

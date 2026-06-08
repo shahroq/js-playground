@@ -23,6 +23,12 @@ export async function getProduct(
   });
 }
 
+export async function deleteProduct(id: string | number): Promise<Product> {
+  return apiFetch<Product>(`/products/${id}`, {
+    method: "DELETE",
+  });
+}
+
 export async function createProduct(product: Product): Promise<Product> {
   return apiFetch<Product>("/products", {
     method: "POST",
@@ -37,11 +43,5 @@ export async function updateProduct(
   return apiFetch<Product>(`/products/${id}`, {
     method: "PATCH",
     body: JSON.stringify(product),
-  });
-}
-
-export async function deleteProduct(id: string | number): Promise<Product> {
-  return apiFetch<Product>(`/products/${id}`, {
-    method: "DELETE",
   });
 }

@@ -1,9 +1,7 @@
 import { JSONTree } from "react-json-tree";
 import { Skeleton, Alert } from "@gpublic/comps";
 import type { EntityId } from "@reduxjs/toolkit";
-
-import { useQuery } from "@tanstack/react-query";
-import { getProduct, productKeys } from "./services/products-api";
+import { useProduct } from "./hooks";
 
 type Props = {
   id?: EntityId;
@@ -11,11 +9,7 @@ type Props = {
 
 export function ProductDetails({ id }: Props) {
   // data
-  const { data, isPending, isError, error } = useQuery({
-    enabled: !!id,
-    queryKey: productKeys.detail(id!),
-    queryFn: ({ signal }) => getProduct(id!, signal),
-  });
+  const { data, isPending, isError, error } = useProduct(id);
 
   if (!id) return null;
 
