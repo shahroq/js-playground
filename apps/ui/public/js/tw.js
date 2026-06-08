@@ -1,6 +1,6 @@
-import { setupDropdownToggle } from "@gpublic/js/dropdown";
-import { setupOffcanvas } from "@gpublic/js/offcanvas";
-import { setupAlert } from "@gpublic/js/alert";
+import { setupDropdownToggle } from "@packages/js/dropdown";
+import { setupOffcanvas } from "@packages/js/offcanvas";
+import { setupAlert } from "@packages/js/alert";
 
 // AUTO INIT
 document.addEventListener("DOMContentLoaded", () => {

@@ -1,4 +1,4 @@
-import { createHttpClient } from "@gpublic/utils";
+import { createHttpClient } from "@packages/utils";
 import { QueryClient } from "@tanstack/react-query";
 
 //TanStack Query is agnostic about how you actually fetch data. The queryFn (and mutationFn) is completely up to you — it can be fetch, Axios, your own wrapper, etc. It doesn't assume any particular HTTP client or URL structure.

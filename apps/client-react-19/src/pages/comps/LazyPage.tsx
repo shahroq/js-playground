@@ -1,4 +1,4 @@
-import type { Page } from "@gpublic/types/types";
+import type { Page } from "@packages/types/types";
 import { PageTitle } from "@/comps";
 
 const page: Page = {

@@ -1,7 +1,7 @@
-import type { Page } from "@gpublic/types/types";
-import { Alert, Button, DummyBox, Hero, Counter, Item } from "@gpublic/comps";
+import type { Page } from "@packages/types/types";
+import { Alert, Button, DummyBox, Hero, Counter, Item } from "@packages/comps";
 import { PageTitle } from "@/comps";
-import avatar2 from "@gpublic/img/avatar-2.png";
+import avatar2 from "@packages/img/avatar-2.png";
 
 const page: Page = {
   title: "Misc",

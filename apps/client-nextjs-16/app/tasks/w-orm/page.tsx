@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { Table, type TableData } from "@gpublic/comps";
+import { Table, type TableData } from "@packages/comps";
 import { PageTitle } from "@/comps";
-import { Page } from "@/gpublic/types/types";
+import { Page } from "@packages/types/types";
 import { Task } from "./types";
 import { getTasks } from "./actions";
 

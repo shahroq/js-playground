@@ -1,5 +1,5 @@
 ---
-import site from "@gpublic/json/site.json";
+import site from "@packages/json/site.json";
 
 const app = site.app;
 ---
@@ -7,7 +7,7 @@ const app = site.app;
 <nav class="container-fluid py-4 flex items-center gap-3">
   {/* Navbar Brand */}
   <a href="#" class="navbar-brand">
-    <img src={`/gpublic/img/${app.logo}`} alt="Logo" />
+    <img src={`/packages/img/${app.logo}`} alt="Logo" />
     <span>{app.name}</span>
   </a>
 

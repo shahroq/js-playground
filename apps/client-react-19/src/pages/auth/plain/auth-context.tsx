@@ -1,4 +1,4 @@
-import type { User } from "@gpublic/types/types";
+import type { User } from "@packages/types/types";
 import {
   createContext,
   useContext,

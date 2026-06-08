@@ -1,7 +1,7 @@
 import { PageTitle } from "@/comps";
-import { Page } from "@/gpublic/types/types";
+import { Page } from "@packages/types/types";
 import { getProducts } from "../actions";
-import { Table, TableData } from "@/gpublic/comps";
+import { Table, TableData } from "@packages/comps";
 import { Product } from "../types";
 import Link from "next/link";
 

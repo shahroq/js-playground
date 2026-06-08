@@ -16,6 +16,7 @@
     "test:watch": "bun test --watch"
   },
   "dependencies": {
+    "@shahroq/shared": "workspace:*",
     "bun-plugin-tailwind": "^0.1.2"
   },
   "devDependencies": {

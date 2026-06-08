@@ -1,11 +1,11 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { pause } from "@gpublic/utils";
+import { pause } from "@packages/utils";
 import { PageTitle } from "@/comps";
-import { Form, Button, Alert } from "@gpublic/comps";
-import { taskInitValues, type Page, type Task } from "@gpublic/types/types";
+import { Form, Button, Alert } from "@packages/comps";
+import { taskInitValues, type Page, type Task } from "@packages/types/types";
 import { options, type FormFeedback } from "../types";
-// import { rhfTaskValidation as v } from "@gpublic/validation";
-import { taskSchema, zodTaskValidation as v } from "@gpublic/validation";
+// import { rhfTaskValidation as v } from "@packages/validation";
+import { taskSchema, zodTaskValidation as v } from "@packages/validation";
 
 const page: Page = {
   title: "w/ React Hook Form",

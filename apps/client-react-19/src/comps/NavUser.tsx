@@ -1,6 +1,6 @@
-import site from "@gpublic/json/site.json";
-import avatar from "@gpublic/img/avatar.png";
-import { Button, Item } from "@gpublic/comps";
+import site from "@packages/json/site.json";
+import avatar from "@packages/img/avatar.png";
+import { Button, Item } from "@packages/comps";
 
 const user = site.user;
 

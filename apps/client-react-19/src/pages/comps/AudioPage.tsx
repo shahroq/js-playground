@@ -1,8 +1,8 @@
-import type { Page } from "@gpublic/types/types";
+import type { Page } from "@packages/types/types";
 import { PageTitle } from "@/comps";
-import clickSound from "@gpublic/sounds/click-sound.m4a";
-import enjoy from "@gpublic/sounds/enjoy.mp3";
-import { PlayButton } from "@gpublic/comps";
+import clickSound from "@packages/sounds/click-sound.m4a";
+import enjoy from "@packages/sounds/enjoy.mp3";
+import { PlayButton } from "@packages/comps";
 
 const page: Page = {
   title: "Audio",

@@ -1,7 +1,7 @@
 "use client";
-import { Hero } from "@gpublic/comps";
+import { Hero } from "@packages/comps";
 import { PageTitle } from "@/comps";
-import { Page } from "@/gpublic/types/types";
+import { Page } from "@packages/types/types";
 
 const page: Page = {
   title: "Dashboard",

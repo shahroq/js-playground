@@ -1,8 +1,8 @@
-import { Button } from "@gpublic/comps";
+import { Button } from "@packages/comps";
 import { PageTitle } from "@/comps";
 import { useReducer } from "react";
 import { counterReducer, INITIAL_STATE } from "./counter-reducer";
-import type { Page } from "@gpublic/types/types";
+import type { Page } from "@packages/types/types";
 
 const page: Page = {
   title: "Counter w/ Reducer",

@@ -1,5 +1,5 @@
-import type { Page } from "@gpublic/types/types";
-import { Nav } from "@gpublic/comps";
+import type { Page } from "@packages/types/types";
+import { Nav } from "@packages/comps";
 import { Link } from "@/modules/router";
 
 type Props = {

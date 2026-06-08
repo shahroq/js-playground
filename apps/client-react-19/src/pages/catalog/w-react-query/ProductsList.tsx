@@ -1,5 +1,5 @@
-import { Skeleton, Alert, Button, Item, ModalV2 } from "@gpublic/comps";
-import type { EntityId } from "@gpublic/types/types";
+import { Skeleton, Alert, Button, Item, ModalV2 } from "@packages/comps";
+import type { EntityId } from "@packages/types/types";
 import { ProductDetails } from "./ProductDetails";
 import { useState } from "react";
 import { ProductDelete } from "./ProductDelete";

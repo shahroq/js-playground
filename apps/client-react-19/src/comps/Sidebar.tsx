@@ -1,9 +1,9 @@
-import type { NavItem } from "@gpublic/types/types";
+import type { NavItem } from "@packages/types/types";
 import { NavUser } from "./NavUser";
-import site from "@gpublic/json/site.json";
-import { filterNavItems } from "@gpublic/utils";
+import site from "@packages/json/site.json";
+import { filterNavItems } from "@packages/utils";
 import { Link, useRouterContext as useRouterContext } from "@/modules/router";
-import { Nav } from "@gpublic/comps/Nav";
+import { Nav } from "@packages/comps/Nav";
 
 let navItems: NavItem[] = site.navSide;
 navItems = filterNavItems(site.navSide, "client-react-19");

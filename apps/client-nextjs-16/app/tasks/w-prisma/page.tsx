@@ -1,6 +1,6 @@
-import { Table, Button, type TableData } from "@gpublic/comps";
+import { Table, Button, type TableData } from "@packages/comps";
 import { PageTitle } from "@/comps/PageTitle";
-import { Page } from "@/gpublic/types/types";
+import { Page } from "@packages/types/types";
 import Link from "next/link";
 
 const page: Page = {

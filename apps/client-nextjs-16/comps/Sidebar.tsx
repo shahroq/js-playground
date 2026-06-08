@@ -1,9 +1,9 @@
 "use client";
 import { usePathname } from "next/navigation";
-import site from "@gpublic/json/site.json";
-import { filterNavItems } from "@gpublic/utils";
-import type { NavItem } from "@gpublic/types/types";
-import { Nav } from "@gpublic/comps/Nav";
+import site from "@packages/json/site.json";
+import { filterNavItems } from "@packages/utils";
+import type { NavItem } from "@packages/types/types";
+import { Nav } from "@packages/comps/Nav";
 import { NavUser } from "./NavUser";
 import Link from "next/link";
 

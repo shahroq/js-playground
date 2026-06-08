@@ -1,4 +1,4 @@
-import type { EntityId, Product } from "@gpublic/types/types";
+import type { EntityId, Product } from "@packages/types/types";
 import { api } from "./api";
 
 /*

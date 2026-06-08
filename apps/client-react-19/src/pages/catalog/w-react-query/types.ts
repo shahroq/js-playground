@@ -1,4 +1,4 @@
-import type { Product } from "@gpublic/types/types";
+import type { Product } from "@packages/types/types";
 
 export type FormState = {
   values?: Partial<Product>;

@@ -1,6 +1,6 @@
 import { useEffect, type PropsWithChildren } from "react";
 import { useAuthContext } from "./auth-context";
-import { Alert } from "@gpublic/comps";
+import { Alert } from "@packages/comps";
 import { useRouterContext } from "@/modules/router";
 
 export function ProtectedRoute({ children }: PropsWithChildren) {

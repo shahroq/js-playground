@@ -1,4 +1,4 @@
-import { Alert, Button } from "@gpublic/comps";
+import { Alert, Button } from "@packages/comps";
 import type { EntityId } from "@reduxjs/toolkit";
 import { useDeleteProduct } from "./hooks";
 

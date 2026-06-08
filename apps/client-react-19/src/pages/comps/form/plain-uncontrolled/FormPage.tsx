@@ -1,8 +1,8 @@
 import { useRef, type ChangeEvent, type SubmitEvent } from "react";
 import { PageTitle } from "@/comps";
-import { taskInitValues, type Page } from "@gpublic/types/types";
+import { taskInitValues, type Page } from "@packages/types/types";
 import { options, type FormElement } from "../types";
-import { Form, Button } from "@gpublic/comps";
+import { Form, Button } from "@packages/comps";
 
 const page: Page = {
   title: "Plain",

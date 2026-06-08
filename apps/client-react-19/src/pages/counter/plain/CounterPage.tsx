@@ -1,6 +1,6 @@
-import { Button } from "@gpublic/comps";
+import { Button } from "@packages/comps";
 import { PageTitle } from "@/comps";
-import type { Page } from "@gpublic/types/types";
+import type { Page } from "@packages/types/types";
 import { useState } from "react";
 
 const page: Page = {

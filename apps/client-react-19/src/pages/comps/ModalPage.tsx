@@ -1,6 +1,6 @@
-import type { Page } from "@gpublic/types/types";
+import type { Page } from "@packages/types/types";
 import { PageTitle } from "@/comps";
-import { Button, DummyBox, ModalV2, useModalContext } from "@gpublic/comps";
+import { Button, DummyBox, ModalV2, useModalContext } from "@packages/comps";
 import { useState } from "react";
 
 const page: Page = {

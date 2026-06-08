@@ -20,7 +20,7 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "@gpublic/*": ["./gpublic/*"]
+      "@packages/*": ["./packages/*"]
     }
   },
   "include": [

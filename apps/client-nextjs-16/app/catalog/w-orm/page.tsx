@@ -1,5 +1,5 @@
 import { PageTitle } from "@/comps";
-import { Page } from "@/gpublic/types/types";
+import { Page } from "@packages/types/types";
 
 const page: Page = {
   title: "Catalog w/ ORM",

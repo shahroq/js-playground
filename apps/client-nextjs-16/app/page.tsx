@@ -1,5 +1,5 @@
 "use client";
-import { Hero } from "@gpublic/comps";
+import { Hero } from "@packages/comps";
 
 export default function Home() {
   return (

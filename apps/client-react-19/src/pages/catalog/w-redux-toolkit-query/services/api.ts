@@ -5,7 +5,7 @@ import type {
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query";
 import type { RootState } from "../store";
-import { pause } from "@gpublic/utils";
+import { pause } from "@packages/utils";
 
 const API_URL = "http://localhost:3009";
 const MAX_RETRIES = 2;

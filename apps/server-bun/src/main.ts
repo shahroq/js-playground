@@ -1,5 +1,5 @@
 import { serve } from "bun";
-import data from "../gpublic/json/catalog.json";
+import data from "../packages/json/catalog.json";
 
 const port = 3000;
 

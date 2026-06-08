@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Route } from "./Route";
-import { Spinner } from "@gpublic/comps";
-import { pause } from "@gpublic/utils";
+import { Spinner } from "@packages/comps";
+import { pause } from "@packages/utils";
 // Pages
 import HomePage from "@/pages/HomePage";
 import DashboardPage from "@/pages/DashboardPage";

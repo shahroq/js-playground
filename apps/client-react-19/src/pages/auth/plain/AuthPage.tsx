@@ -1,9 +1,9 @@
 import { useState, type ChangeEvent, type SubmitEvent } from "react";
 import { PageTitle } from "@/comps";
-import { userInitValues, type Page, type User } from "@gpublic/types/types";
+import { userInitValues, type Page, type User } from "@packages/types/types";
 
-import { Form, Button, Alert, Hero } from "@gpublic/comps";
-import { userLoginSchema, validateByZod as v } from "@gpublic/validation";
+import { Form, Button, Alert, Hero } from "@packages/comps";
+import { userLoginSchema, validateByZod as v } from "@packages/validation";
 import type { FormElement, FormFeedback } from "@/pages/comps/form/types";
 import { AuthProvider, useAuthContext } from "./auth-context";
 import { ProtectedRoute } from "./ProtectedRoute";

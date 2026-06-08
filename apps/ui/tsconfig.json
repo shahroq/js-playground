@@ -27,7 +27,7 @@
     "noPropertyAccessFromIndexSignature": false,
     "paths": {
       "@/*": ["./src/*"],
-      "@gpublic/*": ["./gpublic/*"]
+      "@packages/*": ["./packages/*"]
     }
   },
   "extends": "astro/tsconfigs/strict",

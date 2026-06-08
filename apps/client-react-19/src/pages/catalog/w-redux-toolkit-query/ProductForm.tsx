@@ -1,5 +1,5 @@
-import { Alert, Button, Skeleton, Form } from "@gpublic/comps";
-import { productInitValues, type Product } from "@gpublic/types/types";
+import { Alert, Button, Skeleton, Form } from "@packages/comps";
+import { productInitValues, type Product } from "@packages/types/types";
 import type { EntityId } from "@reduxjs/toolkit";
 import { rules } from "./rules";
 import { useForm, type SubmitHandler } from "react-hook-form";

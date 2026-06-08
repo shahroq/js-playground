@@ -1,5 +1,5 @@
-import site from "@gpublic/json/site.json";
-import logo from "@gpublic/img/logo-dark.png";
+import site from "@packages/json/site.json";
+import logo from "@packages/img/logo-dark.png";
 
 export function Header() {
   return (

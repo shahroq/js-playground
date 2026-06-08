@@ -1,5 +1,5 @@
 import { JSONTree } from "react-json-tree";
-import { Skeleton, Alert } from "@gpublic/comps";
+import { Skeleton, Alert } from "@packages/comps";
 import type { EntityId } from "@reduxjs/toolkit";
 import { useProduct } from "./hooks";
 

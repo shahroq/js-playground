@@ -1,7 +1,7 @@
-import { Button } from "@gpublic/comps";
+import { Button } from "@packages/comps";
 import { PageTitle } from "@/comps";
 import { CounterProvider, useCounterContext } from "./counter-context";
-import type { Page } from "@gpublic/types/types";
+import type { Page } from "@packages/types/types";
 
 const page: Page = {
   title: "Counter w/ Context",

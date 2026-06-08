@@ -1,4 +1,4 @@
-import { Alert, Button } from "@gpublic/comps";
+import { Alert, Button } from "@packages/comps";
 import type { EntityId } from "@reduxjs/toolkit";
 import { useDeleteProductMutation } from "./services/products-api";
 import { JSONTree } from "react-json-tree";

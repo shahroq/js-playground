@@ -1,7 +1,7 @@
 import { PageTitle } from "@/comps";
-import { taskInitValues, type Page, type Task } from "@gpublic/types/types";
+import { taskInitValues, type Page, type Task } from "@packages/types/types";
 import { options } from "../types";
-import { Form, Button } from "@gpublic/comps";
+import { Form, Button } from "@packages/comps";
 
 const page: Page = {
   title: "w/ FormData API",

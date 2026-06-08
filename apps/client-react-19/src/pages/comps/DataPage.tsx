@@ -1,6 +1,6 @@
 import { PageTitle } from "@/comps";
-import type { Page } from "@gpublic/types/types";
-import { Button, Table, type TableData } from "@gpublic/comps";
+import type { Page } from "@packages/types/types";
+import { Button, Table, type TableData } from "@packages/comps";
 
 const page: Page = {
   title: "Data",

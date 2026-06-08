@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import type { EntityId } from "@gpublic/types/types";
-import { Alert, Button, Item, ModalV2, Skeleton } from "@gpublic/comps";
+import type { EntityId } from "@packages/types/types";
+import { Alert, Button, Item, ModalV2, Skeleton } from "@packages/comps";
 
 // import { store } from "./store";
 import { useGetProductsQuery } from "./services/products-api";

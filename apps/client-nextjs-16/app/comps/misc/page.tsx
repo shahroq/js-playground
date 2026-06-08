@@ -1,7 +1,7 @@
 "use client";
-import { Button, ModalV2, DummyBox } from "@gpublic/comps";
+import { Button, ModalV2, DummyBox } from "@packages/comps";
 import { PageTitle } from "@/comps";
-import { Page } from "@/gpublic/types/types";
+import { Page } from "@packages/types/types";
 
 const page: Page = {
   title: "Misc",
