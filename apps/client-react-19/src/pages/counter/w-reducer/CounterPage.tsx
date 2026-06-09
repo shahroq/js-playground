@@ -1,8 +1,8 @@
-import { Button } from "@packages/comps";
-import { PageTitle } from "@/comps";
 import { useReducer } from "react";
+import { Button } from "@jsp/shared/comps";
+import type { Page } from "@jsp/shared/types";
+import { PageTitle } from "@/comps";
 import { counterReducer, INITIAL_STATE } from "./counter-reducer";
-import type { Page } from "@packages/types/types";
 
 const page: Page = {
   title: "Counter w/ Reducer",

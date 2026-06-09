@@ -1,5 +1,5 @@
 import { serve } from "bun";
-import data from "../packages/json/catalog.json";
+import { catalog as data } from "@jsp/shared/json";
 
 const port = 3000;
 

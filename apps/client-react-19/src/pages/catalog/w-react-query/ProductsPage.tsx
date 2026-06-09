@@ -1,5 +1,5 @@
+import type { Page } from "@jsp/shared/types";
 import { PageTitle } from "@/comps";
-import type { Page } from "@packages/types/types";
 import { ProductsList } from "./ProductsList";
 
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";

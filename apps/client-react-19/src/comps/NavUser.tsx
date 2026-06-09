@@ -1,6 +1,6 @@
-import site from "@packages/json/site.json";
-import avatar from "@packages/img/avatar.png";
-import { Button, Item } from "@packages/comps";
+import { site } from "@jsp/shared/json";
+import { avatar } from "@jsp/shared/img";
+import { Button, Item } from "@jsp/shared/comps";
 
 const user = site.user;
 

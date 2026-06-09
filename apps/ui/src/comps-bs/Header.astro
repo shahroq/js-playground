@@ -1,5 +1,6 @@
 ---
-import site from "@packages/json/site.json";
+import { site } from "@jsp/shared/json";
+import { logoDark as logo } from "@jsp/shared/img";
 
 const app = site.app;
 ---
@@ -7,7 +8,7 @@ const app = site.app;
 <nav class="navbar container-fluid gap-2">
   <a class="navbar-brand d-flex align-items-center gap-2" href="#">
     <img
-      src={`/packages/img/${app.logo}`}
+      src={logo.src}
       alt="Logo"
       width="35"
       class="d-inline-block align-text-top"

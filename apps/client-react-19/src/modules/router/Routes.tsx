@@ -1,10 +1,11 @@
 import { lazy, Suspense } from "react";
 import { Route } from "./Route";
-import { Spinner } from "@packages/comps";
-import { pause } from "@packages/utils";
+import { Spinner } from "@jsp/shared/comps";
+import { pause } from "@jsp/shared/utils";
 // Pages
 import HomePage from "@/pages/HomePage";
 import DashboardPage from "@/pages/DashboardPage";
+import SandboxPage from "@/pages/SandboxPage";
 // auth
 import AuthPage from "@/pages/auth/plain/AuthPage";
 // counter
@@ -18,7 +19,7 @@ import DataPage from "@/pages/comps/DataPage";
 import ModalPage from "@/pages/comps/ModalPage";
 import MiscPage from "@/pages/comps/MiscPage";
 const LazyPage = lazy(async () => {
-  await pause(2000);
+  await pause(1500);
   return import("@/pages/comps/LazyPage");
 });
 import AudioPage from "@/pages/comps/AudioPage";
@@ -34,6 +35,7 @@ import ProductPageWRQ from "@/pages/catalog/w-react-query/ProductsPage";
 const routes = [
   { path: "/", element: <HomePage /> },
   { path: "/dashboard", element: <DashboardPage /> },
+  { path: "/sandbox", element: <SandboxPage /> },
   // auth
   { path: "/auth/plain", element: <AuthPage /> },
   // comps

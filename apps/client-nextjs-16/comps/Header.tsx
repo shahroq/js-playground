@@ -1,5 +1,5 @@
-import site from "@packages/json/site.json";
-import logo from "@packages/img/logo-dark.png";
+import { site } from "@jsp/shared/json";
+import { logoDark as logo } from "@jsp/shared/img";
 
 export function Header() {
   return (

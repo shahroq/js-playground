@@ -1,4 +1,4 @@
-import { Hero } from "@packages/comps";
+import { Hero } from "@jsp/shared/comps";
 
 export default function HomePage() {
   return (

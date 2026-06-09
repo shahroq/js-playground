@@ -106,6 +106,7 @@
       "name": "client-nextjs-16",
       "version": "0.1.0",
       "dependencies": {
+        "@jsp/shared": "workspace:*",
         "next": "16.2.6",
       },
       "devDependencies": {
@@ -120,7 +121,7 @@
       "name": "bun-react-template",
       "version": "0.1.0",
       "dependencies": {
-        "@jps/shared": "workspace:*",
+        "@jsp/shared": "workspace:*",
         "bun-plugin-tailwind": "^0.1.2",
       },
       "devDependencies": {
@@ -138,6 +139,9 @@
     },
     "apps/server-bun": {
       "name": "server-bun",
+      "dependencies": {
+        "@jsp/shared": "workspace:*",
+      },
       "devDependencies": {
         "@types/bun": "latest",
       },
@@ -225,6 +229,7 @@
     "apps/ui": {
       "name": "ui",
       "dependencies": {
+        "@jsp/shared": "workspace:*",
         "@tailwindcss/vite": "^4.2.4",
         "astro": "^6.2.2",
       },
@@ -236,7 +241,7 @@
       },
     },
     "packages/shared": {
-      "name": "@jps/shared",
+      "name": "@jsp/shared",
       "version": "1.0.0",
     },
   },
@@ -681,8 +686,6 @@
 
     "@jest/types": ["@jest/types@30.4.1", "", { "dependencies": { "@jest/pattern": "30.4.0", "@jest/schemas": "30.4.1", "@types/istanbul-lib-coverage": "^2.0.6", "@types/istanbul-reports": "^3.0.4", "@types/node": "*", "@types/yargs": "^17.0.33", "chalk": "^4.1.2" } }, "sha512-f1x/vJXIfjOlEmejYpbkbgw1gOqpPECwMvMEtBqe47j7H2Hg8h8w3o3ikhSXq3MI15kg+oQ0exWO0uCtTNJLoQ=="],
 
-    "@jps/shared": ["@jps/shared@workspace:packages/shared"],
-
     "@jridgewell/gen-mapping": ["@jridgewell/gen-mapping@0.3.13", "", { "dependencies": { "@jridgewell/sourcemap-codec": "^1.5.0", "@jridgewell/trace-mapping": "^0.3.24" } }, "sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA=="],
 
     "@jridgewell/remapping": ["@jridgewell/remapping@2.3.5", "", { "dependencies": { "@jridgewell/gen-mapping": "^0.3.5", "@jridgewell/trace-mapping": "^0.3.24" } }, "sha512-LI9u/+laYG4Ds1TDKSJW2YPrIlcVYOwi2fUC6xB43lueCjgxV4lffOCZCtYFiH6TNOX+tQKXx97T4IKHbhyHEQ=="],
@@ -694,6 +697,8 @@
     "@jridgewell/sourcemap-codec": ["@jridgewell/sourcemap-codec@1.5.5", "", {}, "sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og=="],
 
     "@jridgewell/trace-mapping": ["@jridgewell/trace-mapping@0.3.31", "", { "dependencies": { "@jridgewell/resolve-uri": "^3.1.0", "@jridgewell/sourcemap-codec": "^1.4.14" } }, "sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw=="],
+
+    "@jsp/shared": ["@jsp/shared@workspace:packages/shared"],
 
     "@kurkle/color": ["@kurkle/color@0.3.4", "", {}, "sha512-M5UknZPHRu3DEDWoipU6sE8PdkZ6Z/S+v4dD+Ke8IaNlpdSQah50lz1KtcFBa2vsdOnwbbnxJwVM4wty6udA5w=="],
 

@@ -5,7 +5,15 @@
   "private": true,
   "scripts": {
     "format": "prettier --write .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "ui": "bun run --filter './apps/ui' dev",
+    "react": "bun run --filter './apps/client-react-19' dev",
+    "next": "bun run --filter './apps/client-nextjs-16' dev",
+    "angular": "bun run --filter './apps/client-angular-21' start",
+    "express": "bun run --filter './apps/server-express' start:dev",
+    "nest": "bun run --filter './apps/server-nestjs' start:dev",
+    "bun-server": "bun run --filter './apps/server-bun' start:dev",
+    "json-server": "bun run --filter './apps/server-json-server' start"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",

@@ -1,5 +1,5 @@
+import { Page } from "@jsp/shared/types";
 import { PageTitle } from "@/comps";
-import { Page } from "@packages/types/types";
 import { createTaskReducer } from "../actions";
 import FormTask from "../FormTask";
 

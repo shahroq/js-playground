@@ -1,7 +1,6 @@
 import "dotenv/config";
 import { createClient } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
-// import { tasksTable } from "@/data/schema";
 
 // throw new Error("Error for no reason!");
 

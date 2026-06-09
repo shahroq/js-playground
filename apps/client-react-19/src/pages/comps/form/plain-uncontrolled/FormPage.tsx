@@ -1,8 +1,8 @@
 import { useRef, type ChangeEvent, type SubmitEvent } from "react";
+import { taskInitValues, type Page } from "@jsp/shared/types";
+import { Form, Button } from "@jsp/shared/comps";
 import { PageTitle } from "@/comps";
-import { taskInitValues, type Page } from "@packages/types/types";
 import { options, type FormElement } from "../types";
-import { Form, Button } from "@packages/comps";
 
 const page: Page = {
   title: "Plain",

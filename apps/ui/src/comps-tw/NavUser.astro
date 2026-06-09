@@ -1,5 +1,7 @@
 ---
-import site from "@packages/json/site.json";
+import { site } from "@jsp/shared/json";
+import { avatar } from "@jsp/shared/img";
+
 const user = site.user;
 ---
 
@@ -10,11 +12,7 @@ const user = site.user;
     data-toggle="dropdown"
     aria-expanded="false"
   >
-    <img
-      src={`/packages/img/${user.avatar}`}
-      alt={`/${user.name}`}
-      class="avatar"
-    />
+    <img src={avatar.src} alt={`/${user.name}`} class="avatar" />
 
     <dl>
       <dt>{user.name}</dt>

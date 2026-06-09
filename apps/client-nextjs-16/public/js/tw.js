@@ -1,5 +1,5 @@
-import { setupDropdownToggle } from "@packages/js/dropdown";
-import { setupOffcanvas } from "@packages/js/offcanvas";
+import { setupDropdownToggle } from "@jsp/shared/js/dropdown";
+import { setupOffcanvas } from "@jsp/shared/js/offcanvas";
 
 // AUTO INIT
 document.addEventListener("DOMContentLoaded", () => {

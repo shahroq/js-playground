@@ -7,6 +7,9 @@
     "start": "bun run ./src/main.ts",
     "start:dev": "bun --watch run ./src/main.ts"
   },
+  "dependencies": {
+    "@jsp/shared": "workspace:*"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },

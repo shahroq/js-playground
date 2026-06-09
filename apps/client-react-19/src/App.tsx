@@ -1,7 +1,7 @@
-import { Header } from "./comps/Header";
-import { Sidebar } from "./comps/Sidebar";
-import "./index.css";
 import { Routes } from "./modules/router/Routes";
+import { Header } from "@/comps/Header";
+import { Sidebar } from "@/comps/Sidebar";
+import "./index.css";
 
 export function App() {
   return (

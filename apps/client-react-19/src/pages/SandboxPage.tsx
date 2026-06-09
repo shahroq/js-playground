@@ -2,15 +2,15 @@ import type { Page } from "@jsp/shared/types";
 import { PageTitle } from "@/comps";
 
 const page: Page = {
-  title: "Lazy",
-  breadcrumb: [{ label: "Components", path: "/comps" }, { label: "Lazy" }],
+  title: "Sandbox",
+  breadcrumb: [{ label: "Sandbox" }],
 };
 
-export default function MiscPage() {
+export default function SandboxPage() {
   return (
     <section>
       <PageTitle page={page} />
-      <h3>This a lazy page!</h3>
+      ...
     </section>
   );
 }

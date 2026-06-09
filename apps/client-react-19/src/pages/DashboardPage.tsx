@@ -1,5 +1,5 @@
-import { Hero } from "@jps/shared/comps";
-import type { Page } from "@jps/shared/types";
+import { Hero } from "@jsp/shared/comps";
+import type { Page } from "@jsp/shared/types";
 import { PageTitle } from "@/comps";
 
 const page: Page = {

@@ -2,15 +2,15 @@ import { Page } from "@jsp/shared/types";
 import { PageTitle } from "@/comps";
 
 const page: Page = {
-  title: "Catalog w/ ORM",
-  breadcrumb: [{ label: "Catalog" }],
+  title: "Sandbox",
+  breadcrumb: [{ label: "Sandbox" }],
 };
 
-export default async function Catalog() {
+export default function Sandbox() {
   return (
     <section>
       <PageTitle page={page} />
-      <div>Catalog</div>
+      ...
     </section>
   );
 }

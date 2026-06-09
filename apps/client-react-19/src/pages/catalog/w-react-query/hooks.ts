@@ -9,7 +9,7 @@ import {
 } from "./services/products-api";
 import type { EntityId } from "@reduxjs/toolkit";
 import { queryClient } from "./services/api";
-import type { Product } from "@packages/types/types";
+import type { Product } from "@jsp/shared/types";
 
 export const useProducts = () =>
   useQuery({

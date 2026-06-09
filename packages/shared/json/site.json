@@ -8,13 +8,14 @@
   "navSide": [
     { "label": "Home", "path": "/" },
     { "label": "Dashboard", "path": "/dashboard" },
+    { "label": "Sandbox", "path": "/sandbox" },
     {
       "label": "Auth",
       "children": [
         {
           "label": "Plain",
-          "path": "/auth/plain",
-          "targets": ["client-react-19"]
+          "targets": ["client-react-19"],
+          "path": "/auth/plain"
         },
         {
           "label": "w/ Auth.js",
@@ -27,33 +28,33 @@
       "children": [
         {
           "label": "Data",
-          "path": "/comps/data",
-          "targets": ["ui", "client-react-19"]
+          "targets": ["ui", "client-react-19"],
+          "path": "/comps/data"
         },
         {
           "label": "Modal",
-          "path": "/comps/modal",
-          "targets": ["client-react-19"]
+          "targets": ["client-react-19"],
+          "path": "/comps/modal"
         },
         {
           "label": "Misc",
-          "path": "/comps/misc",
-          "targets": ["ui", "client-react-19", "client-nextjs-16"]
+          "targets": ["ui", "client-react-19", "client-nextjs-16"],
+          "path": "/comps/misc"
         },
         {
           "label": "Lazy",
-          "path": "/comps/lazy",
-          "targets": ["client-react-19", "client-nextjs-16"]
+          "targets": ["client-react-19"],
+          "path": "/comps/lazy"
         },
         {
           "label": "Audio",
-          "path": "/comps/audio",
-          "targets": ["client-react-19"]
+          "targets": ["client-react-19"],
+          "path": "/comps/audio"
         },
         {
           "label": "Form",
-          "path": "/comps/form",
-          "targets": ["ui"]
+          "targets": ["ui"],
+          "path": "/comps/form"
         },
         {
           "label": "Form",
@@ -66,23 +67,23 @@
             },
             {
               "label": "Plain (Uncontrolled) ",
-              "path": "/comps/form/plain-uncontrolled",
-              "targets": ["client-react-19"]
+              "targets": ["client-react-19"],
+              "path": "/comps/form/plain-uncontrolled"
             },
             {
               "label": "w/ FormData API (*)",
-              "path": "/comps/form/w-formdata-api",
-              "targets": ["client-react-19"]
+              "targets": ["client-react-19"],
+              "path": "/comps/form/w-formdata-api"
             },
             {
               "label": "w/ useActionState",
-              "path": "/comps/form/w-useactionstate",
-              "targets": ["client-react-19"]
+              "targets": ["client-react-19"],
+              "path": "/comps/form/w-useactionstate"
             },
             {
               "label": "w/ React Hook Form",
-              "path": "/comps/form/w-react-hook-form",
-              "targets": ["client-react-19"]
+              "targets": ["client-react-19"],
+              "path": "/comps/form/w-react-hook-form"
             },
             {
               "label": "w/ TanStack Form",
@@ -124,12 +125,12 @@
           "targets": ["client-nextjs-16"],
           "path": "/catalog/w-orm",
           "children": [
-            { "label": "Products", "path": "/catalog/w-orm/products" },
-            { "label": "Reviews", "path": "/catalog/w-orm/reviews" }
+            { "label": "Products", "path": "/catalog/w-orm/products" }
           ]
         },
         {
           "label": "w/ Redux Toolkit Query",
+          "targets": ["client-react-19"],
           "children": [
             {
               "label": "Products",
@@ -139,6 +140,7 @@
         },
         {
           "label": "w/ React Query",
+          "targets": ["client-react-19"],
           "children": [
             { "label": "Products", "path": "/catalog/w-react-query/products" }
           ]

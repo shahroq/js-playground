@@ -1,11 +1,11 @@
 "use client";
-import { usePathname } from "next/navigation";
-import site from "@packages/json/site.json";
-import { filterNavItems } from "@packages/utils";
-import type { NavItem } from "@packages/types/types";
-import { Nav } from "@packages/comps/Nav";
-import { NavUser } from "./NavUser";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { site } from "@jsp/shared/json";
+import { filterNavItems } from "@jsp/shared/utils";
+import type { NavItem } from "@jsp/shared/types";
+import { Nav } from "@jsp/shared/comps";
+import { NavUser } from "./NavUser";
 
 let navItems: NavItem[] = site.navSide;
 navItems = filterNavItems(site.navSide, "client-nextjs-16");

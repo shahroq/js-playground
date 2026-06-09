@@ -1,7 +1,14 @@
-import type { Page } from "@packages/types/types";
-import { Alert, Button, DummyBox, Hero, Counter, Item } from "@packages/comps";
+import type { Page } from "@jsp/shared/types";
+import {
+  Alert,
+  Button,
+  DummyBox,
+  Hero,
+  Counter,
+  Item,
+} from "@jsp/shared/comps";
+import { avatar1 as avatar } from "@jsp/shared/img";
 import { PageTitle } from "@/comps";
-import avatar2 from "@packages/img/avatar-2.png";
 
 const page: Page = {
   title: "Misc",
@@ -16,7 +23,7 @@ export default function MiscPage() {
       {/* Item */}
       <Item variant="muted">
         <Item.Content className="flex-none ">
-          <img src={avatar2} className="avatar" />
+          <img src={avatar} className="avatar" />
         </Item.Content>
         <Item.Content>
           <Item.Title>Default Variant</Item.Title>

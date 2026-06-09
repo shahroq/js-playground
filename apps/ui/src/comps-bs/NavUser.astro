@@ -1,5 +1,7 @@
 ---
-import site from "@packages/json/site.json";
+import { site } from "@jsp/shared/json";
+import { avatar } from "@jsp/shared/img";
+
 const user = site.user;
 ---
 
@@ -11,7 +13,7 @@ const user = site.user;
     aria-expanded="false"
   >
     <img
-      src={`/packages/img/${user.avatar}`}
+      src={avatar.src}
       alt={`/${user.name}`}
       width="32"
       height="32"

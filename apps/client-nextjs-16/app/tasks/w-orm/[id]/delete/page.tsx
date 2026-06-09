@@ -1,5 +1,5 @@
-import { deleteTask } from "../../actions";
 import { redirect } from "next/navigation";
+import { deleteTask } from "../../actions";
 
 type Props = {
   params: Promise<{ id: string }>;

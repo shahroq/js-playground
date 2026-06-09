@@ -1,7 +1,7 @@
-import { Alert, Button } from "@packages/comps";
 import type { EntityId } from "@reduxjs/toolkit";
-import { useDeleteProductMutation } from "./services/products-api";
 import { JSONTree } from "react-json-tree";
+import { Alert, Button } from "@jsp/shared/comps";
+import { useDeleteProductMutation } from "./services/products-api";
 
 type Props = {
   id?: EntityId;

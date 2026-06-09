@@ -1,5 +1,5 @@
-import { tasksTable } from "@/data/schema";
 import { InferSelectModel } from "drizzle-orm";
+import { tasksTable } from "@/data/schema";
 
 /*
 export type Task = {

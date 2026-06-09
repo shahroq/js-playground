@@ -1,5 +1,5 @@
 "use client";
-import { Form, Button, Alert } from "@packages/comps";
+import { Form, Button, Alert } from "@jsp/shared/comps";
 import { useActionState } from "react";
 import { FormState, Task } from "./types";
 

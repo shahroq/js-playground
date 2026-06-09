@@ -1,7 +1,7 @@
 "use client";
-import { Button, ModalV2, DummyBox } from "@packages/comps";
+import { Page } from "@jsp/shared/types";
+import { Button, ModalV2, DummyBox } from "@jsp/shared/comps";
 import { PageTitle } from "@/comps";
-import { Page } from "@packages/types/types";
 
 const page: Page = {
   title: "Misc",

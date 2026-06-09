@@ -1,6 +1,6 @@
-import { Button } from "@packages/comps";
+import { Button } from "@jsp/shared/comps";
+import type { Page } from "@jsp/shared/types";
 import { PageTitle } from "@/comps";
-import type { Page } from "@packages/types/types";
 
 import { Provider } from "react-redux";
 import { store, type RootState } from "./store";

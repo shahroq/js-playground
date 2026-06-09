@@ -1,10 +1,10 @@
-import type { User } from "@packages/types/types";
 import {
   createContext,
   useContext,
   type PropsWithChildren,
   useReducer,
 } from "react";
+import type { User } from "@jsp/shared/types";
 
 type ContextType = {
   login: (email: string, password: string) => void;

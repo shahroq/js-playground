@@ -1,6 +1,6 @@
-import type { Page } from "@packages/types/types";
-import { Nav } from "@packages/comps";
 import { Link } from "@/modules/router";
+import type { Page } from "@jsp/shared/types";
+import { Nav } from "@jsp/shared/comps";
 
 type Props = {
   page: Page;

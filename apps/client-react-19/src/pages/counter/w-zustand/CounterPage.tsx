@@ -1,8 +1,8 @@
-import { Button } from "@packages/comps";
+import { useShallow } from "zustand/shallow";
+import { Button } from "@jsp/shared/comps";
+import type { Page } from "@jsp/shared/types";
 import { PageTitle } from "@/comps";
 import { useCounterStore } from "./store";
-import { useShallow } from "zustand/shallow";
-import type { Page } from "@packages/types/types";
 
 const page: Page = {
   title: "Counter w/ Zustand",

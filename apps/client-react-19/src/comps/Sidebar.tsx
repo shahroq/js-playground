@@ -1,9 +1,9 @@
-import type { NavItem } from "@packages/types/types";
-import { NavUser } from "./NavUser";
-import site from "@packages/json/site.json";
-import { filterNavItems } from "@packages/utils";
 import { Link, useRouterContext as useRouterContext } from "@/modules/router";
-import { Nav } from "@packages/comps/Nav";
+import { site } from "@jsp/shared/json";
+import type { NavItem } from "@jsp/shared/types";
+import { filterNavItems } from "@jsp/shared/utils";
+import { Nav } from "@jsp/shared/comps";
+import { NavUser } from "./NavUser";
 
 let navItems: NavItem[] = site.navSide;
 navItems = filterNavItems(site.navSide, "client-react-19");

@@ -1,5 +1,5 @@
 {
-  "name": "@jps/shared",
+  "name": "@jsp/shared",
   "version": "1.0.0",
   "main": "./index.ts",
   "module": "./index.ts",
@@ -7,7 +7,9 @@
     "./utils": "./utils/index.ts",
     "./types": "./types/index.ts",
     "./comps": "./comps/index.ts",
+    "./validation": "./validation/index.ts",
     "./json": "./json/index.ts",
-    "./validation": "./validation/index.ts"
+    "./audio": "./audio/index.ts",
+    "./img": "./img/index.ts"
   }
 }

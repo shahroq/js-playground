@@ -1,9 +1,9 @@
-import { PageTitle } from "@/comps";
-import { Page } from "@packages/types/types";
-import { getProducts } from "../actions";
-import { Table, TableData } from "@packages/comps";
-import { Product } from "../types";
 import Link from "next/link";
+import { Page } from "@jsp/shared/types";
+import { Table, TableData } from "@jsp/shared/comps";
+import { PageTitle } from "@/comps";
+import { getProducts } from "../actions";
+import { Product } from "../types";
 
 const page: Page = {
   title: "Catalog w/ ORM",

@@ -1,10 +1,9 @@
 ---
-import site from "@packages/json/site.json";
+import { site } from "@jsp/shared/json";
 import Nav from "./Nav.astro";
-import type { NavItem } from "@packages/types/types";
-import { filterNavItems, prefixNavPaths } from "@packages/utils";
+import type { NavItem } from "@jsp/shared/types";
+import { filterNavItems, prefixNavPaths } from "@jsp/shared/utils";
 import NavUser from "@/comps-bs/NavUser.astro";
-import NavSidebar from "./NavSidebar.astro";
 
 let navItems: NavItem[] = site.navSide;
 navItems = filterNavItems(navItems, "ui");

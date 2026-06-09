@@ -1,6 +1,6 @@
 import { useEffect, type PropsWithChildren } from "react";
 import { useAuthContext } from "./auth-context";
-import { Alert } from "@packages/comps";
+import { Alert } from "@jsp/shared/comps";
 import { useRouterContext } from "@/modules/router";
 
 export function ProtectedRoute({ children }: PropsWithChildren) {

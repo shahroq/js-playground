@@ -1,5 +1,5 @@
 {
-  "name": "bun-react-template",
+  "name": "client-react-19",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -16,7 +16,7 @@
     "test:watch": "bun test --watch"
   },
   "dependencies": {
-    "@jps/shared": "workspace:*",
+    "@jsp/shared": "workspace:*",
     "bun-plugin-tailwind": "^0.1.2"
   },
   "devDependencies": {

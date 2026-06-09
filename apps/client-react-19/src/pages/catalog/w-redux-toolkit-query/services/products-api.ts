@@ -1,4 +1,4 @@
-import type { EntityId, Product } from "@packages/types/types";
+import type { EntityId, Product } from "@jsp/shared/types";
 import { api } from "./api";
 
 /*

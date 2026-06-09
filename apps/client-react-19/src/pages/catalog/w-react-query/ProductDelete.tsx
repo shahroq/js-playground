@@ -1,5 +1,5 @@
-import { Alert, Button } from "@packages/comps";
 import type { EntityId } from "@reduxjs/toolkit";
+import { Alert, Button } from "@jsp/shared/comps";
 import { useDeleteProduct } from "./hooks";
 
 type Props = {

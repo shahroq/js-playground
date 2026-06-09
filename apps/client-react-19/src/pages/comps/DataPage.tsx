@@ -1,6 +1,6 @@
+import type { Page } from "@jsp/shared/types";
+import { Button, Table, type TableData } from "@jsp/shared/comps";
 import { PageTitle } from "@/comps";
-import type { Page } from "@packages/types/types";
-import { Button, Table, type TableData } from "@packages/comps";
 
 const page: Page = {
   title: "Data",

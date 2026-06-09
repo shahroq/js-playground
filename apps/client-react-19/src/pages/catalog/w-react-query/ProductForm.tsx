@@ -1,10 +1,10 @@
-import { Alert, Button, Skeleton, Form } from "@packages/comps";
-import { productInitValues, type Product } from "@packages/types/types";
 import type { EntityId } from "@reduxjs/toolkit";
+import { Alert, Button, Skeleton, Form } from "@jsp/shared/comps";
 import { rules } from "./rules.ts";
 
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { useCreateProduct, useProduct, useUpdateProduct } from "./hooks.ts";
+import { productInitValues, type Product } from "@jsp/shared/types";
 
 type Props = {
   id?: EntityId;

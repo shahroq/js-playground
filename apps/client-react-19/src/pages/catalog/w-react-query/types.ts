@@ -1,4 +1,4 @@
-import type { Product } from "@packages/types/types";
+import type { Product } from "@jsp/shared/types";
 
 export type FormState = {
   values?: Partial<Product>;

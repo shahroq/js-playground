@@ -1,7 +1,7 @@
 "use client";
-import { Hero } from "@packages/comps";
+import { Hero } from "@jsp/shared/comps";
+import { Page } from "@jsp/shared/types";
 import { PageTitle } from "@/comps";
-import { Page } from "@packages/types/types";
 
 const page: Page = {
   title: "Dashboard",

@@ -1,7 +1,7 @@
-import { Skeleton, Alert, Button, Item, ModalV2 } from "@packages/comps";
-import type { EntityId } from "@packages/types/types";
-import { ProductDetails } from "./ProductDetails";
 import { useState } from "react";
+import { Skeleton, Alert, Button, Item, ModalV2 } from "@jsp/shared/comps";
+import type { EntityId } from "@jsp/shared/types";
+import { ProductDetails } from "./ProductDetails";
 import { ProductDelete } from "./ProductDelete";
 import { ProductForm } from "./ProductForm";
 import { useProducts } from "./hooks";

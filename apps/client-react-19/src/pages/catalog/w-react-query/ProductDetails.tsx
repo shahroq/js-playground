@@ -1,6 +1,6 @@
-import { JSONTree } from "react-json-tree";
-import { Skeleton, Alert } from "@packages/comps";
 import type { EntityId } from "@reduxjs/toolkit";
+import { JSONTree } from "react-json-tree";
+import { Skeleton, Alert } from "@jsp/shared/comps";
 import { useProduct } from "./hooks";
 
 type Props = {

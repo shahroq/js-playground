@@ -1,7 +1,7 @@
+import { taskInitValues, type Page, type Task } from "@jsp/shared/types";
+import { Form, Button } from "@jsp/shared/comps";
 import { PageTitle } from "@/comps";
-import { taskInitValues, type Page, type Task } from "@packages/types/types";
 import { options } from "../types";
-import { Form, Button } from "@packages/comps";
 
 const page: Page = {
   title: "w/ useActionState",

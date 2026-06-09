@@ -3,7 +3,6 @@ import {
   useContext,
   useState,
   type PropsWithChildren,
-  type ReactNode,
 } from "react";
 
 type ContextType = {

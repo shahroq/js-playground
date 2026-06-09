@@ -1,5 +1,5 @@
 // import { v4 as uuidv4 } from "uuid";
-import type { Product } from "@packages/types/types";
+import type { Product } from "@jsp/shared/types";
 import { httpClient } from "./api";
 
 export const productKeys = {

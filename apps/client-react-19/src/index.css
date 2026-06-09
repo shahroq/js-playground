@@ -1,2 +1,2 @@
 @import "tailwindcss";
-@import "../packages/css/global-tw";
+@import "../../../packages/shared/css/global-tw.css";

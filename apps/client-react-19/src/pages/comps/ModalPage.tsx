@@ -1,7 +1,7 @@
-import type { Page } from "@packages/types/types";
-import { PageTitle } from "@/comps";
-import { Button, DummyBox, ModalV2, useModalContext } from "@packages/comps";
 import { useState } from "react";
+import type { Page } from "@jsp/shared/types";
+import { Button, DummyBox, ModalV2, useModalContext } from "@jsp/shared/comps";
+import { PageTitle } from "@/comps";
 
 const page: Page = {
   title: "Modal",
