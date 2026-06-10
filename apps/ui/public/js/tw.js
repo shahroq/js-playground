@@ -1,6 +1,6 @@
-import { setupDropdownToggle } from "../../../../packages/shared/js/dropdown";
-import { setupOffcanvas } from "../../../../packages/shared/js/offcanvas";
-import { setupOffcanvas } from "../../../../packages/shared/js/alert";
+import { setupDropdownToggle } from "../../../../packages/shared/public/js/dropdown";
+import { setupOffcanvas } from "../../../../packages/shared/public/js/offcanvas";
+import { setupOffcanvas } from "../../../../packages/shared/public/js/alert";
 
 // AUTO INIT
 document.addEventListener("DOMContentLoaded", () => {
