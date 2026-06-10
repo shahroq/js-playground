@@ -2,14 +2,22 @@
   "name": "@jsp/shared",
   "version": "1.0.0",
   "main": "./index.ts",
-  "module": "./index.ts",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
   "exports": {
-    "./lib": "./lib/index.ts",
-    "./types": "./types/index.ts",
-    "./comps": "./comps/index.ts",
-    "./validation": "./validation/index.ts",
-    "./json": "./json/index.ts",
-    "./audio": "./audio/index.ts",
-    "./img": "./img/index.ts"
+    "./lib": "./src/lib/index.ts",
+    "./types": "./src/types/index.ts",
+    "./comps": "./src/comps/index.ts",
+    "./validation": "./src/validation/index.ts",
+    "./json": "./src/json/index.ts",
+    "./audio": "./public/audio/index.ts",
+    "./img": "./public/img/index.ts"
   }
 }
