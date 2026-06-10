@@ -1,5 +1,5 @@
 import type { NavItem } from "../types/types";
-import { cn, isActivePath } from "../utils";
+import { cn, isActivePath } from "../lib";
 
 type LinkComponentProps = {
   href: string;

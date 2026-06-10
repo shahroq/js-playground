@@ -1,6 +1,6 @@
 "use client";
 import type { PropsWithChildren, ComponentProps } from "react";
-import { cn } from "../utils";
+import { cn } from "../lib";
 
 type SelectOption = { label: string; value: string };
 type Props = ComponentProps<"form"> & PropsWithChildren & { legend?: string };

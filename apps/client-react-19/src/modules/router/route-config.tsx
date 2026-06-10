@@ -1,6 +1,6 @@
 import { Fragment, lazy, Suspense } from "react";
 import { Spinner } from "@jsp/shared/comps";
-import { pause } from "@jsp/shared/utils";
+import { pause } from "@jsp/shared/lib";
 
 // Layouts
 import DashboardLayout from "@/layouts/DashboardLayout";

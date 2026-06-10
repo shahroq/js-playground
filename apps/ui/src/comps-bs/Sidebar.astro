@@ -2,7 +2,7 @@
 import { site } from "@jsp/shared/json";
 import Nav from "./Nav.astro";
 import type { NavItem } from "@jsp/shared/types";
-import { filterNavItems, prefixNavPaths } from "@jsp/shared/utils";
+import { filterNavItems, prefixNavPaths } from "@jsp/shared/lib";
 import NavUser from "@/comps-bs/NavUser.astro";
 
 let navItems: NavItem[] = site.navSide;

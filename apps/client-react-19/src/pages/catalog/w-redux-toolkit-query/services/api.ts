@@ -4,7 +4,7 @@ import type {
   FetchArgs,
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query";
-import { pause } from "@jsp/shared/utils";
+import { pause } from "@jsp/shared/lib";
 import type { RootState } from "../store";
 
 const API_URL = "http://localhost:3009";

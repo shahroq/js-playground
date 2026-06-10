@@ -1,5 +1,5 @@
 "use client";
-import { cn } from "../utils";
+import { cn } from "../lib";
 import type { PropsWithChildrenAndCN } from "../types/types";
 
 // parent comp

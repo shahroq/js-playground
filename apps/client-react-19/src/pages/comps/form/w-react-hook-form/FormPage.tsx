@@ -1,5 +1,5 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { pause } from "@jsp/shared/utils";
+import { pause } from "@jsp/shared/lib";
 import { Form, Button, Alert } from "@jsp/shared/comps";
 import { taskInitValues, type Page, type Task } from "@jsp/shared/types";
 import { taskSchema, zodTaskValidation as v } from "@jsp/shared/validation";

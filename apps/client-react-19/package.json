@@ -16,8 +16,7 @@
     "test:watch": "bun test --watch"
   },
   "dependencies": {
-    "@jsp/shared": "workspace:*",
-    "bun-plugin-tailwind": "^0.1.2"
+    "@jsp/shared": "workspace:*"
   },
   "devDependencies": {
     "@types/bun": "latest"
