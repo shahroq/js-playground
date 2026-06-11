@@ -14,10 +14,12 @@
   "exports": {
     "./lib": "./src/lib/index.ts",
     "./types": "./src/types/index.ts",
-    "./comps": "./src/comps/index.ts",
     "./validation": "./src/validation/index.ts",
     "./json": "./src/json/index.ts",
     "./audio": "./public/audio/index.ts",
-    "./img": "./public/img/index.ts"
+    "./img": "./public/img/index.ts",
+    "./comps": "./src/comps/index.ts",
+    "./comps-shadcn": "./src/comps-shadcn/index.ts",
+    "./comps-shadcn-wo-barrel[no-autoimport]/*": "./src/comps-shadcn/*.tsx"
   }
 }
