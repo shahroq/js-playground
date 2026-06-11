@@ -22,10 +22,9 @@
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
 
-    // "baseUrl": ".",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@packages/*": ["./packages/*"]
+      "@/*": ["./src/*"]
     },
 
     // Some stricter flags (disabled by default)

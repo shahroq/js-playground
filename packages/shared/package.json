@@ -18,8 +18,6 @@
     "./json": "./src/json/index.ts",
     "./audio": "./public/audio/index.ts",
     "./img": "./public/img/index.ts",
-    "./comps": "./src/comps/index.ts",
-    "./comps-shadcn": "./src/comps-shadcn/index.ts",
-    "./comps-shadcn-wo-barrel[no-autoimport]/*": "./src/comps-shadcn/*.tsx"
+    "./comps": "./src/comps/index.ts"
   }
 }
