@@ -4,6 +4,7 @@ import { pause } from "@jsp/shared/lib";
 
 // Layouts
 import DashboardLayout from "@/layouts/DashboardLayout";
+import DashboardLayoutShadcn from "@/layouts/DashboardLayoutShadcn";
 
 // Pages:
 // root
@@ -37,6 +38,8 @@ import FormPageWRHF from "@/pages/comps/form/w-react-hook-form/FormPage";
 import ProductsPageWRTK from "@/pages/catalog/w-redux-toolkit-query/ProductsPage";
 import ProductPageWRQ from "@/pages/catalog/w-react-query/ProductsPage";
 import type { RouteConfig } from "./types";
+// shadcn
+import MiscPageShadcn from "@/pages/shadcn/comps/MiscPage";
 
 export const defaultLayout = DashboardLayout;
 
@@ -44,6 +47,7 @@ export const routesConfig: RouteConfig[] = [
   { path: "/", element: <HomePage /> },
   { path: "/dashboard", element: <DashboardPage /> },
   // { path: "/sandbox", element: <SandboxPage />, layout: Fragment },
+  // { path: "/sandbox", element: <SandboxPage /> },
   { path: "/sandbox", element: <SandboxPage /> },
   // auth
   { path: "/auth/plain", element: <AuthPage /> },
@@ -80,6 +84,12 @@ export const routesConfig: RouteConfig[] = [
     element: <ProductsPageWRTK />,
   },
   { path: "/catalog/w-react-query/products", element: <ProductPageWRQ /> },
+  // shadcn
+  {
+    path: "/shadcn/comps/misc",
+    element: <MiscPageShadcn />,
+    layout: DashboardLayoutShadcn,
+  },
 
   // { path: "*", element: <NotFound /> },
 ] as const;

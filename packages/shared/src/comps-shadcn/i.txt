@@ -1,0 +1,1 @@
+bunx --bun shadcn@latest add alert alert-dialog avatar badge breadcrumb button     button-group card dialog input input-group item label select separator sidebar skeleton sonner table textarea
