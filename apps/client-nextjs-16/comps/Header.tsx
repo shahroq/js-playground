@@ -1,14 +1,10 @@
-import { site } from "@jsp/shared/json";
-import { logoDark as logo } from "@jsp/shared/img";
+import { Brand } from "./Brand";
 
 export function Header() {
   return (
     <nav className="container-fluid py-4 flex items-center gap-3">
       {/* Navbar Brand */}
-      <a href="#" className="navbar-brand">
-        <img src={logo.src} alt="Logo" />
-        <span>{site.app.name}</span>
-      </a>
+      <Brand />
 
       {/* HEADER Burger */}
       <button
