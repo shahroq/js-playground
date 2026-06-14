@@ -3,13 +3,13 @@
     @apply antialiased bg-slate-50;
   }
 
-  #root {
-    > div.layout {
-      @apply container-fluid flex lg:gap-4 h-full;
-    }
-
+  .layout.layout-tw {
     header {
       @apply sticky top-0 z-50 bg-gray-800 text-white;
+    }
+
+    .content {
+      @apply container-fluid flex lg:gap-4 h-full;
     }
 
     aside {
@@ -756,4 +756,8 @@
   }
 
   /* component closing bracket */
+}
+
+.test-class {
+  background-color: blue;
 }

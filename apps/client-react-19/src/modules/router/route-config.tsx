@@ -5,6 +5,10 @@ import { pause } from "@jsp/shared/lib";
 // Layouts
 import DashboardLayout from "@/layouts/DashboardLayout";
 import DashboardLayoutShadcn from "@/layouts/DashboardLayoutShadcn";
+// const DashboardLayout = lazy(() => import("@/layouts/DashboardLayout"));
+// const DashboardLayoutShadcn = lazy(
+//   () => import("@/layouts/DashboardLayoutShadcn"),
+// );
 
 // Pages:
 // root
@@ -42,6 +46,7 @@ import type { RouteConfig } from "./types";
 import MiscPageShadcn from "@/pages/shadcn/comps/MiscPage";
 
 export const defaultLayout = DashboardLayout;
+// export const defaultLayout = lazy(() => import("@/layouts/DashboardLayout"));
 
 export const routesConfig: RouteConfig[] = [
   { path: "/", element: <HomePage /> },

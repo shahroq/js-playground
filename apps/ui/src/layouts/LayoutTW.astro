@@ -12,12 +12,15 @@ import Sidebar from "@/comps-tw/Sidebar.astro";
     <meta name="generator" content={Astro.generator} />
     <title>UI: w/ Tailwind 4</title>
   </head>
-  <body id="root">
-    <header><Header /></header>
-
-    <div class="layout">
-      <aside><Sidebar /></aside>
-      <main><slot /></main>
+  <body>
+    <div id="root">
+      <div class="layout layout-tw">
+        <header><Header /></header>
+        <div class="content">
+          <aside><Sidebar /></aside>
+          <main><slot /></main>
+        </div>
+      </div>
     </div>
   </body>
   <script src="../../public/js/tw.js"></script>

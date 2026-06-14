@@ -1,2 +1,6 @@
 @import "tailwindcss";
 @import "../../../packages/shared/public/css/theme-tw.css";
+
+.test {
+  background-color: red;
+}

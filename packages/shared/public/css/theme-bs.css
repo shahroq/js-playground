@@ -2,149 +2,151 @@
   --header-height: 77px;
   --bs-nav-link-opacity: 0.75;
 }
-
-/*
+.layout.layout-bs {
+  /*
 |--------------------------------------------------------------------------
 | Container
 |--------------------------------------------------------------------------
 */
-.h-container {
-  min-height: calc(100vh - var(--header-height));
-}
-
-main {
-  > section {
-    padding: 2rem !important;
-    margin-top: 1rem !important;
-    margin-bottom: 1rem !important;
-
-    background-color: white;
-    border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
-    border-radius: var(--bs-border-radius) !important;
-    box-shadow: var(--bs-box-shadow-sm) !important;
+  .h-container {
+    min-height: calc(100vh - var(--header-height));
   }
-}
 
-/*
+  main {
+    > section {
+      padding: 2rem !important;
+      margin-top: 1rem !important;
+      margin-bottom: 1rem !important;
+
+      background-color: white;
+      border: var(--bs-border-width) var(--bs-border-style)
+        var(--bs-border-color) !important;
+      border-radius: var(--bs-border-radius) !important;
+      box-shadow: var(--bs-box-shadow-sm) !important;
+    }
+  }
+
+  /*
 |--------------------------------------------------------------------------
 | Dropdown: User Nav
 |--------------------------------------------------------------------------
 */
-.user-nav {
-  .dropdown-toggle {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: RGBA(
-      var(--bs-emphasis-color-rgb),
-      var(--bs-link-underline-opacity, 1)
-    ) !important;
+  .user-nav {
+    .dropdown-toggle {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: RGBA(
+        var(--bs-emphasis-color-rgb),
+        var(--bs-link-underline-opacity, 1)
+      ) !important;
 
-    &::after {
-      border: none;
-      content: "...";
-      margin-left: auto;
-      font-weight: bold;
-      transform: rotate(90deg);
+      &::after {
+        border: none;
+        content: "...";
+        margin-left: auto;
+        font-weight: bold;
+        transform: rotate(90deg);
+      }
     }
   }
-}
 
-/*
+  /*
 |--------------------------------------------------------------------------
 | Nav
 |--------------------------------------------------------------------------
 */
-.nav {
-  /* nav ver */
-  .nav-link {
-    --bs-nav-link-padding-y: 0.3rem;
-    opacity: var(--bs-nav-link-opacity);
+  .nav {
+    /* nav ver */
+    .nav-link {
+      --bs-nav-link-padding-y: 0.3rem;
+      opacity: var(--bs-nav-link-opacity);
 
-    &:hover,
-    &.active {
-      opacity: 1;
-      font-weight: 600;
+      &:hover,
+      &.active {
+        opacity: 1;
+        font-weight: 600;
+      }
     }
-  }
-  .nav-item {
-    &::marker {
-      content: "";
-      display: none;
-    }
+    .nav-item {
+      &::marker {
+        content: "";
+        display: none;
+      }
 
-    ul {
-      padding-left: 1rem;
+      ul {
+        padding-left: 1rem;
 
-      .nav-item a {
-        border-left: 0.125rem solid var(--bs-nav-link-color);
-        opacity: var(--bs-nav-link-opacity);
+        .nav-item a {
+          border-left: 0.125rem solid var(--bs-nav-link-color);
+          opacity: var(--bs-nav-link-opacity);
 
-        &:hover,
-        &.active {
-          opacity: 1;
+          &:hover,
+          &.active {
+            opacity: 1;
+          }
         }
       }
     }
   }
-}
 
-/*
+  /*
 |--------------------------------------------------------------------------
 | Breadcrumb
 |--------------------------------------------------------------------------
 */
-.breadcrumb {
-  .nav-item + .nav-item {
-    padding-left: var(--bs-breadcrumb-item-padding-x);
-  }
-  .nav-item + .nav-item::before {
-    float: left;
-    padding-right: var(--bs-breadcrumb-item-padding-x);
-    color: var(--bs-breadcrumb-divider-color);
-    content: var(--bs-breadcrumb-divider, "/");
-  }
-  .nav-item.active {
-    color: var(--bs-breadcrumb-item-active-color);
+  .breadcrumb {
+    .nav-item + .nav-item {
+      padding-left: var(--bs-breadcrumb-item-padding-x);
+    }
+    .nav-item + .nav-item::before {
+      float: left;
+      padding-right: var(--bs-breadcrumb-item-padding-x);
+      color: var(--bs-breadcrumb-divider-color);
+      content: var(--bs-breadcrumb-divider, "/");
+    }
+    .nav-item.active {
+      color: var(--bs-breadcrumb-item-active-color);
+    }
+
+    a.nav-link {
+      text-decoration: underline;
+    }
+
+    span {
+      display: inline-block;
+    }
   }
 
-  a.nav-link {
-    text-decoration: underline;
-  }
-
-  span {
-    display: inline-block;
-  }
-}
-
-/*
+  /*
 |--------------------------------------------------------------------------
 | Dummy Area
 |--------------------------------------------------------------------------
 */
-.dummy-area {
-  background-color: white;
-  border: 1px solid oklch(0.929 0.013 255.508);
-  border-radius: 0.5rem;
-  color: oklch(0.554 0.046 257.417);
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  align-items: center;
-  height: 200px;
-  font-weight: 400;
-  margin-bottom: 1rem;
+  .dummy-area {
+    background-color: white;
+    border: 1px solid oklch(0.929 0.013 255.508);
+    border-radius: 0.5rem;
+    color: oklch(0.554 0.046 257.417);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    height: 200px;
+    font-weight: 400;
+    margin-bottom: 1rem;
 
-  background-image:
-    linear-gradient(-45deg, #efefef 25%, transparent 25%),
-    linear-gradient(-45deg, transparent 75%, #efefef 75%),
-    linear-gradient(-45deg, #efefef 25%, transparent 25%),
-    linear-gradient(-45deg, transparent 75%, #efefef 7%);
+    background-image:
+      linear-gradient(-45deg, #efefef 25%, transparent 25%),
+      linear-gradient(-45deg, transparent 75%, #efefef 75%),
+      linear-gradient(-45deg, #efefef 25%, transparent 25%),
+      linear-gradient(-45deg, transparent 75%, #efefef 7%);
 
-  background-size: 60px 60px;
-  background-position:
-    0 0,
-    0 30px,
-    30px -30px,
-    -30px 0;
+    background-size: 60px 60px;
+    background-position:
+      0 0,
+      0 30px,
+      30px -30px,
+      -30px 0;
+  }
 }
