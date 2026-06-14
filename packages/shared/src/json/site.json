@@ -11,7 +11,7 @@
     { "label": "Sandbox", "path": "/sandbox" },
     {
       "label": "Auth",
-      "children": [
+      "items": [
         {
           "label": "Plain",
           "targets": ["client-react-19"],
@@ -25,7 +25,7 @@
     },
     {
       "label": "Components",
-      "children": [
+      "items": [
         {
           "label": "Data",
           "targets": ["ui", "client-react-19"],
@@ -59,7 +59,7 @@
         {
           "label": "Form",
           "targets": ["ui", "client-react-19"],
-          "children": [
+          "items": [
             {
               "label": "Plain (Controlled) ",
               "path": "/comps/form/plain-controlled",
@@ -100,7 +100,7 @@
     {
       "label": "Counter",
       "targets": ["client-react-19"],
-      "children": [
+      "items": [
         { "label": "Plain", "path": "/counter/plain" },
         { "label": "w/ Context", "path": "/counter/w-context" },
         { "label": "w/ Reducer", "path": "/counter/w-reducer" },
@@ -114,24 +114,22 @@
     {
       "label": "Tasks",
       "targets": ["client-nextjs-16"],
-      "children": [{ "label": "w/ ORM", "path": "/tasks/w-orm" }]
+      "items": [{ "label": "w/ ORM", "path": "/tasks/w-orm" }]
     },
     {
       "label": "Catalog (Remote)",
       "targets": ["client-react-19", "client-nextjs-16"],
-      "children": [
+      "items": [
         {
           "label": "w/ ORM",
           "targets": ["client-nextjs-16"],
           "path": "/catalog/w-orm",
-          "children": [
-            { "label": "Products", "path": "/catalog/w-orm/products" }
-          ]
+          "items": [{ "label": "Products", "path": "/catalog/w-orm/products" }]
         },
         {
           "label": "w/ Redux Toolkit Query",
           "targets": ["client-react-19"],
-          "children": [
+          "items": [
             {
               "label": "Products",
               "path": "/catalog/w-redux-toolkit-query/products"
@@ -141,7 +139,7 @@
         {
           "label": "w/ React Query",
           "targets": ["client-react-19"],
-          "children": [
+          "items": [
             { "label": "Products", "path": "/catalog/w-react-query/products" }
           ]
         }
@@ -150,10 +148,10 @@
     {
       "label": "Shadcn",
       "targets": ["client-react-19", "client-nextjs-16"],
-      "children": [
+      "items": [
         {
           "label": "Comps",
-          "children": [
+          "items": [
             {
               "label": "Misc",
               "path": "/shadcn/comps/misc"

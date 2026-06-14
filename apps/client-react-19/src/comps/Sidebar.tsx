@@ -5,8 +5,8 @@ import { filterNavItems } from "@jsp/shared/lib";
 import { Nav } from "@jsp/shared/comps";
 import { NavUser } from "./NavUser";
 
-let navItems: NavItem[] = site.navSide;
-navItems = filterNavItems(site.navSide, "client-react-19");
+let items: NavItem[] = site.navSide;
+items = filterNavItems(site.navSide, "client-react-19");
 
 export function Sidebar() {
   const { curPath } = useRouterContext();
@@ -22,7 +22,7 @@ export function Sidebar() {
 
       <div className="offcanvas-body py-4">
         <Nav
-          navItems={navItems}
+          items={items}
           curPath={curPath}
           className={"nav nav-vertical"}
           Link={Link}

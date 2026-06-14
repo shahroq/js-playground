@@ -29,9 +29,9 @@ const isDisabled = !item.path;
   }
 
   {
-    item.children?.length && (
+    item.items?.length && (
       <Nav
-        navItems={item.children}
+        navItems={item.items}
         className="nav nav-vertical"
         level={level + 1}
         curPath={curPath}

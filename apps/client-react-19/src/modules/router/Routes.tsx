@@ -1,5 +1,4 @@
 import NotFound from "@/pages/NotFound";
-import { Route } from "./Route";
 import { defaultLayout, routesConfig } from "./route-config";
 import { useRouterContext } from "./router-context";
 

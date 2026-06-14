@@ -10,10 +10,10 @@ export function isActivePath(current?: string, target?: string) {
  * prefix href attrs with provided string (bs/tw, etc)
  */
 export const prefixNavPaths = (
-  navItems: NavItem[],
+  items: NavItem[],
   pathPrefix: string,
 ): NavItem[] => {
-  const prefixedNavItemsString = JSON.stringify(navItems).replace(
+  const prefixedNavItemsString = JSON.stringify(items).replace(
     /"path":\s*"(.*?)"/g,
     (match, pathValue) => {
       // Check if hrefValue is an empty string OR starts with "/"
@@ -39,15 +39,15 @@ export const filterNavItems = (navItems: NavItem[], pkg: string): NavItem[] => {
   return navItems
     .map((item) => {
       // 1. If it has children → filter recursively
-      if (item.children) {
-        const filteredChildren = filterNavItems(item.children, pkg);
+      if (item.items) {
+        const filteredItems = filterNavItems(item.items, pkg);
 
         // If no children remain after filtering, optionally remove the parent
-        if (filteredChildren.length === 0) return null;
+        if (filteredItems.length === 0) return null;
 
         return {
           ...item,
-          children: filteredChildren,
+          items: filteredItems,
         };
       }
 

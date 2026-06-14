@@ -13,7 +13,7 @@ export function PageTitle({ page }: Props) {
 
       {page.breadcrumb && page.breadcrumb.length > 0 && (
         <Nav
-          navItems={page.breadcrumb}
+          items={page.breadcrumb}
           Link={Link}
           className="nav nav-breadcrumb"
           aria-label="breadcrumb"

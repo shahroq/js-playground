@@ -8,7 +8,7 @@ type LinkComponentProps = {
 };
 
 type Props = {
-  navItems: NavItem[];
+  items: NavItem[];
   curPath?: string;
   className?: string;
   level?: number;
@@ -23,7 +23,7 @@ type PropsNavItem = {
 };
 
 export function Nav({
-  navItems,
+  items,
   curPath,
   className,
   level = 0,
@@ -32,7 +32,7 @@ export function Nav({
 }: Props) {
   return (
     <ul className={cn(className)} data-level={level} {...rest}>
-      {navItems.map((item, i) => (
+      {items.map((item, i) => (
         <NavItemView
           key={i}
           item={item}
@@ -66,9 +66,9 @@ function NavItemView({ item, curPath, level = 0, Link }: PropsNavItem) {
         <span className="nav-link disabled">{item.label}</span>
       )}
 
-      {item.children?.length && (
+      {item.items?.length && (
         <Nav
-          navItems={item.children}
+          items={item.items}
           className="nav nav-vertical"
           level={level + 1}
           curPath={curPath}

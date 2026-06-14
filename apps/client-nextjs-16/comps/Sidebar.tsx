@@ -23,7 +23,7 @@ export function Sidebar() {
 
       <div className="offcanvas-body py-4">
         <Nav
-          navItems={navItems}
+          items={navItems}
           curPath={curPath}
           className={"nav nav-vertical"}
           Link={Link}
