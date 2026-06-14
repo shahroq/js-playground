@@ -1,8 +1,12 @@
 ---
-import { site } from "@jsp/shared/json";
 import { avatar } from "@jsp/shared/img";
+import type { User } from "@jsp/shared/types";
 
-const user = site.user;
+type Props = {
+  user: User;
+};
+
+const { user } = Astro.props;
 ---
 
 <div class="dropdown user-nav">

@@ -30,7 +30,7 @@ const isDisabled = !item.path;
 
   {
     item.items?.length && (
-      <Nav navItems={item.items} level={level + 1} curPath={curPath} />
+      <Nav items={item.items} level={level + 1} curPath={curPath} />
     )
   }
 </li>

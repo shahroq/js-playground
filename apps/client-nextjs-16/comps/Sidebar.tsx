@@ -29,7 +29,7 @@ export function Sidebar() {
           Link={Link}
         />
         <hr />
-        <NavUser />
+        <NavUser user={site.user} />
       </div>
     </div>
   );

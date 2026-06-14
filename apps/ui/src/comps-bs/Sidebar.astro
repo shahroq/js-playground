@@ -5,9 +5,9 @@ import type { NavItem } from "@jsp/shared/types";
 import { filterNavItems, prefixNavPaths } from "@jsp/shared/lib";
 import NavUser from "@/comps-bs/NavUser.astro";
 
-let navItems: NavItem[] = site.navSide;
-navItems = filterNavItems(navItems, "ui");
-navItems = prefixNavPaths(navItems, "/bs");
+let items: NavItem[] = site.navSide;
+items = filterNavItems(items, "ui");
+items = prefixNavPaths(items, "/bs");
 
 const curPath = Astro.url.pathname;
 ---
@@ -23,11 +23,11 @@ const curPath = Astro.url.pathname;
   </div>
   <div class="offcanvas-body d-flex flex-column pt-lg-3">
     <Nav
-      navItems={navItems}
+      items={items}
       curPath={curPath}
       className={"nav flex-column mb-auto"}
     />
     <hr />
-    <NavUser />
+    <NavUser user={site.user} />
   </div>
 </div>

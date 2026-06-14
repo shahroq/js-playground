@@ -1,12 +1,12 @@
 import Image from "next/image";
-import { site } from "@jsp/shared/json";
 import { avatar } from "@jsp/shared/img";
 
 import { Button, Item } from "@jsp/shared/comps";
+import { User } from "@jsp/shared/types";
 
-const user = site.user;
+type Props = { user: User };
 
-export function NavUser() {
+export function NavUser({ user }: Props) {
   return (
     <Item className="px-0 user-nav">
       <Item.Content className="flex-none ">

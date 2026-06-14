@@ -5,9 +5,9 @@ import { filterNavItems, prefixNavPaths } from "@jsp/shared/lib";
 import Nav from "@/comps-tw/Nav.astro";
 import NavUser from "@/comps-tw/NavUser.astro";
 
-let navItems: NavItem[] = site.navSide;
-navItems = filterNavItems(navItems, "ui");
-navItems = prefixNavPaths(navItems, "/tw");
+let items: NavItem[] = site.navSide;
+items = filterNavItems(items, "ui");
+items = prefixNavPaths(items, "/tw");
 
 const curPath = Astro.url.pathname;
 ---
@@ -19,8 +19,8 @@ const curPath = Astro.url.pathname;
   </div>
 
   <div class="offcanvas-body py-4">
-    <Nav navItems={navItems} curPath={curPath} className={"nav nav-vertical"} />
+    <Nav items={items} curPath={curPath} className={"nav nav-vertical"} />
     <hr />
-    <NavUser />
+    <NavUser user={site.user} />
   </div>
 </div>

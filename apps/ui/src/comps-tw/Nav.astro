@@ -3,18 +3,18 @@ import type { NavItem } from "@jsp/shared/types";
 import NavItemView from "./NavItemView.astro";
 
 type Props = {
-  navItems: NavItem[];
+  items: NavItem[];
   curPath?: string;
   className: string;
   level?: number;
 };
 
-const { navItems, curPath, className, level = 0 } = Astro.props;
+const { items, curPath, className, level = 0 } = Astro.props;
 ---
 
 <ul class={className} data-level={level}>
   {
-    navItems.map((item, i) => (
+    items.map((item, i) => (
       <NavItemView item={item} curPath={curPath} level={level} />
     ))
   }
