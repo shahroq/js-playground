@@ -1,1 +1,2 @@
-@import "../../../../packages/shared/public/css/index-bs.css";
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "../../../../packages/shared/public/css/theme-bs.css";

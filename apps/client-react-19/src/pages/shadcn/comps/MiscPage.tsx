@@ -1,24 +1,24 @@
 import type { Page } from "@jsp/shared/types";
 import { PageTitle } from "@/comps";
 import { InfoIcon } from "lucide-react";
-import { Separator } from "@jsp/shared/comps-shadcn/ui/separator";
-import { Button } from "@jsp/shared/comps-shadcn/ui/button";
+import { Button } from "@/shadcn/components/ui/button";
+import { Separator } from "@/shadcn/components/ui/separator";
 import {
   Alert,
   AlertDescription,
   AlertTitle,
-} from "@jsp/shared/comps-shadcn/ui/alert";
+} from "@/shadcn/components/ui/alert";
 import {
   AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
+  AlertDialogTrigger,
   AlertDialogFooter,
+  AlertDialogContent,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@jsp/shared/comps-shadcn/ui/alert-dialog";
+  AlertDialogDescription,
+  AlertDialogCancel,
+  AlertDialogAction,
+} from "@/shadcn/components/ui/alert-dialog";
 
 const page: Page = {
   title: "Misc",

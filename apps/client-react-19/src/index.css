@@ -1,1 +1,2 @@
-@import "../../../packages/shared/public/css/index-tw.css";
+@import "tailwindcss";
+@import "../../../packages/shared/public/css/theme-tw.css";

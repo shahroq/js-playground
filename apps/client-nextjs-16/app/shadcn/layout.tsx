@@ -1,6 +1,7 @@
 import { PropsWithChildren } from "react";
-import "../globals-shadcn.css";
 import { Header, Sidebar } from "@/comps";
+import "../globals.css";
+import "../globals-shadcn.css";
 
 export default async function DashboardLayoutShadcn({
   children,

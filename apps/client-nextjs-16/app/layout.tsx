@@ -1,7 +1,6 @@
 import { PropsWithChildren } from "react";
 import type { Metadata } from "next";
 import { Providers } from "./providers";
-import "./globals.css";
 // import Script from "next/script";
 
 export const metadata: Metadata = {

@@ -1,7 +1,6 @@
 import type { PropsWithChildren } from "react";
 import { Header } from "@/comps/Header";
 import { Sidebar } from "@/comps/Sidebar";
-import "../index-shadcn.css";
 
 export default function DashboardLayout({ children }: PropsWithChildren) {
   return (
@@ -9,7 +8,7 @@ export default function DashboardLayout({ children }: PropsWithChildren) {
       <header>
         <Header />
       </header>
-      <div className="layout">
+      <div className="layout layout-shadcn">
         <aside>
           <Sidebar />
         </aside>
