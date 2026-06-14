@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { Slot } from "radix-ui";
 
 import { useIsMobile } from "@/hooks/use-mobile";
-import { cn } from "@/lib/cn";
+import { cn } from "@jsp/shared/lib";
 import { Button } from "@/comps-shadcn/ui/button";
 import { Input } from "@/comps-shadcn/ui/input";
 import { Separator } from "@/comps-shadcn/ui/separator";

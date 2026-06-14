@@ -1,7 +1,7 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
-import { cn } from "@/lib/cn";
+import { cn } from "@jsp/shared/lib";
 import { Button } from "@/comps-shadcn/ui/button";
 import { Input } from "@/comps-shadcn/ui/input";
 import { Textarea } from "@/comps-shadcn/ui/textarea";

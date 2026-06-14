@@ -3,7 +3,7 @@
 import * as React from "react";
 import { AlertDialog as AlertDialogPrimitive } from "radix-ui";
 
-import { cn } from "@/lib/cn";
+import { cn } from "@jsp/shared/lib";
 import { Button } from "@/comps-shadcn/ui/button";
 
 function AlertDialog({

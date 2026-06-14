@@ -149,15 +149,14 @@
     },
     {
       "label": "Shadcn",
+      "targets": ["client-react-19", "client-nextjs-16"],
       "children": [
         {
           "label": "Comps",
-          "targets": ["client-react-19"],
           "children": [
             {
               "label": "Misc",
-              "path": "/shadcn/comps/misc",
-              "targets": ["client-react-19"]
+              "path": "/shadcn/comps/misc"
             }
           ]
         }
