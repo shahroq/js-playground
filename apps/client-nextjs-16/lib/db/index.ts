@@ -1,4 +1,3 @@
-import "dotenv/config";
 import { createClient } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
 
@@ -24,8 +23,10 @@ export async function checkDbConnection() {
   }
 }
 
-// const data = {
-//   title: "task 1",
-//   desc: "desc 1",
-// };
-// await db.insert(tasksTable).values(data);
+/*
+const data = {
+  title: "task 1",
+  desc: "desc 1",
+};
+await db.insert(tasksTable).values(data);
+*/
