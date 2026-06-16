@@ -1,6 +1,6 @@
 // import { seed } from "drizzle-seed";
 import { faker } from "@faker-js/faker";
-import { db } from "@/lib/db";
+
 import { sql } from "drizzle-orm";
 
 import {
@@ -10,6 +10,7 @@ import {
   usersTable,
   categoriesTable,
 } from "./schema";
+import { db } from ".";
 
 async function main() {
   await truncateTables();

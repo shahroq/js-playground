@@ -2,7 +2,7 @@
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { sql } from "drizzle-orm";
-import { db } from "@/lib/db";
+import { db } from "@/data";
 import { tasksTable } from "@/data/schema";
 import { FormState } from "./types";
 

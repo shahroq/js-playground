@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { sql } from "drizzle-orm";
-import { db } from "@/lib/db";
+import { db } from "@/data";
 import { Page } from "@jsp/shared/types";
 import { tasksTable } from "@/data/schema";
 import { PageTitle } from "@/comps";
