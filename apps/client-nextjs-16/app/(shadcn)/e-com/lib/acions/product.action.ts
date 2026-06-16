@@ -8,7 +8,6 @@ type Options = {
   limit?: number;
   offset?: number;
   orderBy?: string;
-  id: number;
 };
 
 export async function getProducts(options?: Options) {

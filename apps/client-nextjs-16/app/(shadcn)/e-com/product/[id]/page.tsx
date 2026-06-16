@@ -1,5 +1,5 @@
-import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 import type { Page } from "@jsp/shared/types";
 import { Json } from "@jsp/shared/comps";
 import { Header } from "@/shadcn/components/Header";
@@ -25,10 +25,9 @@ type Props = {
 
 export default async function ProductDetailsPage({ params }: Props) {
   const { id } = await params;
+
   const product = await getProductById(+id);
   if (!product) notFound();
-
-  console.log(product);
 
   return (
     <>
