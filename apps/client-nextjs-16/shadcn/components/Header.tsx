@@ -10,6 +10,7 @@ import {
 } from "@/shadcn/components/ui/breadcrumb";
 import { Separator } from "@/shadcn/components/ui/separator";
 import { SidebarTrigger } from "@/shadcn/components/ui/sidebar";
+import HeaderActions from "./HeaderActions";
 
 type Props = PropsWithChildren<{ page: Page }>;
 type PropsAppBreadcrumb = { items?: NavItem[] };
@@ -24,7 +25,7 @@ export function Header({ page, children }: Props) {
           className="mx-2 data-[orientation=vertical]:h-4"
         />
         {page.breadcrumb && <AppBreadcrumb items={page.breadcrumb} />}
-        {children}
+        {children || <HeaderActions />}
       </div>
     </header>
   );

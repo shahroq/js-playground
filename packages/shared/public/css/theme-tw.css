@@ -36,28 +36,44 @@
     }
 
     h1 {
-      @apply text-4xl font-bold tracking-tight;
+      @apply font-bold text-3xl lg:text-4xl tracking-tight;
     }
 
     h2 {
-      @apply text-3xl font-semibold tracking-tight;
+      @apply font-semibold text-2xl lg:text-3xl tracking-tight;
     }
 
     h3 {
-      @apply text-2xl font-semibold;
+      @apply font-semibold text-xl lg:text-2xl;
     }
 
     h4 {
-      @apply text-xl font-medium;
+      @apply font-medium text-lg lg:text-xl;
     }
 
     h5 {
-      @apply text-lg font-medium;
+      @apply font-medium text-lg;
     }
 
     h6 {
-      @apply text-base font-medium text-gray-600;
+      @apply font-medium text-base text-gray-600;
     }
+  }
+}
+
+@layer utility {
+  .wrapper {
+    @apply max-w-7xl lg:mx-auto p-5 md:px-10 w-full;
+  }
+
+  .flex-start {
+    @apply flex justify-start items-center;
+  }
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+  .flex-between {
+    @apply flex justify-between items-center;
   }
 }
 

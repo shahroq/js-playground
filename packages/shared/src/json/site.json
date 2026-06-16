@@ -150,15 +150,15 @@
       "targets": ["client-react-19", "client-nextjs-16"],
       "items": [
         {
-          "label": "Comps",
-          "items": [
-            {
-              "label": "Misc",
-              "path": "/shadcn/comps/misc"
-            }
-          ]
+          "label": "Misc",
+          "path": "/shadcn/misc"
         }
       ]
+    },
+    {
+      "label": "E-Commerce",
+      "targets": ["client-nextjs-16"],
+      "path": "/e-com"
     }
   ],
   "user": {

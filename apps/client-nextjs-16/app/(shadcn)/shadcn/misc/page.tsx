@@ -24,7 +24,7 @@ import { Header } from "@/shadcn/components/Header";
 
 const page: Page = {
   title: "Misc",
-  breadcrumb: [{ label: "Shadcn" }, { label: "Components" }, { label: "Misc" }],
+  breadcrumb: [{ label: "Shadcn" }, { label: "Misc" }],
 };
 
 export default function Misc() {

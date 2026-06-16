@@ -43,7 +43,7 @@ import ProductsPageWRTK from "@/pages/catalog/w-redux-toolkit-query/ProductsPage
 import ProductPageWRQ from "@/pages/catalog/w-react-query/ProductsPage";
 import type { RouteConfig } from "./types";
 // shadcn
-import MiscPageShadcn from "@/pages/shadcn/comps/MiscPage";
+import MiscPageShadcn from "@/pages/shadcn/MiscPage";
 
 export const defaultLayout = DashboardLayout;
 // export const defaultLayout = lazy(() => import("@/layouts/DashboardLayout"));
@@ -91,7 +91,7 @@ export const routesConfig: RouteConfig[] = [
   { path: "/catalog/w-react-query/products", element: <ProductPageWRQ /> },
   // shadcn
   {
-    path: "/shadcn/comps/misc",
+    path: "/shadcn/misc",
     element: <MiscPageShadcn />,
     layout: DashboardLayoutShadcn,
   },
