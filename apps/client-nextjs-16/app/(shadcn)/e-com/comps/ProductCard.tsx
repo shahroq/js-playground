@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/shadcn/components/ui/button";
 import {
   Card,
@@ -8,27 +9,31 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shadcn/components/ui/card";
-import Link from "next/link";
 import { ProductPrice } from "./ProductPrice";
+import { Product } from "@e-com/lib/types";
 
 type Props = {
-  product: any;
+  product: Product;
 };
+
+const defaultImgSrc = `/img/no-img.jpg`;
 
 export function ProductCard({ product }: Props) {
   if (!product) return null;
-  const mainImg =
-    product.images?.length > 0 ? product.images[0] : "/no-img.jpg";
+
+  const [firstImg] = product?.images ?? [];
+  const imgSrc = firstImg ? `/img/products/${firstImg}` : defaultImgSrc;
 
   return (
     <Card className="relative mx-auto w-full max-w-sm">
       <CardHeader>
         <Image
-          src={mainImg}
+          src={imgSrc}
           width={100}
           height={100}
           alt={product.name}
           className="aspect-video w-full object-contain border"
+          // onError={(e) => (e.currentTarget.src = defaultImgSrc)}
         />
       </CardHeader>
 

@@ -20,6 +20,10 @@ export const productsTable = sqliteTable("products", {
   price: real("price").notNull(),
   category: integer("category"),
   inStock: integer("in_stock", { mode: "boolean" }).notNull(),
+  images: text("images", { mode: "json" })
+    .$type<string[]>()
+    .notNull()
+    .default([]),
   createdAt: text("created_at"),
   updatedAt: text("updated_at"),
   createdBy: integer("created_by"),

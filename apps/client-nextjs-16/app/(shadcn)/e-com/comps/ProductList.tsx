@@ -1,7 +1,8 @@
+import { Product } from "@e-com/lib/types";
 import { ProductCard } from "./ProductCard";
 
 type Props = {
-  products: any;
+  products: Product[];
   title?: string;
 };
 export function ProductList({ products, title }: Props) {

@@ -1,6 +1,5 @@
 // import { seed } from "drizzle-seed";
 import { faker } from "@faker-js/faker";
-
 import { sql } from "drizzle-orm";
 
 import {
@@ -96,10 +95,18 @@ const productSeed = async (usersData: any[], categoryData: any[]) => {
   return await db
     .insert(productsTable)
     .values(
-      Array.from({ length: 5 }).map(() => {
+      Array.from({ length: 5 }).map((_, i) => {
         const user = faker.helpers.arrayElement(usersData);
         const category = faker.helpers.arrayElement(categoryData);
 
+        const imageCount = faker.number.int({ min: 0, max: 3 });
+        const images = Array.from({ length: imageCount }).map((_, j) => {
+          const index = String(i + 1).padStart(2, "0");
+          if (j === 0) return `product-${index}.jpg`;
+          // else:
+          const subIndex = String(j + 1).padStart(2, "0");
+          return `product-${index}-${subIndex}.jpg`;
+        });
         return {
           name: faker.commerce.productName(),
           description: faker.commerce.productDescription(),
@@ -110,6 +117,7 @@ const productSeed = async (usersData: any[], categoryData: any[]) => {
           }),
           category: category.id,
           inStock: faker.datatype.boolean(),
+          images,
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
           createdBy: user.id,
