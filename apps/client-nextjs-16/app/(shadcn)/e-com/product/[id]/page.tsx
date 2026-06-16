@@ -1,0 +1,44 @@
+import { notFound } from "next/navigation";
+import { Metadata } from "next";
+import type { Page } from "@jsp/shared/types";
+import { Json } from "@jsp/shared/comps";
+import { Header } from "@/shadcn/components/Header";
+import { getProductById } from "@e-com/lib/acions/product.action";
+import { HeaderActions } from "@e-com/comps/HeaderActions";
+
+export const metadata: Metadata = {
+  title: "Product Detail Page",
+};
+
+const page: Page = {
+  title: "My Store",
+  breadcrumb: [
+    { label: "E-Commerce" },
+    { label: "Products" },
+    { label: "Product" },
+  ],
+};
+
+type Props = {
+  params: Promise<{ id: string }>;
+};
+
+export default async function ProductDetailsPage({ params }: Props) {
+  const { id } = await params;
+  const product = await getProductById(+id);
+  if (!product) notFound();
+
+  console.log(product);
+
+  return (
+    <>
+      <Header page={page}>
+        <HeaderActions />
+      </Header>
+
+      <section>
+        <Json data={product} />
+      </section>
+    </>
+  );
+}

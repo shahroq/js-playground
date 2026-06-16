@@ -10,7 +10,7 @@ import {
 } from "@/shadcn/components/ui/breadcrumb";
 import { Separator } from "@/shadcn/components/ui/separator";
 import { SidebarTrigger } from "@/shadcn/components/ui/sidebar";
-import HeaderActions from "./HeaderActions";
+import { HeaderActions } from "./HeaderActions";
 
 type Props = PropsWithChildren<{ page: Page }>;
 type PropsAppBreadcrumb = { items?: NavItem[] };

@@ -2,7 +2,7 @@ import { ShoppingCart, User } from "lucide-react";
 import { Button } from "@/shadcn/components/ui/button";
 import { ModeToggle } from "@/shadcn/components/ModeToggle";
 
-export default function HeaderActions() {
+export function HeaderActions() {
   return (
     <div className="ml-auto flex gap-2">
       <Button size="sm">
