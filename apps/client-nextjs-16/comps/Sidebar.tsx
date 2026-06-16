@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { site } from "@jsp/shared/json";
-import { filterNavItems } from "@jsp/shared/lib";
+import { filterNavItems } from "@jsp/shared/utils";
 import type { NavItem } from "@jsp/shared/types";
 import { Nav } from "@jsp/shared/comps";
 import { NavUser } from "./NavUser";

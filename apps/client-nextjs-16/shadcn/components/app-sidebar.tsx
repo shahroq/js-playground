@@ -12,7 +12,7 @@ import {
   SidebarHeader,
 } from "@/shadcn/components/ui/sidebar";
 import type { NavItem } from "@jsp/shared/types";
-import { filterNavItems } from "@jsp/shared/lib";
+import { filterNavItems } from "@jsp/shared/utils";
 
 let items: NavItem[] = site.navSide;
 items = filterNavItems(site.navSide, "client-nextjs-16");

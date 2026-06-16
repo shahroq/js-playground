@@ -1,6 +1,6 @@
 "use client";
-import { cn } from "../lib";
 import type { PropsWithChildrenAndCN } from "../types/types";
+import { cn } from "../utils";
 
 // parent comp
 function Hero({ children, className }: PropsWithChildrenAndCN) {

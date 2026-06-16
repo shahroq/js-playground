@@ -1,4 +1,4 @@
-import { formatNumberWithDecimal } from "@jsp/shared/lib";
+import { formatNumberWithDecimal } from "@jsp/shared/utils";
 import { z } from "zod";
 
 /*

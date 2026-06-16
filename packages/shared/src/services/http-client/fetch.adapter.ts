@@ -1,4 +1,4 @@
-import { pause } from "../pause";
+import { pause } from "@/utils";
 import type { HttpClientAdapter, HttpRequestOptions } from "./types";
 
 // Adapter Factory: fetch api

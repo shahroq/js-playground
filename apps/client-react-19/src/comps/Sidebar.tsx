@@ -1,7 +1,7 @@
 import { Link, useRouterContext as useRouterContext } from "@/modules/router";
 import { site } from "@jsp/shared/json";
 import type { NavItem } from "@jsp/shared/types";
-import { filterNavItems } from "@jsp/shared/lib";
+import { filterNavItems } from "@jsp/shared/utils";
 import { Nav } from "@jsp/shared/comps";
 import { NavUser } from "./NavUser";
 

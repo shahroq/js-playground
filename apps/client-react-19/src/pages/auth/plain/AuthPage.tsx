@@ -3,7 +3,7 @@ import { userInitValues, type Page, type User } from "@jsp/shared/types";
 import { PageTitle } from "@/comps";
 
 import { Form, Button, Alert, Hero } from "@jsp/shared/comps";
-import { userLoginSchema, validateByZod as v } from "@jsp/shared/validation";
+import { userLoginSchema, validateByZod as v } from "@jsp/shared/validations";
 import type { FormElement, FormFeedback } from "@/pages/comps/form/types";
 import { AuthProvider, useAuthContext } from "./auth-context";
 import { ProtectedRoute } from "./ProtectedRoute";

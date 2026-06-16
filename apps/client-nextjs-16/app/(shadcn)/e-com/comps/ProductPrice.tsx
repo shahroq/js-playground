@@ -1,4 +1,4 @@
-import { cn } from "@jsp/shared/lib";
+import { cn } from "@jsp/shared/utils";
 
 type Props = {
   value: number;

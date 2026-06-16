@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useRef, type ReactNode } from "react";
 import { createPortal } from "react-dom";
-import { cn } from "../lib";
+import { cn } from "../utils";
 
 type Props = {
   open: boolean;

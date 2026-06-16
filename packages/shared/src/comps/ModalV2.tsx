@@ -12,7 +12,7 @@ import {
   type PropsWithChildren,
 } from "react";
 import { createPortal } from "react-dom";
-import { cn } from "../lib";
+import { cn } from "../utils";
 
 type Size = "sm" | "md" | "lg" | "xl" | "2xl" | "4xl";
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 import type { HttpClientAdapter, HttpRequestOptions } from "./types";
-import { pause } from "../pause";
+import { pause } from "@/utils";
 
 // Adapter Factory: axios
 export function createAxiosAdapter(baseUrl: string): HttpClientAdapter {

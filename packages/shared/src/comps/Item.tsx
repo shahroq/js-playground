@@ -1,7 +1,7 @@
 "use client";
 import { type PropsWithChildren } from "react";
-import { cn } from "../lib";
 import type { PropsWithChildrenAndCN } from "../types/types";
+import { cn } from "../utils";
 
 type Props = PropsWithChildren<{
   as?: React.ElementType;

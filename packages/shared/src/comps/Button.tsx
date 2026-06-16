@@ -1,4 +1,4 @@
-import { cn } from "../lib";
+import { cn } from "../utils";
 import { Spinner } from "./Spinner";
 
 type Props = {

@@ -1,7 +1,7 @@
 import { useState, type ChangeEvent, type SubmitEvent } from "react";
 import { taskInitValues, type Page, type Task } from "@jsp/shared/types";
 import { Form, Button, Alert } from "@jsp/shared/comps";
-import { taskSchema, validateByZod as v } from "@jsp/shared/validation";
+import { taskSchema, validateByZod as v } from "@jsp/shared/validations";
 import { PageTitle } from "@/comps";
 import { options, type FormElement, type FormFeedback } from "../types";
 import { INITIAL_STATE } from "@/pages/counter/w-reducer/counter-reducer";
