@@ -3,8 +3,8 @@ import { Metadata } from "next";
 import type { Page } from "@jsp/shared/types";
 import { Json } from "@jsp/shared/comps";
 import { Header } from "@/shadcn/components/Header";
-import { getProductById } from "@e-com/lib/acions/product.action";
-import { HeaderActions } from "@e-com/comps/HeaderActions";
+import { getProductById } from "@e-com/lib/acions";
+import { HeaderActions } from "@e-com/comps";
 
 export const metadata: Metadata = {
   title: "Product Detail Page",

@@ -9,8 +9,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shadcn/components/ui/card";
-import { ProductPrice } from "./ProductPrice";
 import { Product } from "@e-com/lib/types";
+import { ProductPrice } from ".";
 
 type Props = {
   product: Product;

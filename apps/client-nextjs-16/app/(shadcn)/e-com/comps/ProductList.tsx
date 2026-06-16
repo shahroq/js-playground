@@ -1,5 +1,5 @@
 import { Product } from "@e-com/lib/types";
-import { ProductCard } from "./ProductCard";
+import { ProductCard } from "./";
 
 type Props = {
   products: Product[];
