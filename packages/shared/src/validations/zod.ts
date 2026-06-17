@@ -8,7 +8,7 @@ import type {
 } from "./types";
 import type { Task } from "../types/types";
 
-export const userLoginSchema = z.object({
+export const signInSchema = z.object({
   email: z.email("Please enter a valid email address").trim(),
   password: z.string().min(5, "Password must be at least 5 characters"),
   // .regex(/[A-Z]/, "Must contain an uppercase letter")
