@@ -161,10 +161,21 @@
       "path": "/e-com"
     }
   ],
+  "navUser": [
+    { "label": "Account", "icon": "User", "path": "/account" },
+    { "label": "Billing", "icon": "CreditCard" },
+    { "label": "Notifications", "icon": "Bell" },
+    {
+      "label": "Log out",
+      "icon": "LogOut",
+      "action": "sign-out",
+      "separator": true
+    }
+  ],
   "user": {
     "id": 1,
     "name": "John Doe",
-    "email": "jd@mail.com",
-    "avatar": "avatar.png"
+    "email": "j.doe@email.com",
+    "avatar": "avatar-01.png"
   }
 }

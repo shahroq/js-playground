@@ -5,6 +5,7 @@
 "use client";
 import { PropsWithChildren } from "react";
 import { ThemeProvider } from "next-themes";
+import { SessionProvider } from "next-auth/react";
 
 export function Providers({ children }: PropsWithChildren) {
   return (
@@ -15,7 +16,7 @@ export function Providers({ children }: PropsWithChildren) {
         enableSystem
         disableTransitionOnChange
       >
-        {children}
+        <SessionProvider>{children}</SessionProvider>
       </ThemeProvider>
     </>
   );

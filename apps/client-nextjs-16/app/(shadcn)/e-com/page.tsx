@@ -14,7 +14,7 @@ const page: Page = {
   breadcrumb: [{ label: "E-Commerce" }, { label: "My Store" }],
 };
 
-export default async function Home() {
+export default async function Page() {
   const latestProducts = await getProducts({ limit: 4 });
 
   return (
@@ -24,7 +24,7 @@ export default async function Home() {
       </Header>
 
       <section>
-        My Store: Home
+        <h2>My Store</h2>
         <ProductList products={latestProducts} title="New Arrivals" />
       </section>
     </>

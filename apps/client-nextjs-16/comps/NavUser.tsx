@@ -4,7 +4,7 @@ import { avatar } from "@jsp/shared/img";
 import { Button, Item } from "@jsp/shared/comps";
 import { User } from "@jsp/shared/types";
 
-type Props = { user: User };
+type Props = { user?: User };
 
 export function NavUser({ user }: Props) {
   return (
@@ -13,8 +13,8 @@ export function NavUser({ user }: Props) {
         <Image src={avatar} className="avatar" alt="Avatar" />
       </Item.Content>
       <Item.Content>
-        <Item.Title>{user.name}</Item.Title>
-        <Item.Description>{user.email}</Item.Description>
+        <Item.Title>{user?.name}</Item.Title>
+        <Item.Description>{user?.email}</Item.Description>
       </Item.Content>
       <Item.Content className="flex-none">
         <Button className="btn-icon" onClick={console.log}>

@@ -1,5 +1,3 @@
-"use client";
-
 import type { Page } from "@jsp/shared/types";
 import { InfoIcon } from "lucide-react";
 import { Button } from "@/shadcn/components/ui/button";

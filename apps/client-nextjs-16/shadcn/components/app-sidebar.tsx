@@ -1,5 +1,3 @@
-"use client";
-
 import type { ComponentProps } from "react";
 import { site } from "@jsp/shared/json";
 import { Brand } from "./Brand";
@@ -27,7 +25,7 @@ export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
         <NavSidebar items={items} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={site.user} />
+        <NavUser variant="full" />
       </SidebarFooter>
     </Sidebar>
   );

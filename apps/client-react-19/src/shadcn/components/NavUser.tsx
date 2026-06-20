@@ -1,11 +1,14 @@
-import { avatar } from "@jsp/shared/img";
+import { Fragment } from "react";
+import { site } from "@jsp/shared/json";
 import {
-  IconCreditCard,
-  IconDotsVertical,
-  IconLogout,
-  IconNotification,
-  IconUserCircle,
-} from "@tabler/icons-react";
+  cn,
+  resolveImgPath,
+  resolveIcon,
+  getInitials,
+} from "@jsp/shared/utils";
+import { MoreVerticalIcon, UserIcon, UserPlus } from "lucide-react";
+import { Button } from "@/shadcn/components/ui/button";
+import { ButtonGroup } from "@/shadcn/components/ui/button-group";
 import {
   Avatar,
   AvatarFallback,
@@ -20,84 +23,140 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/shadcn/components/ui/dropdown-menu";
-import {
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  useSidebar,
-} from "@/shadcn/components/ui/sidebar";
+import { useSidebar } from "@/shadcn/components/ui/sidebar";
 import type { User } from "@jsp/shared/types";
+import { Link } from "@/modules/router/Link";
 
-type Props = { user: User };
+type Variant = "full" | "compact";
+type Props = { variant?: Variant };
+type PropsUserInfo = {
+  user?: User;
+  className?: string;
+  grayscale?: boolean;
+  variant?: Variant;
+};
 
-export function NavUser({ user }: Props) {
+const navUser = site.navUser;
+
+export function NavUser({ variant = "full" }: Props) {
   const { isMobile } = useSidebar();
 
+  // null
+  // const user = null;
+  // from json
+  const user = site.user;
+
+  function handleClick(item: (typeof navUser)[number]) {}
+
   return (
-    <SidebarMenu>
-      <SidebarMenuItem>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <SidebarMenuButton
-              size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-            >
-              <Avatar className="h-8 w-8 rounded-lg grayscale">
-                <AvatarImage src={avatar} alt={user.name} />
-                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-              </Avatar>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">{user.name}</span>
-                <span className="truncate text-xs text-muted-foreground">
-                  {user.email}
-                </span>
-              </div>
-              <IconDotsVertical className="ml-auto size-4" />
-            </SidebarMenuButton>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
-            side={isMobile ? "bottom" : "right"}
-            align="end"
-            sideOffset={4}
-          >
-            <DropdownMenuLabel className="p-0 font-normal">
-              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-                </Avatar>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">{user.name}</span>
-                  <span className="truncate text-xs text-muted-foreground">
-                    {user.email}
-                  </span>
-                </div>
-              </div>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <IconUserCircle />
-                Account
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <IconCreditCard />
-                Billing
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <IconNotification />
-                Notifications
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <IconLogout />
-              Log out
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </SidebarMenuItem>
-    </SidebarMenu>
+    <>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild className="">
+          <div className="flex items-center justify-center cursor-pointer data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
+            <UserInfo user={user} grayscale variant={variant} />
+            {variant === "full" && (
+              <MoreVerticalIcon className="ml-auto size-4" />
+            )}
+          </div>
+        </DropdownMenuTrigger>
+
+        <DropdownMenuContent
+          className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
+          side={isMobile || variant === "compact" ? "bottom" : "right"}
+          align="end"
+          sideOffset={4}
+        >
+          <DropdownMenuLabel className="p-0 font-normal">
+            <UserInfo user={user} className="px-1 py-1.5" />
+          </DropdownMenuLabel>
+
+          {user && (
+            <>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                {navUser.map((nav) => {
+                  const Icon = resolveIcon(nav?.icon);
+                  return (
+                    <Fragment key={nav.label}>
+                      {nav?.separator && <DropdownMenuSeparator />}
+                      <DropdownMenuItem onClick={() => handleClick(nav)}>
+                        {Icon && <Icon className="size-4" />}
+                        {nav.label}
+                      </DropdownMenuItem>
+                    </Fragment>
+                  );
+                })}
+              </DropdownMenuGroup>
+            </>
+          )}
+        </DropdownMenuContent>
+      </DropdownMenu>
+      {!user && variant === "compact" && <GuestButtonGroup />}
+    </>
+  );
+}
+
+function UserInfo({
+  user,
+  className,
+  variant = "full",
+  grayscale = false,
+}: PropsUserInfo) {
+  if (!user) user = { name: "Guest" };
+
+  return (
+    <div
+      className={cn(
+        "flex items-center gap-2 text-left text-sm",
+        className,
+        variant === "full" && "w-full",
+      )}
+    >
+      {/* avatar */}
+      <Avatar className={cn("h-8 w-8", grayscale && "grayscale")}>
+        <AvatarImage
+          src={resolveImgPath(user?.avatar, "/img/avatars")}
+          alt={user?.name}
+        />
+
+        <AvatarFallback className="rounded-lg">
+          {getInitials(user?.name)}
+        </AvatarFallback>
+      </Avatar>
+
+      {variant === "full" && (
+        <>
+          {/* info */}
+          <div className="grid flex-1 leading-tight">
+            <span className="truncate font-medium">{user?.name}</span>
+            {user?.email && (
+              <span className="truncate text-xs text-muted-foreground">
+                {user.email}
+              </span>
+            )}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+function GuestButtonGroup() {
+  return (
+    <ButtonGroup>
+      <Button asChild variant="outline">
+        <Link href="/sign-in">
+          <UserIcon />
+          Sign In
+        </Link>
+      </Button>
+
+      <Button asChild variant="outline">
+        <Link href="/sign-up">
+          <UserPlus />
+          Sign Up
+        </Link>
+      </Button>
+    </ButtonGroup>
   );
 }

@@ -1,0 +1,3 @@
+- check session
+	http://localhost:3000/api/auth/session
+	- any other path?

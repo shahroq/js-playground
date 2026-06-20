@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { resolveImgPath } from "@jsp/shared/utils";
 import { Button } from "@/shadcn/components/ui/button";
 import {
   Card,
@@ -16,19 +17,14 @@ type Props = {
   product: Product;
 };
 
-const defaultImgSrc = `/img/no-img.jpg`;
-
 export function ProductCard({ product }: Props) {
   if (!product) return null;
-
-  const [firstImg] = product?.images ?? [];
-  const imgSrc = firstImg ? `/img/products/${firstImg}` : defaultImgSrc;
 
   return (
     <Card className="relative mx-auto w-full max-w-sm">
       <CardHeader>
         <Image
-          src={imgSrc}
+          src={resolveImgPath(product?.images?.[0], "/img/products")}
           width={100}
           height={100}
           alt={product.name}

@@ -20,7 +20,7 @@ export type Page = {
 export type User = {
   id?: string | number;
   email: string;
-  password: string;
+  password?: string;
   name?: string;
   avatar?: string;
 };

@@ -10,6 +10,7 @@ import {
   categoriesTable,
 } from "./schema";
 import { db } from ".";
+import { hashPassword } from "@/auth/utils";
 
 async function main() {
   await truncateTables();
@@ -52,26 +53,33 @@ async function truncateTables() {
 }
 
 async function userSeed() {
+  const password = await hashPassword("123456");
+
   return await db
     .insert(usersTable)
     .values([
       {
         name: faker.person.fullName(),
-        email: faker.internet.email(),
+        email: "admin@email.com",
+        password,
+        avatar: "avatar-01.png",
         role: "ADMIN",
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       },
       {
         name: faker.person.fullName(),
-        email: faker.internet.email(),
+        email: "editor@email.com",
+        password,
+        avatar: "avatar-02.png",
         role: "EDITOR",
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       },
       {
         name: faker.person.fullName(),
-        email: faker.internet.email(),
+        email: "user@email.com",
+        password,
         role: "USER",
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
