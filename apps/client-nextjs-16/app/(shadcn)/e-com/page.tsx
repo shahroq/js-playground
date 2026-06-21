@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 import type { Page } from "@jsp/shared/types";
 import { Header } from "@/shadcn/components/Header";
-import { getProducts } from "./lib/acions";
-import { HeaderActions, ProductList } from "./comps";
+import { getProducts } from "./_lib/acions";
+import { HeaderActions, ProductList } from "./_comps";
 
 export const metadata: Metadata = {
   title: "My Store Home Page",

@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import type { Page } from "@jsp/shared/types";
 import { Json } from "@jsp/shared/comps";
 import { Header } from "@/shadcn/components/Header";
-import { getProductById } from "@e-com/lib/acions";
-import { HeaderActions } from "@e-com/comps";
+import { getProductById } from "@e-com/_lib/acions";
+import { HeaderActions } from "@e-com/_comps";
 
 export const metadata: Metadata = {
   title: "Product Detail Page",
@@ -13,8 +13,8 @@ export const metadata: Metadata = {
 const page: Page = {
   title: "My Store",
   breadcrumb: [
-    { label: "E-Commerce" },
-    { label: "Products" },
+    { label: "E-Commerce", path: "/e-com" },
+    { label: "Products", path: "/e-com/products" },
     { label: "Product" },
   ],
 };
