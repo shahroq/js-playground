@@ -152,6 +152,16 @@
         {
           "label": "Misc",
           "path": "/shadcn/misc"
+        },
+        {
+          "label": "Posts (API Call/Zod)",
+          "targets": ["client-nextjs-16"],
+          "path": "/shadcn/posts"
+        },
+        {
+          "label": "Tasks (ORM)",
+          "targets": ["client-nextjs-16"],
+          "path": "/shadcn/tasks"
         }
       ]
     },

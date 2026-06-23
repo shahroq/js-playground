@@ -39,6 +39,12 @@ export type Task = {
   category: string;
 };
 
+export type TaskQuery = {
+  term?: string;
+  page?: number;
+  limit?: number;
+};
+
 export const taskInitValues: Task = {
   title: "",
   description: "",
