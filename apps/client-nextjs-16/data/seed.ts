@@ -161,7 +161,7 @@ const reviewSeed = async (usersData: any[], productData: any[]) => {
 
 const taskSeed = async () => {
   await db.insert(tasksTable).values(
-    Array.from({ length: 3 }).map(() => ({
+    Array.from({ length: 5 }).map(() => ({
       title: faker.company.buzzPhrase(),
       desc: faker.lorem.paragraph(),
     })),
