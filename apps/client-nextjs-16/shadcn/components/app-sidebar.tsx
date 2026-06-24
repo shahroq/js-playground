@@ -1,4 +1,5 @@
 import type { ComponentProps } from "react";
+// import { auth } from "@/auth";
 import { site } from "@jsp/shared/json";
 import { Brand } from "./Brand";
 import { NavSidebar } from "./NavSidebar";
@@ -15,7 +16,10 @@ import { filterNavItems } from "@jsp/shared/utils";
 let items: NavItem[] = site.navSide;
 items = filterNavItems(site.navSide, "client-nextjs-16");
 
-export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
+export async function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
+  // const session = await auth();
+  // console.log(session);
+
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>

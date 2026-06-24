@@ -6,13 +6,10 @@ import { signIn, signOut } from ".";
 import { pause } from "@jsp/shared/utils";
 
 /**
- * sign in w/ credentials
+ * sign in w/ credentials reducer
  */
 
-export async function signInWCredentialsReducer(
-  prevState: unknown,
-  formData: FormData,
-) {
+export async function signInAction(prevState: unknown, formData: FormData) {
   await pause(0);
   try {
     const user = signInSchema.parse({
@@ -31,6 +28,6 @@ export async function signInWCredentialsReducer(
   }
 }
 
-export async function signOutUser() {
-  await signOut();
+export async function signOutAction() {
+  await signOut({ redirectTo: "/e-com" });
 }

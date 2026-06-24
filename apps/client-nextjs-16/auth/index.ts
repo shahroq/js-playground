@@ -7,8 +7,9 @@ import { authenticateUser } from "./utils";
 export const authConfig = {
   pages: {
     signIn: "/sign-in",
-    error: "/sign-in",
+    // error: "/sign-in",
   },
+
   session: {
     // strategy: "database",
     strategy: "jwt",
@@ -18,7 +19,7 @@ export const authConfig = {
   adapter: DrizzleAdapter(db, {
     usersTable,
     accountsTable,
-    sessionsTable,
+    sessionsTable, 
     verificationTokensTable,
   }),
   */
@@ -43,9 +44,10 @@ export const authConfig = {
       },
     }),
   ],
-
+  // these are like middlewares
   callbacks: {
     session: ({ session, token }) => {
+      // add some extra info we'd need to session
       if (session.user && token) {
         session.user.id = token.sub!;
         session.user.role = token.role as string;
@@ -62,7 +64,16 @@ export const authConfig = {
       }
       return token;
     },
+
+    authorized({ auth, request }) {
+      return !!auth?.user;
+    },
   },
 } satisfies NextAuthConfig;
 
-export const { handlers, signIn, signOut, auth } = NextAuth(authConfig);
+export const {
+  auth,
+  handlers: { GET, POST },
+  signIn,
+  signOut,
+} = NextAuth(authConfig);

@@ -3,7 +3,7 @@ import { useActionState } from "react";
 import Form from "next/form";
 import { useSearchParams } from "next/navigation";
 import { signInDefaultValues, home } from "@/auth/consts";
-import { signInWCredentialsReducer } from "@/auth/actions";
+import { signInAction } from "@/auth/actions";
 import { Json } from "@jsp/shared/comps";
 import {
   Field,
@@ -18,7 +18,7 @@ import { Button } from "@/shadcn/components/ui/button";
 import { Spinner } from "@/shadcn/components/ui/spinner";
 
 export default function FormSignIn() {
-  const [state, action, isPending] = useActionState(signInWCredentialsReducer, {
+  const [state, action, isPending] = useActionState(signInAction, {
     success: false,
     message: "",
   });

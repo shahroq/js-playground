@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { User } from "next-auth";
 import { useSession } from "next-auth/react";
-import { signOut } from "next-auth/react";
 import { site } from "@jsp/shared/json";
 import {
   cn,
@@ -31,6 +30,8 @@ import {
   DropdownMenuTrigger,
 } from "@/shadcn/components/ui/dropdown-menu";
 import { useSidebar } from "@/shadcn/components/ui/sidebar";
+// import { signOut } from "next-auth/react";
+import { signOutAction } from "@/auth/actions";
 
 type Variant = "full" | "compact";
 type Props = { variant?: Variant };
@@ -60,7 +61,7 @@ export function NavUser({ variant = "full" }: Props) {
 
   function handleClick(item: (typeof navUser)[number]) {
     if (item.path) router.push(item.path);
-    if (item.action === "sign-out") signOut();
+    if (item.action === "sign-out") signOutAction();
   }
 
   return (
