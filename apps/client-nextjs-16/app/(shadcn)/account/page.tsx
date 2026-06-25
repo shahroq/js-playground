@@ -2,7 +2,8 @@ import { Metadata } from "next";
 import { auth } from "@/auth";
 import type { Page } from "@jsp/shared/types";
 import { Header } from "@/shadcn/components/Header";
-import { Json } from "@jsp/shared/comps";
+import FormAccount from "./FormAccount";
+import { getUserById } from "@/auth/actions";
 
 const page: Page = {
   title: "Account",
@@ -16,6 +17,11 @@ export const metadata: Metadata = {
 export default async function Page() {
   const session = await auth();
 
+  const userId = session?.user?.id;
+  if (!userId) return null;
+
+  const user = await getUserById(userId);
+
   return (
     <>
       <Header page={page} />
@@ -23,6 +29,7 @@ export default async function Page() {
       <section>
         <h2>Account Page</h2>
         {`Welcome, ${session?.user?.name}`}
+        <FormAccount user={user} />
       </section>
     </>
   );

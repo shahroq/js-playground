@@ -76,4 +76,5 @@ export const {
   handlers: { GET, POST },
   signIn,
   signOut,
+  unstable_update,
 } = NextAuth(authConfig);
