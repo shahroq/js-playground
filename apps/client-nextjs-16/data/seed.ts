@@ -163,7 +163,7 @@ const taskSeed = async () => {
   await db.insert(tasksTable).values(
     Array.from({ length: 5 }).map(() => ({
       title: faker.company.buzzPhrase(),
-      desc: faker.lorem.paragraph(),
+      description: faker.lorem.paragraph(),
     })),
   );
 };

@@ -38,8 +38,8 @@ export default function DataPage() {
         renderTd: (record: Task) => record.title,
       },
       {
-        key: "desc",
-        renderTh: () => "Desc",
+        key: "description",
+        renderTh: () => "Description",
         renderTd: (record: Task) => record.description,
       },
       {

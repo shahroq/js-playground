@@ -16,19 +16,19 @@ export async function createTaskReducer(
   formData: FormData,
 ) {
   const title = String(formData.get("title") || "").trim();
-  const desc = String(formData.get("desc") || "").trim();
+  const description = String(formData.get("description") || "").trim();
   const errors: string[] = [];
 
   // validate user input
   if (!title) errors.push("Title is required");
-  if (!desc) errors.push("Desc is required");
-  const values = { title, desc };
+  if (!description) errors.push("Description is required");
+  const values = { title, description };
 
   if (errors.length) return { values, message: "Error List:", errors };
 
   // create a record in db
   try {
-    const newTask = await db.insert(tasksTable).values({ title, desc });
+    const newTask = await db.insert(tasksTable).values({ title, description });
     revalidatePath("/tasks/w-orm");
     return { message: "Task created successfully" };
   } catch (e) {
@@ -47,13 +47,13 @@ export async function updateTaskReducer(
 ) {
   const id = Number(formData.get("id") || 0);
   const title = String(formData.get("title") || "").trim();
-  const desc = String(formData.get("desc") || "").trim();
+  const description = String(formData.get("description") || "").trim();
   const errors: string[] = [];
 
   // validate user input
   if (!title) errors.push("Title is required");
-  if (!desc) errors.push("Desc is required");
-  const values = { id, title, desc };
+  if (!description) errors.push("Description is required");
+  const values = { id, title, description };
 
   if (errors.length) return { values, message: "Error List:", errors };
 
@@ -61,7 +61,7 @@ export async function updateTaskReducer(
   try {
     const updatedTask = await db
       .update(tasksTable)
-      .set({ title, desc })
+      .set({ title, description })
       .where(sql`${tasksTable.id} = ${id}`)
       .returning();
     revalidatePath("/tasks/w-orm");

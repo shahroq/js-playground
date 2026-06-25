@@ -54,9 +54,9 @@ export default function FormTask({ task, action }: Props) {
         <Form.Row>
           <Form.Label htmlFor="description">Description</Form.Label>
           <Form.Textarea
-            name="desc"
-            id="desc"
-            defaultValue={formState?.values?.desc || ""}
+            name="description"
+            id="description"
+            defaultValue={formState?.values?.description || ""}
           />
           <Form.Description>{"Enter valid description"}</Form.Description>
         </Form.Row>

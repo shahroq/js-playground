@@ -23,7 +23,7 @@ export const taskSchema = z.object({
     .string()
     .min(10, "Zod: Description must be at least 10 characters")
     .includes("@", "Zod: Description must contains @"),
-  category: z.string().min(1, "Zod: Category is required"),
+  category: z.string().min(1, "Zod: Category is required").optional(),
 });
 
 function mapErrorsToAr(error: ZodError): Error[] {

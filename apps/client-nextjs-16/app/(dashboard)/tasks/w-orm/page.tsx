@@ -24,9 +24,9 @@ export default async function Tasks() {
         renderTd: (record: Task) => record.title,
       },
       {
-        key: "desc",
-        renderTh: () => "Desc",
-        renderTd: (record: Task) => record.desc,
+        key: "description",
+        renderTh: () => "Description",
+        renderTd: (record: Task) => record.description,
       },
       {
         key: "action",

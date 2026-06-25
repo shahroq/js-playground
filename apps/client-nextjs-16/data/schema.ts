@@ -138,5 +138,5 @@ export const categoriesTable = sqliteTable("categories", {
 export const tasksTable = sqliteTable("tasks", {
   id: int().primaryKey({ autoIncrement: true }),
   title: text().notNull(),
-  desc: text(),
+  description: text(),
 });
