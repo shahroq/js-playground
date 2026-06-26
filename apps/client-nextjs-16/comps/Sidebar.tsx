@@ -7,8 +7,7 @@ import type { NavItem } from "@jsp/shared/types";
 import { Nav } from "@jsp/shared/comps";
 import { NavUser } from "./NavUser";
 
-let navItems: NavItem[] = site.navSide;
-navItems = filterNavItems(site.navSide, "client-nextjs-16");
+const items = filterNavItems(site.navSide, "client-nextjs-16") as NavItem[];
 
 export function Sidebar() {
   const curPath = usePathname();
@@ -23,7 +22,7 @@ export function Sidebar() {
 
       <div className="offcanvas-body py-4">
         <Nav
-          items={navItems}
+          items={items}
           curPath={curPath}
           className={"nav nav-vertical"}
           Link={Link}

@@ -5,8 +5,7 @@ import { filterNavItems } from "@jsp/shared/utils";
 import { Nav } from "@jsp/shared/comps";
 import { NavUser } from "./NavUser";
 
-let items: NavItem[] = site.navSide;
-items = filterNavItems(site.navSide, "client-react-19");
+const items = filterNavItems(site.navSide, "client-react-19") as NavItem[];
 
 export function Sidebar() {
   const { curPath } = useRouterContext();

@@ -5,9 +5,10 @@ import { filterNavItems, prefixNavPaths } from "@jsp/shared/utils";
 import Nav from "@/comps-tw/Nav.astro";
 import NavUser from "@/comps-tw/NavUser.astro";
 
-let items: NavItem[] = site.navSide;
-items = filterNavItems(items, "ui");
-items = prefixNavPaths(items, "/tw");
+const items = prefixNavPaths(
+  filterNavItems(site.navSide, "ui"),
+  "/tw",
+) as NavItem[];
 
 const curPath = Astro.url.pathname;
 ---

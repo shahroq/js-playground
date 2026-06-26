@@ -13,8 +13,7 @@ import {
 import type { NavItem } from "@jsp/shared/types";
 import { filterNavItems } from "@jsp/shared/utils";
 
-let items: NavItem[] = site.navSide;
-items = filterNavItems(site.navSide, "client-nextjs-16");
+const items = filterNavItems(site.navSide, "client-nextjs-16") as NavItem[];
 
 export async function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
   // const session = await auth();
