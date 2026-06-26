@@ -1,5 +1,6 @@
 import { createClient } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
+import * as schema from "./schema";
 
 // throw new Error("Error for no reason!");
 
@@ -7,7 +8,7 @@ const url = process.env.DB_FILE_NAME;
 if (!url) throw new Error("DB_FILE_NAME environment variable is missing");
 
 const client = createClient({ url });
-export const db = drizzle(client);
+export const db = drizzle(client, { schema });
 
 /**
  * Check database connection
@@ -26,7 +27,7 @@ export async function checkDbConnection() {
 /*
 const data = {
   title: "task 1",
-  desc: "desc 1",
+  description: "description 1",
 };
 await db.insert(tasksTable).values(data);
 */
