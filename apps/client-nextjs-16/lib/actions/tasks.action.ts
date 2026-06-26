@@ -3,7 +3,7 @@ import { revalidatePath } from "next/cache";
 import { and, like, eq, desc } from "drizzle-orm";
 import { db } from "@/data";
 import { tasksTable } from "@/data/schema";
-import { taskSchema } from "@jsp/shared/validations";
+import { taskSchema } from "@jsp/shared/validations/zod";
 import { pause } from "@jsp/shared/utils";
 import { TaskQuery } from "@jsp/shared/types";
 

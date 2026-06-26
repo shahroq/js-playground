@@ -1,5 +1,5 @@
+import { accountSchema, signInSchema } from "@jsp/shared/validations/zod";
 import z from "zod";
-import { accountSchema, signInSchema } from "./validations";
 
 export type SignIn = z.infer<typeof signInSchema>;
 

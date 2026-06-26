@@ -1,29 +1,12 @@
-import { z, ZodError, ZodType } from "zod";
+import { ZodError, ZodType } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type {
   Error,
   FieldsErrors,
   ValidationResult,
   RHFValidationAdapter,
-} from "./types";
-import type { Task } from "../types/types";
-
-export const signInSchema = z.object({
-  email: z.email("Please enter a valid email address").trim(),
-  password: z.string().min(5, "Password must be at least 5 characters"),
-  // .regex(/[A-Z]/, "Must contain an uppercase letter")
-  // .regex(/[a-z]/, "Must contain a lowercase letter")
-  // .regex(/[0-9]/, "Must contain a number")
-  // .regex(/[^A-Za-z0-9]/, "Must contain a special character"),
-});
-
-export const taskSchema = z.object({
-  title: z.string().min(3, "Zod: Title must be at least 3 characters"),
-  description: z
-    .string()
-    .min(10, "Zod: Description must be at least 10 characters"),
-  category: z.string().min(1, "Zod: Category is required").optional(),
-});
+} from "../types";
+import type { Task } from "../../types/types";
 
 function mapErrorsToAr(error: ZodError): Error[] {
   return error.issues.map((i: any) => ({

@@ -22,16 +22,9 @@ import {
 import { Suspense } from "react";
 import { SkeletonTable } from "@/shadcn/components/SkeletonTable";
 import { pause } from "@jsp/shared/utils";
+import { postSchema, postsSchema } from "@jsp/shared/validations/zod";
 
-export const PostSchema = z.object({
-  userId: z.number(),
-  id: z.number(),
-  title: z.string(),
-  body: z.string(),
-});
-const PostsSchema = z.array(PostSchema);
-
-export type Post = z.infer<typeof PostSchema>;
+export type Post = z.infer<typeof postSchema>;
 
 const page: Page = {
   title: "Posts",
@@ -48,7 +41,7 @@ async function getPosts(limit = 10): Promise<Post[]> {
   );
   if (!res.ok) throw new Error("Failed to fetch posts");
   const json = await res.json();
-  return PostsSchema.parse(json);
+  return postsSchema.parse(json);
 }
 
 export default function Page() {

@@ -1,4 +1,3 @@
-import { formatNumberWithDecimal } from "@jsp/shared/utils";
 import { z } from "zod";
 
 /*
@@ -9,6 +8,7 @@ const currency = z
     "Price must have exactly two decimal places",
   );
 */
+
 const currency = z
   .string()
   .regex(/^\d+(\.\d{2})$/, "Price must have exactly two decimal places")

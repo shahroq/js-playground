@@ -3,13 +3,12 @@
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { sql, eq } from "drizzle-orm";
 import { db } from "@/data";
-import { signInSchema } from "./validations";
 import { signIn, signOut, unstable_update } from ".";
 import { pause } from "@jsp/shared/utils";
 import { usersTable } from "@/data/schema";
 import { auth } from "."; // same place you're importing signIn/signOut from
-import { accountSchema } from "./validations";
 import { revalidatePath } from "next/cache";
+import { accountSchema, signInSchema } from "@jsp/shared/validations/zod";
 
 /**
  * sign in w/ credentials reducer

@@ -2,8 +2,10 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { pause } from "@jsp/shared/utils";
 import { Form, Button, Alert } from "@jsp/shared/comps";
 import { taskInitValues, type Page, type Task } from "@jsp/shared/types";
-import { taskSchema, zodTaskValidation as v } from "@jsp/shared/validations";
-// import { rhfTaskValidation as v } from "@jsp/shared/validations";
+import {
+  taskSchema,
+  zodTaskValidation as v,
+} from "@jsp/shared/validations/zod";
 import { PageTitle } from "@/comps";
 import { options, type FormFeedback } from "../types";
 
