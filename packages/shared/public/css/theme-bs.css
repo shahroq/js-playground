@@ -12,6 +12,16 @@
     min-height: calc(100vh - var(--header-height));
   }
 
+  aside {
+    .nav-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #64748b;
+      margin-bottom: 0.5rem; /* mb-2 */
+      text-transform: uppercase;
+    }
+  }
+
   main {
     > section {
       padding: 2rem !important;

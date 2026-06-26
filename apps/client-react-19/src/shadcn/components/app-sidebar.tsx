@@ -12,8 +12,6 @@ import {
 import type { NavItem } from "@jsp/shared/types";
 import { filterNavItems } from "@jsp/shared/utils";
 
-const items = filterNavItems(site.navSide, "client-react-19") as NavItem[];
-
 export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="offcanvas" {...props}>
@@ -21,7 +19,16 @@ export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
         <Brand />
       </SidebarHeader>
       <SidebarContent>
-        <NavSidebar items={items} />
+        <NavSidebar
+          items={filterNavItems(site.navSide, "client-react-19") as NavItem[]}
+          title="Tailwind"
+        />
+        <NavSidebar
+          items={
+            filterNavItems(site.navSideShadcn, "client-react-19") as NavItem[]
+          }
+          title="Shadcn"
+        />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={site.user} />

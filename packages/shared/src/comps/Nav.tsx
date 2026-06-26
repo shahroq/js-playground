@@ -13,6 +13,7 @@ type Props = {
   className?: string;
   level?: number;
   Link: React.ComponentType<LinkComponentProps>;
+  title?: string;
 };
 
 type PropsNavItem = {
@@ -28,20 +29,24 @@ export function Nav({
   className,
   level = 0,
   Link,
+  title,
   ...rest
 }: Props) {
   return (
-    <ul className={cn(className)} data-level={level} {...rest}>
-      {items.map((item, i) => (
-        <NavItemView
-          key={i}
-          item={item}
-          curPath={curPath}
-          level={level}
-          Link={Link}
-        />
-      ))}
-    </ul>
+    <>
+      {title && <div className="nav-label">{title}</div>}
+      <ul className={cn(className)} data-level={level} {...rest}>
+        {items.map((item, i) => (
+          <NavItemView
+            key={i}
+            item={item}
+            curPath={curPath}
+            level={level}
+            Link={Link}
+          />
+        ))}
+      </ul>
+    </>
   );
 }
 

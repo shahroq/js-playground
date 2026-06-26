@@ -20,7 +20,12 @@ const curPath = Astro.url.pathname;
   </div>
 
   <div class="offcanvas-body py-4">
-    <Nav items={items} curPath={curPath} className={"nav nav-vertical"} />
+    <Nav
+      items={items}
+      curPath={curPath}
+      className={"nav nav-vertical"}
+      title="tailwind"
+    />
     <hr />
     <NavUser user={site.user} />
   </div>

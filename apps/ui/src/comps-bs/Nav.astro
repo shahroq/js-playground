@@ -7,11 +7,13 @@ type Props = {
   curPath?: string;
   className?: string;
   level?: number;
+  title?: string;
 };
 
-const { items, curPath, className, level = 0 } = Astro.props;
+const { items, curPath, className, level = 0, title } = Astro.props;
 ---
 
+{title && <div class="nav-label">{title}</div>}
 <ul class={className} data-level={level}>
   {
     items?.map((item, i) => (

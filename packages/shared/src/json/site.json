@@ -144,26 +144,28 @@
           ]
         }
       ]
-    },
+    }
+  ],
+  "navSideShadcn": [
     {
-      "label": "Shadcn",
+      "label": "Components",
       "targets": ["client-react-19", "client-nextjs-16"],
       "items": [
         {
           "label": "Misc",
           "path": "/shadcn/misc"
-        },
-        {
-          "label": "Posts (API Call/Zod)",
-          "targets": ["client-nextjs-16"],
-          "path": "/shadcn/posts"
-        },
-        {
-          "label": "Tasks (ORM)",
-          "targets": ["client-nextjs-16"],
-          "path": "/shadcn/tasks"
         }
       ]
+    },
+    {
+      "label": "Posts (w/ API Call/Zod)",
+      "targets": ["client-nextjs-16"],
+      "path": "/shadcn/posts"
+    },
+    {
+      "label": "Tasks (w/ ORM)",
+      "targets": ["client-nextjs-16"],
+      "path": "/shadcn/tasks"
     },
     {
       "label": "E-Commerce",

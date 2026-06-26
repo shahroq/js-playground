@@ -45,6 +45,10 @@
 
       aside {
         @apply w-auto shrink-0;
+
+        .nav-label {
+          @apply text-xs font-bold text-slate-500 !mb-2 uppercase;
+        }
       }
 
       main {

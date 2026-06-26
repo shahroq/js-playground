@@ -13,8 +13,6 @@ import {
 import type { NavItem } from "@jsp/shared/types";
 import { filterNavItems } from "@jsp/shared/utils";
 
-const items = filterNavItems(site.navSide, "client-nextjs-16") as NavItem[];
-
 export async function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
   // const session = await auth();
   // console.log(session);
@@ -25,7 +23,16 @@ export async function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
         <Brand />
       </SidebarHeader>
       <SidebarContent>
-        <NavSidebar items={items} />
+        <NavSidebar
+          items={filterNavItems(site.navSide, "client-nextjs-16") as NavItem[]}
+          title="Tailwind"
+        />
+        <NavSidebar
+          items={
+            filterNavItems(site.navSideShadcn, "client-nextjs-16") as NavItem[]
+          }
+          title="Shadcn"
+        />
       </SidebarContent>
       <SidebarFooter>
         <NavUser variant="full" />
