@@ -36,7 +36,7 @@ export type Task = {
   id?: string | number;
   title: string;
   description: string;
-  category: string;
+  category?: string;
 };
 
 export type TaskQuery = {
@@ -46,7 +46,7 @@ export type TaskQuery = {
 };
 
 export const taskInitValues: Task = {
-  title: "",
+  title: "new task",
   description: "",
   category: "work",
 };

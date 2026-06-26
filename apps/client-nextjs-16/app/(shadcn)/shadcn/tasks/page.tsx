@@ -1,15 +1,6 @@
 import { Suspense } from "react";
 import type { Page, TaskQuery } from "@jsp/shared/types";
 import { Header } from "@/shadcn/components/Header";
-import { MoreHorizontalIcon } from "lucide-react";
-import { Button } from "@/shadcn/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/shadcn/components/ui/dropdown-menu";
 import {
   Table,
   TableBody,
@@ -21,6 +12,8 @@ import {
 import { SkeletonTable } from "@/shadcn/components/SkeletonTable";
 import { getTasks } from "@/lib/actions/tasks.action";
 import { Filters } from "./Filter";
+import { Actions } from "./Actions";
+import { ActionCreate } from "./ActionCreate";
 
 const page: Page = {
   title: "Tasks",
@@ -51,7 +44,10 @@ export default async function Page({ searchParams }: Props) {
       <section>
         <div className="flex-between">
           <h2>Tasks</h2>
-          <Filters />
+          <div className="flex gap-2">
+            <Filters />
+            <ActionCreate />
+          </div>
         </div>
 
         <Suspense fallback={<SkeletonTable />}>
@@ -86,22 +82,7 @@ async function TaskList({ query }: PropsTaskList) {
             <TableCell className="font-medium">{row.id}</TableCell>
             <TableCell>{row.title}</TableCell>
             <TableCell className="text-right">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="size-8">
-                    <MoreHorizontalIcon />
-                    <span className="sr-only">Open menu</span>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem>Edit</DropdownMenuItem>
-                  <DropdownMenuItem>Duplicate</DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem variant="destructive">
-                    Delete
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <Actions task={row} />
             </TableCell>
           </TableRow>
         ))}
