@@ -4,15 +4,15 @@
       @apply flex flex-1 flex-col gap-4 px-6 py-4;
     }
   }
+}
 
-  .brand {
-    @apply flex items-center gap-2 px-1 py-2 font-semibold;
+.brand {
+  @apply flex items-center gap-2 px-1 py-2 font-semibold;
 
-    > img {
-      @apply size-8;
-    }
-    > span {
-      @apply text-lg font-semibold;
-    }
+  > img {
+    @apply size-8;
+  }
+  > span {
+    @apply text-lg font-semibold;
   }
 }
