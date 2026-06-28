@@ -34,6 +34,16 @@
       @apply font-medium text-base text-gray-600;
     }
 
+    small,
+    .small {
+      @apply text-sm text-slate-600;
+    }
+
+    pre,
+    .pre {
+      @apply rounded-md bg-slate-100 p-4 text-sm text-red-700;
+    }
+
     &.layout-tw {
       header {
         @apply sticky top-0 z-50 bg-gray-800 text-white;
