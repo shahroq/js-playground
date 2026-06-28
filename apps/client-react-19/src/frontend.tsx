@@ -7,15 +7,10 @@
 
 import { createRoot } from "react-dom/client";
 import { App } from "./App";
-import { RouterProvider } from "@/modules/router";
 
 function start() {
   const root = createRoot(document.getElementById("root")!);
-  root.render(
-    <RouterProvider>
-      <App />
-    </RouterProvider>,
-  );
+  root.render(<App />);
 }
 
 if (document.readyState === "loading") {
