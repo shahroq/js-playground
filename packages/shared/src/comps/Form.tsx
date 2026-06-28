@@ -43,6 +43,7 @@ function Label({ children, className, ...rest }: PropsLabel) {
   );
 }
 
+// https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input
 function Input({ type = "text", className, ...rest }: PropsInput) {
   return (
     <input

@@ -39,6 +39,7 @@ function TaskForm() {
     if (!formRef.current) return;
 
     const formData = new FormData(formRef.current);
+    console.log("formData:", formData);
 
     /*
     const formValues = {
@@ -47,8 +48,6 @@ function TaskForm() {
       category: formData.get("category"),
     };
     */
-
-    console.log("formData:", formData);
 
     // reset form if needed
     if (0) formRef.current.reset();

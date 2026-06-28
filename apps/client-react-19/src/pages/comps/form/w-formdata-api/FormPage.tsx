@@ -26,17 +26,23 @@ export default function FormPage() {
  */
 function TaskForm() {
   // local operations: validation etc
-  function formAction(formData: FormData): any | Promise<any> {
-    const entries = Object.fromEntries(formData.entries());
+  function parseTask(formData: FormData): Task {
+    // 1: simple
+    // return Object.fromEntries(formData);
 
-    const formValues: Task = {
-      title: entries.title ?? "",
-      description: entries.description ?? "",
-      category: entries.category ?? "",
+    // 2: more explicit
+    return {
+      title: String(formData.get("title") ?? ""),
+      description: String(formData.get("description") ?? ""),
+      category: String(formData.get("category") ?? ""),
     };
-    console.log("formValues:", formValues);
+  }
 
-    // BUT it reset the form!
+  function formAction(formData: FormData) {
+    const task = parseTask(formData);
+    console.log("task:", task);
+
+    // react resets the form!
   }
 
   return (

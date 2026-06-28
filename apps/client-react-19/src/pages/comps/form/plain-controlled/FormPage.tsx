@@ -42,6 +42,14 @@ function TaskForm() {
 
   const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // get data with FormData
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    console.log("formData 1: ", formData);
+    console.log("formData 2: ", Object.fromEntries(formData));
+
+    // get data from state
     console.log("formValues:", formValues);
 
     // validation
