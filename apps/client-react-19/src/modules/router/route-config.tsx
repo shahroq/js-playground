@@ -28,6 +28,7 @@ import CounterPageWZustand from "@/pages/counter/w-zustand/CounterPage";
 import DataPage from "@/pages/comps/DataPage";
 import ModalPage from "@/pages/comps/ModalPage";
 import MiscPage from "@/pages/comps/MiscPage";
+import TiltPage from "@/pages/comps/TitlePage";
 const LazyPage = lazy(async () => {
   await pause(1500);
   return import("@/pages/comps/LazyPage");
@@ -60,6 +61,7 @@ export const routesConfig: RouteConfig[] = [
   { path: "/comps/data", element: <DataPage /> },
   { path: "/comps/modal", element: <ModalPage /> },
   { path: "/comps/misc", element: <MiscPage /> },
+  { path: "/comps/tilt", element: <TiltPage /> },
   {
     path: "/comps/lazy",
     element: (

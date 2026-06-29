@@ -52,6 +52,11 @@
           "path": "/comps/audio"
         },
         {
+          "label": "Titl",
+          "targets": ["client-react-19"],
+          "path": "/comps/tilt"
+        },
+        {
           "label": "Form",
           "targets": ["ui"],
           "path": "/comps/form"
