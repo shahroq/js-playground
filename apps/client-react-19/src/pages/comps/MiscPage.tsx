@@ -7,8 +7,8 @@ import {
   Counter,
   Item,
 } from "@jsp/shared/comps";
-import { avatar1 as avatar } from "@jsp/shared/img";
 import { PageTitle } from "@/comps";
+import { avatar } from "@jsp/shared/img";
 
 const page: Page = {
   title: "Misc",
@@ -17,7 +17,7 @@ const page: Page = {
 
 export default function MiscPage() {
   return (
-    <section>
+    <section className="space-y-5">
       <PageTitle page={page} />
 
       {/* Item */}
