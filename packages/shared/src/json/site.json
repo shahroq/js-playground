@@ -119,34 +119,26 @@
     {
       "label": "Tasks",
       "targets": ["client-nextjs-16"],
-      "items": [{ "label": "w/ ORM", "path": "/tasks/w-orm" }]
+      "items": [{ "label": "List w/ ORM", "path": "/tasks/list-w-orm" }]
     },
     {
-      "label": "Catalog (Remote)",
+      "label": "Catalog",
       "targets": ["client-react-19", "client-nextjs-16"],
       "items": [
         {
-          "label": "w/ ORM",
+          "label": "Product List w/ ORM",
           "targets": ["client-nextjs-16"],
-          "path": "/catalog/w-orm",
-          "items": [{ "label": "Products", "path": "/catalog/w-orm/products" }]
+          "path": "/catalog/product-list-w-orm"
         },
         {
-          "label": "w/ Redux Toolkit Query",
+          "label": "Product List w/ RTK Query",
           "targets": ["client-react-19"],
-          "items": [
-            {
-              "label": "Products",
-              "path": "/catalog/w-redux-toolkit-query/products"
-            }
-          ]
+          "path": "/catalog/product-list-w-rtk-query"
         },
         {
-          "label": "w/ React Query",
+          "label": "Product List w/ React Query",
           "targets": ["client-react-19"],
-          "items": [
-            { "label": "Products", "path": "/catalog/w-react-query/products" }
-          ]
+          "path": "/catalog/product-list-w-react-query"
         }
       ]
     }
@@ -163,14 +155,24 @@
       ]
     },
     {
-      "label": "Posts (w/ API Call/Zod)",
+      "label": "Posts",
       "targets": ["client-nextjs-16"],
-      "path": "/shadcn/posts"
+      "items": [
+        {
+          "label": "List w/ API",
+          "path": "/shadcn/posts/list-w-api"
+        }
+      ]
     },
     {
-      "label": "Tasks (w/ ORM)",
+      "label": "Tasks",
       "targets": ["client-nextjs-16"],
-      "path": "/shadcn/tasks"
+      "items": [
+        {
+          "label": "List w/ ORM",
+          "path": "/shadcn/tasks/list-w-orm"
+        }
+      ]
     },
     {
       "label": "E-Commerce",

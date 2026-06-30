@@ -40,8 +40,8 @@ import FormPageWFDAPI from "@/pages/comps/form/w-formdata-api/FormPage";
 import FormPageWUAS from "@/pages/comps/form/w-useactionstate/FormPage";
 import FormPageWRHF from "@/pages/comps/form/w-react-hook-form/FormPage";
 // catalog
-import ProductsPageWRTK from "@/pages/catalog/w-redux-toolkit-query/ProductsPage";
-import ProductPageWRQ from "@/pages/catalog/w-react-query/ProductsPage";
+import ProductsPageWRTK from "@/pages/catalog/product-list-w-rtk-query/ProductsPage";
+import ProductPageWRQ from "@/pages/catalog/product-list-w-react-query/ProductsPage";
 import type { RouteConfig } from "./types";
 // shadcn
 import MiscPageShadcn from "@/pages/shadcn/MiscPage";
@@ -87,10 +87,10 @@ export const routesConfig: RouteConfig[] = [
   { path: "/counter/w-zustand", element: <CounterPageWZustand /> },
   // catalog
   {
-    path: "/catalog/w-redux-toolkit-query/products",
+    path: "/catalog/product-list-w-rtk-query",
     element: <ProductsPageWRTK />,
   },
-  { path: "/catalog/w-react-query/products", element: <ProductPageWRQ /> },
+  { path: "/catalog/product-list-w-react-query", element: <ProductPageWRQ /> },
   // shadcn
   {
     path: "/shadcn/misc",

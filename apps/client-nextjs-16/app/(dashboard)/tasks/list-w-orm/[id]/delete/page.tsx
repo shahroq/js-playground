@@ -9,7 +9,7 @@ export default async function Delete({ params }: Props) {
   const { id } = await params;
 
   await deleteTask(parseInt(id));
-  redirect(`/tasks/w-orm`);
+  redirect(`/tasks/list-w-orm`);
 
   return <section>Deleting the task...</section>;
 }

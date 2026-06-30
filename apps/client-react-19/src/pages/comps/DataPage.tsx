@@ -48,14 +48,14 @@ export default function DataPage() {
         renderTd: (record: Task) => (
           <div className="flex gap-2">
             <Button
-              className="btn-sm btn-primary"
+              className="btn-sm btn-primary disabled"
               onClick={() => console.log("Edit", record.id)}
             >
               Edit
             </Button>
 
             <Button
-              className="btn-sm btn-danger"
+              className="btn-sm btn-danger disabled"
               onClick={() => console.log("Delete", record.id)}
             >
               Delete

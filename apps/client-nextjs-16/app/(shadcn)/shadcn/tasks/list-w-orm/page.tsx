@@ -17,7 +17,11 @@ import { ActionCreate } from "./ActionCreate";
 
 const page: Page = {
   title: "Tasks",
-  breadcrumb: [{ label: "Shadcn" }, { label: "Posts" }],
+  breadcrumb: [
+    { label: "Shadcn" },
+    { label: "Tasks" },
+    { label: "List w/ ORM" },
+  ],
 };
 
 type Props = {

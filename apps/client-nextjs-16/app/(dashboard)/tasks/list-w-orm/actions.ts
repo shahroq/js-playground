@@ -64,7 +64,7 @@ export async function updateTaskReducer(
       .set({ title, description })
       .where(sql`${tasksTable.id} = ${id}`)
       .returning();
-    revalidatePath("/tasks/w-orm");
+    revalidatePath("/tasks/list-w-orm");
     return { message: "Task updated successfully", values: updatedTask[0] };
   } catch (e) {
     console.error(e);
@@ -85,5 +85,5 @@ export async function deleteTask(id: number) {
   console.log(`deleted Updated...`);
   console.log(deletedTask);
 
-  redirect(`/tasks/w-orm`);
+  redirect(`/tasks/list-w-orm`);
 }

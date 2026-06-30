@@ -7,7 +7,7 @@ const page: Page = {
   title: "Create",
   breadcrumb: [
     { label: "Tasks" },
-    { label: "List", path: "/tasks/w-orm" },
+    { label: "List w/ ORM", path: "/tasks/list-w-orm" },
     { label: "Create" },
   ],
 };

@@ -14,7 +14,7 @@ const page: Page = {
   title: "My Store",
   breadcrumb: [
     { label: "E-Commerce", path: "/e-com" },
-    { label: "Products", path: "/e-com/products" },
+    { label: "Products", path0: "/e-com/products" },
     { label: "Product" },
   ],
 };

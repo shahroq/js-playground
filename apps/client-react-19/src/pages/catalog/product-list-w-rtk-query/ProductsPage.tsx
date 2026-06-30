@@ -9,8 +9,8 @@ const page: Page = {
   title: "Products",
   breadcrumb: [
     { label: "Dashboard" },
-    { label: "Catalog w/ Redux Toolkit Query" },
-    { label: "Products" },
+    { label: "Catalog" },
+    { label: "Product List w/ RTK Query" },
   ],
 };
 

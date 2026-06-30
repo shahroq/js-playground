@@ -11,7 +11,7 @@ const page: Page = {
   title: "Update",
   breadcrumb: [
     { label: "Tasks" },
-    { label: "List", path: "/tasks/w-orm" },
+    { label: "List w/ ORM", path: "/tasks/list-w-orm" },
     { label: "Update" },
   ],
 };

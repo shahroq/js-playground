@@ -10,7 +10,7 @@ export default async function Catalog() {
   return (
     <section>
       <PageTitle page={page} />
-      <div>Catalog</div>
+      <h3>Catalog</h3>
     </section>
   );
 }

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 const page: Page = {
   title: "My Store",
-  breadcrumb: [{ label: "E-Commerce" }, { label: "My Store" }],
+  breadcrumb: [{ label: "E-Commerce (Home)" }],
 };
 
 export default async function Page() {

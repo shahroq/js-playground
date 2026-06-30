@@ -10,8 +10,8 @@ const page: Page = {
   title: "Products",
   breadcrumb: [
     { label: "Dashboard" },
-    { label: "Catalog w/ React Query" },
-    { label: "Products" },
+    { label: "Catalog" },
+    { label: "Product List w/ React Query" },
   ],
 };
 

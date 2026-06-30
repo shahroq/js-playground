@@ -7,7 +7,7 @@ import { getTasks } from "./actions";
 
 const page: Page = {
   title: "Tasks",
-  breadcrumb: [{ label: "Tasks" }, { label: "List" }],
+  breadcrumb: [{ label: "Tasks" }, { label: "List w/ ORM" }],
 };
 
 export default async function Tasks() {
@@ -35,13 +35,13 @@ export default async function Tasks() {
           <div className="flex gap-2">
             <Link
               className="btn btn-sm btn-primary"
-              href={`w-orm/${record.id}/update`}
+              href={`list-w-orm/${record.id}/update`}
             >
               Edit
             </Link>
             <Link
               className="btn btn-sm btn-danger"
-              href={`w-orm/${record.id}/delete`}
+              href={`list-w-orm/${record.id}/delete`}
             >
               Delete w/ Page
             </Link>
@@ -55,7 +55,7 @@ export default async function Tasks() {
     <section>
       <PageTitle page={page} />
       <div className="flex flex-row-reverse">
-        <Link href={`w-orm/create`} className="btn btn-primary">
+        <Link href={`list-w-orm/create`} className="btn btn-primary">
           Add
         </Link>
       </div>

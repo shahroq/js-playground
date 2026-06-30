@@ -28,7 +28,11 @@ export type Post = z.infer<typeof postSchema>;
 
 const page: Page = {
   title: "Posts",
-  breadcrumb: [{ label: "Shadcn" }, { label: "Posts" }],
+  breadcrumb: [
+    { label: "Shadcn" },
+    { label: "Posts" },
+    { label: "List w/ API" },
+  ],
 };
 
 async function getPosts(limit = 10): Promise<Post[]> {
@@ -85,10 +89,10 @@ async function PostList() {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                  <DropdownMenuItem>Edit</DropdownMenuItem>
-                  <DropdownMenuItem>Duplicate</DropdownMenuItem>
+                  <DropdownMenuItem disabled>Edit</DropdownMenuItem>
+                  <DropdownMenuItem disabled>Duplicate</DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem variant="destructive">
+                  <DropdownMenuItem variant="destructive" disabled>
                     Delete
                   </DropdownMenuItem>
                 </DropdownMenuContent>
