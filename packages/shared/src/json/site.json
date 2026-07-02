@@ -139,6 +139,11 @@
           "label": "Product List w/ React Query",
           "targets": ["client-react-19"],
           "path": "/catalog/product-list-w-react-query"
+        },
+        {
+          "label": "Product List w/ use hook",
+          "targets": ["client-react-19"],
+          "path": "/catalog/product-list-w-use-hook"
         }
       ]
     }

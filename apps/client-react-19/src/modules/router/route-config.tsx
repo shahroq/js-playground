@@ -42,6 +42,7 @@ import FormPageWRHF from "@/pages/comps/form/w-react-hook-form/FormPage";
 // catalog
 import ProductsPageWRTK from "@/pages/catalog/product-list-w-rtk-query/ProductsPage";
 import ProductPageWRQ from "@/pages/catalog/product-list-w-react-query/ProductsPage";
+import ProductPageWUH from "@/pages/catalog/product-list-w-use-hook/ProductsPage";
 import type { RouteConfig } from "./types";
 // shadcn
 import MiscPageShadcn from "@/pages/shadcn/MiscPage";
@@ -91,6 +92,7 @@ export const routesConfig: RouteConfig[] = [
     element: <ProductsPageWRTK />,
   },
   { path: "/catalog/product-list-w-react-query", element: <ProductPageWRQ /> },
+  { path: "/catalog/product-list-w-use-hook", element: <ProductPageWUH /> },
   // shadcn
   {
     path: "/shadcn/misc",
