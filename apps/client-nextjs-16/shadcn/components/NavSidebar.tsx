@@ -1,6 +1,9 @@
+"use client";
+
 import type { NavItem } from "@jsp/shared/types";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Collapsible,
   CollapsibleContent,
@@ -24,16 +27,30 @@ type Props = {
 
 type NavItemProps = {
   item: NavItem;
+  pathname: string;
   depth?: number;
 };
 
+type SubItemNodeProps = {
+  item: NavItem;
+  depth: number;
+  pathname: string;
+};
+
 export function NavSidebar({ items, title }: Props) {
+  const pathname = usePathname();
+
   return (
     <SidebarGroup>
       {title && <SidebarGroupLabel>{title}</SidebarGroupLabel>}
       <SidebarMenu>
         {items.map((item) => (
-          <NavItemNode key={item.label} item={item} depth={0} />
+          <NavItemNode
+            key={item.label}
+            item={item}
+            depth={0}
+            pathname={pathname}
+          />
         ))}
       </SidebarMenu>
     </SidebarGroup>
@@ -41,7 +58,7 @@ export function NavSidebar({ items, title }: Props) {
 }
 
 // Top-level items: rendered inside <SidebarMenu> (<ul>), so must be <li> via SidebarMenuItem
-function NavItemNode({ item, depth = 0 }: NavItemProps) {
+function NavItemNode({ item, pathname, depth = 0 }: NavItemProps) {
   const hasChildren = !!item.items?.length;
   const hasPath = !!item.path;
 
@@ -85,7 +102,12 @@ function NavItemNode({ item, depth = 0 }: NavItemProps) {
         <CollapsibleContent>
           <SidebarMenuSub>
             {item.items!.map((child) => (
-              <SubItemNode key={child.label} item={child} depth={depth + 1} />
+              <SubItemNode
+                key={child.label}
+                item={child}
+                pathname={pathname}
+                depth={depth + 1}
+              />
             ))}
           </SidebarMenuSub>
         </CollapsibleContent>
@@ -96,15 +118,16 @@ function NavItemNode({ item, depth = 0 }: NavItemProps) {
 
 // Sub-level items: rendered inside <SidebarMenuSub> (<ul>), wrapped in SidebarMenuSubItem (<li>).
 // Children recurse back into SubItemNode, never NavItemNode, to avoid <li>-in-<li>.
-function SubItemNode({ item, depth }: { item: NavItem; depth: number }) {
+function SubItemNode({ item, pathname, depth }: SubItemNodeProps) {
   const hasChildren = !!item.items?.length;
   const hasPath = !!item.path;
+  const active = item.path === pathname;
 
   if (!hasChildren) {
     return (
       <SidebarMenuSubItem>
-        <SidebarMenuSubButton asChild>
-          <Link href={item.path || "#"}>
+        <SidebarMenuSubButton asChild isActive={active}>
+          <Link href={item.path || "#"} className="">
             <span>{item.label}</span>
           </Link>
         </SidebarMenuSubButton>
