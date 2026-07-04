@@ -27,26 +27,13 @@ import { postSchema, postsSchema } from "@jsp/shared/validations/zod";
 export type Post = z.infer<typeof postSchema>;
 
 const page: Page = {
-  title: "Posts",
+  title: "Posts (API)",
   breadcrumb: [
     { label: "Shadcn" },
     { label: "Posts" },
-    { label: "List w/ API" },
+    { label: "List (Plain)" },
   ],
 };
-
-async function getPosts(limit = 10): Promise<Post[]> {
-  await pause(1000);
-  const res = await fetch(
-    `https://jsonplaceholder.typicode.com/posts?_limit=${limit}`,
-    {
-      next: { revalidate: 60 },
-    },
-  );
-  if (!res.ok) throw new Error("Failed to fetch posts");
-  const json = await res.json();
-  return postsSchema.parse(json);
-}
 
 export default function Page() {
   return (
@@ -103,4 +90,17 @@ async function PostList() {
       </TableBody>
     </Table>
   );
+}
+
+async function getPosts(limit = 10): Promise<Post[]> {
+  await pause(1000);
+  const res = await fetch(
+    `https://jsonplaceholder.typicode.com/posts?_limit=${limit}`,
+    {
+      next: { revalidate: 60 },
+    },
+  );
+  if (!res.ok) throw new Error("Failed to fetch posts");
+  const json = await res.json();
+  return postsSchema.parse(json);
 }
