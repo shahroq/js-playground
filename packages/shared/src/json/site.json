@@ -136,9 +136,9 @@
           "path": "/catalog/product-list-w-rtk-query"
         },
         {
-          "label": "Product List w/ React Query",
+          "label": "Product List w/ TanStack Query",
           "targets": ["client-react-19"],
-          "path": "/catalog/product-list-w-react-query"
+          "path": "/catalog/product-list-w-tanstack-query"
         },
         {
           "label": "Product List w/ use hook",
@@ -160,12 +160,16 @@
       ]
     },
     {
-      "label": "Posts",
+      "label": "Posts (API)",
       "targets": ["client-nextjs-16"],
       "items": [
         {
-          "label": "List w/ API",
-          "path": "/shadcn/posts/list-w-api"
+          "label": "List (Plain)",
+          "path": "/shadcn/posts/list"
+        },
+        {
+          "label": "List w/ TanStack Query",
+          "path": "/shadcn/posts/list-w-tanstack-query"
         }
       ]
     },

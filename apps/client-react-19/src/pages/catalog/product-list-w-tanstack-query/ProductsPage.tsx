@@ -11,7 +11,7 @@ const page: Page = {
   breadcrumb: [
     { label: "Dashboard" },
     { label: "Catalog" },
-    { label: "Product List w/ React Query" },
+    { label: "Product List w/ TanStack Query" },
   ],
 };
 
