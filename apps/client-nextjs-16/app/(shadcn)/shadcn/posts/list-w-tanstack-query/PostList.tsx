@@ -1,8 +1,6 @@
-import { z } from "zod";
-import type { Page } from "@jsp/shared/types";
-import { Header } from "@/shadcn/components/Header";
+"use client";
 
-import { MoreHorizontalIcon } from "lucide-react";
+import { SkeletonTable } from "@/shadcn/components/SkeletonTable";
 import { Button } from "@/shadcn/components/ui/button";
 import {
   DropdownMenu,
@@ -19,39 +17,21 @@ import {
   TableHeader,
   TableRow,
 } from "@/shadcn/components/ui/table";
-import { Suspense } from "react";
-import { SkeletonTable } from "@/shadcn/components/SkeletonTable";
-import { postSchema } from "@jsp/shared/validations/zod";
-import { getPosts } from "../api";
+import { Alert } from "@jsp/shared/comps";
+import { MoreHorizontalIcon } from "lucide-react";
+import { usePosts } from "./hooks";
 
-export type Post = z.infer<typeof postSchema>;
+export function PostList() {
+  const { data, error, isLoading } = usePosts();
 
-const page: Page = {
-  title: "Posts (API)",
-  breadcrumb: [
-    { label: "Shadcn" },
-    { label: "Posts" },
-    { label: "List (Plain)" },
-  ],
-};
-
-export default function Page() {
-  return (
-    <>
-      <Header page={page} />
-
-      <section>
-        <h2>Posts</h2>
-        <Suspense fallback={<SkeletonTable />}>
-          <PostList />
-        </Suspense>
-      </section>
-    </>
-  );
-}
-
-async function PostList() {
-  const data = await getPosts(3);
+  if (isLoading) return <SkeletonTable />;
+  if (error) return <Alert variant="warning">{JSON.stringify(error)}</Alert>;
+  if (!data?.length)
+    return (
+      <Alert variant="info" dismissible={false}>
+        List is empty.
+      </Alert>
+    );
 
   return (
     <Table>
@@ -63,7 +43,7 @@ async function PostList() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {data.map((row) => (
+        {data?.map((row) => (
           <TableRow key={row.id}>
             <TableCell className="font-medium">{row.id}</TableCell>
             <TableCell>{row.title}</TableCell>
