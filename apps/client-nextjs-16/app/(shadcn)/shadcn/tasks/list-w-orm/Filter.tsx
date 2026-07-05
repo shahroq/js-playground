@@ -6,7 +6,7 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from "@/shadcn/components/ui/input-group";
-import { useTaskQuery } from "./use-query";
+import { useTaskQuery } from "./use-task-query";
 import {
   Select,
   SelectContent,

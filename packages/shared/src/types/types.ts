@@ -43,11 +43,18 @@ export type Task = {
   category?: string;
 };
 
+export const taskSortables = ["id", "title", "status"] as const;
+
+export type TaskSortField = (typeof taskSortables)[number];
+export type TaskSort = TaskSortField | `-${TaskSortField}`;
+
+// parsed:
 export type TaskQuery = {
   term?: string;
   status?: TaskStatus;
   page?: number;
   limit?: number;
+  sort?: TaskSort;
 };
 
 export const taskInitValues: Task = {

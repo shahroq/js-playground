@@ -16,6 +16,7 @@ import { Actions } from "./Actions";
 import { ActionCreate } from "./ActionCreate";
 import Link from "next/link";
 import { StatusBadge } from "./StatusBadge";
+import { parseTaskQuery } from "./query";
 
 const page: Page = {
   title: "Tasks",
@@ -26,23 +27,11 @@ const page: Page = {
   ],
 };
 
-type Props = {
-  searchParams: Promise<TaskQuery>;
-};
-
-type PropsTaskList = {
-  query?: TaskQuery;
-};
+type Props = { searchParams: Promise<URLSearchParams> };
+type PropsTaskList = { query: TaskQuery };
 
 export default async function Page({ searchParams }: Props) {
-  const sParams = await searchParams;
-
-  const query: TaskQuery = {
-    term: sParams.term || undefined,
-    status: sParams.status || undefined,
-    page: sParams.page ? Number(sParams.page) : undefined,
-    limit: sParams.limit ? Number(sParams.limit) : undefined,
-  };
+  const query = parseTaskQuery(await searchParams);
 
   return (
     <>
