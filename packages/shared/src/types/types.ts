@@ -32,15 +32,20 @@ export const userInitValues: User = {
   avatar: "",
 };
 
+export const taskStatus = ["NEW", "IN_PROGRESS", "COMPLETED"] as const;
+export type TaskStatus = (typeof taskStatus)[number];
+
 export type Task = {
   id?: string | number;
   title: string;
   description: string;
+  status?: TaskStatus;
   category?: string;
 };
 
 export type TaskQuery = {
   term?: string;
+  status?: TaskStatus;
   page?: number;
   limit?: number;
 };

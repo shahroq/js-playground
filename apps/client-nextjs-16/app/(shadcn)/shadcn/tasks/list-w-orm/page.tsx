@@ -14,6 +14,8 @@ import { getTasks } from "@/lib/actions/tasks.action";
 import { Filters } from "./Filter";
 import { Actions } from "./Actions";
 import { ActionCreate } from "./ActionCreate";
+import Link from "next/link";
+import { StatusBadge } from "./StatusBadge";
 
 const page: Page = {
   title: "Tasks",
@@ -37,6 +39,7 @@ export default async function Page({ searchParams }: Props) {
 
   const query: TaskQuery = {
     term: sParams.term || undefined,
+    status: sParams.status || undefined,
     page: sParams.page ? Number(sParams.page) : undefined,
     limit: sParams.limit ? Number(sParams.limit) : undefined,
   };
@@ -75,8 +78,11 @@ async function TaskList({ query }: PropsTaskList) {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[100px]">ID</TableHead>
+          <TableHead className="w-25">
+            <Link href="">ID</Link>
+          </TableHead>
           <TableHead>Title</TableHead>
+          <TableHead>Status</TableHead>
           <TableHead className="text-right">Actions</TableHead>
         </TableRow>
       </TableHeader>
@@ -85,6 +91,9 @@ async function TaskList({ query }: PropsTaskList) {
           <TableRow key={row.id}>
             <TableCell className="font-medium">{row.id}</TableCell>
             <TableCell>{row.title}</TableCell>
+            <TableCell>
+              <StatusBadge status={row.status} />
+            </TableCell>
             <TableCell className="text-right">
               <Actions task={row} />
             </TableCell>

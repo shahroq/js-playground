@@ -20,6 +20,7 @@ export async function getTasks(query?: TaskQuery) {
   const filters = [];
 
   if (query?.term) filters.push(like(tasksTable.title, `%${query.term}%`));
+  if (query?.status) filters.push(eq(tasksTable.status, query.status));
 
   return db
     .select()

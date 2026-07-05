@@ -1,3 +1,4 @@
+import { taskStatus } from "@jsp/shared/types";
 import {
   int,
   integer,
@@ -139,4 +140,9 @@ export const tasksTable = sqliteTable("tasks", {
   id: int().primaryKey({ autoIncrement: true }),
   title: text().notNull(),
   description: text(),
+  status: text("status", {
+    enum: taskStatus,
+  })
+    .notNull()
+    .default("NEW"),
 });

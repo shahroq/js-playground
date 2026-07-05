@@ -11,6 +11,7 @@ import {
 } from "./schema";
 import { db } from ".";
 import { hashPassword } from "@/auth/utils";
+import { taskStatus } from "@jsp/shared/types";
 
 async function main() {
   await truncateTables();
@@ -164,6 +165,7 @@ const taskSeed = async () => {
     Array.from({ length: 5 }).map(() => ({
       title: faker.company.buzzPhrase(),
       description: faker.lorem.paragraph(),
+      status: faker.helpers.arrayElement(taskStatus),
     })),
   );
 };
