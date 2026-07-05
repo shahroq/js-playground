@@ -10,13 +10,14 @@ import {
   TableRow,
 } from "@/shadcn/components/ui/table";
 import { SkeletonTable } from "@/shadcn/components/SkeletonTable";
-import { getTasks } from "@/lib/actions/tasks.action";
+import { findTasks } from "@/lib/actions/tasks.action";
 import { Filters } from "./Filter";
 import { Actions } from "./Actions";
 import { ActionCreate } from "./ActionCreate";
 import { StatusBadge } from "./StatusBadge";
 import { parseTaskQuery } from "./query";
 import { LinkSortable } from "./LinkSortable";
+import { Paginate } from "./Paginate";
 
 const page: Page = {
   title: "Tasks",
@@ -55,44 +56,48 @@ export default async function Page({ searchParams }: Props) {
 }
 
 async function TaskList({ query }: PropsTaskList) {
-  const data = await getTasks(query);
+  const result = await findTasks(query);
 
-  if (!data.length) {
+  if (!result.items.length) {
     return (
       <p className="text-muted-foreground py-8 text-center">No tasks found.</p>
     );
   }
 
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead className="w-25">
-            <LinkSortable field="id">ID</LinkSortable>
-          </TableHead>
-          <TableHead>
-            <LinkSortable field="title">Title</LinkSortable>
-          </TableHead>
-          <TableHead>
-            <LinkSortable field="status">Status</LinkSortable>
-          </TableHead>
-          <TableHead className="text-right">Actions</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {data.map((row) => (
-          <TableRow key={row.id}>
-            <TableCell className="font-medium">{row.id}</TableCell>
-            <TableCell>{row.title}</TableCell>
-            <TableCell>
-              <StatusBadge status={row.status} />
-            </TableCell>
-            <TableCell className="text-right">
-              <Actions task={row} />
-            </TableCell>
+    <>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-25">
+              <LinkSortable field="id">ID</LinkSortable>
+            </TableHead>
+            <TableHead>
+              <LinkSortable field="title">Title</LinkSortable>
+            </TableHead>
+            <TableHead>
+              <LinkSortable field="status">Status</LinkSortable>
+            </TableHead>
+            <TableHead className="text-right">Actions</TableHead>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHeader>
+        <TableBody>
+          {result.items.map((item) => (
+            <TableRow key={item.id}>
+              <TableCell className="font-medium">{item.id}</TableCell>
+              <TableCell>{item.title}</TableCell>
+              <TableCell>
+                <StatusBadge status={item.status} />
+              </TableCell>
+              <TableCell className="text-right">
+                <Actions task={item} />
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+
+      <Paginate meta={result.meta} />
+    </>
   );
 }

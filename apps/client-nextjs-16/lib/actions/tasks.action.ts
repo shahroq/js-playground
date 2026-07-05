@@ -1,6 +1,6 @@
 "use server";
 import { revalidatePath } from "next/cache";
-import { and, like, eq, asc, desc } from "drizzle-orm";
+import { and, like, eq, asc, desc, count } from "drizzle-orm";
 import { db } from "@/data";
 import { tasksTable } from "@/data/schema";
 import { taskSchema } from "@jsp/shared/validations/zod";
@@ -8,7 +8,7 @@ import { pause } from "@jsp/shared/utils";
 import { TaskQuery } from "@jsp/shared/types";
 
 const PAUSE = 500;
-const DEFAULT_LIMIT = 10;
+const DEFAULT_LIMIT = 2;
 
 export async function getTasks(query?: TaskQuery) {
   await pause(PAUSE);
@@ -46,6 +46,68 @@ export async function getTasks(query?: TaskQuery) {
     .orderBy(orderBy)
     .limit(limit)
     .offset(offset);
+}
+
+// with pagination data
+export async function findTasks(query?: TaskQuery) {
+  await pause(PAUSE);
+
+  const page = query?.page ?? 1;
+  const limit = query?.limit ?? DEFAULT_LIMIT;
+  const offset = (page - 1) * limit;
+
+  // Filter
+  const filters = [];
+  if (query?.term) filters.push(like(tasksTable.title, `%${query.term}%`));
+  if (query?.status) filters.push(eq(tasksTable.status, query.status));
+
+  const where = filters.length ? and(...filters) : undefined;
+
+  // Sort
+  const sort = query?.sort ?? "-id";
+  const descending = sort.startsWith("-");
+  const field = descending ? sort.slice(1) : sort;
+
+  let orderBy;
+  switch (field) {
+    case "title":
+      orderBy = descending ? desc(tasksTable.title) : asc(tasksTable.title);
+      break;
+
+    case "status":
+      orderBy = descending ? desc(tasksTable.status) : asc(tasksTable.status);
+      break;
+
+    case "id":
+    default:
+      orderBy = descending ? desc(tasksTable.id) : asc(tasksTable.id);
+  }
+
+  const [items, [{ total }]] = await Promise.all([
+    db
+      .select()
+      .from(tasksTable)
+      .where(where)
+      .orderBy(orderBy)
+      .limit(limit)
+      .offset(offset),
+
+    db.select({ total: count() }).from(tasksTable).where(where),
+  ]);
+
+  const totalPages = Math.ceil(total / limit);
+
+  return {
+    items,
+    meta: {
+      total,
+      page,
+      limit,
+      totalPages,
+      hasPrevious: page > 1,
+      hasNext: page < totalPages,
+    },
+  };
 }
 
 export async function getTask(id: number) {

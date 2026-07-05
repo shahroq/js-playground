@@ -97,6 +97,9 @@
   .flex-between {
     @apply flex justify-between items-center;
   }
+  .flex-end {
+    @apply flex justify-end items-center;
+  }
 }
 
 /* to control the width and horizontal alignment of your content */
