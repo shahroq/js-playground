@@ -28,8 +28,20 @@ export function useTaskQuery() {
     router.replace(`${pathname}?${params.toString()}`);
   }
 
+  const href = (patch: Partial<TaskQuery>) => {
+    const merged = { ...query, ...patch };
+    const params = new URLSearchParams();
+
+    Object.entries(merged).forEach(([k, v]) => {
+      if (v !== undefined && v !== "") params.set(k, String(v));
+    });
+
+    return `?${params.toString()}`;
+  };
+
   return {
     query,
     updateQuery,
+    href,
   };
 }

@@ -14,9 +14,9 @@ import { getTasks } from "@/lib/actions/tasks.action";
 import { Filters } from "./Filter";
 import { Actions } from "./Actions";
 import { ActionCreate } from "./ActionCreate";
-import Link from "next/link";
 import { StatusBadge } from "./StatusBadge";
 import { parseTaskQuery } from "./query";
+import { LinkSortable } from "./LinkSortable";
 
 const page: Page = {
   title: "Tasks",
@@ -68,10 +68,14 @@ async function TaskList({ query }: PropsTaskList) {
       <TableHeader>
         <TableRow>
           <TableHead className="w-25">
-            <Link href="">ID</Link>
+            <LinkSortable field="id">ID</LinkSortable>
           </TableHead>
-          <TableHead>Title</TableHead>
-          <TableHead>Status</TableHead>
+          <TableHead>
+            <LinkSortable field="title">Title</LinkSortable>
+          </TableHead>
+          <TableHead>
+            <LinkSortable field="status">Status</LinkSortable>
+          </TableHead>
           <TableHead className="text-right">Actions</TableHead>
         </TableRow>
       </TableHeader>
