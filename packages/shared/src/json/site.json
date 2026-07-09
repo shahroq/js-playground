@@ -155,7 +155,7 @@
       "items": [
         {
           "label": "Misc",
-          "path": "/shadcn/misc"
+          "path": "/shadcn/comps/misc"
         }
       ]
     },

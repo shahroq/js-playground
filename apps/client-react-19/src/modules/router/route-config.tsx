@@ -45,7 +45,7 @@ import ProductPageWTSQ from "@/pages/catalog/product-list-w-tanstack-query/Produ
 import ProductPageWUH from "@/pages/catalog/product-list-w-use-hook/ProductsPage";
 import type { RouteConfig } from "./types";
 // shadcn
-import MiscPageShadcn from "@/pages/shadcn/MiscPage";
+import MiscPageShadcn from "@/pages/shadcn/comps/MiscPage";
 
 export const defaultLayout = DashboardLayout;
 // export const defaultLayout = lazy(() => import("@/layouts/DashboardLayout"));
@@ -98,7 +98,7 @@ export const routesConfig: RouteConfig[] = [
   { path: "/catalog/product-list-w-use-hook", element: <ProductPageWUH /> },
   // shadcn
   {
-    path: "/shadcn/misc",
+    path: "/shadcn/comps/misc",
     element: <MiscPageShadcn />,
     layout: DashboardLayoutShadcn,
   },
