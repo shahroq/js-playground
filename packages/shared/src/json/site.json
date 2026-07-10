@@ -160,6 +160,16 @@
       ]
     },
     {
+      "label": "AI",
+      "targets": ["client-nextjs-16"],
+      "items": [
+        {
+          "label": "Chat",
+          "path": "/shadcn/ai/chat"
+        }
+      ]
+    },
+    {
       "label": "Posts (API)",
       "targets": ["client-nextjs-16"],
       "items": [
