@@ -4,6 +4,16 @@
       @apply flex flex-1 flex-col gap-4 px-6 py-4;
     }
   }
+
+  /* make sidebar compact */
+  [data-slot="sidebar"] {
+    ul {
+      gap: 0;
+      > li > a {
+        height: 24px;
+      }
+    }
+  }
 }
 
 .brand {
