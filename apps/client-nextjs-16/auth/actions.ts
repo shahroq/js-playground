@@ -1,7 +1,7 @@
 "use server";
 
 import { isRedirectError } from "next/dist/client/components/redirect-error";
-import { sql, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { db } from "@/data";
 import { signIn, signOut, unstable_update } from ".";
 import { pause } from "@jsp/shared/utils";

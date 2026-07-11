@@ -1,6 +1,6 @@
 import { pause } from "@jsp/shared/utils";
+import { Post } from "@jsp/shared/types";
 import { postsSchema } from "@jsp/shared/validations/zod";
-import { Post } from "./list/page";
 
 export async function getPosts(limit = 10): Promise<Post[]> {
   await pause(1000);

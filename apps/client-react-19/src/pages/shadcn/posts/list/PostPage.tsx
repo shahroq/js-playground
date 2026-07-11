@@ -1,5 +1,4 @@
-import { z } from "zod";
-import type { Page } from "@jsp/shared/types";
+import type { Page, Post } from "@jsp/shared/types";
 import {
   Table,
   TableBody,
@@ -10,11 +9,8 @@ import {
 } from "@/shadcn/components/ui/table";
 import { Header } from "@/shadcn/components/Header";
 import { useEffect, useState } from "react";
-import { postSchema } from "@jsp/shared/validations/zod";
 import { pause } from "@jsp/shared/utils";
 import { Spinner } from "@jsp/shared/comps";
-
-export type Post = z.infer<typeof postSchema>;
 
 const page: Page = {
   title: "Misc",

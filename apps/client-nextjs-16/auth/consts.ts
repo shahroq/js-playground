@@ -1,4 +1,4 @@
-import { Account, SignIn } from "@/auth/types";
+import { Account, SignIn } from "@jsp/shared/types";
 
 export const home = "/e-com";
 

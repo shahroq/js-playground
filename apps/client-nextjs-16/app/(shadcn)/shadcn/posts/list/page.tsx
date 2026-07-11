@@ -1,4 +1,3 @@
-import { z } from "zod";
 import type { Page } from "@jsp/shared/types";
 import { Header } from "@/shadcn/components/Header";
 
@@ -21,10 +20,7 @@ import {
 } from "@/shadcn/components/ui/table";
 import { Suspense } from "react";
 import { SkeletonTable } from "@/shadcn/components/SkeletonTable";
-import { postSchema } from "@jsp/shared/validations/zod";
 import { getPosts } from "../api";
-
-export type Post = z.infer<typeof postSchema>;
 
 const page: Page = {
   title: "Posts (API)",

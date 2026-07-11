@@ -6,7 +6,7 @@ import type {
   ValidationResult,
   RHFValidationAdapter,
 } from "../types";
-import type { Task } from "../../types/types";
+import type { Task } from "@/types";
 
 function mapErrorsToAr(error: ZodError): Error[] {
   return error.issues.map((i: any) => ({
