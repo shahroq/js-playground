@@ -1,4 +1,5 @@
-import type { Page, Post } from "@jsp/shared/types";
+import { useEffect, useState } from "react";
+import type { Page } from "@jsp/shared/types";
 import {
   Table,
   TableBody,
@@ -8,9 +9,10 @@ import {
   TableRow,
 } from "@/shadcn/components/ui/table";
 import { Header } from "@/shadcn/components/Header";
-import { useEffect, useState } from "react";
-import { pause } from "@jsp/shared/utils";
-import { Spinner } from "@jsp/shared/comps";
+import { SkeletonTable } from "@/comps/SkeletonTable";
+import { Alert } from "@jsp/shared/comps";
+import { getPosts } from "../api";
+import type { ReadState } from "../types";
 
 const page: Page = {
   title: "Misc",
@@ -33,36 +35,37 @@ export default function PostPage() {
     </>
   );
 }
-const LIMIT = 5;
 
 function PostList() {
-  const [data, setData] = useState<Post[]>([]);
-  const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [state, setState] = useState<ReadState>({
+    data: [],
+    error: null,
+    isLoading: true,
+  });
 
   useEffect(() => {
-    async function fetchData() {
+    const controller = new AbortController();
+
+    async function loadData() {
       try {
-        setIsLoading(true);
-        await pause(1500);
-        const res = await fetch(
-          `https://jsonplaceholder.typicode.com/posts?_limit=${LIMIT}`,
-        );
-        if (!res.ok) throw new Error(`Could not fecth data!`);
-        const posts = await res.json();
-        setData(posts);
+        const data = await getPosts();
+        setState({ ...state, data, isLoading: false });
       } catch (e) {
-        console.log(e);
-        setError(e);
+        setState({
+          ...state,
+          error: e instanceof Error ? e : new Error("Unknown error"),
+        });
       } finally {
-        setIsLoading(false);
       }
     }
-    fetchData();
+    loadData();
+    return () => controller.abort();
   }, []);
 
-  if (error) return <p>{error.message}</p>;
-  if (isLoading) return <Spinner />;
+  if (state.isLoading) return <SkeletonTable />;
+  if (state.error)
+    return <Alert variant="warning">{state.error.message}</Alert>;
+  if (!state.data.length) return <Alert>No posts found.</Alert>;
 
   return (
     <Table>
@@ -74,7 +77,7 @@ function PostList() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {data.map((row) => (
+        {state.data.map((row) => (
           <TableRow key={row.id}>
             <TableCell className="font-medium">{row.id}</TableCell>
             <TableCell>{row.title}</TableCell>

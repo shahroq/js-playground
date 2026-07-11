@@ -1,15 +1,7 @@
-import type { Page } from "@jsp/shared/types";
 import { Header } from "@/shadcn/components/Header";
+import type { Page } from "@jsp/shared/types";
 
-import { MoreHorizontalIcon } from "lucide-react";
-import { Button } from "@/shadcn/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/shadcn/components/ui/dropdown-menu";
+import { SkeletonTable } from "@/shadcn/components/SkeletonTable";
 import {
   Table,
   TableBody,
@@ -19,7 +11,6 @@ import {
   TableRow,
 } from "@/shadcn/components/ui/table";
 import { Suspense } from "react";
-import { SkeletonTable } from "@/shadcn/components/SkeletonTable";
 import { getPosts } from "../api";
 
 const page: Page = {
@@ -63,24 +54,7 @@ async function PostList() {
           <TableRow key={row.id}>
             <TableCell className="font-medium">{row.id}</TableCell>
             <TableCell>{row.title}</TableCell>
-            <TableCell className="text-right">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="size-8">
-                    <MoreHorizontalIcon />
-                    <span className="sr-only">Open menu</span>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem disabled>Edit</DropdownMenuItem>
-                  <DropdownMenuItem disabled>Duplicate</DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem variant="destructive" disabled>
-                    Delete
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </TableCell>
+            <TableCell className="text-right">.</TableCell>
           </TableRow>
         ))}
       </TableBody>

@@ -46,7 +46,7 @@ import ProductPageWUH from "@/pages/catalog/product-list-w-use-hook/ProductsPage
 import type { RouteConfig } from "./types";
 // shadcn
 import MiscPageShadcn from "@/pages/shadcn/comps/MiscPage";
-import PostPageShadcn from "@/pages/shadcn/posts/list/PostPage";
+import PostListPageShadcn from "@/pages/shadcn/posts/list/PostPage";
 
 export const defaultLayout = DashboardLayout;
 // export const defaultLayout = lazy(() => import("@/layouts/DashboardLayout"));
@@ -105,7 +105,7 @@ export const routesConfig: RouteConfig[] = [
   },
   {
     path: "/shadcn/posts/list",
-    element: <PostPageShadcn />,
+    element: <PostListPageShadcn />,
     layout: DashboardLayoutShadcn,
   },
 
