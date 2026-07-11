@@ -171,7 +171,7 @@
     },
     {
       "label": "Posts (API)",
-      "targets": ["client-nextjs-16"],
+      "targets": ["client-react-19", "client-nextjs-16"],
       "items": [
         {
           "label": "List (Plain)",
@@ -179,6 +179,7 @@
         },
         {
           "label": "List w/ TanStack Query",
+          "targets": ["client-nextjs-16"],
           "path": "/shadcn/posts/list-w-tanstack-query"
         }
       ]
