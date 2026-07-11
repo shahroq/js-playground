@@ -61,7 +61,7 @@ function NavItemNode({ item, depth = 0 }: NavItemProps) {
   return (
     <SidebarMenuItem>
       <Collapsible
-        defaultOpen={depth === 0}
+        defaultOpen={item.closed !== undefined ? !item.closed : depth === 0}
         className="group/collapsible w-full"
       >
         <div className="flex items-center w-full">
@@ -116,7 +116,7 @@ function SubItemNode({ item, depth }: { item: NavItem; depth: number }) {
   return (
     <SidebarMenuSubItem>
       <Collapsible
-        defaultOpen={depth <= 1}
+        defaultOpen={item.closed !== undefined ? !item.closed : depth <= 1}
         className="group/collapsible w-full"
       >
         <div className="flex items-center w-full">

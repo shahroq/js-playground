@@ -10,6 +10,7 @@ export type NavItem = {
   path?: string;
   items?: NavItem[];
   target?: string[];
+  closed?: boolean;
 };
 
 export type Page = {

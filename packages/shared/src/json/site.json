@@ -64,6 +64,7 @@
         {
           "label": "Form",
           "targets": ["ui", "client-react-19"],
+          "closed": true,
           "items": [
             {
               "label": "Plain (Controlled) ",
