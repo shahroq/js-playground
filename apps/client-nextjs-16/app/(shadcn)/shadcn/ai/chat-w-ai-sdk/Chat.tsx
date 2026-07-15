@@ -1,15 +1,15 @@
 "use client";
 
 import { useActionState, useEffect, useOptimistic, useRef } from "react";
-import Form from "next/form";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
 } from "@/shadcn/components/ui/input-group";
 import TextareaAutosize from "react-textarea-autosize";
-import { Message, updateConversationReducer } from "../actions";
+import { updateMessagesReducer } from "./actions";
 import { Conversation } from "./Conversation";
+import { UIMessage } from "./types";
 
 export function Chat() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -17,24 +17,27 @@ export function Chat() {
 
   useEffect(() => textareaRef.current?.focus(), []);
 
-  const [conversation, dispatchAction, isPending] = useActionState(
-    updateConversationReducer,
-    [],
+  const [state, dispatchAction, isPending] = useActionState(
+    updateMessagesReducer,
+    [] as UIMessage[],
   );
-  const [optimisticConversation, setOptimisticConversation] =
-    useOptimistic(conversation);
+
+  const [optimisticMessages, setOptimisticMessages] = useOptimistic(
+    state,
+    (state, newMessage: UIMessage) => [...state, newMessage],
+  );
 
   function formAction(formData: FormData) {
-    const body = formData.get("msg")?.toString().trim();
-    if (!body) return;
+    const content = formData.get("msg")?.toString().trim();
+    if (!content || isPending) return;
 
-    const newMessage = {
-      body,
-      author: "me",
+    const newMessage: UIMessage = {
+      content,
+      role: "user",
       id: crypto.randomUUID(),
-    } as Message;
+    };
 
-    setOptimisticConversation((conv) => [...conv, newMessage]);
+    setOptimisticMessages(newMessage);
 
     formRef.current?.reset();
     textareaRef.current?.focus();
@@ -44,10 +47,10 @@ export function Chat() {
 
   return (
     <div className="flex h-full min-h-0 flex-col justify-end gap-5">
-      <Conversation messages={optimisticConversation} isPending={isPending} />
+      <Conversation messages={optimisticMessages} isPending={isPending} />
 
       <section id="input">
-        <Form className="grid w-full" ref={formRef} action={formAction}>
+        <form className="grid w-full" ref={formRef} action={formAction}>
           <InputGroup>
             <TextareaAutosize
               className="flex field-sizing-content min-h-16 w-full resize-none rounded-md bg-transparent px-3 py-2.5 text-base transition-[color,box-shadow] outline-none md:text-sm"
@@ -55,6 +58,13 @@ export function Chat() {
               placeholder=""
               data-slot="input-group-control"
               ref={textareaRef}
+              defaultValue={""}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  formRef.current?.requestSubmit();
+                }
+              }}
             />
             <InputGroupAddon align="block-end">
               <InputGroupButton
@@ -68,7 +78,7 @@ export function Chat() {
               </InputGroupButton>
             </InputGroupAddon>
           </InputGroup>
-        </Form>
+        </form>
       </section>
     </div>
   );

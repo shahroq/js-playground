@@ -165,8 +165,8 @@
       "targets": ["client-nextjs-16"],
       "items": [
         {
-          "label": "Chat",
-          "path": "/shadcn/ai/chat"
+          "label": "Chat w/ AI SDK",
+          "path": "/shadcn/ai/chat-w-ai-sdk"
         }
       ]
     },

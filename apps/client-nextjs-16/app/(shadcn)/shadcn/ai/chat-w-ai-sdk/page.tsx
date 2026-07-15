@@ -4,7 +4,11 @@ import { Chat } from "./Chat";
 
 const page: Page = {
   title: "AI",
-  breadcrumb: [{ label: "Shadcn" }, { label: "AI" }, { label: "Chat" }],
+  breadcrumb: [
+    { label: "Shadcn" },
+    { label: "AI" },
+    { label: "Chat w/ AI SDK" },
+  ],
 };
 
 export default function Page() {
