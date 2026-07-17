@@ -165,6 +165,10 @@
       "targets": ["client-nextjs-16"],
       "items": [
         {
+          "label": "Tokenizer",
+          "path": "/shadcn/ai/tokenizer"
+        },
+        {
           "label": "Chat w/ AI SDK",
           "path": "/shadcn/ai/chat-w-ai-sdk"
         }
